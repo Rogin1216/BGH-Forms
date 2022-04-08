@@ -123,7 +123,7 @@
                 
             </div>
         </div>
-    </div>
+    
 
     <table class="table table-bordered table-responsive-lg">
             <tr>
@@ -149,6 +149,7 @@
                 @endforeach
                 </tbody>
     </table>
+    </div>
 </div>
 
 

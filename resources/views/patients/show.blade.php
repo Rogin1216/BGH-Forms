@@ -42,11 +42,10 @@ input{
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+@foreach($patients as $patients)@endforeach
 <div class="card">
   <div class="card-header p-2 bg-success text-white">GENERAL DATA:</div>
   <div class="card-body">
-  
       <form action="{{ url('patientform') }}" method="post">
         {!! csrf_field() !!}
         
@@ -65,7 +64,7 @@ input{
                     <label>Last name:</label>
                     <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control"disabled="true"></br>
                 </div>
-              
+       
         </div>
 
         
@@ -105,6 +104,7 @@ input{
                 </div>
                 </div>  
         </div>
+        
         <hr>
         <div class="form-group col-md-12">
                   <h5>Nature of Injury/ies:</h5>
@@ -291,11 +291,12 @@ input{
 
         </div>
         <hr>
+        <!-- External cause panel -->
         <div class="form-group col-md-12">
               <h5>External Cause/s of Injury/ies:</h5>
                   
                   <div class="row mx-md-n5">
-                    <div class="col px-md-5 border border-secondary">
+                    <div class="col px-md-5">
 
                     <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="" onclick="return false;">
                           <label class="form-check-label" for=" Bites">
@@ -303,7 +304,6 @@ input{
                           </label>
                           <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" disabled="true">
 
-                    
                       <div class="row">
                       <div class="col-auto">
                       <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="" onclick="return false;">
@@ -450,6 +450,8 @@ input{
                       
                       <div class="row">
                       <div class="col-auto">
+                        <input class="form-check-input" type="checkbox" name="drowningCh" id="gunshotCh" value="" onclick="return false;">
+
                           <label class="form-check-label" for="Gunshot">
                             Gunshot, Specify weapon
                           </label>
@@ -457,35 +459,37 @@ input{
                       </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh" value=""  onclick="return false;">
+                      
                       <div class="row">
                       <div class="col col-lg-4">
+                      <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh" value=""  onclick="return false;">
                           <label class="form-check-label" for="Hanging">
                             Hanging/Strangulation
                           </label>
                       </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh" value=""  onclick="return false;">
                       <div class="row">
                       <div class="col col-lg-4">
+                      <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh" value=""  onclick="return false;">
                           <label class="form-check-label" for="Mauling">
                             Mauling/Assault
                           </label>
                       </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh" value="">
+                      <div class="row">
                       <div class="col col-lg-4">
+                      <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh" value="">
                           <label class="form-check-label" for="Transport">
                             Transport/Vehicular Accident
                           </label>
                       </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="" onclick="return false;">
                       <div class="row">
                         <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="" onclick="return false;">
                                 <label class="form-check-label" for="Fall">
                                   Fall, specify, from/in/on/into
                                 </label>
@@ -493,9 +497,10 @@ input{
                         </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="firecrackerCh" id="firecrackerCh" value="" onclick="return false;">
                       <div class="row">
                         <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="firecrackerCh" id="firecrackerCh" value="" onclick="return false;">
+
                                 <label class="form-check-label" for="Firecracker">
                                   Firecracker, specify type/s
                                 </label>
@@ -506,18 +511,19 @@ input{
                         </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh" value=""  onclick="return false;">
                       <div class="row">
                         <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh" value=""  onclick="return false;">
                                 <label class="form-check-label" for="Sexual">
                                   Sexual Assault/Sexual Abuse/Rape(Alleged)
                                 </label>
                         </div>
                       </div>
 
-                      <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch" value="" onclick="return false;">
                       <div class="row">
                         <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch" value="" onclick="return false;">
+
                                   <label class="form-check-label" for="Others5">
                                     Others,specify
                                   </label>
@@ -1427,11 +1433,14 @@ input{
         </div>
                 </div>
         </div>
+</div>
 <br>
-<input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br>
-<a href="{{ url('/patientform') }}" class="btn btn-secondary btn-sm" title="Patient lists"onclick="return confirm(&quot;Unsaved information will not be updated, Continue?&quot;)">
+
+<!-- <input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br> -->
+<a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists">
                             <i class="fa fa-plus" aria-hidden="true"></i> Back
                         </a>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

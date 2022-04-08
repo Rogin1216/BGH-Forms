@@ -203,25 +203,19 @@ class PatientController extends Controller
      */
     public function show($hpercode)
     {
-        //   dd($enccode);
+        // dd($hpercode);
         //$patients = Vwinjurylist::find($enccode);
         //$patients = DB::connection('Vwinjurylist')->select('*');
-        $hpercode = DB::table('vwInjuryList')->first();
+        // $patients = DB::table('vwInjuryList')->first();
+        $patients = DB::table('vwInjuryList')->select('*')->where('hpercode',$hpercode)->get();
+        // dd($patients);
+
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
 
-        return view('patients.show')->with('patients', $hpercode);
-
-        
-        //$array = Patient::with('natureOfInjury')->get();
-        //$natureOfInjury = explode(" ", $array);
-
-        //$contact = Contact::find($id);
-        //return view('contacts.show')->with('contacts', $contact);
-
-        
-
-        //->with('patients', $natureOfInjury);
-        
+        return view('patients.show')->with('patients', $patients);
+        // return view('patients.show', compact(
+        //     'patients',
+        // ));
     }
 
     /**
