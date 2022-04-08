@@ -40,7 +40,7 @@ background-color: #faf882;
 background-color: #031694;
 }
 #divpeach{
-background-color: #f5d69d;
+background-color: #f0dea8;
 }
 .inputlabelunderline{
   border: none;
@@ -68,7 +68,7 @@ background-color: #f5d69d;
 .inputlabelunderlineShort1{
   border: none;
   border-bottom: 1px solid;
-  background-color: #f5d69d;
+  background-color: #f0dea8;
   height: auto;
   width: 80px;
 }
@@ -1174,6 +1174,28 @@ h1{
             </div>
         </div>
     </div>
-</div>
+    </div>
+    <br>
+    <div >
+        <nav aria-label="..." class="float-end">
+            <ul class="pagination">
+                
+                <li class="page-item active">
+                <a class="page-link" href="{{url ('/cancerForm') }}">1</a>
+                </li>
+
+                <li class="page-item ">
+                <a class="page-link" href="{{url ('/cancerFormp2') }}"><span class="sr-only">2</span></a>
+                </li>
+
+                <li class="page-item">
+                <a class="page-link" href="{{url ('/cancerFormp3') }}">3</a>
+                </li>
+
+            </ul>
+        </nav> 
+    </div>
 </html>
+
+
 @endsection

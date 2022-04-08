@@ -92,6 +92,13 @@ class PatientController extends Controller
     {
         return view('patients.createCancer');
     }
+    public function createCancerformp2()
+    {
+        return view('patients.createCancerp2');
+    }
+    public function createCancerformp3(){
+        return view('patients.createCancerp3');
+    }
 
     /**
      * Store a newly created resource in storage.
