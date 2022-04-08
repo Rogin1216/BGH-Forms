@@ -156,6 +156,8 @@
                   <th>Discharge date</th>
                   <th>Discharge time</th>
                   <th></th>
+                  <th></th>
+                  <th>enc</th>
                 </tr>
             </thead>
             <tbody>
@@ -174,7 +176,9 @@
                 <!-- <td>{{$item->disdate ?? null ?: '--' }}</td> -->
                 <td>{{date('F j,Y', strtotime($item->disdate ))}}</td>
                 <td>{{date('g:i a', strtotime($item->disdate ))}}</td>
-                <td><a href="/patientShow/{{$item->hpercode}}">show</a></td>
+                <td><a href="/patientShow/{{$item->enccode}}">edit</a></td>
+                <td><a href="/injuryForm/{{$item->hpercode}}">print</a></td>
+                <td>{{$item->enccode}}</a></td>
               </tr>
               @endforeach
             </tbody>

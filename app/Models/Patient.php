@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    protected $table = 'patients';
+    protected $table = 'injuryRegistry';
     protected $primaryKey = 'id';
     protected $fillable = ['firstName', 'middleName', 'lName','docAdmit', 'frstAid','natureOfInjury',
                         'rdoAid',

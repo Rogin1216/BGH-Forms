@@ -130,6 +130,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>hpercode</th>
+                
 
                 <th width="280px">Action</th>
             </tr>
@@ -140,6 +141,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
                     <td>{{ $item->hpercode}}</td>
+                    
                     <td>
                       <a href="/showID/{{$item->hpercode}}">show</a>
                     </td>

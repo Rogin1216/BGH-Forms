@@ -83,9 +83,14 @@ class PatientController extends Controller
       
      }
      //open Injury form
-    public function create()
+    public function print($hpercode)
     {
-        return view('patients.create');
+        $patients = DB::table('vwInjuryList')->select('*')->where('hpercode',$hpercode)->get();
+        // dd($patients);
+
+        //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
+
+        return view('patients.print')->with('patients', $patients);
     }
     //open Cancer form
     public function createCancerform()
@@ -109,7 +114,7 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $input=$request->all();
+        //$input=$request->all();
 
         
         //dd($_POST);
@@ -133,8 +138,8 @@ class PatientController extends Controller
         // Patient::create($input);
         
     //    DB::table('registry.dbo.patients')->create(["EXEC registry.dbo.AddPatients '$request->abrasion',  '$request->avulsion' "]);
-
-            DB::UPDATE("EXEC registry.dbo.AddPatient '$request->firstName','$request->middleName', '$request->lName',
+    
+            DB::UPDATE("EXEC registry.dbo.InsertingValuesInto '$request->firstName','$request->middleName', '$request->lName',
             '$request->docAdmit',
             '$request->frstAid',
             '$request->abrasion',
@@ -173,7 +178,7 @@ class PatientController extends Controller
             '$request->treatment',
             '$request->transferred'
             ");
-            
+            // dd($request);
 
         return redirect('patientform')->with('flash message','Patient Added');
     

@@ -33,32 +33,38 @@ border: 1px black solid;
 table, td, tr{
   border: 1px solid black;
 }
+input{
+   text-align:center;
+}
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+@foreach($patients as $patients)@endforeach
 <div class="card">
   <div class="card-header p-2 bg-success text-white">GENERAL DATA:</div>
   <div class="card-body">
-      
       <form action="{{ url('patientform') }}" method="post">
         {!! csrf_field() !!}
+        
+        <!--<input type="checkbox" value="Edit" id="editChx"><label>Edit profile</label></br>-->
         <div class="form-group row">
+        
                 <div class="form-group col-md-2">
                     <label>First Name:</label>
-                    <input type="text" name="firstName" id="firstName"  class="form-control" required ></br>
+                    <input type="text" name="firstName" id="firstName" value="{{$patients->patfirst}}" class="form-control"disabled="true" onclick="EnableDisable();" ></br>
                 </div> 
                 <div class="form-group col-md-2"> 
                     <label>Middle name:</label>
-                    <input type="text" name="middleName" id="middleName"  class="form-control" required></br>
+                    <input type="text" name="middleName" id="middleName" value="{{$patients->patmiddle}}" class="form-control"disabled="true"></br>
                 </div>
                 <div class="form-group col-md-2"> 
                     <label>Last name:</label>
-                    <input type="text" name="lName" id="lName"  class="form-control"required></br>
+                    <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control"disabled="true"></br>
                 </div>
+       
         </div>
 
         
@@ -68,53 +74,53 @@ table, td, tr{
         </div>
                 <div class="form-group col-md-5"> 
                   <div class="row">
-                  <input type="hidden" name="rdoAid" value="0">
+                    <div class="row">
                     <div class="col col-lg-4">
                     <label class="firstAid">First Aid Given:</label>
                     </div>
                     <div class="col col-lg-2">
-                    <input class="form-check-input" type="radio" name="rdoAid" value="1" id="aidYes">
+                    <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="">
                     <label class="form-check-label" for="rdoAid" >
                     Yes
                     </div>
                     <div class="col col-lg-2">
                     </label>
-                    <input class="form-check-input" type="radio" name="rdoAid" value="2" id="aidNo" checked="true">
+                    <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="">
                     <label class="form-check-label" for="rdoAid">
                     No
                     </label>
                     </div>
                     </div>
+                    </div>
                   <div class="form-group">
-                   <textarea class="form-control" rows="2" name="frstAid" id="frstAid" value="" disabled="true"></textarea><!--COMMENT GIVEN BY-->
+                   <textarea class="form-control" rows="2" name="frstAid" id="frstAid" disabled="true" placeholder="no comment">{{$patients->frstAid}}</textarea><!--COMMENT GIVEN BY-->
                   </div>
                 </div>
                 
                 <div class="form-group col-md-5"> 
                 <label>By: </label>
                 <div class="form-group col-md-8">
-                    <input type="text" name="docAdmit" id="docAdmit" placeholder="name of doctor" class="form-control" required>
-                    
+                    <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}" placeholder="name of doctor" class="form-control" disabled="true">
                 </div>
                 </div>  
         </div>
+        
         <hr>
         <div class="form-group col-md-12">
                   <h5>Nature of Injury/ies:</h5>
                   <div class="innerdiv">
                   <div class="row">
                     <div class="col col-lg-2">
-                    <Label for="injuries">Multiple injuries?</Label>
+                    <Label>Multiple injuries?</Label>
                     </div>
-                    <input type="hidden" name="injryRdo" value="0">
                     <div class="col col-lg-1">
-                    <input class="form-check-input" type="radio" name="injryRdo" value ="1" id="injuryRdo1" >
+                    <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo1" value="" onclick="return false;">
                       <label class="form-check-label" >
                       Yes
                       </label>
                     </div>
                     <div class="col col-lg-1">
-                      <input class="form-check-input" type="radio" name="injryRdo" value="2" id="injuryRdo2" checked="true">
+                      <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo2" value="" onclick="return false;">
                       <label class="form-check-label" >
                       No
                     </label>
@@ -123,129 +129,118 @@ table, td, tr{
 
                   <div class="row mx-md-n3">
                   <div class="col px-md-3">
-                    <label class="labelmarginleft"><u>(Check all applicable, indicate in the blank space oppiste each type of injury the body location(site) affected and other deatils)</u></label>
+                    <label class="labelmarginleft"><u>(Check all applicable, indicate in the blank sace oppiste each type of injury the body location(site) affected and other deatils)</u></label>
                     </div>
                   </div>
 
 <!--checkbox from abrasion-->
-                  
                     <div class="form-group row-md-4">
                         <div class="form-check">
 
-
-                          <input type="hidden" name="abrasionCh" value="0">
                           <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="abrasionCh" id="Abrasion" >
-                              <label class="form-check-label" for="Abrasion">
+                            <input class="form-check-input" type="checkbox" name="abrasionCh" id="Abrasion" value="" onclick="return false;">
+                                                        <label class="form-check-label" for="Abrasion">
                                 Abrasion
                               </label>
-                              <input type="text" class="inputlabelunderline" name="abrasion">
+                              <input type="text" class="inputlabelunderline" name="abrasion" value="{{$patients->abrasion}}" placeholder="N/A" disabled="true">
                             </div>
                           </div>
 
-                          <input type="hidden" name="avulsionCh" value="0">
                           <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="avulsionCh" id="Avulsion">
+                            <input class="form-check-input" type="checkbox" name="avulsionCh" id="avulsion" value="" onclick="return false;">
                               <label class="form-check-label" for="Avulsion">
                                 Avulsion
                               </label>
-                              <input type="text" class="inputlabelunderline" name="avulsion">
+                              <input type="text" class="inputlabelunderline" name="avulsion" value="{{$patients->avulsion}}" placeholder="N/A" disabled="true">
                             </div>
                           </div>
-                          
-                          
+
+                          <input class="form-check-input" type="checkbox" name="burnCh" id="burnCh" value=""  onclick="return false;">
                           <div class="row">
                             <div class="col col-lg-16">
-                            <input type="hidden" name="burnCh" value="0">
-                            <input class="form-check-input" type="checkbox" value="1" name="burnCh" id="Burn">
                               <label class="form-check-label" for="Burn">
                               Burn (Degree of Burn & Extent of Body Surface involved) Degree:
                               </label>
-                              <input type="hidden" name="degreeRdoBtn" value="0">
-                              <input class="" type="radio" name="Burn" id="degreeRdoBtn1" value="1" >
+                              <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="" onclick="return false;">
                               <label class="" for="" >
                               1<sup>st</sup>
-                              <input class="" type="radio" name="Burn" id="degreeRdoBtn1" value="2">
+                              <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="" onclick="return false;">
                               <label class="" for="">
                               2<sup>nd</sup>
                               </label>
-                              <input class="" type="radio" name="Burn" id="degreeRdoBtn3" value="3" >
+                              <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn3" value="" onclick="return false;">
                               <label class="" for="" >
                               3<sup>rd</sup>
                               </label>
-                              <input class="" type="radio" name="Burn" id="degreeRdoBtn4" value="4" >
+                              <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn4" value="" onclick="return false;">
                               <label class="" for="">
                               4<sup>th</sup>
                               </label>
-                              <input class="" type="radio" name="Burn" id="degreeRdoBtn5" value="5" >
+                              <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn5" value="" onclick="return false;">
                               <label class="" for="" >
                               5<sup>th</sup>
                               </label>
                               <label>Site:</label>
-                              <input type="text" class="inputlabelunderline" name="site">
+                              <input type="text" class="inputlabelunderline" value="{{$patients->site}}" placeholder="N/A" disabled="true">
                               </label>
                             </div>
                           </div>
-
-                          <input type="hidden" name="concussionCh" value="0">
                           <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="concussionCh" id="Concussion">
+                            <input class="form-check-input" type="checkbox" name="concussionCh" id="concussionCh" value="" onclick="return false;">
                               <label class="form-check-label" for="Concussion">
                               Concussion
                               </label>
-                              <input type="text" class="inputlabelunderline" name="concussion">
+                              <input type="text" class="inputlabelunderline" value="{{$patients->concussion}}" placeholder="N/A" disabled="true">
                             </div>
                           </div>
 
-                          <input type="hidden" name="contusionCh" value="0">
                           <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="contusionCh" id="Contusion">
+                            <input class="form-check-input" type="checkbox" name="contusionCh" id="contusionCh" value=""  onclick="return false;">
                               <label class="form-check-label" for="Contusion">
                                 Contusion
                               </label>
-                              <input type="text" class="inputlabelunderline" name="contusion">
+                              <input type="text" class="inputlabelunderline" value="{{$patients->contusion}}" placeholder="N/A" disabled="true">
                             </div>
                           </div>
 
-                          <input type="hidden" name="fractureCh" value="0">
                           <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="fractureCh" id="Fracture">
+                            <input class="form-check-input" type="checkbox" name="fractureCh" id="fractureCh" value="" onclick="return false;">
+                            
                               <label class="form-check-label" for="Fracture">
                                 Fracture
                               </label>
 
-                              <input type="hidden" name="openTypeCh" value="0">
                               <div class="row mx-md-n5">
                                 <div class="col px-md-5">
-                                  <input class="form-check-input" type="checkbox" value="1" name="openTypeCh" id="Open Type">
+                                  
                                   <label class="form-check-label" for="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="openTypeCh" id="openTypeCh" value="" onclick="return false;">
                                     <label class="form-check-label" for="Open Type">
                                       Open Type
                                     </label>
-                                    <input type="text" class="inputlabelunderline" name="openType">
-                                    <label class="form-check-label" for="">
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->openType}}" placeholder="N/A" disabled="true">
+                                    <label class="form-check-label" for="Open Type">
                                     (ex. comminuted, depressed fracture)
                                     </label>
                                   </label>
                                 </div>
                               </div>
 
-                              <input type="hidden" name="closeTypeCh" value="0">
                               <div class="row mx-md-n5">
                                 <div class="col px-md-5">
-                                  <input class="form-check-input" type="checkbox" value="1" name="closedTypeCh" id="Closed Type">
+                                  
                                   <label class="form-check-label" for="flexCheckDefault">
-                                    
+                                  <input class="form-check-input" type="checkbox" name="closedTypeCh" id="closedTypeCh" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Closed Type">
                                       Closed Type
                                     </label>
-                                    <input type="text" class="inputlabelunderline" name="closedType">
-                                    <label class="form-check-label" for="">
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->closedType}}" placeholder="N/A" disabled="true">
+                                    <label class="form-check-label" for="closedType">
                                     (ex. Compound, infected fracture)
                                     </label>
                                   </label>
@@ -253,16 +248,14 @@ table, td, tr{
                               </div>
                             </div>
 
-                            <input type="hidden" name="woundCh" value="0">
                             <div class="row">
                                 <div class="col col-lg-12">
-                                  <input class="form-check-input" type="checkbox" value="1" name="woundCh" id="wound">
+                                <input class="form-check-input" type="checkbox" name="woundCh" id="woundCh" value="" onclick="return false;">
                                   <label class="form-check-label" for="flexCheckDefault">
-                                    
                                     <label class="form-check-label" for="wound">
                                       Open/Wound Laceration
                                     </label>
-                                    <input type="text" class="inputlabelunderline" name="wound">
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->wound}}" placeholder="N/A" disabled="true">
                                   </label>
                                 </div>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -270,25 +263,25 @@ table, td, tr{
                                       </label>
                             </div>
 
-                            <input type="hidden" name="traumaCh" value="0">
                             <div class="row">
                             <div class="col col-lg-5">
-                            <input class="form-check-input" type="checkbox" value="1" name="traumaCh" id="Traumatic Amputation">
+                            <input class="form-check-input" type="checkbox" name="traumaCh" id="traumaCh" value=""  onclick="return false;">
+                            
                               <label class="form-check-label" for="Traumatic Amputation">
                                 Traumatic Amputation
                               </label>
-                              <input type="text" class="inputlabelunderline" name="traumaticAmputation">
+                              <input type="text" class="inputlabelunderline" value="{{$patients->traumaticAmputation}}" placeholder="N/A" disabled="true">
                             </div>
                             </div>
 
-                            <input type="hidden" name="others1Ch" value="0">
                             <div class="row">
                             <div class="col col-lg-8">
-                            <input class="form-check-input" type="checkbox" value="1" name="others1Ch" id="Others1">
+                            <input class="form-check-input" type="checkbox" name="others1Ch" id="others1Ch" value=""onclick="return false;">
+                            
                               <label class="form-check-label" for="Others1">
                               Others: Pls. specify injury and the body part/s affected:
                               </label>
-                              <input type="text" class="inputlabelunderline" name="others1">
+                              <input type="text" class="inputlabelunderline" value="{{$patients->others1}}" placeholder="N/A" disabled="true">
                             </div>
                           </div>
                           </div>
@@ -298,283 +291,243 @@ table, td, tr{
 
         </div>
         <hr>
+        <!-- External cause panel -->
         <div class="form-group col-md-12">
               <h5>External Cause/s of Injury/ies:</h5>
-              <input type="hidden" name="biteCh" value="0">
-                  <div class="row mx-md-n5">
-                    <div class="col px-md-5">
-                    <input class="form-check-input" type="checkbox" value="1" name="bitesCh" id="Bites">
-                          <label class="form-check-label" for="Bites">
-                            Bites/stings, Specify animal/insect:
-                          </label>
-                          <input type="text" class="inputlabelunderline" name="bites">
-
-                    </div>
-                  </div>
                   
                   <div class="row mx-md-n5">
                     <div class="col px-md-5">
+
+                    <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="" onclick="return false;">
+                          <label class="form-check-label" for=" Bites">
+                            Bites/stings, Specify animal/insect:
+                          </label>
+                          <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" disabled="true">
+
                       <div class="row">
                       <div class="col-auto">
-                        <input type="hidden" name="burn1Ch" value="0">
-                      <input class="form-check-input" type="checkbox" value="1" name="burn1Ch" id="Burn1">
+                      <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="" onclick="return false;">
                           <label class="form-check-label" for="Burn1">
                             Burn,
                           </label>
                       </div>
-                      <input type="hidden" name="burnRdo" value="0">
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="1" name="Burn1" id="Heat">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Heat"  onclick="return false;">
+                      
                           <label class="form-check-label" for="Heat">
                             Heat
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="2" name="Burn1" id="Fire">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Fire"  onclick="return false;">
                           <label class="form-check-label" for="Fire">
                             Fire
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="3" name="Burn1" id="Electricty">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Electricty"  onclick="return false;">
                           <label class="form-check-label" for="Electricty">
                             Electricty
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="4" name="Burn1" id="Oil">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Oil"  onclick="return false;">
                           <label class="form-check-label" for="Oil">
                             Oil
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="5" name="Burn1" id="Friction">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Friction"  onclick="return false;">
                           <label class="form-check-label" for="Friction">
                             Friction
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="6" name="Burn1" id="Others2">
+                      <input class="form-check-input" type="radio" value="" name="burnRdo" id="Others2"  onclick="return false;">
                           <label class="form-check-label" for="Others2">
                             Others,specify
                           </label>
-                          <input type="text" class="inputlabelunderline" name="others2">
+                          <input type="text" class="inputlabelunderline" value="{{$patients->others2}}" placeholder="N/A" disabled="true" onclick="return false;">
                       </div>
+                    
                       </div>
 
-                      <input type="hidden" name="chemicalCh" value="0">
+                      <input class="form-check-input" type="checkbox" name="chemicalCh" id="chemicalCh" value="" onclick="return false;">
                       <div class="row">
                         <div class="col col-lg-8">
-                        <input class="form-check-input" type="checkbox" value="1" name="chemicalCh" id="Chemical">
                           <label class="form-check-label" for="Chemical">
                             Chemical/Substance, specify
                           </label>
-                          <input type="text" class="inputlabelunderline" name="chemical">
+                          <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}" placeholder="N/A" disabled="true">
                         </div>
 
-                        <input type="hidden" name="sharpCh" value="0">
+                        
                         <div class="col col-lg-8">
-                        <input class="form-check-input" type="checkbox" value="1" name="sharpCh" id="sharp">
+                        <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="}"onclick="return false;">
                           <label class="form-check-label" for="sharp">
                             Contact with sharp objects, specify object
                           </label>
-                          <input type="text" class="inputlabelunderline" name="sharp">
+                          <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}" placeholder="N/A" disabled="true">
                         </div>
                       </div>
 
-                      <input type="hidden" name="drowningCh" value="0">
                       <div class="row">
                       <div class="col col-lg-3">
-                      <input class="form-check-input" type="checkbox" value="1" name="drowningCh" id="Drowning">
+                      <input class="form-check-input" type="checkbox" name="drowningCh" id="drowningCh" value="" onclick="return false;">
                           <label class="form-check-label" for="Drowning">
                             Drowning: Type/Body of Water:
                           </label>
                       </div>
-                      <input type="hidden" name="drowningRdo" value="0">
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="1" name="drowningRdo" id="Sea">
+                      <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Sea"  onclick="return false;">
                           <label class="form-check-label" for="Sea">
                             Sea
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="2" name="drowningRdo" id="River">
+                      <input class="form-check-input" type="radio" value="" name="drowningRdo" id="River"  onclick="return false;">
                           <label class="form-check-label" for="River">
                             River
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="3" name="drowningRdo" id="Lake">
+                      <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Lake"  onclick="return false;">
                           <label class="form-check-label" for="Lake">
                             Lake
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="4" name="drowningRdo" id="Pool">
+                      <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Pool"  onclick="return false;">
                           <label class="form-check-label" for="Pool">
                             Pool
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="5" name="drowningRdo" id="BathTub">
+                      <input class="form-check-input" type="radio" value="" name="drowningRdo" id="BathTub"  onclick="return false;">
                           <label class="form-check-label" for="BathTub">
                             Bath Tub
                           </label>
                       </div>
                       <div class="col col-lg-4">
-                        <input class="form-check-input" type="radio" value="6" name="drowningRdo" id="Others3">
+                        <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Others3"  onclick="return false;">
                           <label class="form-check-label" for="Others3">
                             Others,specify
                           </label>
-                          <input type="text" class="inputlabelunderline" name="others3">
+                          <input type="text" class="inputlabelunderline" value="{{$patients->others3}}" placeholder="N/A" disabled="true">
                       </div>
                       </div>
-
-                      <input type="hidden" name="natureCh" value="0">
                       <div class="row">
                       <div class="col-auto">
-                      <input class="form-check-input" type="checkbox" value="1" name="natureCh" id="Exposure">
+                      <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value="" onclick="return false;">
                           <label class="form-check-label" for="Exposure">
                             Exposure to forces of Nature:
                           </label>
-                      </div>
-                      <input type="hidden" name="natureRdo" value="0">
+                      </div>    
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="1" name="natureRdo" id="Earthquake">
+                      <input class="form-check-input" type="radio" name="natureRdo" id="Earthquake" value=""  onclick="return false;">
                           <label class="form-check-label" for="Earthquake">
                             Earthquake
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="2" name="natureRdo" id="Volcanic">
+                      <input class="form-check-input" type="radio" name="natureRdo" id="Volcanic" value=""  onclick="return false;">
                           <label class="form-check-label" for="Volcanic">
                             Volcanic eruption
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="3" name="natureRdo" id="Typhoon">
+                      <input class="form-check-input" type="radio" name="natureRdo" id="Typhoon" value=""  onclick="return false;">
                           <label class="form-check-label" for="Typhoon">
                             Typhoon
                           </label>
                       </div>
                       <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="4" name="natureRdo" id="Landslide">
+                      <input class="form-check-input" type="radio" name="natureRdo" id="Landslide" value=""  onclick="return false;">
                           <label class="form-check-label" for="Landslide">
                             Landslide/Avalanche
                           </label>
                       </div>
-                      <div class="col-auto">
-                      <input class="form-check-input" type="radio" value="5" name="natureRdo" id="Tidal">
-                          <label class="form-check-label" for="Tidal">
-                            Tidal Wave
-                          </label>
-                      </div>
-                        <div class="row">
-                        <div class="col px-md-5">
-                          <div class="row">
-                            <div class="col-auto">
-                              <input class="form-check-input" type="radio" value="6" name="natureRdo" id="Flood">
-                                <label class="form-check-label" for="Flood">
-                                  Flood(due to storm/excessive rain)
-                                </label>
-                            </div>
-                            
-                            <div class="col-auto">
-                              <input class="form-check-input" type="radio" value="7" name="natureRdo" id="Others4">
-                                <label class="form-check-label" for="Others4">
-                                  Others,specify
-                                </label>
-                                <input type="text" class="inputlabelunderline" name="others4">
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                      </div>
-
-                      <input type="hidden" name="gunshotCh" value="0">
+                      
                       <div class="row">
                       <div class="col-auto">
-                        <input class="form-check-input" type="checkbox" value="1" name="gunshotCh" id="Gunshot">
+                        <input class="form-check-input" type="checkbox" name="drowningCh" id="gunshotCh" value="" onclick="return false;">
+
                           <label class="form-check-label" for="Gunshot">
                             Gunshot, Specify weapon
                           </label>
-                          <input type="text" class="inputlabelunderline" name="gunshot">
+                          <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}" placeholder="N/A" disabled="true">
                       </div>
                       </div>
 
-                      <input type="hidden" name="hangingCh" value="0">
+                      
                       <div class="row">
                       <div class="col col-lg-4">
-                        <input class="form-check-input" type="checkbox" value="1" name="hangingCh" id="Hanging">
+                      <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh" value=""  onclick="return false;">
                           <label class="form-check-label" for="Hanging">
                             Hanging/Strangulation
                           </label>
                       </div>
                       </div>
 
-                      <input type="hidden" name="maulingCH" value="0">
                       <div class="row">
                       <div class="col col-lg-4">
-                        <input class="form-check-input" type="checkbox" value="1" name="maulingCh" id="Mauling">
+                      <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh" value=""  onclick="return false;">
                           <label class="form-check-label" for="Mauling">
                             Mauling/Assault
                           </label>
                       </div>
                       </div>
 
-                      <input type="hidden" name="transportCh" value="0">
                       <div class="row">
                       <div class="col col-lg-4">
-                        <input class="form-check-input" type="checkbox" value="1" name="transportCh" id="Transport">
+                      <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh" value="">
                           <label class="form-check-label" for="Transport">
                             Transport/Vehicular Accident
                           </label>
                       </div>
                       </div>
 
-                      <input type="hidden" name="fallCh" value="0">
                       <div class="row">
                         <div class="col-auto">
-                        <input class="form-check-input" type="checkbox" value="1" name="fallCh" id="Fall">
+                      <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="" onclick="return false;">
                                 <label class="form-check-label" for="Fall">
                                   Fall, specify, from/in/on/into
                                 </label>
-                                <input type="text" class="inputlabelunderline" name="fall">
+                                <input type="text" class="inputlabelunderline" value="{{$patients->fall}}" placeholder="N/A" disabled="true">
                         </div>
                       </div>
 
-                      <input type="hidden" name="firecrackerCh" value="0">
                       <div class="row">
                         <div class="col-auto">
-                        <input class="form-check-input" type="checkbox" value="1" name="firecrackerCh" id="Firecracker">
+                      <input class="form-check-input" type="checkbox" name="firecrackerCh" id="firecrackerCh" value="" onclick="return false;">
+
                                 <label class="form-check-label" for="Firecracker">
                                   Firecracker, specify type/s
                                 </label>
-                                <input type="text" class="inputlabelunderline" name="firecracker">
+                                <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}" placeholder="N/A" disabled="true">
                                 <label class="form-check-label" for="Firecracker">
                                   (with libraries)
                                 </label>
                         </div>
                       </div>
 
-                      <input type="hidden" name="assaultCh" value="0">
                       <div class="row">
                         <div class="col-auto">
-                        <input class="form-check-input" type="checkbox" value="1" name="assaultCh" id="Sexual">
+                      <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh" value=""  onclick="return false;">
                                 <label class="form-check-label" for="Sexual">
                                   Sexual Assault/Sexual Abuse/Rape(Alleged)
                                 </label>
                         </div>
                       </div>
 
-                      <input type="hidden" name="others5Ch" value="0">
                       <div class="row">
                         <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="others5Ch" id="Others5">
+                      <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch" value="" onclick="return false;">
+
                                   <label class="form-check-label" for="Others5">
                                     Others,specify
                                   </label>
-                                  <input type="text" class="inputlabelunderline" name="others5">
+                                  <input type="text" class="inputlabelunderline" value="{{$patients->others5}}" placeholder="N/A" disabled="true">
                         </div>
                       </div> 
                     </div>
@@ -600,39 +553,36 @@ table, td, tr{
                         <div class="form-group row-md-8">
                           <div class="container border border-secondary" >
 
-                            <div class="row border-bottom border-secondary">
+                          <div class="row border-bottom border-secondary">
                               <div class="col-auto">
                                <label>For transport/vehicular accident only:</label>
                                </div>
-                               <input type="hidden" name="transpoRdo1" value="0">
                               <div class="col-auto">
-                               <input class="form-check-input" type="radio" value="1" name="transpoRdo1" id="Land" >
+                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Land" value=""  onclick="return false;" >
                                 <label class="form-check-label mx-auto" for="Land">
                                     Land
                                 </label>
                               </div>
                               <div class="col-auto">
-                               <input class="form-check-input" type="radio" value="2" name="transpoRdo1" id="Water" >
+                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Water" value=""  onclick="return false;" >
                                 <label class="form-check-label mx-auto" for="Water">
                                     Water
                                 </label>
                               </div>
                               <div class="col col-lg-4">
-                               <input class="form-check-input" type="radio" value="3" name="transpoRdo1" id="Air" >
+                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Air" value=""  onclick="return false;">
                                 <label class="form-check-label mx-auto" for="Air">
                                     Air
                                 </label>
                               </div>
-
-                              <input type="hidden" name="collRdo" value="0">
                               <div class="col-auto">
-                               <input class="form-check-input" type="radio" value="1" name="collRdo" id="Collision" >
+                               <input class="form-check-input" type="radio" name="collRdo" id="Collision" value=""  onclick="return false;">
                                 <label class="form-check-label mx-auto" for="Collision">
                                     Collision
                                 </label>
                               </div>
                               <div class="col-auto">
-                               <input class="form-check-input" type="radio" value="2" name="collRdo" id="Non-Collision" >
+                               <input class="form-check-input" type="radio" name="collRdo" id="Non-Collision" value=""  onclick="return false;">
                                 <label class="form-check-label" for="Non-Collision">
                                     Non-Collision
                                 </label>
@@ -642,33 +592,31 @@ table, td, tr{
                             <div class="row border-bottom border-secondary">
                                 <div class="col-auto">
                                 <h6 class="form-check-label" for="flexCheckDefault">
-                                    Severity:
+                                    Severity: 
                                 </h6>
-                                </div>
-
-                                <input type="hidden" name="severity" value="0">
+                                </div>   
                                 <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="1" name="severity" id="Fatal Accident"> 
+                                <input class="form-check-input" type="radio" name="severity" id="Fatal Accident" value=""  onclick="return false;"> 
                                   <label class="form-check-label" for="Fatal Accident">
                                     Fatal Accident
                                 </label>
                                 </div>
                                 <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="2" name="severity" id="Serious">
+                                <input class="form-check-input" type="radio" value="Serious" name="severity" id="Serious" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Serious">
                                     Serious Injury Accident
                                 </label>
                                 </div>
                                 
                                 <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="3" name="severity" id="Minor">
+                                <input class="form-check-input" type="radio" value="Minor" name="severity" id="Minor" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Minor">
                                     Minor Injury Accident
                                 </label>
                                 </div>
 
                                 <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="4" name="severity" id="Property">
+                                <input class="form-check-input" type="radio" value="Property" name="severity" id="Property" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Property">
                                     Property Damage Only
                                 </label>
@@ -699,23 +647,22 @@ table, td, tr{
                                   </h6>
                                   </div>
 
-                                  <input type="hidden" name="vehicleRdo" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="1" name="vehicleRdo" id="Pedestrian" >
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Pedestrian" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Pedestrian">
                                       None(Pedestrian)
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="vehicleRdo" id="Car">
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Car" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Car">
                                       Car
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="3" name="vehicleRdo" id="Van" }>
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Van" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Van">
                                       Van
                                   </label>
@@ -730,28 +677,28 @@ table, td, tr{
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="4" name="vehicleRdo" id="Bus"}>
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Bus" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Bus">
                                       Bus
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="5" name="vehicleRdo" id="Motorcycle" >
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Motorcycle" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Motorcycle">
                                       Motorcycle
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="6" name="vehicleRdo" id="Bicycle" >
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Bicycle" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Bicycle">
                                       Bicycle
                                   </label>
                                   </div>
                                   
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="7" name="vehicleRdo" id="Tricycle" >
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Tricycle" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Tricycle">
                                       Tricycle
                                   </label>
@@ -766,15 +713,15 @@ table, td, tr{
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="8" name="vehicleRdo" id="Others6">
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Others6" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others6" name="others6">
                                       Others,
                                   </label>
-                                  <input type="text" class="inputlabelunderline" name="others6">
+                                  <input type="text" class="inputlabelunderline" value="{{$patients->others6}}" placeholder="N/A" disabled="true">
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="9" name="vehicleRdo" id="Unknown" >
+                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Unknown" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Unknown">
                                       Unknown
                                   </label>
@@ -787,7 +734,7 @@ table, td, tr{
                             <div class="container">
                                 <div class="row row-lg-8">
                                   <div class="col-auto">
-                                  <h6 class="form-check-label" for="othervehicle">
+                                  <h6 class="form-check-label" for="flexCheckDefault">
                                       Other Vehicle/Object Involved(for COLLISION accident ONLY)
                                   </h6>
                                   </div>
@@ -801,31 +748,29 @@ table, td, tr{
                                   </h6>
                                   </div>
 
-                                  <input type="hidden" name="otherRdo" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="1" name="otherRdo" id="Pedestrian1">
-                                    <label class="form-check-label" for="Pedestrian1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Pedestrian" value=""  onclick="return false;">
+                                    <label class="form-check-label" for="Pedestrian">
                                       None(Pedestrian)
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="otherRdo" id="Car1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Car1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Car1">
                                       Car
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="3" name="otherRdo" id="Van1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Van1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Van1">
                                       Van
                                   </label>
                                   </div>
                                  </div>
-                                
 
-                                <div class="row row-lg-8">
+                                 <div class="row row-lg-8">
                                   <div class="col col-lg-2">
                                   <h6 class="form-check-label" for="flexCheckDefault">
                                       
@@ -833,28 +778,28 @@ table, td, tr{
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="4" name="otherRdo" id="Bus1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Bus1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Bus1">
                                       Bus
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="5" name="otherRdo" id="Motorcycle1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Motorcycle1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Motorcycle1">
                                       Motorcycle
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="6" name="otherRdo" id="Bicycle1" >
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Bicycle1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Bicycle1">
                                       Bicycle
                                   </label>
                                   </div>
                                   
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="7" name="otherRdo" id="Tricycle1">
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Tricycle1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Tricycle1">
                                       Tricycle
                                   </label>
@@ -869,15 +814,15 @@ table, td, tr{
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="8" name="otherRdo" id="Others7" >
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Others7" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others7">
                                       Others,
                                   </label>
-                                  <input type="text" class="inputlabelunderline" name="others7">
+                                  <input type="text" class="inputlabelunderline" name="others7" value="{{ $patients->others7}}" placeholder="N/A" disabled="true">
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="9" name="otherRdo" id="Unknown1" >
+                                  <input class="form-check-input" type="radio" name="otherRdo" id="Unknown1" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Unknown1">
                                       Unknown
                                   </label>
@@ -894,61 +839,60 @@ table, td, tr{
                                     Position of Patient
                                 </h6>
                             </div>
-                            <input type="hidden" name="posRdo" value="0">
                                 <div class="row">
                                 <div class="container">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="1" name="posRdo" id="Pedestrian2" >
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Pedestrian2" value=""  onclick="return false;" >
                                     <label class="form-check-label" for="Pedestrian2">
                                       Pedestrian
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="posRdo" id="Driver" >
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Driver" value=""  onclick="return false;" >
                                     <label class="form-check-label" for="Driver">
                                       Driver
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="3" name="posRdo" id="Captain" >
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Captain" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Captain">
                                       Captain
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="4" name="posRdo" id="Pilot">
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Pilot" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Pilot">
                                       Pilot
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="5" name="posRdo" id="Front">
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Front" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Front">
                                       Front Passenger
                                   </label>
                                   </div>
                                   
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="6" name="posRdo" id="Rear" >
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Rear" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Rear">
                                       Rear Passenger
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="7" name="posRdo" id="Others8">
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Others8" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others8">
                                       Others,
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="others8">
+                                  <input type="text" class="inputlabelunderline2" name="others8" value="{{ $patients->others8}}" placeholder="N/A" disabled="true">
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="8" name="posRdo" id="Unknown2" >
+                                  <input class="form-check-input" type="radio" name="posRdo" id="Unknown2" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Unknown2">
                                       Unknown
                                   </label>
@@ -966,27 +910,27 @@ table, td, tr{
                             </div>
                                 <div class="row">
                                 <div class="container">
-                                <input type="hidden" name="victimsRdo" value="0">
+                                  
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="1" name="victimsRdo" id="Alone">
+                                  <input class="form-check-input" type="radio" name="victimsRdo" id="Alone" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Alone">
                                       Alone
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="victimsRdo" id="Withothers">
+                                  <input class="form-check-input" type="radio" name="victimsRdo" id="Withothers" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Withothers">
                                       With others, specify how many(excuding the victim)
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="withothers">
+                                  <input type="text" class="inputlabelunderline2" value="{{$patients->withothers}}" placeholder="N/A" disabled="true">
                                   </div>
                                   
                                 </div>
                                 </div>
                                 </div><!--33a.4 end-->
                                 <div class="col col-lg-4 border border-secondary border-left-0 border-right-0"><!--33b-->
-                            <div class="col-auto">
+                                <div class="col-auto">
                                 <h6 class="form-check-label" for="flexCheckDefault">
                                     Place of Occurrence:
                                 </h6>
@@ -994,52 +938,51 @@ table, td, tr{
                                 <div class="row">
                                 <div class="container">
                                   <div class="col-auto">
-                                  <input type="hidden" name="palceRdo" value="0">
-                                  <input class="form-check-input" type="radio" value="1" name="placeRdo" id="Home" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Home" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Home">
                                       Home
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="placeRdo" id="School" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="School" value=""  onclick="return false;">
                                     <label class="form-check-label" for="School">
                                       School
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="3" name="placeRdo" id="Road" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Road" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Road">
                                       Road
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="4" name="placeRdo" id="Bars" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Bars" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Bars">
                                       Videoke Bars
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="5" name="placeRdo" id="Workplace" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Workplace" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Workplace">
                                       Workplace, specify
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="workplaceInput">
+                                  <input type="text" class="inputlabelunderline2" name="workplaceInput" value="" placeholder="N/A" disabled="true">
                                   </div>
                                   
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="6" name="placeRdo" id="Others9" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Others9" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others9">
                                       Others, specify
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="others9">
+                                  <input type="text" class="inputlabelunderline2" name="others9" value="{{ $patients->others9}}" placeholder="N/A" disabled="true">
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="7" name="placeRdo" id="Unkown4" >
+                                  <input class="form-check-input" type="radio" name="placeRdo" id="Unkown4" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Unkown4">
                                       Unkown
                                   </label>
@@ -1047,47 +990,46 @@ table, td, tr{
                                   </div>
                                 </div>
                                 </div>
-                                </div><!--33b end-->
+                                </div>
                                 <div class="col col-lg-4 border border-secondary"><!--33c-->
-                            <div class="col-auto">
+                                <div class="col-auto">
                                 <h6 class="form-check-label" for="flexCheckDefault">
                                     Activity of the Patient at the time of the incident:
                                 </h6>
                             </div>
-                            <input type="hidden" name="activityRdo" value="0">
                                 <div class="row">
                                 <div class="container">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="1" name="activityRdo" id="Sports" >
+                                  <input class="form-check-input" type="radio" name="activityRdo" id="Sports" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Sports">
                                       Sports
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="2" name="activityRdo" id="Leisure" >
+                                  <input class="form-check-input" type="radio" name="activityRdo" id="Leisure"value=""  onclick="return false;">
                                     <label class="form-check-label" for="Leisure">
                                       Leisure
                                   </label>
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="3" name="activityRdo" id="Workrelated" >
+                                  <input class="form-check-input" type="radio" name="activityRdo" id="Workrelated"value=""  onclick="return false;" >
                                     <label class="form-check-label" for="Workrelated">
                                       Work related
                                   </label>
                                   </div>
                                   
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="4" name="activityRdo" id="Others10" >
+                                  <input class="form-check-input" type="radio" name="activityRdo" id="Others10" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others10">
                                       Others, specify
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="others10">
+                                  <input type="text" class="inputlabelunderline2" name="others10" value="{{ $patients->others10}}" placeholder="N/A" disabled="true">
                                   </div>
 
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="radio" value="5" name="activityRdo" id="Unkown5">
+                                  <input class="form-check-input" type="radio" name="activityRdo" id="Unkown5" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Unkown5">
                                       Unkown
                                   </label>
@@ -1105,53 +1047,47 @@ table, td, tr{
                             </div>
                                 <div class="row">
                                 <div class="container">
-                                <input type="hidden" name="alcoholCh" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="alcoholCh" id="Alchohol">
+                                  <input class="form-check-input" type="checkbox" name="alcoholCh" id="Alchohol" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Alchohol">
                                       Alchohol/liquor
                                   </label>
                                   </div>
 
-                                <input type="hidden" name="smokeCh" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="smokingCh" id="Smoking">
+                                  <input class="form-check-input" type="checkbox" name="smokingCh" id="Smoking" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Smoking">
                                       Smoking
                                   </label>
                                   </div>
 
-                                <input type="hidden" name="drugsCh" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="drugsCh" id="Drugs">
+                                  <input class="form-check-input" type="checkbox" name="drugsCh" id="Drugs" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Drugs">
                                       Drugs
                                   </label>
                                   </div>
 
-                                <input type="hidden" name="phoneCh" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="phoneCh" id="phone">
+                                  <input class="form-check-input" type="checkbox" name="phoneCh" id="phone" value=""  onclick="return false;">
                                     <label class="form-check-label" for="phone">
                                       Using mobile phone
                                   </label>
                                   </div>
 
-                                <input type="hidden" name="sleepyCh" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="sleepyCh" id="Sleepy">
+                                  <input class="form-check-input" type="checkbox" name="sleepyCh" id="Sleepy" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Sleepy">
                                       Sleepy
                                   </label>
                                   </div>
 
-                                <input type="hidden" name="others11Ch" value="0">
                                   <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="others11Ch" id="Others11">
+                                  <input class="form-check-input" type="checkbox" name="others11Ch" id="Others11" value=""  onclick="return false;">
                                     <label class="form-check-label" for="Others11">
                                       Others, specify
                                   </label>
-                                  <input type="text" class="inputlabelunderline2" name="others11">
+                                  <input type="text" class="inputlabelunderline2" value="{{$patients->others11}}" placeholder="N/A" disabled="true">
                                   <label class="form-check-label" for="Others11">
                                       (e.g. suspected unter the influcence of substance used)
                                   </label>
@@ -1172,49 +1108,44 @@ table, td, tr{
                                   </h6>
                                   </div>
                                 
-                                  <input type="hidden" name="safetyCh" value="0">
+                               
+                                  
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="noneCh" id="None">
+                                <input class="form-check-input" type="checkbox" name="noneCh" id="noneCh" value="" onclick="return false;">
                                   <label class="form-check-label" for="None">
                                     None
                                 </label>
                                 </div>
-
-                                <input type="hidden" name="airbagCh" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="airbagCh" id="Airbag">
+                                <input class="form-check-input" type="checkbox" name="airbagCh" id="airbagCh" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Airbag">
                                     Airbag
                                 </label>
                                 </div>
                                 
-                                <input type="hidden" name="helmetCh" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="helmetCh" id="Helmet">
+                                <input class="form-check-input" type="checkbox" name="helmetCh" id="helmetCh" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Helmet">
                                     Helmet
                                 </label>
                                 </div>
 
-                                <input type="hidden" name="childseatCh" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="childseatCh" id="Childseat">
+                                <input class="form-check-input" type="checkbox" name="childseatCh" id="childseatCh" value=""  onclick="return false;">
                                   <label class="form-check-label" for="Childseat">
                                     Childseat
                                 </label>
                                 </div>
 
-                                <input type="hidden" name="seatbeltCh" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="seatbeltCh" id="Seatbelt">
+                                <input class="form-check-input" type="checkbox" name="seatbeltCh" id="seatbeltCh" value="" onclick="return false;">
                                   <label class="form-check-label" for="Seatbelt">
                                     Seatbelt
                                 </label>
                                 </div>
 
-                                <input type="hidden" name="vestCh" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="vestCh" id="LifeJacket">
+                                <input class="form-check-input" type="checkbox" name="vestCh" id="vestCh" value=""  onclick="return false;">
                                   <label class="form-check-label" for="LifeJacket">
                                     Life vest/LifeJacket/Floatation device
                                 </label>
@@ -1226,19 +1157,17 @@ table, td, tr{
                                 <div class="row">
                                 <div class="col col-lg-3">
                                 
-                                <input type="hidden" name="others12Ch" value="0">
                                 </div>
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="others12Ch" id="Others12">
-                                  <label class="form-check-label" for="Others12">
+                                <input class="form-check-input" type="checkbox" name="others12Ch" id="others12Ch" value="" onclick="return false;">
+                                  <label class="form-check-label" for="Others12" value="{{$patients->others12}}" placeholder="N/A">
                                     Others
                                 </label>
                                 </div>
 
-                                <input type="hidden" name="unknown5Ch" value="0">
                                 <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="1" name="unknown5Ch" id="Unknown5">
-                                  <label class="form-check-label" for="Unknown5">
+                                <input class="form-check-input" type="checkbox" name="unknown5Ch" id="unknown5" value="" onclick="return false;">
+                                  <label class="form-check-label" for="unknown5">
                                     Unknown
                                 </label>
                                 </div>
@@ -1270,37 +1199,36 @@ table, td, tr{
         </div>
 
         <div class="row-auto border border-secondary border-left-0 border-right-0">
-          <div class="row">
+        <div class="row">
             <div class="col-auto">
                 Transferred from another hospital/facility
             </div>
             <div class="col-auto">
-            <input type="hidden" name="transferRdo" value="0">
-                <input class="form-check-input" type="radio" name="transferRdo" value="1" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="transferRdo" value="" onclick="return false" id="flexRadioDefault1">
                   <label class="form-check-label" for="transferRdo">
                       Yes
                   </label>
             </div>
               <div class="col col-lg-1">
-                <input class="form-check-input" type="radio" name="transferRdo" value="2" id="flexRadioDefault2" checked="checked">
+                <input class="form-check-input" type="radio" name="transferRdo" value="" onclick="return false" id="flexRadioDefault2">
                   <label class="form-check-label" for="transferRdo">
                       No
                   </label>
               </div>
           </div>
-            <div class="row">
+          <div class="row">
             <div class="col-auto">
                 Referred by another Hospital/Facility for Laboratory and/or other medical procedures
             </div>
               <div class="col-auto">
             <input type="hidden" name="referral" value="0">
-                <input class="form-check-input" type="radio" name="referral" value="1" id="flexRadioDefault1">
+                <input class="form-check-input" type="radio" name="referral" value=""  onclick="return false" id="flexRadioDefault1">
                   <label class="form-check-label" for="referral">
                       Yes
                   </label>
               </div>
               <div class="col col-lg-1">
-                <input class="form-check-input" type="radio" name="referral" value="2" id="flexRadioDefault2"checked="checked">
+                <input class="form-check-input" type="radio" name="referral" value=""  onclick="return false" id="flexRadioDefault2">
                   <label class="form-check-label" for="referral">
                       No
                   </label>
@@ -1311,10 +1239,10 @@ table, td, tr{
         <div class="row-auto">
           <div class="row">
           <div class="col-auto">
-          <label class="form-check-label">
+          <label class="form-check-label" for="flexCheckDefault" >
                    Name of Originating Hospital/Physician:
                 </label>
-             <input type="text" class="inputlabelunderline" name="hospPhys">
+             <input type="text" class="inputlabelunderline" value="" placeholder="N/A" disabled="true">
           </div>
           </div>
         </div>
@@ -1327,119 +1255,110 @@ table, td, tr{
           </label>
           </div>
         
-            <input type="hidden" name="arrival" value="0">
+            
           <div class="col-auto">
-          <input class="form-check-input" type="radio" name="arrival" value="1" id="arrival">
+          <input class="form-check-input" type="radio" name="arrival"  value=""  onclick="return false">
             <label class="form-check-label" for="arrival">
               Dead on Arrival
             </label>
           </div>
           <div class="col-auto">
-          <input class="form-check-input" type="radio" name="arrival" value="2" id="arrivalAlive" checked="checked">
+          <input class="form-check-input" type="radio" name="arrival" value=""  onclick="return false">
             <label class="form-check-label" for="arrivalAlive">
               Alive if alive, please check if:
             </label>
           </div>
 
-          <input type="hidden" name="status" value="0">
           <div class="col-auto">
-          <input class="form-check-input" type="radio" name="status" value="1">
+          <input class="form-check-input" type="radio" name="status" value=""  onclick="return false">
             <label class="form-check-label" for="conscious">
               Conscious
             </label>
           </div>
           <div class="col-auto">
-          <input class="form-check-input" type="radio" name="status" value="2" checked="checked">
+          <input class="form-check-input" type="radio" name="status" value=""  onclick="return false">
             <label class="form-check-label" for="unconscious">
               Unconscious
             </label>
           </div>
-          </div>
+        </div>
 
           <div class="row">
             <div class="col-auto">
-              <label class="form-check-label" for="mode">
+              <label class="form-check-label">
                 Mode of transport to the Hospital/Facility:
               </label>
             </div>
           
-          <input type="hidden" name="transpoRdo" value="0">
-          <div class="col-auto">
-          <input class="form-check-input" type="radio" value="1" name="transpoRdo" id="ambulance" >
+            <div class="col-auto">
+          <input class="form-check-input" type="radio" value=""  onclick="return false" name="transpoRdo" id="ambulance" >
             <label class="form-check-label" for="ambulance">
               Ambulance
             </label>
           </div>
           <div class="col-auto">
-          <input class="form-check-input" type="radio" value="2" name="transpoRdo" id="police">
+          <input class="form-check-input" type="radio" value=""  onclick="return false" name="transpoRdo" id="police">
             <label class="form-check-label" for="police">
               Police vehicle
             </label>
           </div>
           <div class="col-auto">
-          <input class="form-check-input" type="radio" value="3" name="transpoRdo" id="private">
+          <input class="form-check-input" type="radio" value=""  onclick="return false" name="transpoRdo" id="private">
             <label class="form-check-label" for="private">
               Private vehicle
             </label>
           </div>
           <div class="col-auto">
-          <input class="form-check-input" type="radio" value="4" name="transpoRdo" id="others13">
-            <label class="form-check-label" for="others13">
+          <input class="form-check-input" type="radio" value=""  onclick="return false" name="transpoRdo" id="private">
+            <label class="form-check-label" for="others12">
               Others, specify
             </label>
-            <input type="text" class="inputlabelunderline" name="others13">
+            <input type="text" class="inputlabelunderline" value="{{$patients->others13}}" placeholder="N/A" disabled="true">
           </div>
         </div>
         </div>
         <div class="row-auto border-bottom border-secondary">
           <div class="row">
           <div class="col-auto">
-          <label class="form-check-label" for="impression">
+          <label class="form-check-label">
                    Initial Impression:
                 </label>
-             <input type="text" class="inputlabelunderline" name="impression">
+             <input type="text" class="inputlabelunderline" value="{{$patients->impression}}" placeholder="N/A" disabled="true">
           </div>
           </div>
         </div>
         <div class="row-auto">
           <div class="row">
           <div class="col-auto">
-          <label class="form-check-label" for="icdNature" >
+          <label class="form-check-label">
                    ICD-10 Code/s: Nature of Injury:
                 </label>
-             <input type="text" class="inputlabelunderline" name="icdNature">
+             <input type="text" class="inputlabelunderline" value="{{$patients->icdNature}}" placeholder="N/A" disabled="true">
           </div>
           <div class="col-auto">
-          <label class="form-check-label" for="icdExternal">
+          <label class="form-check-label">
                    ICD-10 Code/s: External cause of Injury:
                 </label>
-             <input type="text" class="inputlabelunderline" name="icdExternal">
+             <input type="text" class="inputlabelunderline" value="{{$patients->icdExternal}}" placeholder="N/A" disabled="true">
           </div>
           </div>
         </div>
         <div class="row-auto border border-secondary border-right-0 border-left-0">
           <div class="row">
           <div class="col-auto">
-          <label class="form-check-label" for="treatment">
+          <label class="form-check-label">
                    Treatment Given:
           </label>
           </div>
           <div class="col-auto">
-                <input class="form-check-input" type="radio" value="Yes" name="treatment1" id="treatYes">
-                <label class="form-check-label" for="treatYes">
-                   Yes, specify
-                </label>
+                <label class="form-check-label">
                 
-          <input type="text" class="inputlabelunderline" name="treatment" >
-          </div>
-          <div class="col-auto">
-          <input class="form-check-input" type="radio" value=" " name="treatment1" id="treatNo">
-          <label class="form-check-label" for="treatNo">
-                   No
+
                 </label>
+          <input type="text" class="inputlabelunderline" value="{{$patients->treatment}}" placeholder="N/A" disabled="true">
           </div>
           </div>
-        </div>
+        </div> 
         <div class="row-auto">
           <div class="row">
             <div class="col-auto">
@@ -1447,47 +1366,43 @@ table, td, tr{
                    Disposition:
               </label>
             </div>
-          </div>
-          <div class="row mx-md-n5">
-          <input type="hidden" name="dispoRdo" value="0">
+            <div class="row mx-md-n5">
             <div class="col-auto px-md-5">
-            <input class="form-check-input" type="radio" value="1" name="dispoRdo" id="admitted" checked="true">
+            <input class="form-check-input" type="radio" value=""  name="dispoRdo" id="admitted" checked="true">
                 <label class="form-check-label" for="admitted">
                    Admitted
                 </label>
             </div>
             <div class="col-auto px-md-5">
-            <input class="form-check-input" type="radio" value="2" name="dispoRdo" id="senthome">
+            <input class="form-check-input" type="radio" value=""  name="dispoRdo" id="senthome">
                 <label class="form-check-label" for="senthome">
                    Treated and Sent Home
                 </label>
             </div>
             <div class="col-auto">
-            <input class="form-check-input" type="radio" value="3" name="dispoRdo" id="transfer" >
+            <input class="form-check-input" type="radio" value=""  name="dispoRdo" id="transfer" >
                 <label class="form-check-label" for="transfer">
                    Transferred to another facility/hospital, specify
                 </label>
-                <input type="text" class="inputlabelunderline" name="transferred">
+                <input type="text" class="inputlabelunderline" name="transferred" value="{{$patients->transferred}}">
             </div>
           </div>
           <div class="row mx-md-n">
             <div class="col-auto px-md-5">
-            <input class="form-check-input" type="radio" value="4" name="dispoRdo" id="HAMA" >
+            <input class="form-check-input" type="radio" value=""  name="dispoRdo" id="HAMA" >
                 <label class="form-check-label" for="HAMA">
                    HAMA
                 </label>
             </div>
             <div class="col-auto px-md-5">
-            <input class="form-check-input" type="radio" value="5" name="dispoRdo" id="absconded" >
+            <input class="form-check-input" type="radio" value=""  name="dispoRdo" id="absconded" >
                 <label class="form-check-label" for="absconded">
                    Absconded
                 </label>
             </div>
           </div>
-        </div>
+          </div>
         <div class="row-auto border border-secondary border-right-0 border-left-0">
-        <input type="hidden" name="outcome" value="0">
-
           <div class="row">
           <div class="col-auto">
           <label class="form-check-label" for="outcome">
@@ -1495,19 +1410,19 @@ table, td, tr{
           </label>
           </div>
           <div class="col-auto">
-                <input class="form-check-input" type="radio" value="1" name="outcome" id="improved" checked="true"> 
+                <input class="form-check-input" type="radio" value=""  name="outcome" id="improved" checked="true"> 
                 <label class="form-check-label" for="improved">
                    Improved
                 </label>
           </div>
           <div class="col-auto">
-                <input class="form-check-input" type="radio" value="2" name="outcome"  id="unimproved">
+                <input class="form-check-input" type="radio" value=""  name="outcome"  id="unimproved">
                 <label class="form-check-label" for="unimproved">
                    Unimproved
                 </label>
           </div>
           <div class="col-auto">
-                <input class="form-check-input" type="radio" value="3" name="outcome" id="died">
+                <input class="form-check-input" type="radio" value=""  name="outcome" id="died">
                 <label class="form-check-label" for="died">
                    Died
                 </label>
@@ -1515,36 +1430,21 @@ table, td, tr{
           </div>
         </div>
         </div>
-        <input type="submit" value="Save" class="btn btn-primary"></br>
-    </form><br>
-    <a href="{{ url('/patientform') }}" class="btn btn-secondary btn-sm" title="Add New Contact"><i class="fa fa-plus" aria-hidden="true"></i> Back</a>
-
         </div>
+                </div>
         </div>
+</div>
 <br>
 
-    <script type="text/javascript">
-        ( function (){
-            var aidYes = document.getElementById("aidYes");
-            var aidNo = document.getElementById("aidNo");
-            var frstAid = document.getElementById("frstAid");
+<!-- <input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br> -->
+<a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Back
+                        </a>
 
-            aidYes.addEventListener('click', function (){
-                if(this.checked){
-                    frstAid.disabled = '';
-                }else{
-                    frstAid.disabled = 'false';
-                }
-            });
-            aidNo.addEventListener('click', function (){
-                if(this.checked){
-                    frstAid.disabled = 'false';
-                    frstAid.value = '';
-                }else{
-                    frstAid.disabled = '';
-                }
-            });
-        })();
-        </script>
 
-    @stop
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+@stop
