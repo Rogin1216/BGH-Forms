@@ -341,10 +341,10 @@ h1{
                 
             </div>
             <div class="col border-top border-secondary">
-                    <input type="text" class="inputlabelunderline" name="phNum" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="hpNum" placeholder="---">
                     <div class="row">
                         <div class="col pt-4">
-                            <input type="text" class="inputlabelunderline" name="phNum" placeholder="---">
+                            <input type="text" class="inputlabelunderline" name="patPhilNum" placeholder="---">
                         </div>
                     </div>
             </div>
@@ -376,13 +376,13 @@ h1{
             <b>Name of Patient</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patlast">
+                    <input type="text" class="inputlabelunderlineName" name="patLast">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patfirst">
+                    <input type="text" class="inputlabelunderlineName" name="patFirst">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patmiddle">
+                    <input type="text" class="inputlabelunderlineName" name="patMiddle">
                 </div>
             </div>
             <div class="row">
@@ -470,22 +470,22 @@ h1{
             <b>Address</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patNoSt">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patReg">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patProv">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patCity">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patBrngy">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="">
+                    <input type="text" class="inputlabelunderlineName" name="patZip">
                 </div>
             </div>
             <div class="row">
@@ -528,7 +528,7 @@ h1{
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="inputlabelunderline" name="" placeholder="---">
+                        <input type="text" class="inputlabelunderline" name="patNum" placeholder="---">
                     </div>
                 </div>
             </div>
@@ -538,7 +538,7 @@ h1{
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="inputlabelunderline" name="" placeholder="---">
+                        <input type="text" class="inputlabelunderline" name="patEmail" placeholder="---">
                     </div>
                 </div>
             </div>
@@ -554,16 +554,16 @@ h1{
             </div>
         </div>
         <div class="col">
-            <input type="text" class="inputlabelunderlineShort" name="age" >years old
+            <input type="text" class="inputlabelunderlineShort" name="patAge" >years old
             <div class="row">
                 <div class="col">
-                    <input type="text" width="10px" class="inputlabelunderlineShort" name="age">years old
+                    <input type="text" width="10px" class="inputlabelunderlineShort" name="patCancAge">years old
                 </div>
             </div>
         </div>
         <div class="col border-start border-end border-secondary">
                 Birthday:
-                <input type="date" name="bday">
+                <input type="date" name="patBday">
         </div>
         <div class="col border-end border-secondary">
             <div class="row">
@@ -571,7 +571,7 @@ h1{
                     Religion:
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderline" name="patrel" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="patRel" placeholder="---">
                 </div>
             </div>
             <div class="row">
@@ -579,7 +579,7 @@ h1{
                     Nationality:
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderline" name="patnat" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="patNat" placeholder="---">
                 </div>
             </div>
         </div>
@@ -647,7 +647,7 @@ h1{
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="inputlabelunderlineShort" name="packCig" placeholder="pack/year"> 
+                                                <input type="text" class="inputlabelunderlineShort" name="patPackYr" placeholder="pack/year"> 
                                             </div>
                                         </div>
                                     </div>
@@ -718,7 +718,7 @@ h1{
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="inputlabelunderlineShort" name="packCig" placeholder="drinks/day"> 
+                                                <input type="text" class="inputlabelunderlineShort" name="patDriYr" placeholder="drinks/day"> 
                                             </div>
                                         </div>
                                 </div>
@@ -742,7 +742,7 @@ h1{
                         <div class="row">
                             <div class="col">
                                 <label for=""># of sexual partners:</label>
-                                <input type="text" class="inputlabelunderlineShort" name="sexNo"> 
+                                <input type="text" class="inputlabelunderlineShort" name="patNumSex"> 
                             </div>
                         </div>
                     </div>
@@ -750,13 +750,13 @@ h1{
                 <div class="row">
                     <div class="col">
                         <b>Average Monthly Family Income:</b>
-                        <input type="text" class="inputlabelunderlineShort" name="avgInc"> 
+                        <input type="text" class="inputlabelunderlineShort" name="patAvgInc"> 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <b>Means of Health Expenditure:</b>
-                        <input type="text" class="inputlabelunderlineName" name="meansEx"> 
+                        <input type="text" class="inputlabelunderlineName" name="patMeansEx"> 
                     </div>
                 </div>
                 <div class="row">
@@ -808,7 +808,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="vapor">
                                     Chemicals/vapors
-                                    <input type="text" class="inputlabelunderlineShort" name="spec2" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patChemVap" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -819,7 +819,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="pest">
                                     Pesticides/Insescticides
-                                    <input type="text" class="inputlabelunderlineShort" name="spec3" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patPestIns" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -830,7 +830,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="dyes">
                                     Dyes
-                                    <input type="text" class="inputlabelunderlineShort" name="spec4" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patDyes" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -841,14 +841,14 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="others1">
                                     Others:
-                                    <input type="text" class="inputlabelunderlineShort" name="spec5" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patOther1" placeholder="specify">
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <b>Longest Job Held:</b>
-                                <input type="text" class="inputlabelunderlineName" name="job" >
+                                <input type="text" class="inputlabelunderlineName" name="patLongJob" >
                             </div>
                         </div>
                 </div>
@@ -889,7 +889,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="diaMell">
                                     Diabetes mellitus 
-                                    <input type="text" class="inputlabelunderlineShort" name="meds1" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patDiaMell" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -900,7 +900,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="hyTen">
                                     Hypertension
-                                    <input type="text" class="inputlabelunderlineShort" name="meds2" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patHype" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -911,7 +911,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="carDis">
                                     Cardiovascular Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="meds3" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patCarDis" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -922,7 +922,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="cerDis">
                                     Cerebrovascular Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="meds4" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patCerDis" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -933,7 +933,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="likiDis">
                                     Liver/Kidney Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="meds5" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patLivDis" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -944,7 +944,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="std">
                                     STD
-                                    <input type="text" class="inputlabelunderlineShort" name="meds6" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patStd" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -955,7 +955,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="others2">
                                     Others:
-                                    <input type="text" class="inputlabelunderlineShort" name="meds6" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patOther2" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -978,7 +978,7 @@ h1{
                         <b>Gynecological History:</b>
                         <div class="row">
                             <div class="col">
-                            Age of menarche:<input type="text" class="inputlabelunderlineShort" name="ageMena">years old
+                            Age of menarche:<input type="text" class="inputlabelunderlineShort" name="femMenarAge">years old
                             </div>
                         </div>
                         <div class="row">
@@ -995,7 +995,7 @@ h1{
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                        Age of menopause:<input type="text" class="inputlabelunderlineShort" name="ageMeno">
+                                        Age of menopause:<input type="text" class="inputlabelunderlineShort" name="femMenopAge">
                                         </div>
                                         <div class="row">
                                             <div class="col-auto">
@@ -1044,7 +1044,7 @@ h1{
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="inputlabelunderlineShort" name="contraDur">Months
+                                        <input type="text" class="inputlabelunderlineShort" name="femContra">Months
                                     </div>
                                 </div>
                             </div>
@@ -1066,7 +1066,7 @@ h1{
                         </div>
                         <div class="row">
                             <div class="col">
-                                Age at 1<sup>st</sup> live birth: <input type="text" class="inputlabelunderlineShort" name="liveBirthage">
+                                Age at 1<sup>st</sup> live birth: <input type="text" class="inputlabelunderlineShort" name="fem1stBirth">
                             </div>
                         </div>
                         <div class="row">
@@ -1074,7 +1074,7 @@ h1{
                                 <label class="mr-sm-2" for="inputState">if currently pregnant:</label>
                                     <div class="row">
                                         <div class="col">
-                                            <select id="inputState" class="custom-select mr-sm-2" name="ifPreg">
+                                            <select id="inputState" class="custom-select mr-sm-2" name="femCurPreg">
                                                 <option selected>1<sup>st</sup> trimester</option>
                                                 <option >2<sup>nd</sup> trimester</option>
                                                 <option >3<sup>rd</sup> trimester</option>
@@ -1126,7 +1126,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="HumanyrExam" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHuPap" placeholder="---">
                 </div>
                 <div class="col col-md-3">
                     <input class="form-check-input" type="checkbox" value="" name="infect" id="HepaB">
@@ -1134,7 +1134,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="HepayrExam" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHepaB" placeholder="---">
                 </div>
             </div>
             <div class="row border-top border-secondary">
@@ -1144,7 +1144,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="HelicobyrExam" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHeliPy" placeholder="---">
                 </div>
                 <div class="col col-md-3">
                     <input class="form-check-input" type="checkbox" value="" name="infect" id="otherInfect">
@@ -1152,23 +1152,23 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="othersyrExam" placeholder="---"> 
+                    <input type="text" class="inputlabelunderline" name="infOthers" placeholder="---"> 
                 </div>
             </div>
             <div class="row">
                 <div class="col col-lg-4 border-end border-top border-secondary">
                     Height:
-                    <input type="text" class="inputlabelunderlineShort" name="height">
+                    <input type="text" class="inputlabelunderlineShort" name="patHeight">
                     cms
                 </div>
                 <div class="col col-lg-4 border-end border-top border-secondary">
                     Weight:
-                    <input type="text" class="inputlabelunderlineShort" name="weight">
+                    <input type="text" class="inputlabelunderlineShort" name="patWeight">
                     cms
                 </div>
                 <div class="col col-lg-4 border-top border-secondary" id="divpeach">
                     BSA:
-                    <input type="text" class="inputlabelunderlineShort1" name="bsa">
+                    <input type="text" class="inputlabelunderlineShort1" name="patBsa">
                     
                 </div>
             </div>

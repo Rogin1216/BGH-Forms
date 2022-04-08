@@ -25,7 +25,7 @@ Route::get('/injuryForm','PatientController@create');                   //create
 Route::get('/cancerForm','PatientController@createCancerform');         //create cancer form page 1
 Route::get('/cancerFormp2','PatientController@createCancerformp2');     //create cancer form page 2
 Route::get('/cancerFormp3','PatientController@createCancerformp3');     //create cancer form page 3
-//Route::get('/patientShow/{id}','PatientController@viewencounter');
+Route::get('/patientShow/{id}','PatientController@show');
 Route::get('/showID/{id}','PatientController@viewencounter');           //view patient encounter lists
 Route::get('/search','PatientController@searchfilter');                 //search for patient
 

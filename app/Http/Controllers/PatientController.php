@@ -201,15 +201,15 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($enccode)
+    public function show($hpercode)
     {
         //   dd($enccode);
         //$patients = Vwinjurylist::find($enccode);
         //$patients = DB::connection('Vwinjurylist')->select('*');
-        $enccode = DB::table('vwInjuryList')->first();
+        $hpercode = DB::table('vwInjuryList')->first();
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
 
-        return view('patients.show')->with('patients', $enccode);
+        return view('patients.show')->with('patients', $hpercode);
 
         
         //$array = Patient::with('natureOfInjury')->get();

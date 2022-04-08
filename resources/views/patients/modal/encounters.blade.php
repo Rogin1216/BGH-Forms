@@ -153,6 +153,7 @@
                   <th>Type</th>
                   <th>Admission date</th>
                   <th>Discharge date</th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -161,7 +162,7 @@
                 <td>{{$item->toecode}}</td>
                 <td>{{$item->admdate ?? null ?: '--' }}</td>
                 <td>{{$item->disdate ?? null ?: '--' }}</td>
-                
+                <td><a href="/patientShow/{{$item->hpercode}}">show</a></td>
               </tr>
               @endforeach
             </tbody>

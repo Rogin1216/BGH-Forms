@@ -293,24 +293,20 @@ input{
         <hr>
         <div class="form-group col-md-12">
               <h5>External Cause/s of Injury/ies:</h5>
+                  
                   <div class="row mx-md-n5">
-                    <div class="col px-md-5">
+                    <div class="col px-md-5 border border-secondary">
+
                     <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="" onclick="return false;">
-                    
                           <label class="form-check-label" for=" Bites">
                             Bites/stings, Specify animal/insect:
                           </label>
                           <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" disabled="true">
 
-                    </div>
-                  </div>
-                  
-                  <div class="row mx-md-n5">
-                    <div class="col px-md-5">
-
-                    <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="" onclick="return false;">
+                    
                       <div class="row">
                       <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="" onclick="return false;">
                           <label class="form-check-label" for="Burn1">
                             Burn,
                           </label>
@@ -420,10 +416,9 @@ input{
                           <input type="text" class="inputlabelunderline" value="{{$patients->others3}}" placeholder="N/A" disabled="true">
                       </div>
                       </div>
-
-                      <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value=""') }} onclick="return false;">
                       <div class="row">
                       <div class="col-auto">
+                      <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value="" onclick="return false;">
                           <label class="form-check-label" for="Exposure">
                             Exposure to forces of Nature:
                           </label>

@@ -191,6 +191,7 @@ h1{
   border: 1.5px solid var(--first-color);
 }
 </style>
+<!-- logo & header -->
 <div class="container-fluid border border-secondary"><!-- start logo header --> 
     <div class="row "> 
         <div class="col-auto">
@@ -245,16 +246,18 @@ h1{
             </div>
         </div>
     </div> 
-</div><!-- end logo header --> 
+</div>
 
 <div class="container">
     <div class="row">
         <div class="col ">
+            <!-- final diagnosis -->
             <div class="row">
                 <div class="col border border-secondary border-top-0" id="divyellow">
                     <b>Final Diagnosis (PLEASE FILL UP COMPLETELY, INDICATE STAGE, SITE OF METS, ER, PR, HER2, EGFR etc )</b>
                 </div>
             </div>
+            <!-- Serum -->
             <div class="row">
                 <div class="col border border-secondary border-top-0">
                     <div class="row">
@@ -267,7 +270,7 @@ h1{
                             Serum biomarker
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineName" name="seSerum">
                                 </div>
                             </div>
                         </div>
@@ -275,7 +278,7 @@ h1{
                             Level
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineShort" name="seLvl">
                                 </div>
                             </div>
                         </div>
@@ -283,7 +286,7 @@ h1{
                             Ref range
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineShort" name="seRange">
                                 </div>
                             </div>
                         </div>
@@ -292,7 +295,7 @@ h1{
                 <div class="col border-end border-bottom border-secondary">
                     <div class="row">
                         <div class="col border-bottom border-secondary" id="divpeach">
-                        Molecular
+                        <b>MOLECULAR BIOMARKER DATA:</b>
                         </div>
                     </div>
                     <div class="row">
@@ -300,7 +303,7 @@ h1{
                             Molecular marker
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineName" name="molMar">
                                 </div>
                             </div>
                         </div>
@@ -308,7 +311,7 @@ h1{
                             Level
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineShort" name="molLvl">
                                 </div>
                             </div>
                         </div>
@@ -316,7 +319,7 @@ h1{
                             Ref range
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineShort" name="molRange">
                                 </div>
                             </div>
                         </div>
@@ -324,27 +327,28 @@ h1{
                 </div>
                 <div class="col col-lg-4 border-end border-bottom border-secondary">
                     <div class="row">
-                        <div class="col" id="divpeach">
+                        <div class="col border-bottom border-secondary" id="divpeach">
                             <b>FISH/CYTOGENETICS</b>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderline" name="effectDate" placeholder="---">
+                            <input type="text" class="inputlabelunderline" name="fiCyt" placeholder="---">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col" id="divpeach">
+                        <div class="col border-top border-secondary border-bottom" id="divpeach">
                             <b>FLOW CYTOMETRY:</b>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderline" name="effectDate" placeholder="---">
+                            <input type="text" class="inputlabelunderline" name="flowCyt" placeholder="---">
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- treatment plan -->
             <div class="row">
                 <div class="col">
                     <div class="row">
@@ -461,6 +465,58 @@ h1{
                                                 <input class="form-check-input" type="checkbox" value="" name="cancData" id="trAddOth">
                                                 <label for="trAddOth">Others, specify:</label>
                                                 <input type="text" class="inputlabelunderlineShort" name="trAddOthInput">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <b> Planned other additionalAdditional/Adjuvant Treatment/s</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddSur">
+                                                <label for="trPlAddSur">Surgery</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddRad">
+                                                <label for="trPlAddRad">Radiotherapy</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddChem">
+                                                <label for="trPlAddChem">Chemotherapy</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddImm">
+                                                <label for="trPlAddImm">Immunotherapy/Cryotherapy</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddHormo">
+                                                <label for="trPlAddHormo">Hormonal</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddUn">
+                                                <label for="trPlAddUn">Unknown</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                                <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddOth">
+                                                <label for="trPlAddOth">Others, specify:</label>
+                                                <input type="text" class="inputlabelunderlineShort" name="trPlAddOthInput">
                                         </div>
                                     </div>
                                 </div>
@@ -731,23 +787,579 @@ h1{
                                             <label for="trPlAdj">Palliative</label>
                                        </div>
                                    </div>
+
                                    <div class="row">
-                                        <div class="col-auto">
-                                            Dose:
-                                        </div>
                                         <div class="col">
-                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlNeo">
-                                            <label for="trPlAdj">Regular</label>
-                                            <input type="text" class="inputlabelunderlineName" name="trPl#1">
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-auto">
+                                                    Dose:
+                                                </div>
+                                                <div class="col-auto">
                                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlNeo">
-                                                    <label for="trPlAdj">Boost</label>
+                                                    <label for="trPlAdj">Regular</label>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlNeo">
+                                                            <label for="trPlAdj">Boost</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    Sites:
                                                     <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            Sites:
+                                                            <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>     
+                                    </div>  
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <b>Surgery </b>
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlNeo">
+                                            <label for="trPlAdj">NO</label>
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlNeo">
+                                            <label for="trPlAdj">YES</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                        Date: <input type="date" name="trPrimDate">
+                                        </div>
+                                        <div class="col">
+                                        Surgeon:
+                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                        Planned Operation:
+                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <b><i><u>Hormonal:</u></i></b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <u>Remarks:</u>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- yearly update -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col border border-secondary">
+                                            <div class="row">
+                                                <div class="col border-bottom border-secondary">
+                                                    <b>Year 1</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col border-end border-secondary">
+                                                    Date
+                                                </div>
+                                                <div class="col">
+                                                    N
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col border border-secondary">
+                                            <div class="row">
+                                                <div class="col border-bottom border-secondary">
+                                                    <b>Year 2</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col border-end border-secondary">
+                                                    Date
+                                                </div>
+                                                <div class="col">
+                                                    N
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col border border-secondary">
+                                            <div class="row">
+                                                <div class="col border-bottom border-secondary">
+                                                    <b>Year 3</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col border-end border-secondary">
+                                                    Date
+                                                </div>
+                                                <div class="col">
+                                                    N
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col border border-secondary">
+                                            <div class="row">
+                                                <div class="col border-bottom border-secondary">
+                                                    <b>Year 4</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col border-end border-secondary">
+                                                    Date
+                                                </div>
+                                                <div class="col">
+                                                    N
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col border border-secondary">
+                                            <div class="row">
+                                                <div class="col border-bottom border-secondary">
+                                                    <b>Year 5</b>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col border-end border-secondary">
+                                                    Date
+                                                </div>
+                                                <div class="col">
+                                                    N
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                            <div class="row border-top border-secondary">
+                                                <div class="col border-end border-secondary">
+                                                --
+                                                </div>
+                                                <div class="col">
+                                                --
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                   <div class="row">
+                                       <div class="col">
+                                       Others:
+                                       </div>
+                                   </div>
+                                   <div class="row">
+                                       <div class="col">
+                                            <input type="text" class="inputlabelunderline" name="trPl#1" placeholder="---">
+                                       </div>
+                                   </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col text-white" id="divIndigo">
+                        <b>FOLLOW UP</b>
+                        </div>
+                    </div>
+                    <div class="row border-end border-secondary">
+                        <div class="col col-lg-4 border border-secondary border-bottom-0 border-top-0">
+                            <div class="row">
+                                <div class="col">
+                                    Date:
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    date
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-lg-5 ">
+                           <div class="row">
+                               <div class="col ">
+                                   Status:
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-auto">
+                                    <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                    <label for="treatCurInc">Alive without disease</label>
+                               </div>
+                               <div class="col-auto">
+                                    <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                    <label for="treatCurInc">Alive with disease</label>
+                               </div>
+                               <div class="col-auto">
+                                    <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                    <label for="treatCurInc">Dead</label>
+                               </div>
+                           </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    Time from last treatment:
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                    months
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col border border-secondary">
+                            <div class="row">
+                                <div class="col col-lg-8 border-end border-secondary">
+                                    <div class="row">
+                                        <div class="col">
+                                            <b>Attending Oncologist</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <small>
+                                                        Last Name
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <small>
+                                                        First Name
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <small>
+                                                        Middle Name
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                            <label for="treatCurInc">Gyne</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                            <label for="treatCurInc">Hema</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                            <label for="treatCurInc">MO</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                            <label for="treatCurInc">Pedia Hema-onco</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatCurInc">
+                                            <label for="treatCurInc">Rad</label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -758,6 +1370,7 @@ h1{
     </div>
 </div>
     <br>
+<!-- page -->
 <div>
         <nav aria-label="..." class="float-end">
             <ul class="pagination">
@@ -777,6 +1390,7 @@ h1{
             </ul>
         </nav> 
 </div>
+
 </html>
 
 
