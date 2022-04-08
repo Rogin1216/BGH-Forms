@@ -212,9 +212,8 @@ class PatientController extends Controller
         //$patients = Vwinjurylist::find($enccode);
         //$patients = DB::connection('Vwinjurylist')->select('*');
         // $patients = DB::table('vwInjuryList')->first();
-        $patients = DB::table('vwInjuryList')->select('*')->where('hpercode',$hpercode)->get();
+        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
         // dd($patients);
-
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
 
         return view('patients.show')->with('patients', $patients);

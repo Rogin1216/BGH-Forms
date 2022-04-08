@@ -130,8 +130,6 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>hpercode</th>
-                
-
                 <th width="280px">Action</th>
             </tr>
             <tbody>
