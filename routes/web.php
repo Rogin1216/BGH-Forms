@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/patientform', PatientController::class);
+
 // cancer form
 Route::get('/cancerForm','PatientController@createCancerform');             //create cancer form page 1
 Route::get('/cancerFormp2','PatientController@createCancerformp2');         //create cancer form page 2
@@ -29,6 +29,9 @@ Route::get('/patientlists','PatientController@index');                      //vi
 Route::get('/showID/{id}','PatientController@viewencounter');               //view patient encounter lists
 Route::get('/patientShow/{id}','PatientController@show')->where('id','.*'); //show injury form with ID
 
-Route::get('/save','PatientController@store');                              //save injury form
-Route::get('/injuryForm/{id}','PatientController@print');                   //print Form
+// Route::get('/store/{id}','PatientController@store')->where('id','.*');      //save injury form
+Route::get('/store/{id}', function () {
+    return redirect('patients.show');
+});
+Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*'); //print Form
 

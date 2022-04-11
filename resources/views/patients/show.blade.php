@@ -61,11 +61,12 @@
 </script>
 
 @foreach($patients as $patients)
+<form action="{{ url ('/store/$patients->hpercode') }}" type="get">
 
 <div class="card">
     <div class="card-header p-2 bg-success text-white">GENERAL DATA:</div>
     <div class="card-body">
-        <form action="{{ url('patientform') }}" method="post">
+        
             {!! csrf_field() !!}
 
             <!--<input type="checkbox" value="Edit" id="editChx"><label>Edit profile</label></br>-->
@@ -84,6 +85,9 @@
                 <div class="form-group col-md-2">
                     <label>Last name:</label>
                     <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control"></br>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="hidden" name="enccode" id="enccode" value="{{$patients->enccode}}" class="form-control" ></br>
                 </div>
 
             </div>
@@ -212,7 +216,7 @@
                                             5<sup>th</sup>
                                         </label>
                                         <label>Site:</label>
-                                        <input type="text" class="inputlabelunderline" value="{{$patients->site}}"
+                                        <input type="text" class="inputlabelunderline" value="{{$patients->site}}" name="site"
                                             placeholder="N/A">
                                     </label>
                                 </div>
@@ -224,7 +228,7 @@
                                     <label class="form-check-label" for="Concussion">
                                         Concussion
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->concussion}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->concussion}}" name="concussion"
                                         placeholder="N/A">
                                 </div>
                             </div>
@@ -236,7 +240,7 @@
                                     <label class="form-check-label" for="Contusion">
                                         Contusion
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->contusion}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->contusion}}" name="contusion"
                                         placeholder="N/A">
                                 </div>
                             </div>
@@ -260,7 +264,7 @@
                                                     Open Type
                                                 </label>
                                                 <input type="text" class="inputlabelunderline"
-                                                    value="{{$patients->openType}}" placeholder="N/A">
+                                                    value="{{$patients->openType}}" placeholder="N/A" name="openType">
                                                 <label class="form-check-label" for="Open Type">
                                                     (ex. comminuted, depressed fracture)
                                                 </label>
@@ -277,7 +281,7 @@
                                                 <label class="form-check-label" for="Closed Type">
                                                     Closed Type
                                                 </label>
-                                                <input type="text" class="inputlabelunderline"
+                                                <input type="text" class="inputlabelunderline" name="closedType"
                                                     value="{{$patients->closedType}}" placeholder="N/A">
                                                 <label class="form-check-label" for="closedType">
                                                     (ex. Compound, infected fracture)
@@ -295,7 +299,7 @@
                                             <label class="form-check-label" for="wound">
                                                 Open/Wound Laceration
                                             </label>
-                                            <input type="text" class="inputlabelunderline" value="{{$patients->wound}}"
+                                            <input type="text" class="inputlabelunderline" value="{{$patients->wound}}" name="wound"
                                                 placeholder="N/A">
                                         </label>
                                     </div>
@@ -313,7 +317,7 @@
                                         <label class="form-check-label" for="Traumatic Amputation">
                                             Traumatic Amputation
                                         </label>
-                                        <input type="text" class="inputlabelunderline"
+                                        <input type="text" class="inputlabelunderline" name="traumaticAmputation"
                                             value="{{$patients->traumaticAmputation}}" placeholder="N/A">
                                     </div>
                                 </div>
@@ -326,7 +330,7 @@
                                         <label class="form-check-label" for="Others1">
                                             Others: Pls. specify injury and the body part/s affected:
                                         </label>
-                                        <input type="text" class="inputlabelunderline" value="{{$patients->others1}}"
+                                        <input type="text" class="inputlabelunderline" value="{{$patients->others1}}" name="others1"
                                             placeholder="N/A">
                                     </div>
                                 </div>
@@ -348,7 +352,7 @@
                         <label class="form-check-label" for=" Bites">
                             Bites/stings, Specify animal/insect:
                         </label>
-                        <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A">
+                        <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" name="bites">
 
                         <div class="row">
                             <div class="col-auto">
@@ -359,7 +363,6 @@
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" value="" name="burnRdo" id="Heat">
-
                                 <label class="form-check-label" for="Heat">
                                     Heat
                                 </label>
@@ -393,7 +396,7 @@
                                 <label class="form-check-label" for="Others2">
                                     Others,specify
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->others2}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->others2}}" name="others2"
                                     placeholder="N/A">
                             </div>
 
@@ -405,17 +408,17 @@
                                 <label class="form-check-label" for="Chemical">
                                     Chemical/Substance, specify
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}" name="chemical"
                                     placeholder="N/A">
                             </div>
 
 
                             <div class="col col-lg-8">
-                                <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="}">
+                                <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="">
                                 <label class="form-check-label" for="sharp">
                                     Contact with sharp objects, specify object
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}" name="sharp"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -463,7 +466,7 @@
                                 <label class="form-check-label" for="Others3">
                                     Others,specify
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->others3}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->others3}}" name="others3"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -507,7 +510,7 @@
                                     <label class="form-check-label" for="Gunshot">
                                         Gunshot, Specify weapon
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}" name="gunshot"
                                         placeholder="N/A">
                                 </div>
                             </div>
@@ -549,7 +552,7 @@
                                     <label class="form-check-label" for="Fall">
                                         Fall, specify, from/in/on/into
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->fall}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->fall}}" name="fall"
                                         placeholder="N/A">
                                 </div>
                             </div>
@@ -562,7 +565,7 @@
                                     <label class="form-check-label" for="Firecracker">
                                         Firecracker, specify type/s
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}" name="firecracker"
                                         placeholder="N/A">
                                     <label class="form-check-label" for="Firecracker">
                                         (with libraries)
@@ -584,11 +587,10 @@
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch"
                                         value="">
-
                                     <label class="form-check-label" for="Others5">
                                         Others,specify
                                     </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->others5}}"
+                                    <input type="text" class="inputlabelunderline" value="{{$patients->others5}}" name="others5"
                                         placeholder="N/A">
                                 </div>
                             </div>
@@ -800,7 +802,7 @@
                                                                     Others,
                                                                 </label>
                                                                 <input type="text" class="inputlabelunderline"
-                                                                    value="{{$patients->others6}}" placeholder="N/A">
+                                                                    value="{{$patients->others6}}" placeholder="N/A" name="others6"> 
                                                             </div>
 
                                                             <div class="col-auto">
@@ -1033,8 +1035,8 @@
                                                                 <label class="form-check-label" for="Withothers">
                                                                     With others, specify how many(excuding the victim)
                                                                 </label>
-                                                                <input type="text" class="inputlabelunderline2"
-                                                                    value="{{$patients->withothers}}" placeholder="N/A">
+                                                                <input type="text" class="inputlabelunderline2" name="withothers"
+                                                                    value="{{$patients->withothers}}" placeholder="N/A"> 
                                                             </div>
 
                                                         </div>
@@ -1228,7 +1230,7 @@
                                                                 <label class="form-check-label" for="Others11">
                                                                     Others, specify
                                                                 </label>
-                                                                <input type="text" class="inputlabelunderline2"
+                                                                <input type="text" class="inputlabelunderline2" name="others11"
                                                                     value="{{$patients->others11}}" placeholder="N/A">
                                                                 <label class="form-check-label" for="Others11">
                                                                     (e.g. suspected unter the influcence of substance
@@ -1312,7 +1314,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox"
                                                             name="others12Ch" id="others12Ch" value="">
-                                                        <label class="form-check-label" for="Others12"
+                                                        <label class="form-check-label" for="Others12" name="others12"
                                                             value="{{$patients->others12}}" placeholder="N/A">
                                                             Others
                                                         </label>
@@ -1403,7 +1405,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Name of Originating Hospital/Physician:
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="" placeholder="N/A">
+                                <input type="text" class="inputlabelunderline" value="" placeholder="N/A" name="hospPhys">
                             </div>
                         </div>
                     </div>
@@ -1482,7 +1484,7 @@
                                 <label class="form-check-label" for="others12">
                                     Others, specify
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->others13}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->others13}}" name="others13"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -1493,7 +1495,7 @@
                                 <label class="form-check-label">
                                     Initial Impression:
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->impression}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->impression}}" name="impression"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -1504,14 +1506,14 @@
                                 <label class="form-check-label">
                                     ICD-10 Code/s: Nature of Injury:
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->icdNature}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->icdNature}}" name="icdNature"
                                     placeholder="N/A">
                             </div>
                             <div class="col-auto">
                                 <label class="form-check-label">
                                     ICD-10 Code/s: External cause of Injury:
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->icdExternal}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->icdExternal}}" name="icdExternal"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -1528,7 +1530,7 @@
 
 
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->treatment}}"
+                                <input type="text" class="inputlabelunderline" value="{{$patients->treatment}}" name="treatment"
                                     placeholder="N/A">
                             </div>
                         </div>
@@ -1615,17 +1617,24 @@
 </div>
 @endforeach
 
-<br>
+<!-- <a href="/save" class="btn btn-warning btn-sm" title="">
+    <i class="fa fa-plus" aria-hidden="true"></i> Save</a> -->
 
+<button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Save</button>
+</form>
+
+<div class="row">
+    <div class="col">
+        <a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists"
+            onclick="return confirm(&quot;Unsaved information will not be updated, Continue?&quot;)">
+            <i class="fa fa-plus" aria-hidden="true"></i> Back
+        </a>
+    </div>
+</div>
 
 <!-- <input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br> -->
-<a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists"
-    onclick="return confirm(&quot;Unsaved information will not be updated, Continue?&quot;)">
-    <i class="fa fa-plus" aria-hidden="true"></i> Back
-</a>
 
-<a href="/save" class="btn btn-warning btn-sm" title="">
-    <i class="fa fa-plus" aria-hidden="true"></i> Save</a>
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
