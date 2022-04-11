@@ -29,9 +29,9 @@ Route::get('/patientlists','PatientController@index');                      //vi
 Route::get('/showID/{id}','PatientController@viewencounter');               //view patient encounter lists
 Route::get('/patientShow/{id}','PatientController@show')->where('id','.*'); //show injury form with ID
 
-// Route::get('/store/{id}','PatientController@store')->where('id','.*');      //save injury form
-Route::get('/store/{id}', function () {
-    return redirect('patients.show');
-});
+Route::get('/store/{id}','PatientController@store')->where('id','.*');      //save injury form
+// Route::get('/store/{id}', function () {
+//     return redirect('patients.show');
+// });
 Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*'); //print Form
 

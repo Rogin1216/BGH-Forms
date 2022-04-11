@@ -6,6 +6,7 @@ use App\Models\Patient;
 use App\Models\Vwinjurylist;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class PatientController extends Controller
 {
@@ -118,7 +119,7 @@ class PatientController extends Controller
         //  dd($request->all());
         // DB::UPDATE("EXEC registry.dbo.InsertingValuesInto'$request->all,'
         // ");
-
+        // dd($hpercode);
             DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
             '$request->enccode',
             '$request->docAdmit',
@@ -161,20 +162,9 @@ class PatientController extends Controller
             ");
             
             // dd($request);
+            
+            return redirect()->back();
 
-        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
-        // dd($patients);
-        // $patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
-        // return redirect()->route('/patientShow');
-        
-        // return redirect()->route('products.show')->with('patients', $patients);
-        // return redirect('patients.show')->with('patients', $patients);
-        // ->with('patients', $patients);
-        // return redirect()->route('/createCancer');
-        // return redirect('patients.show')->with('patients', $patients);
-        // return redirect()->action([PatientController::class, 'show/{hpercode}']);
-        // return redirect()->route('/patientShow/{id}');
-        // return redirect()->route('/patientShow/{id}', [$patients]);
         
     }
 
