@@ -272,7 +272,7 @@ h1{
                     <b>Referred from region/province:</b>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderlineName" name="cancRefer">
+                            <input type="text" class="inputlabelunderlineName" name="cancRefer" value="{{$patients->cancRefer}}">
                         </div>
                     </div>
                 </div>
@@ -285,7 +285,7 @@ h1{
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderlineName" name="cancRefFac">
+                            <input type="text" class="inputlabelunderlineName" name="cancRefFac" value="{{$patients->cancRefFac}}">
                         </div>
                     </div>
                     <div class="row">
@@ -295,7 +295,7 @@ h1{
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderlineName" name="cancDocProf">
+                            <input type="text" class="inputlabelunderlineName" name="cancDocProf" value="{{$patients->cancDocProf}}">
                         </div>
                     </div>
                 </div>
@@ -348,7 +348,7 @@ h1{
                     <b>Date of Consultation/Admission:</b>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderlineName" name="cancDateAdm">
+                            <input type="text" class="inputlabelunderlineName" name="cancDateAdm" value="{{$patients->cancDateAdm}}">
                         </div>
                     </div>
                 </div>
@@ -356,12 +356,12 @@ h1{
                     <b>Chief Complaint:</b>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="inputlabelunderlineName" name="cancComp">
+                                <input type="text" class="inputlabelunderlineName" name="cancComp" value="{{$patients->cancComp}}">
                             </div>
                         </div>
                 </div>
                 <div class="col col-lg-6 border border-secondary border-end-0">
-                     <b>Date of Diagnosis(Clinical or pathologic):</b><input type="text" class="inputlabelunderlineName" name="diagDate">
+                     <b>Date of Diagnosis(Clinical or pathologic):</b><input type="text" class="inputlabelunderlineName" name="diagDate" value="{{$patients->diagDate}}">
                     <div class="row">
                         <div class="col">
                             <b>Type of Diagnosis</b>
@@ -426,7 +426,7 @@ h1{
                             Primary site 
                             <div class="row">
                                 <div class="col ">
-                                    </b><input type="text" class="inputlabelunderlineName" name="diagCancPrim">
+                                    </b><input type="text" class="inputlabelunderlineName" name="diagCancPrim" value="{{$patients->diagCancPrim}}">
                                 </div>
                             </div>
                         </div>
@@ -434,7 +434,7 @@ h1{
                             Date of Diagnosis
                             <div class="row">
                                 <div class="col">
-                                    </b><input type="text" class="inputlabelunderlineName" name="diagCancDate">
+                                    </b><input type="text" class="inputlabelunderlineName" name="diagCancDate" value="{{$patients->diagCancDate}}">
                                 </div>
                             </div>
                         </div>
@@ -551,14 +551,14 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="tumHeadNeck">
                                             <label for="tumHeadNeck">Head and Neck, specify</label>
-                                            <input type="text" class="inputlabelunderlineName" name="tumHeadNeck">
+                                            <input type="text" class="inputlabelunderlineName" name="tumHeadNeck" value="{{$patients->tumHeadNeck}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="tumHepato">
                                             <label for="tumHepato">Hepatobiliary, specify</label>
-                                            <input type="text" class="inputlabelunderlineName" name="tumHepato">
+                                            <input type="text" class="inputlabelunderlineName" name="tumHepato" value="{{$patients->tumHepato}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -571,16 +571,16 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="tumNeuro">
                                             <label for="tumNeuro">Neuroendocrine, site</label>
-                                            <input type="text" class="inputlabelunderlineName" name="tumNeuro">
+                                            <input type="text" class="inputlabelunderlineName" name="tumNeuro" value="{{$patients->tumNeuro}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="tumLung">
                                             <label for="tumLung">Lung:</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="tumLungNSC">
+                                            <input type="text" class="inputlabelunderlineShort" name="tumLungNSC" value="{{$patients->tumLungNSC}}">
                                             <label for="tumLungNSC">NSCLC</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="tumLungSCL">
+                                            <input type="text" class="inputlabelunderlineShort" name="tumLungSCL" value="{{$patients->tumLungSCL}}">
                                             <label for="tumLungSCL">SCLC</label>
                                         </div>
                                     </div>
@@ -650,7 +650,7 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="tumOther">
                                             <label for="tumOther">Others:</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="tumOther">
+                                            <input type="text" class="inputlabelunderlineShort" name="tumOther" value="{{$patients->tumOther}}">
                                         </div>
                                     </div>
                                 </div>
@@ -686,7 +686,7 @@ h1{
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="hemaBly">
                                     <label for="hemaBly">B-lymphoma ,specify</label>
-                                    <input type="text" class="inputlabelunderlineName" name="hemaBlyInput">
+                                    <input type="text" class="inputlabelunderlineName" name="hemaBlyInput" value="{{$patients->hemaBlyInput}}">
                                 </div>
                             </div>
                             <div class="row">   
@@ -701,19 +701,19 @@ h1{
                                     <label for="hemaMDS">MDS ,specify</label>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="hemaCMLinput">
+                                    <input type="text" class="inputlabelunderlineShort" name="hemaCMLinput" value="{{$patients->hemaCMLinput}}">
                                     <label for="hemaMDS">CML</label>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" class="inputlabelunderlineShort" name="hemaPVinput">
+                                            <input type="text" class="inputlabelunderlineShort" name="hemaPVinput" value="{{$patients->hemaPVinput}}">
                                             <label for="hemaMDS">PV</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" class="inputlabelunderlineShort" name="hemaETinput">
+                                                    <input type="text" class="inputlabelunderlineShort" name="hemaETinput" value="{{$patients->hemaETinput}}">
                                                     <label for="hemaMDS">ET</label>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <input type="text" class="inputlabelunderlineShort" name="hemaMFinput">
+                                                            <input type="text" class="inputlabelunderlineShort" name="hemaMFinput" value="{{$patients->hemaMFinput}}">
                                                             <label for="hemaMDS">MF</label>
                                                         </div>
                                                     </div>
@@ -727,14 +727,14 @@ h1{
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="hemaT">
                                     <label for="hemaT">T-lymphoma</label>
-                                    <input type="text" class="inputlabelunderlineName" name="hemaTinput">
+                                    <input type="text" class="inputlabelunderlineName" name="hemaTinput" value="{{$patients->hemaTinput}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="hemaOthers">
                                     <label for="hemaOthers">Others:</label>
-                                    <input type="text" class="inputlabelunderlineName" name="hemaOthersinput">
+                                    <input type="text" class="inputlabelunderlineName" name="hemaOthersinput" value="{{$patients->hemaOthersinput}}">
                                 </div>
                             </div>
                         </div>
@@ -812,14 +812,14 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="contumHeadNeck">
                                             <label for="contumHeadNeck">Head and Neck, specify</label>
-                                            <input type="text" class="inputlabelunderlineName" name="contumHeadNeck">
+                                            <input type="text" class="inputlabelunderlineName" name="contumHeadNeck" value="{{$patients->contumHeadNeck}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="contumHepato">
                                             <label for="contumHepato">Hepatobiliary, specify</label>
-                                            <input type="text" class="inputlabelunderlineName" name="contumHepato">
+                                            <input type="text" class="inputlabelunderlineName" name="contumHepato" value="{{$patients->contumHepato}}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -832,16 +832,16 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="contumNeuro">
                                             <label for="contumNeuro">Neuroendocrine, site</label>
-                                            <input type="text" class="inputlabelunderlineName" name="contumNeuro">
+                                            <input type="text" class="inputlabelunderlineName" name="contumNeuro" value="{{$patients->contumNeuro}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="contumLung">
                                             <label for="contumLung">Lung:</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="contumLungNSC">
+                                            <input type="text" class="inputlabelunderlineShort" name="contumLungNSC" value="{{$patients->contumLungNSC}}">
                                             <label for="contumLungNSC">NSCLC</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="contumLungSCL">
+                                            <input type="text" class="inputlabelunderlineShort" name="contumLungSCL" value="{{$patients->contumLungSCL}}">
                                             <label for="contumLungSCL">SCLC</label>
                                         </div>
                                     </div>
@@ -911,7 +911,7 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="contumOther">
                                             <label for="contumOther">Others:</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="contumOther">
+                                            <input type="text" class="inputlabelunderlineShort" name="contumOther" value="{{$patients->contumOther}}">
                                         </div>
                                     </div>
                                 </div>
@@ -947,7 +947,7 @@ h1{
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="conhemaBly">
                                     <label for="conhemaBly">B-lymphoma ,specify</label>
-                                    <input type="text" class="inputlabelunderlineName" name="conhemaBlyInput">
+                                    <input type="text" class="inputlabelunderlineName" name="conhemaBlyInput" value="{{$patients->conhemaBlyInput}}">
                                 </div>
                             </div>
                             <div class="row">   
@@ -962,19 +962,19 @@ h1{
                                     <label for="conhemaMDS">MDS ,specify</label>
                                 </div>
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="conhemaCMLinput">
+                                    <input type="text" class="inputlabelunderlineShort" name="conhemaCMLinput" value="{{$patients->conhemaCMLinput}}">
                                     <label for="conhemaMDS">CML</label>
                                     <div class="row">
                                         <div class="col">
-                                            <input type="text" class="inputlabelunderlineShort" name="conhemaPVinput">
+                                            <input type="text" class="inputlabelunderlineShort" name="conhemaPVinput" value="{{$patients->conhemaPVinput}}">
                                             <label for="conhemaMDS">PV</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" class="inputlabelunderlineShort" name="conhemaETinput">
+                                                    <input type="text" class="inputlabelunderlineShort" name="conhemaETinput" value="{{$patients->conhemaETinput}}">
                                                     <label for="conhemaMDS">ET</label>
                                                     <div class="row">
                                                         <div class="col">
-                                                            <input type="text" class="inputlabelunderlineShort" name="conhemaMFinput">
+                                                            <input type="text" class="inputlabelunderlineShort" name="conhemaMFinput" value="{{$patients->conhemaMFinput}}">
                                                             <label for="conhemaMDS">MF</label>
                                                         </div>
                                                     </div>
@@ -988,14 +988,14 @@ h1{
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="hemaT">
                                     <label for="hemaT">T-lymphoma</label>
-                                    <input type="text" class="inputlabelunderlineName" name="hemaTinput">
+                                    <input type="text" class="inputlabelunderlineName" name="conhemaTinput" value="{{$patients->conhemaTinput}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="hemaOthers">
                                     <label for="hemaOthers">Others:</label>
-                                    <input type="text" class="inputlabelunderlineName" name="hemaOthersinput">
+                                    <input type="text" class="inputlabelunderlineName" name="conhemaOthersinput" value="{{$patients->conhemaOthersinput}}">
                                 </div>
                             </div>
                         </div>
@@ -1059,7 +1059,7 @@ h1{
                     <div class="col-auto" >
                         <input class="form-check-input" type="checkbox" value="" name="cancData" id="tabOthers">
                         <label for="tabOthers">Others:</label>
-                        <input type="text" class="inputlabelunderlineShort2" name="hemaOthersinput">
+                        <input type="text" class="inputlabelunderlineShort2" name="tabOthers" value="{{$patients->tabOthers}}">
                     </div>
                 </div>
             </div>
@@ -1127,41 +1127,41 @@ h1{
                             <div class="row">
                                 <div class="col">
                                     Tissue biopsied:
-                                    <input type="text" class="inputlabelunderlineName" name="bioTis">
+                                    <input type="text" class="inputlabelunderlineName" name="bioTis" value="{{$patients->bioTis}}">
                                 </div>
                                 <div class="col">
                                     Tumor size(cms):
-                                    <input type="text" class="inputlabelunderlineShort" name="bioTumSiz">
+                                    <input type="text" class="inputlabelunderlineShort" name="bioTumSiz" value="{{$patients->bioTumSiz}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     Histopathology:
-                                    <input type="text" class="inputlabelunderlineName" name="bioHis">
+                                    <input type="text" class="inputlabelunderlineName" name="bioHis" value="{{$patients->bioHis}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     carcinoma type:
-                                    <input type="text" class="inputlabelunderlineName" name="bioCarc">
+                                    <input type="text" class="inputlabelunderlineName" name="bioCarc" value="{{$patients->bioCarc}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     neuroendocrine, tumor and grade:
-                                    <input type="text" class="inputlabelunderlineName" name="bioNeuro">
+                                    <input type="text" class="inputlabelunderlineName" name="bioNeuro" value="{{$patients->bioNeuro}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     mesenchymal (sarcoma etc), specify:
-                                    <input type="text" class="inputlabelunderlineName" name="bioMes">
+                                    <input type="text" class="inputlabelunderlineName" name="bioMes" value="{{$patients->bioMes}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
                                     Others
-                                    <input type="text" class="inputlabelunderlineName" name="bioOther">
+                                    <input type="text" class="inputlabelunderlineName" name="bioOther" value="{{$patients->bioOther}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -1192,12 +1192,12 @@ h1{
                             <div class="row">
                                 <div class="col-auto">
                                     LVI 
-                                    <input type="text" class="inputlabelunderlineShort" name="bioLVImin">
+                                    <input type="text" class="inputlabelunderlineShort" name="bioLVImin" value="{{$patients->bioLVImin}}">
                                     <label for="bioLVImin">(-)</label>
                                 </div>
                                 <div class="col">
                                      
-                                    <input type="text" class="inputlabelunderlineShort" name="bioLVIplus">
+                                    <input type="text" class="inputlabelunderlineShort" name="bioLVIplus" value="{{$patients->bioLVIplus}}">
                                     <label for="bioLVIplus">(+)</label>
                                 </div>
                             </div>
@@ -1311,7 +1311,7 @@ h1{
                                 <div class="col">
                                     <div class="row">
                                     <div class="col">
-                                        <b>Sites of Distant Metastatis:</b>Number of metaststic sites:<input type="text" class="inputlabelunderline" name="stagNoMet" placeholder="---">
+                                        <b>Sites of Distant Metastatis:</b>Number of metaststic sites:<input type="text" class="inputlabelunderline" name="stagNoMet" value="{{$patients->stagNoMet}}" placeholder="---">
                                     </div>
                                     </div>
                                 </div>
@@ -1352,7 +1352,7 @@ h1{
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="stagOther">
                                     <label for="stagOther">Other:</label>
-                                    <input type="text" class="inputlabelunderlineShort" name="stagOther" >
+                                    <input type="text" class="inputlabelunderlineShort" name="stagOther" value="{{$patients->stagOther}}">
                                 </div>
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" value="" name="cancData" id="stagUnk">

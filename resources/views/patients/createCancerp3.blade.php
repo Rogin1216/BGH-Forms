@@ -270,7 +270,7 @@ h1{
                             Serum biomarker
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="seSerum">
+                                    <input type="text" class="inputlabelunderlineName" name="seSerum" value="{{$patients->seSerum}}">
                                 </div>
                             </div>
                         </div>
@@ -278,7 +278,7 @@ h1{
                             Level
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="seLvl">
+                                    <input type="text" class="inputlabelunderlineShort" name="seLvl" value="{{$patients->seLvl}}">
                                 </div>
                             </div>
                         </div>
@@ -286,7 +286,7 @@ h1{
                             Ref range
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="seRange">
+                                    <input type="text" class="inputlabelunderlineShort" name="seRange" value="{{$patients->seRange}}">
                                 </div>
                             </div>
                         </div>
@@ -303,7 +303,7 @@ h1{
                             Molecular marker
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="molMar">
+                                    <input type="text" class="inputlabelunderlineName" name="molMar" value="{{$patients->molMar}}">
                                 </div>
                             </div>
                         </div>
@@ -311,7 +311,7 @@ h1{
                             Level
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="molLvl">
+                                    <input type="text" class="inputlabelunderlineShort" name="molLvl" value="{{$patients->molLvl}}">
                                 </div>
                             </div>
                         </div>
@@ -319,7 +319,7 @@ h1{
                             Ref range
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineShort" name="molRange">
+                                    <input type="text" class="inputlabelunderlineShort" name="molRange" value="{{$patients->molRange}}">
                                 </div>
                             </div>
                         </div>
@@ -333,7 +333,7 @@ h1{
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderline" name="fiCyt" placeholder="---">
+                            <input type="text" class="inputlabelunderline" name="fiCyt" value="{{$patients->fiCyt}}" placeholder="---">
                         </div>
                     </div>
                     <div class="row">
@@ -343,7 +343,7 @@ h1{
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" class="inputlabelunderline" name="flowCyt" placeholder="---">
+                            <input type="text" class="inputlabelunderline" name="flowCyt" value="{{$patients->flowCyt}}" placeholder="---">
                         </div>
                     </div>
                 </div>
@@ -387,7 +387,7 @@ h1{
                                         <div class="col">
                                             <input class="form-check-input" type="checkbox" value="" name="cancData" id="treatOther">
                                             <label for="treatOther">Others, specify:</label>
-                                            <input type="text" class="inputlabelunderlineShort" name="effectDate">
+                                            <input type="text" class="inputlabelunderlineShort" name="treatOther" value="{{$patients->treatOther}}">
                                         </div>
                                     </div>
                                 </div>
@@ -464,7 +464,7 @@ h1{
                                         <div class="col">
                                                 <input class="form-check-input" type="checkbox" value="" name="cancData" id="trAddOth">
                                                 <label for="trAddOth">Others, specify:</label>
-                                                <input type="text" class="inputlabelunderlineShort" name="trAddOthInput">
+                                                <input type="text" class="inputlabelunderlineShort" name="trAddOthInput" value="{{$patients->trAddOthInput}}">
                                         </div>
                                     </div>
                                 </div>
@@ -516,7 +516,7 @@ h1{
                                         <div class="col">
                                                 <input class="form-check-input" type="checkbox" value="" name="cancData" id="trPlAddOth">
                                                 <label for="trPlAddOth">Others, specify:</label>
-                                                <input type="text" class="inputlabelunderlineShort" name="trPlAddOthInput">
+                                                <input type="text" class="inputlabelunderlineShort" name="trPlAddOthInput" value="{{$patients->trPlAddOthInput}}">
                                         </div>
                                     </div>
                                 </div>
@@ -568,7 +568,7 @@ h1{
                                         <div class="col">
                                                 <input class="form-check-input" type="checkbox" value="" name="cancData" id="trTrOth">
                                                 <label for="trTrOth">Others, specify:</label>
-                                                <input type="text" class="inputlabelunderlineShort" name="trTrOthInput">
+                                                <input type="text" class="inputlabelunderlineShort" name="trTrOthInput" value="{{$patients->trTrOthInput}}">
                                         </div>
                                     </div>
                                 </div>
@@ -610,11 +610,11 @@ h1{
                                         1<sup>st</sup> line
                                         </div>
                                         <div class="col-auto">
-                                            <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                            <input type="text" class="inputlabelunderlineName" name="proto1st1" value="{{$patients->proto1st1}}">-<input type="text" class="inputlabelunderlineShort" name="proto1stcy1" value="{{$patients->proto1stcy1}}">
                                             # of cycles
                                             <div class="row">
                                                 <div class="col">
-                                                <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                                <input type="text" class="inputlabelunderlineName" name="proto1st2" value="{{$patients->proto1st2}}">-<input type="text" class="inputlabelunderlineShort" name="proto1stcy2" value="{{$patients->proto1stcy2}}">
                                                 # of cycles
                                                 </div>
                                             </div>
@@ -648,11 +648,11 @@ h1{
                                         2<sup>nd</sup> line
                                         </div>
                                         <div class="col-auto">
-                                            <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                            <input type="text" class="inputlabelunderlineName" name="proto2nd1" value="{{$patients->proto2nd1}}">-<input type="text" class="inputlabelunderlineShort" name="proto2ndcy1" value="{{$patients->proto2ndcy1}}">
                                             # of cycles
                                             <div class="row">
                                                 <div class="col">
-                                                <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                                <input type="text" class="inputlabelunderlineName" name="proto2nd2" value="{{$patients->proto2nd2}}">-<input type="text" class="inputlabelunderlineShort" name="proto2ndcy2" value="{{$patients->proto2ndcy2}}">
                                                 # of cycles
                                                 </div>
                                             </div>
@@ -686,11 +686,11 @@ h1{
                                         3<sup>rd</sup> line
                                         </div>
                                         <div class="col-auto">
-                                            <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                            <input type="text" class="inputlabelunderlineName" name="proto3rd1" value="{{$patients->proto3rd1}}">-<input type="text" class="inputlabelunderlineShort" name="proto3rdcy1" value="{{$patients->proto3rdcy1}}">
                                             # of cycles
                                             <div class="row">
                                                 <div class="col">
-                                                <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                                <input type="text" class="inputlabelunderlineName" name="proto3rd2" value="{{$patients->proto3rd2}}">-<input type="text" class="inputlabelunderlineShort" name="proto3rdcy2" value="{{$patients->proto3rdcy2}}">
                                                 # of cycles
                                                 </div>
                                             </div>
@@ -724,11 +724,11 @@ h1{
                                         4<sup>th</sup> line
                                         </div>
                                         <div class="col-auto">
-                                            <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                            <input type="text" class="inputlabelunderlineName" name="proto4th1" value="{{$patients->proto4th1}}">-<input type="text" class="inputlabelunderlineShort" name="proto4thcy1" value="{{$patients->proto4thcy1}}">
                                             # of cycles
                                             <div class="row">
                                                 <div class="col">
-                                                <input type="text" class="inputlabelunderlineName" name="trPl1st">-<input type="text" class="inputlabelunderlineShort" name="trPl#1">
+                                                <input type="text" class="inputlabelunderlineName" name="proto4th2" value="{{$patients->proto4th2}}">-<input type="text" class="inputlabelunderlineShort" name="proto4thcy2" value="{{$patients->proto4thcy2}}">
                                                 # of cycles
                                                 </div>
                                             </div>
@@ -773,7 +773,7 @@ h1{
                                    <div class="row">
                                        <div class="col">
                                            <b>Identify site:</b>
-                                           <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                           <input type="text" class="inputlabelunderlineName" name="radSite" value="{{$patients->radSite}}">
                                        </div>
                                    </div>
                                    <div class="row">
@@ -806,11 +806,11 @@ h1{
                                                 </div>
                                                 <div class="col">
                                                     Sites:
-                                                    <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                                    <input type="text" class="inputlabelunderlineName" name="doseRegSite" value="{{$patients->doseRegSite}}">
                                                     <div class="row">
                                                         <div class="col">
                                                             Sites:
-                                                            <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                                            <input type="text" class="inputlabelunderlineName" name="doseBoostSite" value="{{$patients->doseBoostSite}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -837,13 +837,13 @@ h1{
                                         </div>
                                         <div class="col">
                                         Surgeon:
-                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        <input type="text" class="inputlabelunderlineName" name="surSurgeon" value="{{$patients->surSurgeon}}">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
                                         Planned Operation:
-                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        <input type="text" class="inputlabelunderlineName" name="surPlanOp" value="{{$patients->surPlanOp}}">
                                         </div>
                                     </div>
                                 </div>
@@ -857,7 +857,7 @@ h1{
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        <input type="text" class="inputlabelunderlineName" name="surHormone" value="{{$patients->surHormone}}">
                                         </div>
                                     </div>
                                 </div>
@@ -869,7 +869,7 @@ h1{
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                        <input type="text" class="inputlabelunderlineName" name="trPl#1">
+                                        <input type="text" class="inputlabelunderlineName" name="surRemarks" value="{{$patients->surRemarks}}">
                                         </div>
                                     </div>
                                 </div>
@@ -1209,7 +1209,7 @@ h1{
                                    </div>
                                    <div class="row">
                                        <div class="col">
-                                            <input type="text" class="inputlabelunderline" name="trPl#1" placeholder="---">
+                                            <input type="text" class="inputlabelunderline" name="surOthers" value="{{$patients->surOthers}}" placeholder="---">
                                        </div>
                                    </div>
                                 </div>
@@ -1268,7 +1268,7 @@ h1{
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                    <input type="text" class="inputlabelunderlineName" name="timeTreat" value="{{$patients->timeTreat}}">
                                     months
                                 </div>
                             </div>
@@ -1287,7 +1287,7 @@ h1{
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                    <input type="text" class="inputlabelunderlineName" name="oncoLast" value="{{$patients->oncoLast}}">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1301,7 +1301,7 @@ h1{
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                    <input type="text" class="inputlabelunderlineName" name="oncoFirst" value="{{$patients->oncoFirst}}">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1315,7 +1315,7 @@ h1{
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" class="inputlabelunderlineName" name="effectDate">
+                                                    <input type="text" class="inputlabelunderlineName" name="oncoMiddle" value="{{$patients->oncoMiddle}}">
                                                 </div>
                                             </div>
                                             <div class="row">

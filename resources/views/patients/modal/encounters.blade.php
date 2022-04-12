@@ -160,7 +160,6 @@
                   <th>Discharge time</th>
                   <th></th>
                   <th></th>
-                  <th>enc</th>
                 </tr>
             </thead>
             <tbody>
@@ -187,14 +186,13 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="/patientShow/{{$item->enccode}}">Injury Registration Form</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cancerForm">Cancer Registration Form</a>
+                        <a class="dropdown-item" href="/cancerForm/{{$item->enccode}}">Cancer Registration Form</a>
                     </div>
                     </div>
                 </td>
                 
 
-                <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode}}">print</a></td>
-                <td>{{$item->enccode}}</a></td>
+                <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode}}">print</a></td> -->
               </tr>
               @endforeach
             </tbody>

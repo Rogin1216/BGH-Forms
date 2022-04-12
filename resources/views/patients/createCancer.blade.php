@@ -191,6 +191,10 @@ h1{
   border: 1.5px solid var(--first-color);
 }
 </style>
+</head>
+@foreach($patients as $patients)
+
+<!-- <form action="{{ url ('/store/$patients->hpercode') }}" type="get"> -->
 <div class="container-fluid border border-secondary"><!-- start logo header --> 
     <div class="row "> 
         <div class="col-auto">
@@ -376,13 +380,13 @@ h1{
             <b>Name of Patient</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patLast">
+                    <input type="text" class="inputlabelunderlineName" name="patLast" value="{{$patients->patlast}}">
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patFirst">
+                    <input type="text" class="inputlabelunderlineName" name="patFirst" value="{{$patients->patfirst}}" >
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patMiddle">
+                    <input type="text" class="inputlabelunderlineName" name="patMiddle" value="{{$patients->patmiddle}}">
                 </div>
             </div>
             <div class="row">
@@ -647,7 +651,7 @@ h1{
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="inputlabelunderlineShort" name="patPackYr" placeholder="pack/year"> 
+                                                <input type="text" class="inputlabelunderlineShort" name="patPackYr" placeholder="pack/year" value="{{$patients->patPackYr}}"> 
                                             </div>
                                         </div>
                                     </div>
@@ -718,7 +722,7 @@ h1{
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <input type="text" class="inputlabelunderlineShort" name="patDriYr" placeholder="drinks/day"> 
+                                                <input type="text" class="inputlabelunderlineShort" name="patDriYr" placeholder="drinks/day" value="{{$patients->patDriYr}}"> 
                                             </div>
                                         </div>
                                 </div>
@@ -742,7 +746,7 @@ h1{
                         <div class="row">
                             <div class="col">
                                 <label for=""># of sexual partners:</label>
-                                <input type="text" class="inputlabelunderlineShort" name="patNumSex"> 
+                                <input type="text" class="inputlabelunderlineShort" name="patNumSex" value="{{$patients->patNumSex}}"> 
                             </div>
                         </div>
                     </div>
@@ -750,14 +754,35 @@ h1{
                 <div class="row">
                     <div class="col">
                         <b>Average Monthly Family Income:</b>
-                        <input type="text" class="inputlabelunderlineShort" name="patAvgInc"> 
+                        <input type="text" class="inputlabelunderlineShort" name="patAvgInc" value="{{$patients->patAvgInc}}"> 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <b>Means of Health Expenditure:</b>
-                        <input type="text" class="inputlabelunderlineName" name="patMeansEx"> 
+                        <input type="text" class="inputlabelunderlineName" name="patMeansEx" value="{{$patients->patMeansEx}}"> 
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        Vaccine:
+                        <div class="row">
+                        <div class="col">
+                            HepB 
+                            
+                        </div>
+                        <div class="col">
+                        <input class="form-check-input" type="checkbox" value="" name="vacHepB" id="vacHepB">
+                        </div>
+                        <div class="col-auto">
+                            HPV
+                        </div>
+                        <div class="col">
+                            <input class="form-check-input" type="checkbox" value="" name="vacHpv" id="vacHpv">
+                        </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-auto">
@@ -808,7 +833,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="vapor">
                                     Chemicals/vapors
-                                    <input type="text" class="inputlabelunderlineShort" name="patChemVap" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patChemVap" value="{{$patients->patChemVap}}" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -819,7 +844,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="pest">
                                     Pesticides/Insescticides
-                                    <input type="text" class="inputlabelunderlineShort" name="patPestIns" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patPestIns" value="{{$patients->patPestIns}}" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -830,7 +855,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="dyes">
                                     Dyes
-                                    <input type="text" class="inputlabelunderlineShort" name="patDyes" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patDyes" value="{{$patients->patDyes}}" placeholder="specify">
                                 </label>
                             </div>
                         </div>
@@ -841,14 +866,14 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="others1">
                                     Others:
-                                    <input type="text" class="inputlabelunderlineShort" name="patOther1" placeholder="specify">
+                                    <input type="text" class="inputlabelunderlineShort" name="patOther1" value="{{$patients->patOther1}}" placeholder="specify">
                                 </label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <b>Longest Job Held:</b>
-                                <input type="text" class="inputlabelunderlineName" name="patLongJob" >
+                                <input type="text" class="inputlabelunderlineName" name="patLongJob" value="{{$patients->patLongJob}}">
                             </div>
                         </div>
                 </div>
@@ -889,7 +914,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="diaMell">
                                     Diabetes mellitus 
-                                    <input type="text" class="inputlabelunderlineShort" name="patDiaMell" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patDiaMell" value="{{$patients->patDiaMell}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -900,7 +925,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="hyTen">
                                     Hypertension
-                                    <input type="text" class="inputlabelunderlineShort" name="patHype" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patHype" value="{{$patients->patHype}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -911,7 +936,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="carDis">
                                     Cardiovascular Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="patCarDis" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patCarDis" value="{{$patients->patCarDis}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -922,7 +947,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="cerDis">
                                     Cerebrovascular Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="patCerDis" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patCerDis" value="{{$patients->patCerDis}}"  placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -933,7 +958,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="likiDis">
                                     Liver/Kidney Disease
-                                    <input type="text" class="inputlabelunderlineShort" name="patLivDis" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patLivDis" value="{{$patients->patLivDis}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -944,7 +969,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="std">
                                     STD
-                                    <input type="text" class="inputlabelunderlineShort" name="patStd" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patStd" value="{{$patients->patStd}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -955,7 +980,7 @@ h1{
                             <div class="col">
                                 <label class="form-check-label" for="others2">
                                     Others:
-                                    <input type="text" class="inputlabelunderlineShort" name="patOther2" placeholder="medication">
+                                    <input type="text" class="inputlabelunderlineShort" name="patOther2" value="{{$patients->patOther2}}" placeholder="medication">
                                 </label>
                             </div>
                         </div>
@@ -978,7 +1003,7 @@ h1{
                         <b>Gynecological History:</b>
                         <div class="row">
                             <div class="col">
-                            Age of menarche:<input type="text" class="inputlabelunderlineShort" name="femMenarAge">years old
+                            Age of menarche:<input type="text" class="inputlabelunderlineShort" name="femMenarAge" value="{{$patients->femMenarAge}}">years old
                             </div>
                         </div>
                         <div class="row">
@@ -995,7 +1020,7 @@ h1{
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                        Age of menopause:<input type="text" class="inputlabelunderlineShort" name="femMenopAge">
+                                        Age of menopause:<input type="text" class="inputlabelunderlineShort" name="femMenopAge" value="{{$patients->femMenopAge}}">
                                         </div>
                                         <div class="row">
                                             <div class="col-auto">
@@ -1044,7 +1069,7 @@ h1{
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <input type="text" class="inputlabelunderlineShort" name="femContra">Months
+                                        <input type="text" class="inputlabelunderlineShort" name="femContra" value="{{$patients->femContra}}">Months
                                     </div>
                                 </div>
                             </div>
@@ -1066,7 +1091,7 @@ h1{
                         </div>
                         <div class="row">
                             <div class="col">
-                                Age at 1<sup>st</sup> live birth: <input type="text" class="inputlabelunderlineShort" name="fem1stBirth">
+                                Age at 1<sup>st</sup> live birth: <input type="text" class="inputlabelunderlineShort" name="fem1stBirth" value="{{$patients->fem1stBirth}}">
                             </div>
                         </div>
                         <div class="row">
@@ -1126,7 +1151,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="infHuPap" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHuPap" placeholder="---" value="{{$patients->infHuPap}}">
                 </div>
                 <div class="col col-md-3">
                     <input class="form-check-input" type="checkbox" value="" name="infect" id="HepaB">
@@ -1134,7 +1159,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="infHepaB" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHepaB" placeholder="---" value="{{$patients->infHepaB}}">
                 </div>
             </div>
             <div class="row border-top border-secondary">
@@ -1144,7 +1169,7 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="infHeliPy" placeholder="---">
+                    <input type="text" class="inputlabelunderline" name="infHeliPy" placeholder="---" value="{{$patients->infHeliPy}}">
                 </div>
                 <div class="col col-md-3">
                     <input class="form-check-input" type="checkbox" value="" name="infect" id="otherInfect">
@@ -1152,23 +1177,23 @@ h1{
                 </div>
                 <div class="col">
                     <label for="">Year Examined/Dx:</label>
-                    <input type="text" class="inputlabelunderline" name="infOthers" placeholder="---"> 
+                    <input type="text" class="inputlabelunderline" name="infOthers" placeholder="---" value="{{$patients->infOthers}}"> 
                 </div>
             </div>
             <div class="row">
                 <div class="col col-lg-4 border-end border-top border-secondary">
                     Height:
-                    <input type="text" class="inputlabelunderlineShort" name="patHeight">
+                    <input type="text" class="inputlabelunderlineShort" name="patHeight" value="{{$patients->patHeight}}">
                     cms
                 </div>
                 <div class="col col-lg-4 border-end border-top border-secondary">
                     Weight:
-                    <input type="text" class="inputlabelunderlineShort" name="patWeight">
+                    <input type="text" class="inputlabelunderlineShort" name="patWeight" value="{{$patients->patWeight}}">
                     cms
                 </div>
                 <div class="col col-lg-4 border-top border-secondary" id="divpeach">
                     BSA:
-                    <input type="text" class="inputlabelunderlineShort1" name="patBsa">
+                    <input type="text" class="inputlabelunderlineShort1" name="patBsa" value="{{$patients->patBsa}}">
                     
                 </div>
             </div>
@@ -1176,7 +1201,9 @@ h1{
     </div>
     </div>
     <br>
-    <div >
+@endforeach
+    <div>
+                                            <!-- </form> -->
         <nav aria-label="..." class="float-end">
             <ul class="pagination">
                 
@@ -1196,6 +1223,4 @@ h1{
         </nav> 
     </div>
 </html>
-
-
 @endsection

@@ -540,650 +540,726 @@ input{
             <div class="col-auto">
               <h5>FOR TRANSPORT/VEHICULAR ACCIDENT ONLY:</h5>
             </div>
-            <div class="col-auto">
-              <p>
-                  <a class="btn btn-warning btn-sm" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">expand</a>
-              </p>
-            </div>
-          </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="collapse multi-collapse" id="multiCollapseExample1">
-                      <div class="card card-body" id="collapsible">
-                        <div class="form-group row-md-8">
-                          <div class="container border border-secondary" >
-
-                          <div class="row border-bottom border-secondary">
-                              <div class="col-auto">
-                               <label>For transport/vehicular accident only:</label>
-                               </div>
-                              <div class="col-auto">
-                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Land" value=""  onclick="return false;" >
-                                <label class="form-check-label mx-auto" for="Land">
-                                    Land
-                                </label>
-                              </div>
-                              <div class="col-auto">
-                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Water" value=""  onclick="return false;" >
-                                <label class="form-check-label mx-auto" for="Water">
-                                    Water
-                                </label>
-                              </div>
-                              <div class="col col-lg-4">
-                               <input class="form-check-input" type="radio" name="transpoRdo1" id="Air" value=""  onclick="return false;">
-                                <label class="form-check-label mx-auto" for="Air">
-                                    Air
-                                </label>
-                              </div>
-                              <div class="col-auto">
-                               <input class="form-check-input" type="radio" name="collRdo" id="Collision" value=""  onclick="return false;">
-                                <label class="form-check-label mx-auto" for="Collision">
-                                    Collision
-                                </label>
-                              </div>
-                              <div class="col-auto">
-                               <input class="form-check-input" type="radio" name="collRdo" id="Non-Collision" value=""  onclick="return false;">
-                                <label class="form-check-label" for="Non-Collision">
-                                    Non-Collision
-                                </label>
-                              </div>
-                            </div>
-
-                            <div class="row border-bottom border-secondary">
-                                <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Severity: 
-                                </h6>
-                                </div>   
-                                <div class="col-auto">
-                                <input class="form-check-input" type="radio" name="severity" id="Fatal Accident" value=""  onclick="return false;"> 
-                                  <label class="form-check-label" for="Fatal Accident">
-                                    Fatal Accident
-                                </label>
-                                </div>
-                                <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="Serious" name="severity" id="Serious" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Serious">
-                                    Serious Injury Accident
-                                </label>
-                                </div>
-                                
-                                <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="Minor" name="severity" id="Minor" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Minor">
-                                    Minor Injury Accident
-                                </label>
-                                </div>
-
-                                <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="Property" name="severity" id="Property" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Property">
-                                    Property Damage Only
-                                </label>
-                                </div>
-                              </div>
-                            
-                              
-                            <div class="row">
-                            <div class="col col-lg-6 border-right border-secondary"><!--33a.2-->
-                            <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Vehicles Invloved:
-                                </h6>
-                                </div>
-                            <div class="container">
-                            <div class="row row-lg-8">
-                                  <div class="col-auto">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      Patient's Vehicle
-                                  </h6>
-                                  </div>
-                                  </div>
-
-                                  <div class="row">
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Pedestrian" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Pedestrian">
-                                      None(Pedestrian)
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Car" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Car">
-                                      Car
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Van" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Van">
-                                      Van
-                                  </label>
-                                  </div>
-                                </div>
-
-                                <div class="row row-lg-8">
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Bus" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Bus">
-                                      Bus
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Motorcycle" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Motorcycle">
-                                      Motorcycle
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Bicycle" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Bicycle">
-                                      Bicycle
-                                  </label>
-                                  </div>
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Tricycle" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Tricycle">
-                                      Tricycle
-                                  </label>
-                                  </div>
-                                </div>
-
-                                <div class="row row-lg-8">
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Others6" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others6" name="others6">
-                                      Others,
-                                  </label>
-                                  <input type="text" class="inputlabelunderline" value="{{$patients->others6}}" placeholder="N/A" disabled="true">
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="vehicleRdo" id="Unknown" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Unknown">
-                                      Unknown
-                                  </label>
-                                  </div>
-
-                                </div>
-                                
-                            </div>
-
-                            <div class="container">
-                                <div class="row row-lg-8">
-                                  <div class="col-auto">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      Other Vehicle/Object Involved(for COLLISION accident ONLY)
-                                  </h6>
-                                  </div>
-                                  </div>
-
-                                  <div class="row">
-
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Pedestrian" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Pedestrian">
-                                      None(Pedestrian)
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Car1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Car1">
-                                      Car
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Van1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Van1">
-                                      Van
-                                  </label>
-                                  </div>
-                                 </div>
-
-                                 <div class="row row-lg-8">
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Bus1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Bus1">
-                                      Bus
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Motorcycle1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Motorcycle1">
-                                      Motorcycle
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Bicycle1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Bicycle1">
-                                      Bicycle
-                                  </label>
-                                  </div>
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Tricycle1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Tricycle1">
-                                      Tricycle
-                                  </label>
-                                  </div>
-                                </div>
-
-                                <div class="row row-lg-8">
-                                  <div class="col col-lg-2">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      
-                                  </h6>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Others7" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others7">
-                                      Others,
-                                  </label>
-                                  <input type="text" class="inputlabelunderline" name="others7" value="{{ $patients->others7}}" placeholder="N/A" disabled="true">
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="otherRdo" id="Unknown1" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Unknown1">
-                                      Unknown
-                                  </label>
-                                  </div>
-
-                                </div>
-                            </div>
-                            </div><!--33a.2 end-->
-
-                            <!--33a.3-->
-                            <div class="col col-lg-3">
-                            <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Position of Patient
-                                </h6>
-                            </div>
-                                <div class="row">
-                                <div class="container">
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Pedestrian2" value=""  onclick="return false;" >
-                                    <label class="form-check-label" for="Pedestrian2">
-                                      Pedestrian
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Driver" value=""  onclick="return false;" >
-                                    <label class="form-check-label" for="Driver">
-                                      Driver
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Captain" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Captain">
-                                      Captain
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Pilot" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Pilot">
-                                      Pilot
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Front" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Front">
-                                      Front Passenger
-                                  </label>
-                                  </div>
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Rear" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Rear">
-                                      Rear Passenger
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Others8" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others8">
-                                      Others,
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" name="others8" value="{{ $patients->others8}}" placeholder="N/A" disabled="true">
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="posRdo" id="Unknown2" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Unknown2">
-                                      Unknown
-                                  </label>
-                                  </div>
-                                </div>
-                                </div>
-                                </div><!--33a.3 end-->
-
-                                <!--33a.4-->
-                                <div class="col col-lg-3 border-left border-secondary">
-                            <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Victims Involved
-                                </h6>
-                            </div>
-                                <div class="row">
-                                <div class="container">
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="victimsRdo" id="Alone" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Alone">
-                                      Alone
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="victimsRdo" id="Withothers" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Withothers">
-                                      With others, specify how many(excuding the victim)
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" value="{{$patients->withothers}}" placeholder="N/A" disabled="true">
-                                  </div>
-                                  
-                                </div>
-                                </div>
-                                </div><!--33a.4 end-->
-                                <div class="col col-lg-4 border border-secondary border-left-0 border-right-0"><!--33b-->
-                                <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Place of Occurrence:
-                                </h6>
-                            </div>
-                                <div class="row">
-                                <div class="container">
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Home" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Home">
-                                      Home
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="School" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="School">
-                                      School
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Road" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Road">
-                                      Road
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Bars" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Bars">
-                                      Videoke Bars
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Workplace" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Workplace">
-                                      Workplace, specify
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" name="workplaceInput" value="" placeholder="N/A" disabled="true">
-                                  </div>
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Others9" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others9">
-                                      Others, specify
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" name="others9" value="{{ $patients->others9}}" placeholder="N/A" disabled="true">
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="placeRdo" id="Unkown4" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Unkown4">
-                                      Unkown
-                                  </label>
-                                  
-                                  </div>
-                                </div>
-                                </div>
-                                </div>
-                                <div class="col col-lg-4 border border-secondary"><!--33c-->
-                                <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Activity of the Patient at the time of the incident:
-                                </h6>
-                            </div>
-                                <div class="row">
-                                <div class="container">
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="activityRdo" id="Sports" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Sports">
-                                      Sports
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="activityRdo" id="Leisure"value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Leisure">
-                                      Leisure
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="activityRdo" id="Workrelated"value=""  onclick="return false;" >
-                                    <label class="form-check-label" for="Workrelated">
-                                      Work related
-                                  </label>
-                                  </div>
-                                  
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="activityRdo" id="Others10" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others10">
-                                      Others, specify
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" name="others10" value="{{ $patients->others10}}" placeholder="N/A" disabled="true">
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="radio" name="activityRdo" id="Unkown5" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Unkown5">
-                                      Unkown
-                                  </label>
-                                  
-                                  </div>
-                                </div>
-                                </div>
-                                </div><!--33c-->
-
-                                <div class="col col-lg-4 border border-secondary border-left-0 border-right-0"><!--33d-->
-                            <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                    Other risk factor at the time of the incident:
-                                </h6>
-                            </div>
-                                <div class="row">
-                                <div class="container">
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="alcoholCh" id="Alchohol" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Alchohol">
-                                      Alchohol/liquor
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="smokingCh" id="Smoking" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Smoking">
-                                      Smoking
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="drugsCh" id="Drugs" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Drugs">
-                                      Drugs
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="phoneCh" id="phone" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="phone">
-                                      Using mobile phone
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="sleepyCh" id="Sleepy" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Sleepy">
-                                      Sleepy
-                                  </label>
-                                  </div>
-
-                                  <div class="col-auto">
-                                  <input class="form-check-input" type="checkbox" name="others11Ch" id="Others11" value=""  onclick="return false;">
-                                    <label class="form-check-label" for="Others11">
-                                      Others, specify
-                                  </label>
-                                  <input type="text" class="inputlabelunderline2" value="{{$patients->others11}}" placeholder="N/A" disabled="true">
-                                  <label class="form-check-label" for="Others11">
-                                      (e.g. suspected unter the influcence of substance used)
-                                  </label>
-                                  </div>
-                                  
-                                  </div>
-                                </div>
-                                </div>
-                                </div><!--33d-->
-
-                                <div class="row border-bottom border-secondary"><!--33e-->
-                                <div class="row">
-
-
-                                  <div class="col-auto">
-                                  <h6 class="form-check-label" for="flexCheckDefault">
-                                      Safety:(check all that apply)
-                                  </h6>
-                                  </div>
-                                
-                               
-                                  
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="noneCh" id="noneCh" value="" onclick="return false;">
-                                  <label class="form-check-label" for="None">
-                                    None
-                                </label>
-                                </div>
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="airbagCh" id="airbagCh" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Airbag">
-                                    Airbag
-                                </label>
-                                </div>
-                                
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="helmetCh" id="helmetCh" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Helmet">
-                                    Helmet
-                                </label>
-                                </div>
-
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="childseatCh" id="childseatCh" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="Childseat">
-                                    Childseat
-                                </label>
-                                </div>
-
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="seatbeltCh" id="seatbeltCh" value="" onclick="return false;">
-                                  <label class="form-check-label" for="Seatbelt">
-                                    Seatbelt
-                                </label>
-                                </div>
-
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="vestCh" id="vestCh" value=""  onclick="return false;">
-                                  <label class="form-check-label" for="LifeJacket">
-                                    Life vest/LifeJacket/Floatation device
-                                </label>
-                                </div>
-
-                                </div>
-                                
-
-                                <div class="row">
-                                <div class="col col-lg-3">
-                                
-                                </div>
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="others12Ch" id="others12Ch" value="" onclick="return false;">
-                                  <label class="form-check-label" for="Others12" value="{{$patients->others12}}" placeholder="N/A">
-                                    Others
-                                </label>
-                                </div>
-
-                                <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" name="unknown5Ch" id="unknown5" value="" onclick="return false;">
-                                  <label class="form-check-label" for="unknown5">
-                                    Unknown
-                                </label>
-                                </div>
-                                </div>
-                                
-                              </div><!--33e end-->
-
-
-                            </div>
-                            
-
-                          </div>   
+            <div class="row">
+                        <div class="col">
+                                        <div class="container border border-secondary">
+                                            <div class="row border-bottom border-secondary">
+                                                <div class="col-auto">
+                                                    <label>For transport/vehicular accident only:</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" name="transpoRdo1"
+                                                        id="Land" value="">
+                                                    <label class="form-check-label mx-auto" for="Land">
+                                                        Land
+                                                    </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" name="transpoRdo1"
+                                                        id="Water" value="">
+                                                    <label class="form-check-label mx-auto" for="Water">
+                                                        Water
+                                                    </label>
+                                                </div>
+                                                <div class="col col-lg-4">
+                                                    <input class="form-check-input" type="radio" name="transpoRdo1"
+                                                        id="Air" value="">
+                                                    <label class="form-check-label mx-auto" for="Air">
+                                                        Air
+                                                    </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" name="collRdo"
+                                                        id="Collision" value="">
+                                                    <label class="form-check-label mx-auto" for="Collision">
+                                                        Collision
+                                                    </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" name="collRdo"
+                                                        id="Non-Collision" value="">
+                                                    <label class="form-check-label" for="Non-Collision">
+                                                        Non-Collision
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row border-bottom border-secondary">
+                                                <div class="col-auto">
+                                                    <h6 class="form-check-label" for="flexCheckDefault">
+                                                        Severity:
+                                                    </h6>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" name="severity"
+                                                        id="Fatal Accident" value="">
+                                                    <label class="form-check-label" for="Fatal Accident">
+                                                        Fatal Accident
+                                                    </label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" value="Serious"
+                                                        name="severity" id="Serious" value="">
+                                                    <label class="form-check-label" for="Serious">
+                                                        Serious Injury Accident
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" value="Minor"
+                                                        name="severity" id="Minor" value="">
+                                                    <label class="form-check-label" for="Minor">
+                                                        Minor Injury Accident
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-auto">
+                                                    <input class="form-check-input" type="radio" value="Property"
+                                                        name="severity" id="Property" value="">
+                                                    <label class="form-check-label" for="Property">
+                                                        Property Damage Only
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col col-lg-6 border-right border-secondary">
+                                                    <!--33a.2-->
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Vehicles Invloved:
+                                                        </h6>
+                                                    </div>
+                                                    <div class="container">
+                                                        <div class="row row-lg-8">
+                                                            <div class="col-auto">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+                                                                    Patient's Vehicle
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Pedestrian" value="">
+                                                                <label class="form-check-label" for="Pedestrian">
+                                                                    None(Pedestrian)
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Car" value="">
+                                                                <label class="form-check-label" for="Car">
+                                                                    Car
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Van" value="">
+                                                                <label class="form-check-label" for="Van">
+                                                                    Van
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-lg-8">
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Bus" value="">
+                                                                <label class="form-check-label" for="Bus">
+                                                                    Bus
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Motorcycle" value="">
+                                                                <label class="form-check-label" for="Motorcycle">
+                                                                    Motorcycle
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Bicycle" value="">
+                                                                <label class="form-check-label" for="Bicycle">
+                                                                    Bicycle
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Tricycle" value="">
+                                                                <label class="form-check-label" for="Tricycle">
+                                                                    Tricycle
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-lg-8">
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Others6" value="">
+                                                                <label class="form-check-label" for="Others6"
+                                                                    name="others6">
+                                                                    Others,
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline"
+                                                                    value="{{$patients->others6}}" placeholder="N/A" name="others6"> 
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="vehicleRdo" id="Unknown" value="">
+                                                                <label class="form-check-label" for="Unknown">
+                                                                    Unknown
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="container">
+                                                        <div class="row row-lg-8">
+                                                            <div class="col-auto">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+                                                                    Other Vehicle/Object Involved(for COLLISION accident
+                                                                    ONLY)
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Pedestrian" value="">
+                                                                <label class="form-check-label" for="Pedestrian">
+                                                                    None(Pedestrian)
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Car1" value="">
+                                                                <label class="form-check-label" for="Car1">
+                                                                    Car
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Van1" value="">
+                                                                <label class="form-check-label" for="Van1">
+                                                                    Van
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-lg-8">
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Bus1" value="">
+                                                                <label class="form-check-label" for="Bus1">
+                                                                    Bus
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Motorcycle1" value="">
+                                                                <label class="form-check-label" for="Motorcycle1">
+                                                                    Motorcycle
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Bicycle1" value="">
+                                                                <label class="form-check-label" for="Bicycle1">
+                                                                    Bicycle
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Tricycle1" value="">
+                                                                <label class="form-check-label" for="Tricycle1">
+                                                                    Tricycle
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-lg-8">
+                                                            <div class="col col-lg-2">
+                                                                <h6 class="form-check-label" for="flexCheckDefault">
+
+                                                                </h6>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Others7" value="">
+                                                                <label class="form-check-label" for="Others7">
+                                                                    Others,
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline"
+                                                                    name="others7" value="{{ $patients->others7}}"
+                                                                    placeholder="N/A">
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="otherRdo" id="Unknown1" value="">
+                                                                <label class="form-check-label" for="Unknown1">
+                                                                    Unknown
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--33a.2 end-->
+
+                                                <!--33a.3-->
+                                                <div class="col col-lg-3">
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Position of Patient
+                                                        </h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Pedestrian2" value="">
+                                                                <label class="form-check-label" for="Pedestrian2">
+                                                                    Pedestrian
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Driver" value="">
+                                                                <label class="form-check-label" for="Driver">
+                                                                    Driver
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Captain" value="">
+                                                                <label class="form-check-label" for="Captain">
+                                                                    Captain
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Pilot" value="">
+                                                                <label class="form-check-label" for="Pilot">
+                                                                    Pilot
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Front" value="">
+                                                                <label class="form-check-label" for="Front">
+                                                                    Front Passenger
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Rear" value="">
+                                                                <label class="form-check-label" for="Rear">
+                                                                    Rear Passenger
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Others8" value="">
+                                                                <label class="form-check-label" for="Others8">
+                                                                    Others,
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2"
+                                                                    name="others8" value="{{ $patients->others8}}"
+                                                                    placeholder="N/A">
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="posRdo" id="Unknown2" value="">
+                                                                <label class="form-check-label" for="Unknown2">
+                                                                    Unknown
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--33a.3 end-->
+
+                                                <!--33a.4-->
+                                                <div class="col col-lg-3 border-left border-secondary">
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Victims Involved
+                                                        </h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="container">
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="victimsRdo" id="Alone" value="">
+                                                                <label class="form-check-label" for="Alone">
+                                                                    Alone
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="victimsRdo" id="Withothers" value="">
+                                                                <label class="form-check-label" for="Withothers">
+                                                                    With others, specify how many(excuding the victim)
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2" name="withothers"
+                                                                    value="{{$patients->withothers}}" placeholder="N/A"> 
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--33a.4 end-->
+                                                <div
+                                                    class="col col-lg-4 border border-secondary border-left-0 border-right-0">
+                                                    <!--33b-->
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Place of Occurrence:
+                                                        </h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Home" value="">
+                                                                <label class="form-check-label" for="Home">
+                                                                    Home
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="School" value="">
+                                                                <label class="form-check-label" for="School">
+                                                                    School
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Road" value="">
+                                                                <label class="form-check-label" for="Road">
+                                                                    Road
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Bars" value="">
+                                                                <label class="form-check-label" for="Bars">
+                                                                    Videoke Bars
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Workplace" value="">
+                                                                <label class="form-check-label" for="Workplace">
+                                                                    Workplace, specify
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2"
+                                                                    name="workplaceInput" value="" placeholder="N/A">
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Others9" value="">
+                                                                <label class="form-check-label" for="Others9">
+                                                                    Others, specify
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2"
+                                                                    name="others9" value="{{ $patients->others9}}"
+                                                                    placeholder="N/A">
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="placeRdo" id="Unkown4" value="">
+                                                                <label class="form-check-label" for="Unkown4">
+                                                                    Unkown
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col col-lg-4 border border-secondary">
+                                                    <!--33c-->
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Activity of the Patient at the time of the incident:
+                                                        </h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="activityRdo" id="Sports" value="">
+                                                                <label class="form-check-label" for="Sports">
+                                                                    Sports
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="activityRdo" id="Leisure" value="">
+                                                                <label class="form-check-label" for="Leisure">
+                                                                    Leisure
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="activityRdo" id="Workrelated" value="">
+                                                                <label class="form-check-label" for="Workrelated">
+                                                                    Work related
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="activityRdo" id="Others10" value="">
+                                                                <label class="form-check-label" for="Others10">
+                                                                    Others, specify
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2"
+                                                                    name="others10" value="{{ $patients->others10}}"
+                                                                    placeholder="N/A">
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="activityRdo" id="Unkown5" value="">
+                                                                <label class="form-check-label" for="Unkown5">
+                                                                    Unkown
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--33c-->
+
+                                                <div
+                                                    class="col col-lg-4 border border-secondary border-left-0 border-right-0">
+                                                    <!--33d-->
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Other risk factor at the time of the incident:
+                                                        </h6>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="alcoholCh" id="Alchohol" value="">
+                                                                <label class="form-check-label" for="Alchohol">
+                                                                    Alchohol/liquor
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="smokingCh" id="Smoking" value="">
+                                                                <label class="form-check-label" for="Smoking">
+                                                                    Smoking
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="drugsCh" id="Drugs" value="">
+                                                                <label class="form-check-label" for="Drugs">
+                                                                    Drugs
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="phoneCh" id="phone" value="">
+                                                                <label class="form-check-label" for="phone">
+                                                                    Using mobile phone
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="sleepyCh" id="Sleepy" value="">
+                                                                <label class="form-check-label" for="Sleepy">
+                                                                    Sleepy
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="col-auto">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    name="others11Ch" id="Others11" value="">
+                                                                <label class="form-check-label" for="Others11">
+                                                                    Others, specify
+                                                                </label>
+                                                                <input type="text" class="inputlabelunderline2" name="others11"
+                                                                    value="{{$patients->others11}}" placeholder="N/A">
+                                                                <label class="form-check-label" for="Others11">
+                                                                    (e.g. suspected unter the influcence of substance
+                                                                    used)
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--33d-->
+
+                                            <div class="row border-bottom border-secondary">
+                                                <!--33e-->
+                                                <div class="row">
+
+
+                                                    <div class="col-auto">
+                                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Safety:(check all that apply)
+                                                        </h6>
+                                                    </div>
+
+
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox" name="noneCh"
+                                                            id="noneCh" value="">
+                                                        <label class="form-check-label" for="None">
+                                                            None
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox" name="airbagCh"
+                                                            id="airbagCh" value="">
+                                                        <label class="form-check-label" for="Airbag">
+                                                            Airbag
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox" name="helmetCh"
+                                                            id="helmetCh" value="">
+                                                        <label class="form-check-label" for="Helmet">
+                                                            Helmet
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="childseatCh" id="childseatCh" value="">
+                                                        <label class="form-check-label" for="Childseat">
+                                                            Childseat
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="seatbeltCh" id="seatbeltCh" value="">
+                                                        <label class="form-check-label" for="Seatbelt">
+                                                            Seatbelt
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox" name="vestCh"
+                                                            id="vestCh" value="">
+                                                        <label class="form-check-label" for="LifeJacket">
+                                                            Life vest/LifeJacket/Floatation device
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="col col-lg-3">
+
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="others12Ch" id="others12Ch" value="">
+                                                        <label class="form-check-label" for="Others12" name="others12"
+                                                            value="{{$patients->others12}}" placeholder="N/A">
+                                                            Others
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="unknown5Ch" id="unknown5" value="">
+                                                        <label class="form-check-label" for="unknown5">
+                                                            Unknown
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <!--33e end-->
+                                        </div>
+                            <!--TRANSPORT/VEHICULAR PART-->
                         </div>
-                      </div><!--TRANSPORT/VEHICULAR PART-->
                     </div>
-                  </div>
                 </div> <!--collapsible button-->
 
         <hr>
@@ -1432,15 +1508,24 @@ input{
         </div>
         </div>
                 </div>
+                <div class="row">
+                <div class="col ">
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                        <a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists"
+                                >
+                                <i class="fa fa-plus" aria-hidden="true"></i> Back
+                            </a>
+                        </div>   
+                        
+                    </div>
+                </div>
+            </div>
         </div>
+        
+</div>
 </div>
 <br>
-
-<!-- <input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br> -->
-<a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Back
-                        </a>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

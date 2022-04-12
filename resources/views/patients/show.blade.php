@@ -105,13 +105,13 @@
                             </div>
                             <div class="col col-lg-2">
                                 <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="">
-                                <label class="form-check-label" for="rdoAid">
+                                <label class="form-check-label" for="aidYes">
                                     Yes
                             </div>
                             <div class="col col-lg-2">
                                 </label>
                                 <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="">
-                                <label class="form-check-label" for="rdoAid">
+                                <label class="form-check-label" for="aidNo">
                                     No
                                 </label>
                             </div>
@@ -131,6 +131,7 @@
                             placeholder="name of doctor" class="form-control">
                     </div>
                 </div>
+                
             </div>
 
             <hr>
@@ -143,13 +144,13 @@
                         </div>
                         <div class="col col-lg-1">
                             <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo1" value="">
-                            <label class="form-check-label">
+                            <label class="form-check-label" for="injuryRdo1">
                                 Yes
                             </label>
                         </div>
                         <div class="col col-lg-1">
                             <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo2" value="">
-                            <label class="form-check-label">
+                            <label class="form-check-label" for="injuryRdo2">
                                 No
                             </label>
                         </div>
@@ -182,7 +183,7 @@
                                 <div class="col col-lg-5">
                                     <input class="form-check-input" type="checkbox" name="avulsionCh" id="avulsion"
                                         value="">
-                                    <label class="form-check-label" for="Avulsion">
+                                    <label class="form-check-label" for="avulsion">
                                         Avulsion
                                     </label>
                                     <input type="text" class="inputlabelunderline" name="avulsion"
@@ -193,26 +194,26 @@
                             <input class="form-check-input" type="checkbox" name="burnCh" id="burnCh" value="">
                             <div class="row">
                                 <div class="col col-lg-16">
-                                    <label class="form-check-label" for="Burn">
+                                    <label class="form-check-label" for="burnCh">
                                         Burn (Degree of Burn & Extent of Body Surface involved) Degree:
                                     </label>
                                     <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="">
-                                    <label class="" for="">
+                                    <label class="" for="degreeRdoBtn1">
                                         1<sup>st</sup>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="">
-                                        <label class="" for="">
+                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn2" value="">
+                                        <label class="" for="degreeRdoBtn2">
                                             2<sup>nd</sup>
                                         </label>
                                         <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn3" value="">
-                                        <label class="" for="">
+                                        <label class="" for="degreeRdoBtn3">
                                             3<sup>rd</sup>
                                         </label>
                                         <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn4" value="">
-                                        <label class="" for="">
+                                        <label class="" for="degreeRdoBtn4">
                                             4<sup>th</sup>
                                         </label>
                                         <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn5" value="">
-                                        <label class="" for="">
+                                        <label class="" for="degreeRdoBtn5">
                                             5<sup>th</sup>
                                         </label>
                                         <label>Site:</label>
@@ -225,7 +226,7 @@
                                 <div class="col col-lg-5">
                                     <input class="form-check-input" type="checkbox" name="concussionCh"
                                         id="concussionCh" value="">
-                                    <label class="form-check-label" for="Concussion">
+                                    <label class="form-check-label" for="concussionCh">
                                         Concussion
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->concussion}}" name="concussion"
@@ -237,7 +238,7 @@
                                 <div class="col col-lg-5">
                                     <input class="form-check-input" type="checkbox" name="contusionCh" id="contusionCh"
                                         value="">
-                                    <label class="form-check-label" for="Contusion">
+                                    <label class="form-check-label" for="contusionCh">
                                         Contusion
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->contusion}}" name="contusion"
@@ -250,7 +251,7 @@
                                     <input class="form-check-input" type="checkbox" name="fractureCh" id="fractureCh"
                                         value="">
 
-                                    <label class="form-check-label" for="Fracture">
+                                    <label class="form-check-label" for="fractureCh">
                                         Fracture
                                     </label>
 
@@ -260,7 +261,7 @@
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 <input class="form-check-input" type="checkbox" name="openTypeCh"
                                                     id="openTypeCh" value="">
-                                                <label class="form-check-label" for="Open Type">
+                                                <label class="form-check-label" for="openTypeCh">
                                                     Open Type
                                                 </label>
                                                 <input type="text" class="inputlabelunderline"
@@ -278,7 +279,7 @@
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 <input class="form-check-input" type="checkbox" name="closedTypeCh"
                                                     id="closedTypeCh" value="">
-                                                <label class="form-check-label" for="Closed Type">
+                                                <label class="form-check-label" for="closedTypeCh">
                                                     Closed Type
                                                 </label>
                                                 <input type="text" class="inputlabelunderline" name="closedType"
@@ -295,8 +296,8 @@
                                     <div class="col col-lg-12">
                                         <input class="form-check-input" type="checkbox" name="woundCh" id="woundCh"
                                             value="">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            <label class="form-check-label" for="wound">
+                                        <label class="form-check-label" for="woundCh">
+                                            <label class="form-check-label" for="woundCh">
                                                 Open/Wound Laceration
                                             </label>
                                             <input type="text" class="inputlabelunderline" value="{{$patients->wound}}" name="wound"
@@ -314,7 +315,7 @@
                                         <input class="form-check-input" type="checkbox" name="traumaCh" id="traumaCh"
                                             value="">
 
-                                        <label class="form-check-label" for="Traumatic Amputation">
+                                        <label class="form-check-label" for="traumaCh">
                                             Traumatic Amputation
                                         </label>
                                         <input type="text" class="inputlabelunderline" name="traumaticAmputation"
@@ -327,7 +328,7 @@
                                         <input class="form-check-input" type="checkbox" name="others1Ch" id="others1Ch"
                                             value="">
 
-                                        <label class="form-check-label" for="Others1">
+                                        <label class="form-check-label" for="others1Ch">
                                             Others: Pls. specify injury and the body part/s affected:
                                         </label>
                                         <input type="text" class="inputlabelunderline" value="{{$patients->others1}}" name="others1"
@@ -349,7 +350,7 @@
                     <div class="col px-md-5">
 
                         <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="">
-                        <label class="form-check-label" for=" Bites">
+                        <label class="form-check-label" for="bitesCh">
                             Bites/stings, Specify animal/insect:
                         </label>
                         <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" name="bites">
@@ -357,7 +358,7 @@
                         <div class="row">
                             <div class="col-auto">
                                 <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="">
-                                <label class="form-check-label" for="Burn1">
+                                <label class="form-check-label" for="burn1Ch">
                                     Burn,
                                 </label>
                             </div>
@@ -405,7 +406,7 @@
                         <input class="form-check-input" type="checkbox" name="chemicalCh" id="chemicalCh" value="">
                         <div class="row">
                             <div class="col col-lg-8">
-                                <label class="form-check-label" for="Chemical">
+                                <label class="form-check-label" for="chemicalCh">
                                     Chemical/Substance, specify
                                 </label>
                                 <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}" name="chemical"
@@ -415,7 +416,7 @@
 
                             <div class="col col-lg-8">
                                 <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="">
-                                <label class="form-check-label" for="sharp">
+                                <label class="form-check-label" for="sharpCh">
                                     Contact with sharp objects, specify object
                                 </label>
                                 <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}" name="sharp"
@@ -427,7 +428,7 @@
                             <div class="col col-lg-3">
                                 <input class="form-check-input" type="checkbox" name="drowningCh" id="drowningCh"
                                     value="">
-                                <label class="form-check-label" for="Drowning">
+                                <label class="form-check-label" for="drowningCh">
                                     Drowning: Type/Body of Water:
                                 </label>
                             </div>
@@ -473,7 +474,7 @@
                         <div class="row">
                             <div class="col-auto">
                                 <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value="">
-                                <label class="form-check-label" for="Exposure">
+                                <label class="form-check-label" for="natureCh">
                                     Exposure to forces of Nature:
                                 </label>
                             </div>
@@ -507,7 +508,7 @@
                                     <input class="form-check-input" type="checkbox" name="drowningCh" id="gunshotCh"
                                         value="">
 
-                                    <label class="form-check-label" for="Gunshot">
+                                    <label class="form-check-label" for="gunshotCh">
                                         Gunshot, Specify weapon
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}" name="gunshot"
@@ -520,7 +521,7 @@
                                 <div class="col col-lg-4">
                                     <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh"
                                         value="">
-                                    <label class="form-check-label" for="Hanging">
+                                    <label class="form-check-label" for="hangingCh">
                                         Hanging/Strangulation
                                     </label>
                                 </div>
@@ -530,7 +531,7 @@
                                 <div class="col col-lg-4">
                                     <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh"
                                         value="">
-                                    <label class="form-check-label" for="Mauling">
+                                    <label class="form-check-label" for="maulingCh">
                                         Mauling/Assault
                                     </label>
                                 </div>
@@ -540,7 +541,7 @@
                                 <div class="col col-lg-4">
                                     <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh"
                                         value="">
-                                    <label class="form-check-label" for="Transport">
+                                    <label class="form-check-label" for="transportCh">
                                         Transport/Vehicular Accident
                                     </label>
                                 </div>
@@ -549,7 +550,7 @@
                             <div class="row">
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="">
-                                    <label class="form-check-label" for="Fall">
+                                    <label class="form-check-label" for="fallCh">
                                         Fall, specify, from/in/on/into
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->fall}}" name="fall"
@@ -562,7 +563,7 @@
                                     <input class="form-check-input" type="checkbox" name="firecrackerCh"
                                         id="firecrackerCh" value="">
 
-                                    <label class="form-check-label" for="Firecracker">
+                                    <label class="form-check-label" for="firecrackerCh">
                                         Firecracker, specify type/s
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}" name="firecracker"
@@ -577,7 +578,7 @@
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh"
                                         value="">
-                                    <label class="form-check-label" for="Sexual">
+                                    <label class="form-check-label" for="assaultCh">
                                         Sexual Assault/Sexual Abuse/Rape(Alleged)
                                     </label>
                                 </div>
@@ -587,7 +588,7 @@
                                 <div class="col-auto">
                                     <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch"
                                         value="">
-                                    <label class="form-check-label" for="Others5">
+                                    <label class="form-check-label" for="others5Ch">
                                         Others,specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others5}}" name="others5"
@@ -604,20 +605,10 @@
                         <div class="col-auto">
                             <h5>FOR TRANSPORT/VEHICULAR ACCIDENT ONLY:</h5>
                         </div>
-                        <div class="col-auto">
-                            <p>
-                                <a class="btn btn-warning btn-sm" data-toggle="collapse" href="#multiCollapseExample1"
-                                    role="button" aria-expanded="false" aria-controls="multiCollapseExample1">expand</a>
-                            </p>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                <div class="card card-body" id="collapsible">
-                                    <div class="form-group row-md-8">
                                         <div class="container border border-secondary">
-
                                             <div class="row border-bottom border-secondary">
                                                 <div class="col-auto">
                                                     <label>For transport/vehicular accident only:</label>
@@ -1092,7 +1083,7 @@
                                                                     Workplace, specify
                                                                 </label>
                                                                 <input type="text" class="inputlabelunderline2"
-                                                                    name="workplaceInput" value="" placeholder="N/A">
+                                                                    name="workplaceInput" value="{{ $patients->workplaceInput}}" placeholder="N/A">
                                                             </div>
 
                                                             <div class="col-auto">
@@ -1260,14 +1251,14 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox" name="noneCh"
                                                             id="noneCh" value="">
-                                                        <label class="form-check-label" for="None">
+                                                        <label class="form-check-label" for="noneCh">
                                                             None
                                                         </label>
                                                     </div>
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox" name="airbagCh"
                                                             id="airbagCh" value="">
-                                                        <label class="form-check-label" for="Airbag">
+                                                        <label class="form-check-label" for="airbagCh">
                                                             Airbag
                                                         </label>
                                                     </div>
@@ -1275,7 +1266,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox" name="helmetCh"
                                                             id="helmetCh" value="">
-                                                        <label class="form-check-label" for="Helmet">
+                                                        <label class="form-check-label" for="helmetCh">
                                                             Helmet
                                                         </label>
                                                     </div>
@@ -1283,7 +1274,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox"
                                                             name="childseatCh" id="childseatCh" value="">
-                                                        <label class="form-check-label" for="Childseat">
+                                                        <label class="form-check-label" for="childseatCh">
                                                             Childseat
                                                         </label>
                                                     </div>
@@ -1291,7 +1282,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox"
                                                             name="seatbeltCh" id="seatbeltCh" value="">
-                                                        <label class="form-check-label" for="Seatbelt">
+                                                        <label class="form-check-label" for="seatbeltCh">
                                                             Seatbelt
                                                         </label>
                                                     </div>
@@ -1299,7 +1290,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox" name="vestCh"
                                                             id="vestCh" value="">
-                                                        <label class="form-check-label" for="LifeJacket">
+                                                        <label class="form-check-label" for="vestCh">
                                                             Life vest/LifeJacket/Floatation device
                                                         </label>
                                                     </div>
@@ -1314,7 +1305,7 @@
                                                     <div class="col-auto">
                                                         <input class="form-check-input" type="checkbox"
                                                             name="others12Ch" id="others12Ch" value="">
-                                                        <label class="form-check-label" for="Others12" name="others12"
+                                                        <label class="form-check-label" for="others12Ch" name="others12"
                                                             value="{{$patients->others12}}" placeholder="N/A">
                                                             Others
                                                         </label>
@@ -1331,14 +1322,7 @@
 
                                             </div>
                                             <!--33e end-->
-
-
                                         </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
                             <!--TRANSPORT/VEHICULAR PART-->
                         </div>
                     </div>
@@ -1364,15 +1348,15 @@
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="transferRdo" value=""
-                                    onclick="return false" id="flexRadioDefault1">
-                                <label class="form-check-label" for="transferRdo">
+                                     id="transferRdoyes">
+                                <label class="form-check-label" for="transferRdoyes">
                                     Yes
                                 </label>
                             </div>
                             <div class="col col-lg-1">
                                 <input class="form-check-input" type="radio" name="transferRdo" value=""
-                                    onclick="return false" id="flexRadioDefault2">
-                                <label class="form-check-label" for="transferRdo">
+                                     id="transferRdono">
+                                <label class="form-check-label" for="transferRdono">
                                     No
                                 </label>
                             </div>
@@ -1384,15 +1368,15 @@
                             <div class="col-auto">
                                 <input type="hidden" name="referral" value="0">
                                 <input class="form-check-input" type="radio" name="referral" value=""
-                                    onclick="return false" id="flexRadioDefault1">
-                                <label class="form-check-label" for="referral">
+                                     id="referralyes">
+                                <label class="form-check-label" for="referralyes">
                                     Yes
                                 </label>
                             </div>
                             <div class="col col-lg-1">
                                 <input class="form-check-input" type="radio" name="referral" value=""
-                                    onclick="return false" id="flexRadioDefault2">
-                                <label class="form-check-label" for="referral">
+                                     id="referralno">
+                                <label class="form-check-label" for="referralno">
                                     No
                                 </label>
                             </div>
@@ -1405,7 +1389,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Name of Originating Hospital/Physician:
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="" placeholder="N/A" name="hospPhys">
+                                <input type="text" class="inputlabelunderline" value="{{$patients->hospPhys}}" placeholder="N/A" name="hospPhys">
                             </div>
                         </div>
                     </div>
@@ -1421,29 +1405,29 @@
 
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="arrival" value=""
-                                    onclick="return false">
-                                <label class="form-check-label" for="arrival">
+                                id="deadarrival">
+                                <label class="form-check-label" for="deadarrival">
                                     Dead on Arrival
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="arrival" value=""
-                                    onclick="return false">
-                                <label class="form-check-label" for="arrivalAlive">
+                                id="arrival">
+                                <label class="form-check-label" for="arrival">
                                     Alive if alive, please check if:
                                 </label>
                             </div>
 
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="status" value=""
-                                    onclick="return false">
+                                id="conscious">
                                 <label class="form-check-label" for="conscious">
                                     Conscious
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="status" value=""
-                                    onclick="return false">
+                                    id="unconscious">
                                 <label class="form-check-label" for="unconscious">
                                     Unconscious
                                 </label>
@@ -1458,30 +1442,30 @@
                             </div>
 
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" onclick="return false"
+                                <input class="form-check-input" type="radio" value="" 
                                     name="transpoRdo" id="ambulance">
                                 <label class="form-check-label" for="ambulance">
                                     Ambulance
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" onclick="return false"
+                                <input class="form-check-input" type="radio" value="" 
                                     name="transpoRdo" id="police">
                                 <label class="form-check-label" for="police">
                                     Police vehicle
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" onclick="return false"
+                                <input class="form-check-input" type="radio" value="" 
                                     name="transpoRdo" id="private">
                                 <label class="form-check-label" for="private">
                                     Private vehicle
                                 </label>
                             </div>
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" onclick="return false"
-                                    name="transpoRdo" id="private">
-                                <label class="form-check-label" for="others12">
+                                <input class="form-check-input" type="radio" value="" 
+                                    name="transpoRdo" id="others13">
+                                <label class="form-check-label" for="others13">
                                     Others, specify
                                 </label>
                                 <input type="text" class="inputlabelunderline" value="{{$patients->others13}}" name="others13"
@@ -1613,28 +1597,58 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col ">
+                    <div class="row">
+                        <div class="col d-flex justify-content-start">
+                        <a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists"
+                                onclick="return confirm(&quot;Unsaved information will not be updated, Continue?&quot;)">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Back
+                            </a>
+                        </div>   
+                        <div class="col d-flex justify-content-end">
+                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Save Only</button>
+                        </div>
+                        <div class="col-auto d-flex justify-content-end">
+                        <button type="submit" class="btn btn-outline-warning"><i class="fa fa-search"></i>Print</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 @endforeach
-
-<!-- <a href="/save" class="btn btn-warning btn-sm" title="">
-    <i class="fa fa-plus" aria-hidden="true"></i> Save</a> -->
-
-<button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Save</button>
-</form>
-
 <div class="row">
-    <div class="col">
-        <a href="/showID/{{$patients->hpercode}}" class="btn btn-secondary btn-sm" title="Patient lists"
-            onclick="return confirm(&quot;Unsaved information will not be updated, Continue?&quot;)">
-            <i class="fa fa-plus" aria-hidden="true"></i> Back
-        </a>
-    </div>
-</div>
+                    <div class="col">
+                        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                        choose your colors:
+                        <br/>
+                        <input type="checkbox" name="color_list[]" value="Red" <?php if(isset($_POST['color_list']) && in_array("Red",
+                        $_POST['color_list'])) echo 'checked="checked"'; ?>/> Red<br/>
+                        <input type="checkbox" name="color_list[]" value="Green" <?php if(isset($_POST['color_list']) && in_array("Green",
+                        $_POST['color_list'])) echo 'checked="checked"';?>/> Green<br/>
+                        <input type="checkbox" name="color_list[]" value="Blue" <?php if(isset($_POST['color_list']) && in_array("Blue",
+                        $_POST['color_list'])) echo 'checked="checked"';?>/> Blue<br/>
+                        <input type="checkbox" name="color_list[]" value="Orange" <?php if(isset($_POST['color_list']) && in_array("Orange",
+                        $_POST['color_list'])) echo 'checked="checked"';?>/> Orange<br/>
+                        <input type="checkbox" name="color_list[]" value="Purple" <?php if(isset($_POST['color_list']) && in_array("Purple",
+                        $_POST['color_list'])) echo 'checked="checked"';?>/> Purple<br/>
 
-<!-- <input type="submit" value="Update" id="update" class="btn btn-info"  ></br></br> -->
-
-
+                        <input type="submit" name="btnSubmit" value="Submit"/>
+                        <!-- </form> -->
+                        <?php
+                        if(isset($_POST['btnSubmit'])){
+                            if(isset($_POST['color_list'])){
+                                foreach($_POST['color_list'] as $value){
+                                    echo"<p style=color:$value> $value </p>";
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+</form>
+                        
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

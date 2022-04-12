@@ -96,9 +96,12 @@ class PatientController extends Controller
 
     }
     //open Cancer form
-    public function createCancerform()
+    public function createCancerform($hpercode)
     {
-        return view('patients.createCancer');
+        // dd($hpercode);
+        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
+        return view('patients.createCancer')->with('patients', $patients);
+        // return view('patients.createCancer');
     }
     public function createCancerformp2()
     {
@@ -148,6 +151,7 @@ class PatientController extends Controller
             '$request->others7',
             '$request->others8',
             '$request->withothers',
+            '$request->workplaceInput',
             '$request->others9',
             '$request->others10',
             '$request->others11',
