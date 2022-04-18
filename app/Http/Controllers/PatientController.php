@@ -130,6 +130,47 @@ class PatientController extends Controller
         // DB::UPDATE("EXEC registry.dbo.InsertingValuesInto'$request->all,'
         // ");
         // dd($hpercode);
+        DB::UPDATE("EXEC registry.dbo.InsertChValue
+            '$request->abrasionCh',
+            '$request->avulsionCh',
+            '$request->burnCh',
+            '$request->concussionCh',
+            '$request->contusionCh',
+            '$request->fractureCh',
+            '$request->openTypeCh',
+            '$request->closedTypeCh',
+            '$request->woundCh',
+            '$request->traumaCh',
+            '$request->others1Ch',
+            '$request->bitesCh',
+            '$request->burn1Ch',
+            '$request->chemicalCh',
+            '$request->sharpCh',
+            '$request->drowningCh',
+            '$request->natureCh',
+            '$request->gunshotCh',
+            '$request->hangingCh',
+            '$request->maulingCh',
+            '$request->transportCh',
+            '$request->fallCh',
+            '$request->firecrackerCh',
+            '$request->assaultCh',
+            '$request->others5Ch',
+            '$request->alcoholCh',
+            '$request->smokingCh',
+            '$request->phoneCh',
+            '$request->sleepyCh',
+            '$request->others11Ch',
+            '$request->noneCh',
+            '$request->airbagCh',
+            '$request->helmetCh',
+            '$request->childseatCh',
+            '$request->seatbeltCh',
+            '$request->vestCh',
+            '$request->others12Ch',
+            '$request->unknown5Ch'
+            ");
+            
             DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
             '$request->enccode',
             '$request->docAdmit',
@@ -172,46 +213,7 @@ class PatientController extends Controller
             '$request->transferred'
             ");
 
-            DB::UPDATE("EXEC registry.dbo.InsertChValue
-            '$request->abrasionCh',
-            '$request->avulsionCh',
-            '$request->burnCh',
-            '$request->concussionCh',
-            '$request->contusionCh',
-            '$request->fractureCh',
-            '$request->openTypeCh',
-            '$request->closedTypeCh',
-            '$request->woundCh',
-            '$request->traumaCh',
-            '$request->others1Ch',
-            '$request->bitesCh',
-            '$request->burn1Ch',
-            '$request->chemicalCh',
-            '$request->sharpCh',
-            '$request->drowningCh',
-            '$request->natureCh',
-            '$request->gunshotCh',
-            '$request->hangingCh',
-            '$request->maulingCh',
-            '$request->transportCh',
-            '$request->fallCh',
-            '$request->firecrackerCh',
-            '$request->assaultCh',
-            '$request->others5Ch',
-            '$request->alcoholCh',
-            '$request->smokingCh',
-            '$request->phoneCh',
-            '$request->sleepyCh',
-            '$request->others11Ch',
-            '$request->noneCh',
-            '$request->airbagCh',
-            '$request->helmetCh',
-            '$request->childseatCh',
-            '$request->seatbeltCh',
-            '$request->vestCh',
-            '$request->others12Ch',
-            '$request->unknown5Ch'
-            ");
+            
             
             // dd($request->all());
             

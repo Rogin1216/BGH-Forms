@@ -70,8 +70,7 @@
 
 .grid-container > div {
   /* text-align: center; */
-  font-size: 20px;
-  border: 1px solid;
+  font-size: 15px;
 }
 
 #gridAid{
@@ -86,10 +85,19 @@
     display: grid;
     grid-template-columns: 150px 70px 70px;
 }
-/* .item1 {
-  grid-column-start: 2;
-  grid-column-end: 3;
-} */
+#gridNature{
+    grid-template-columns: 280px ;
+    grid-template-rows: auto auto auto
+}
+#gridBurn{
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px 50px;
+    grid-template-rows: auto auto
+}
+#gridBurn .item1{
+     grid-column: 1 / span 4; 
+}
+
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -158,74 +166,44 @@
 
 
             <div class="form-group row">
-                <div class="p-2 bg-success text-white" id="bgGreen">
-                    PRE-ADMISSION DATA:
-                </div>
-
-                <div class="grid-container" id="gridAid">
-                    <div class="item1">
-                        <label class="firstAid">First Aid Given:</label>
-                    </div>
-                    <div class="item2">
-                        <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="">
-                        <label class="form-check-label" for="aidYes">
-                            Yes</label>
-                    </div>
-                    <div class="item3">
-                        <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="">
-                        <label class="form-check-label" for="aidNo">
-                            No</label>
-                    </div>
-                    <div class="item4">
-                    <label>By: </label>
-                    </div>
-                    <div class="item5">
-                        <textarea class="form-control" rows="2" name="frstAid" id="frstAid"
-                        placeholder="no comment">{{$patients->frstAid}}</textarea>
-                    </div>
-                    <div class="item6">
-                        <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
-                            placeholder="name of doctor" class="form-control">
-                    </div>
-                </div>
-
-
-
-                <!-- <div class="form-group col-md-5">
+                <div class="container">
                     <div class="row">
-                        
-                            <div class="col col-lg-4">
-                                <label class="firstAid">First Aid Given:</label>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label class="firstAid">First Aid Given:</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="">
+                                    <label class="form-check-label" for="aidYes">
+                                        Yes</label>
+                                </div>
+                                <div class="col-auto">
+                                    </label>
+                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="">
+                                    <label class="form-check-label" for="aidNo">
+                                        No</label>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col col-lg-2">
-                                <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="">
-                                <label class="form-check-label" for="aidYes">
-                                    Yes</label>
+                            
                             </div>
-                            <div class="col col-lg-2">
-                                </label>
-                                <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="">
-                                <label class="form-check-label" for="aidNo">
-                                    No</label>
-                                </label>
+                            <div class="col">
+                                By:
                             </div>
-                        
                     </div>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="2" name="frstAid" id="frstAid"
+                    <div class="row">
+                        <div class="col-auto">
+                        <textarea class="form-control" name="frstAid" id="frstAid"
                             placeholder="no comment">{{$patients->frstAid}}</textarea>
+                        </div>
                         
+                        <div class="col-auto">
+                            <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
+                                placeholder="name of doctor" class="form-control">
+                        </div>
                     </div>
-                </div> -->
-
-                <!-- <div class="form-group col-md-5">
-                    <label>By: </label>
-                    <div class="form-group col-md-8">
-                        <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
-                            placeholder="name of doctor" class="form-control">
-                    </div>
-                </div> -->
-                
+                </div>
             </div>
 
             <hr>
@@ -278,7 +256,7 @@
 
                     <!--checkbox from abrasion-->
                     <div class="form-group row-md-4">
-                        <div class="form-check">
+                        <div class="container">
                         @foreach($data as $chdata)
                             <div class="row">
                                 <div class="col col-lg-5">
@@ -307,6 +285,8 @@
                             </div>
 
                             <input type="hidden" name="burnCh" value="0">
+
+                            
                             <input class="form-check-input" type="checkbox" name="burnCh" id="burnCh" value="1" {{ ($chdata->burnCh == '1'? ' checked' : '') }}>
                             <div class="row">
                                 <div class="col col-lg-16">
@@ -374,7 +354,7 @@
                                     <label class="form-check-label" for="fractureCh">
                                         Fracture
                                     </label>
-
+                                    <div class="container">
                                     <div class="row mx-md-n5">
                                         <div class="col px-md-5">
 
@@ -412,8 +392,9 @@
                                             </label>
                                         </div>
                                     </div>
+                                    </div>
                                 </div>
-
+                                </div>
                                 <div class="row">
                                     <div class="col col-lg-12">
                                     <input type="hidden" name="woundCh" value="0">
@@ -465,279 +446,283 @@
                     </div>
                 </div>
 
-            </div>
-            <hr>
-            <!-- External cause panel -->
-            <div class="form-group col-md-12">
-                <h5>External Cause/s of Injury/ies:</h5>
+                <hr>
+        <div class="container">
+            <h5>External Cause/s of Injury/ies:</h5>
+            <div class="row">
+                <div class="col">
+                <input type="hidden" name="bitesCh" value="0">
+                    <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="1" {{ ($chdata->bitesCh == '1'? ' checked' : '') }}>
+                    <label class="form-check-label" for="bitesCh">
+                        Bites/stings, Specify animal/insect:
+                    </label>
+                    <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" name="bites">
 
-                <div class="row mx-md-n5">
-                    <div class="col px-md-5">
-                    <input type="hidden" name="bitesCh" value="0">
-                        <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="1" {{ ($chdata->bitesCh == '1'? ' checked' : '') }}>
-                        <label class="form-check-label" for="bitesCh">
-                            Bites/stings, Specify animal/insect:
-                        </label>
-                        <input type="text" class="inputlabelunderline" value="{{$patients->bites}}" placeholder="N/A" name="bites">
-
-                        <div class="row">
-                            <div class="col-auto">
-                            <input type="hidden" name="burn1Ch" value="0">
-                                <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="1" {{ ($chdata->burn1Ch == '1'? ' checked' : '') }}>
-                                <label class="form-check-label" for="burn1Ch">
-                                    Burn,
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Heat">
-                                <label class="form-check-label" for="Heat">
-                                    Heat
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Fire">
-                                <label class="form-check-label" for="Fire">
-                                    Fire
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Electricty">
-                                <label class="form-check-label" for="Electricty">
-                                    Electricty
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Oil">
-                                <label class="form-check-label" for="Oil">
-                                    Oil
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Friction">
-                                <label class="form-check-label" for="Friction">
-                                    Friction
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="burnRdo" id="Others2">
-                                <label class="form-check-label" for="Others2">
-                                    Others,specify
-                                </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->others2}}" name="others2"
-                                    placeholder="N/A">
-                            </div>
-
+                    <div class="row">
+                        <div class="col-auto">
+                        <input type="hidden" name="burn1Ch" value="0">
+                            <input class="form-check-input" type="checkbox" name="burn1Ch" id="burn1Ch" value="1" {{ ($chdata->burn1Ch == '1'? ' checked' : '') }}>
+                            <label class="form-check-label" for="burn1Ch">
+                                Burn,
+                            </label>
                         </div>
-                        <input type="hidden" name="chemicalCh" value="0">
-                        <input class="form-check-input" type="checkbox" name="chemicalCh" id="chemicalCh" value="1" {{ ($chdata->chemicalCh == '1'? ' checked' : '') }}>
-                        <div class="row">
-                            <div class="col col-lg-8">
-                                <label class="form-check-label" for="chemicalCh">
-                                    Chemical/Substance, specify
-                                </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}" name="chemical"
-                                    placeholder="N/A">
-                            </div>
-
-
-                            <div class="col col-lg-8">
-                            <input type="hidden" name="sharpCh" value="0">
-                                <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="1" {{ ($chdata->sharpCh == '1'? ' checked' : '') }}>
-                                <label class="form-check-label" for="sharpCh">
-                                    Contact with sharp objects, specify object
-                                </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}" name="sharp"
-                                    placeholder="N/A">
-                            </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Heat">
+                            <label class="form-check-label" for="Heat">
+                                Heat
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Fire">
+                            <label class="form-check-label" for="Fire">
+                                Fire
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Electricty">
+                            <label class="form-check-label" for="Electricty">
+                                Electricty
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Oil">
+                            <label class="form-check-label" for="Oil">
+                                Oil
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Friction">
+                            <label class="form-check-label" for="Friction">
+                                Friction
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="burnRdo" id="Others2">
+                            <label class="form-check-label" for="Others2">
+                                Others,specify
+                            </label>
+                            <input type="text" class="inputlabelunderline" value="{{$patients->others2}}" name="others2"
+                                placeholder="N/A">
                         </div>
 
+                    </div>
+
+                    <input type="hidden" name="chemicalCh" value="0">
+                    <input class="form-check-input" type="checkbox" name="chemicalCh" id="chemicalCh" value="1" {{ ($chdata->chemicalCh == '1'? ' checked' : '') }}>
+                    <div class="row">
+                        <div class="col-auto">
+                            <label class="form-check-label" for="chemicalCh">
+                                Chemical/Substance, specify
+                            </label>
+                            <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}" name="chemical"
+                                placeholder="N/A">
+                        </div>
+
+
+                        <div class="col col-lg-8">
+                        <input type="hidden" name="sharpCh" value="0">
+                            <input class="form-check-input" type="checkbox" name="sharpCh" id="sharpCh" value="1" {{ ($chdata->sharpCh == '1'? ' checked' : '') }}>
+                            <label class="form-check-label" for="sharpCh">
+                                Contact with sharp objects, specify object
+                            </label>
+                            <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}" name="sharp"
+                                placeholder="N/A">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-auto">
+                        <input type="hidden" name="drowningCh" value="0">
+                            <input class="form-check-input" type="checkbox" name="drowningCh" id="drowningCh"
+                                value="1" {{ ($chdata->drowningCh == '1'? ' checked' : '') }}>
+                            <label class="form-check-label" for="drowningCh">
+                                Drowning: Type/Body of Water:
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Sea">
+                            <label class="form-check-label" for="Sea">
+                                Sea
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="River">
+                            <label class="form-check-label" for="River">
+                                River
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Lake">
+                            <label class="form-check-label" for="Lake">
+                                Lake
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Pool">
+                            <label class="form-check-label" for="Pool">
+                                Pool
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="BathTub">
+                            <label class="form-check-label" for="BathTub">
+                                Bath Tub
+                            </label>
+                        </div>
+                        <div class="col col-lg-4">
+                            <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Others3">
+                            <label class="form-check-label" for="Others3">
+                                Others,specify
+                            </label>
+                            <input type="text" class="inputlabelunderline" value="{{$patients->others3}}" name="others3"
+                                placeholder="N/A">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-auto">
+                        <input type="hidden" name="natureCh" value="0">
+                            <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value="1" {{ ($chdata->natureCh == '1'? ' checked' : '') }}>
+                            <label class="form-check-label" for="natureCh">
+                                Exposure to forces of Nature:
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Earthquake" value="">
+                            <label class="form-check-label" for="Earthquake">
+                                Earthquake
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Volcanic" value="">
+                            <label class="form-check-label" for="Volcanic">
+                                Volcanic eruption
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Typhoon" value="">
+                            <label class="form-check-label" for="Typhoon">
+                                Typhoon
+                            </label>
+                        </div>
+                        <div class="col-auto">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Landslide" value="">
+                            <label class="form-check-label" for="Landslide">
+                                Landslide/Avalanche
+                            </label>
+                        </div>
+                    </div>
                         <div class="row">
-                            <div class="col col-lg-3">
-                            <input type="hidden" name="drowningCh" value="0">
-                                <input class="form-check-input" type="checkbox" name="drowningCh" id="drowningCh"
-                                    value="1" {{ ($chdata->drowningCh == '1'? ' checked' : '') }}>
-                                <label class="form-check-label" for="drowningCh">
-                                    Drowning: Type/Body of Water:
-                                </label>
-                            </div>
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Sea">
-                                <label class="form-check-label" for="Sea">
-                                    Sea
+                            <input type="hidden" name="gunshotCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="gunshotCh" id="gunshotCh"
+                                    value="1" {{ ($chdata->gunshotCh == '1'? ' checked' : '') }}>
+
+                                <label class="form-check-label" for="gunshotCh">
+                                    Gunshot, Specify weapon
                                 </label>
+                                <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}" name="gunshot"
+                                    placeholder="N/A">
                             </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="River">
-                                <label class="form-check-label" for="River">
-                                    River
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Lake">
-                                <label class="form-check-label" for="Lake">
-                                    Lake
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Pool">
-                                <label class="form-check-label" for="Pool">
-                                    Pool
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="BathTub">
-                                <label class="form-check-label" for="BathTub">
-                                    Bath Tub
-                                </label>
-                            </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col col-lg-4">
-                                <input class="form-check-input" type="radio" value="" name="drowningRdo" id="Others3">
-                                <label class="form-check-label" for="Others3">
-                                    Others,specify
+                            <input type="hidden" name="hangingCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh"
+                                    value="1" {{ ($chdata->hangingCh == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="hangingCh">
+                                    Hanging/Strangulation
                                 </label>
-                                <input type="text" class="inputlabelunderline" value="{{$patients->others3}}" name="others3"
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-lg-4">
+                            <input type="hidden" name="maulingCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh"
+                                    value="1" {{ ($chdata->maulingCh == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="maulingCh">
+                                    Mauling/Assault
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-lg-4">
+                            <input type="hidden" name="transportCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh"
+                                    value="1" {{ ($chdata->transportCh == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="transportCh">
+                                    Transport/Vehicular Accident
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-auto">
+                            <input type="hidden" name="fallCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="1" {{ ($chdata->fallCh == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="fallCh">
+                                    Fall, specify, from/in/on/into
+                                </label>
+                                <input type="text" class="inputlabelunderline" value="{{$patients->fall}}" name="fall"
                                     placeholder="N/A">
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-auto">
-                            <input type="hidden" name="natureCh" value="0">
-                                <input class="form-check-input" type="checkbox" name="natureCh" id="natureCh" value="1" {{ ($chdata->natureCh == '1'? ' checked' : '') }}>
-                                <label class="form-check-label" for="natureCh">
-                                    Exposure to forces of Nature:
+                            <input type="hidden" name="firecrackerCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="firecrackerCh"
+                                    id="firecrackerCh" value="1" {{ ($chdata->firecrackerCh == '1'? ' checked' : '') }}>
+
+                                <label class="form-check-label" for="firecrackerCh">
+                                    Firecracker, specify type/s
+                                </label>
+                                <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}" name="firecracker"
+                                    placeholder="N/A">
+                                <label class="form-check-label" for="Firecracker">
+                                    (with libraries)
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" name="natureRdo" id="Earthquake" value="">
-                                <label class="form-check-label" for="Earthquake">
-                                    Earthquake
+                            <input type="hidden" name="assaultCh" value="0">
+                                <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh"
+                                    value="1" {{ ($chdata->assaultCh == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="assaultCh">
+                                    Sexual Assault/Sexual Abuse/Rape(Alleged)
                                 </label>
                             </div>
+                        </div>
+
+                        <div class="row">
                             <div class="col-auto">
-                                <input class="form-check-input" type="radio" name="natureRdo" id="Volcanic" value="">
-                                <label class="form-check-label" for="Volcanic">
-                                    Volcanic eruption
+                            <input type="hidden" name="others5Ch" value="0">
+                                <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch"
+                                    value="1" {{ ($chdata->others5Ch == '1'? ' checked' : '') }}>
+                                <label class="form-check-label" for="others5Ch">
+                                    Others,specify
                                 </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" name="natureRdo" id="Typhoon" value="">
-                                <label class="form-check-label" for="Typhoon">
-                                    Typhoon
-                                </label>
-                            </div>
-                            <div class="col-auto">
-                                <input class="form-check-input" type="radio" name="natureRdo" id="Landslide" value="">
-                                <label class="form-check-label" for="Landslide">
-                                    Landslide/Avalanche
-                                </label>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-auto">
-                                <input type="hidden" name="gunshotCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="gunshotCh" id="gunshotCh"
-                                        value="1" {{ ($chdata->gunshotCh == '1'? ' checked' : '') }}>
-
-                                    <label class="form-check-label" for="gunshotCh">
-                                        Gunshot, Specify weapon
-                                    </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}" name="gunshot"
-                                        placeholder="N/A">
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col col-lg-4">
-                                <input type="hidden" name="hangingCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="hangingCh" id="hangingCh"
-                                        value="1" {{ ($chdata->hangingCh == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="hangingCh">
-                                        Hanging/Strangulation
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-lg-4">
-                                <input type="hidden" name="maulingCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="maulingCh" id="maulingCh"
-                                        value="1" {{ ($chdata->maulingCh == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="maulingCh">
-                                        Mauling/Assault
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-lg-4">
-                                <input type="hidden" name="transportCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="transportCh" id="transportCh"
-                                        value="1" {{ ($chdata->transportCh == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="transportCh">
-                                        Transport/Vehicular Accident
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-auto">
-                                <input type="hidden" name="fallCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="fallCh" id="fallCh" value="1" {{ ($chdata->fallCh == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="fallCh">
-                                        Fall, specify, from/in/on/into
-                                    </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->fall}}" name="fall"
-                                        placeholder="N/A">
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-auto">
-                                <input type="hidden" name="firecrackerCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="firecrackerCh"
-                                        id="firecrackerCh" value="1" {{ ($chdata->firecrackerCh == '1'? ' checked' : '') }}>
-
-                                    <label class="form-check-label" for="firecrackerCh">
-                                        Firecracker, specify type/s
-                                    </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->firecracker}}" name="firecracker"
-                                        placeholder="N/A">
-                                    <label class="form-check-label" for="Firecracker">
-                                        (with libraries)
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-auto">
-                                <input type="hidden" name="assaultCh" value="0">
-                                    <input class="form-check-input" type="checkbox" name="assaultCh" id="assaultCh"
-                                        value="1" {{ ($chdata->assaultCh == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="assaultCh">
-                                        Sexual Assault/Sexual Abuse/Rape(Alleged)
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-auto">
-                                <input type="hidden" name="others5Ch" value="0">
-                                    <input class="form-check-input" type="checkbox" name="others5Ch" id="others5Ch"
-                                        value="1" {{ ($chdata->others5Ch == '1'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="others5Ch">
-                                        Others,specify
-                                    </label>
-                                    <input type="text" class="inputlabelunderline" value="{{$patients->others5}}" name="others5"
-                                        placeholder="N/A">
-                                </div>
+                                <input type="text" class="inputlabelunderline" value="{{$patients->others5}}" name="others5"
+                                    placeholder="N/A">
                             </div>
                         </div>
                     </div>
-                </div>
+                
+            </div>
+        </div>
+
+               
+            <hr>
+            <!-- External cause panel -->
+            
                 <hr>
 
-                <div class="form-group col-md-12">
+                <div class="form-group col">
                     <div class="row">
                         <div class="col-auto">
                             <h5>FOR TRANSPORT/VEHICULAR ACCIDENT ONLY:</h5>
@@ -1768,6 +1753,8 @@
             </div>
     </div>
 </div>
+</div>
+            </div>
 @endforeach
 
 </form>
