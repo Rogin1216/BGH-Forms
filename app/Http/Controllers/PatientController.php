@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use App\Models\Vwinjurylist;
+use App\Models\checkboxList;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -111,6 +112,12 @@ class PatientController extends Controller
         return view('patients.createCancerp3');
     }
 
+    public function exampleCH(Request $request){
+        // 
+        // dd($request);
+        return view('patients.exampleCH');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -164,8 +171,49 @@ class PatientController extends Controller
             '$request->treatment',
             '$request->transferred'
             ");
+
+            DB::UPDATE("EXEC registry.dbo.InsertChValue
+            '$request->abrasionCh',
+            '$request->avulsionCh',
+            '$request->burnCh',
+            '$request->concussionCh',
+            '$request->contusionCh',
+            '$request->fractureCh',
+            '$request->openTypeCh',
+            '$request->closedTypeCh',
+            '$request->woundCh',
+            '$request->traumaCh',
+            '$request->others1Ch',
+            '$request->bitesCh',
+            '$request->burn1Ch',
+            '$request->chemicalCh',
+            '$request->sharpCh',
+            '$request->drowningCh',
+            '$request->natureCh',
+            '$request->gunshotCh',
+            '$request->hangingCh',
+            '$request->maulingCh',
+            '$request->transportCh',
+            '$request->fallCh',
+            '$request->firecrackerCh',
+            '$request->assaultCh',
+            '$request->others5Ch',
+            '$request->alcoholCh',
+            '$request->smokingCh',
+            '$request->phoneCh',
+            '$request->sleepyCh',
+            '$request->others11Ch',
+            '$request->noneCh',
+            '$request->airbagCh',
+            '$request->helmetCh',
+            '$request->childseatCh',
+            '$request->seatbeltCh',
+            '$request->vestCh',
+            '$request->others12Ch',
+            '$request->unknown5Ch'
+            ");
             
-            // dd($request);
+            // dd($request->all());
             
             return redirect()->back();
 
@@ -178,14 +226,15 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($hpercode)
+    public function show(Request $request,$hpercode)
     {
         // dd($hpercode);
         $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
-        // dd($patients);
+        $data = DB::table('checkboxList')->get();
+        // dd($request->all());
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
-
-        return view('patients.show')->with('patients', $patients);
+        // dd($data);
+        return view('patients.show',compact('data'))->with('patients', $patients);
         // return view('patients.show', compact(
         //     'patients',
         // ));

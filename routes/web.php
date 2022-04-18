@@ -35,3 +35,7 @@ Route::get('/store/{id}','PatientController@store')->where('id','.*');          
 // });
 Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*');             //print Form
 
+
+Route::get('/example','PatientController@example');             //print Form
+Route::get('/exampleCH','PatientController@exampleCH');             //print Form
+
