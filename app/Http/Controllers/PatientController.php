@@ -126,52 +126,9 @@ class PatientController extends Controller
      */
     public function store(Request $request,$hpercode)
     {
-        //  dd($request->all());
-        // DB::UPDATE("EXEC registry.dbo.InsertingValuesInto'$request->all,'
-        // ");
-        // dd($hpercode);
-        DB::UPDATE("EXEC registry.dbo.InsertChValue
-            '$request->abrasionCh',
-            '$request->avulsionCh',
-            '$request->burnCh',
-            '$request->concussionCh',
-            '$request->contusionCh',
-            '$request->fractureCh',
-            '$request->openTypeCh',
-            '$request->closedTypeCh',
-            '$request->woundCh',
-            '$request->traumaCh',
-            '$request->others1Ch',
-            '$request->bitesCh',
-            '$request->burn1Ch',
-            '$request->chemicalCh',
-            '$request->sharpCh',
-            '$request->drowningCh',
-            '$request->natureCh',
-            '$request->gunshotCh',
-            '$request->hangingCh',
-            '$request->maulingCh',
-            '$request->transportCh',
-            '$request->fallCh',
-            '$request->firecrackerCh',
-            '$request->assaultCh',
-            '$request->others5Ch',
-            '$request->alcoholCh',
-            '$request->smokingCh',
-            '$request->phoneCh',
-            '$request->sleepyCh',
-            '$request->others11Ch',
-            '$request->noneCh',
-            '$request->airbagCh',
-            '$request->helmetCh',
-            '$request->childseatCh',
-            '$request->seatbeltCh',
-            '$request->vestCh',
-            '$request->others12Ch',
-            '$request->unknown5Ch'
-            ");
-            
-            DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
+            // dd($request->all());
+
+        DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
             '$request->enccode',
             '$request->docAdmit',
             '$request->frstAid',
@@ -212,9 +169,59 @@ class PatientController extends Controller
             '$request->treatment',
             '$request->transferred'
             ");
+            // dd($request->frstAid);
 
+
+        //  dd($request->abrasion);
+        // DB::UPDATE("EXEC registry.dbo.InsertingValuesInto'$request->all,'
+        // ");
+        // dd($hpercode);
+
+        DB::UPDATE("EXEC registry.dbo.InsertChValue
+            '$request->abrasionCh',
+            '$request->avulsionCh',
+            '$request->burnCh',
+            '$request->concussionCh',
+            '$request->contusionCh',
+            '$request->fractureCh',
+            '$request->openTypeCh',
+            '$request->closedTypeCh',
+            '$request->woundCh',
+            '$request->traumaCh',
+            '$request->others1Ch',
+            '$request->bitesCh',
+            '$request->burn1Ch',
+            '$request->chemicalCh',
+            '$request->sharpCh',
+            '$request->drowningCh',
+            '$request->natureCh',
+            '$request->gunshotCh',
+            '$request->hangingCh',
+            '$request->maulingCh',
+            '$request->transportCh',
+            '$request->fallCh',
+            '$request->firecrackerCh',
+            '$request->assaultCh',
+            '$request->others5Ch',
+            '$request->alcoholCh',
+            '$request->smokingCh',
+            '$request->drugsCh',
+            '$request->phoneCh',
+            '$request->sleepyCh',
+            '$request->others11Ch',
+            '$request->noneCh',
+            '$request->airbagCh',
+            '$request->helmetCh',
+            '$request->childseatCh',
+            '$request->seatbeltCh',
+            '$request->vestCh',
+            '$request->others12Ch',
+            '$request->unknown5Ch',
+            '$request->outcome'
+            ");
             
             
+
             // dd($request->all());
             
             return redirect()->back();
@@ -232,6 +239,7 @@ class PatientController extends Controller
     {
         // dd($hpercode);
         $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
+
         $data = DB::table('checkboxList')->get();
         // dd($request->all());
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
