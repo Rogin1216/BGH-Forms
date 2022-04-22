@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,8 @@ Route::get('/store/{id}','PatientController@store')->where('id','.*');          
 //     return redirect('patients.show');
 // });
 Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*');             //print Form
+Route::get('/export','PatientController@export');                                       //export to Excel
+// Route::get('users/export/', [PatientController::class, 'export']);                        //convert to EXCEL
 
-
-Route::get('/example','PatientController@example');             //print Form
-Route::get('/exampleCH','PatientController@exampleCH');             //print Form
+// Route::get('/example','PatientController@example');             //print Form
+// Route::get('/exampleCH','PatientController@exampleCH');             //print Form
