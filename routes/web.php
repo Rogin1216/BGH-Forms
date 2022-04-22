@@ -39,7 +39,6 @@ Route::get('/store/{id}','PatientController@store')->where('id','.*');          
 // });
 Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*');             //print Form
 Route::get('/export','PatientController@export');                                       //export to Excel
-// Route::get('users/export/', [PatientController::class, 'export']);                        //convert to EXCEL
-
+// Route::get('users/export/', [PatientController::class, 'export']); 
 // Route::get('/example','PatientController@example');             //print Form
 // Route::get('/exampleCH','PatientController@exampleCH');             //print Form

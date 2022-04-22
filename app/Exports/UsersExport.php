@@ -3,9 +3,9 @@
 namespace App\Exports;
 
 use App\Models\User;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FormCollection;
 
-class UsersExport implements FromCollection
+class UsersExport implements FormCollection
 {
     /**
     * @return \Illuminate\Support\Collection

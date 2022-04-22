@@ -8,7 +8,14 @@ use App\Models\checkboxList;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
+// exports
+
+use App\Exports\UsersExport;
+use App\Exports\StudyClassExport;
+use App\Exports\EducationsExport;
+use App\Exports\IntakesExport;
 use Maatwebsite\Excel\Excel;
+
 
 class PatientController extends Controller
 {
@@ -370,8 +377,8 @@ class PatientController extends Controller
 
     }
     public function export() 
-{
-    return Excel::download(new UsersExport, 'users.xlsx');
-}
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
 
 }

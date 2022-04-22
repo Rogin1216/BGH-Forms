@@ -48,6 +48,12 @@
         width: 700px;
         
     }
+    #frsAidComm{
+        column-width: 490px;
+    }
+    #docAdmitCol{
+        column-width: 230px;
+    }
     #padding{
         padding: 70px;
     }
@@ -179,7 +185,7 @@
                 <div class="form-group">
                     <div class="container">
                     <div class="row ">
-                        <div class="col-auto">
+                        <div class="col">
                             <div class="row">
                                 <div class="col-auto">
                                     <label class="firstAid">First Aid Given:</label>
@@ -204,12 +210,12 @@
                             </div>
                     </div>
                     <div class="row">
-                        <div class="col-auto">
+                        <div class="col-auto" id="frsAidComm">
                         <textarea class="form-control" name="frstAid" id="frstAid"
                             placeholder="no comment">{{$patients->frstAid}}</textarea>
                         </div>
                         
-                        <div class="col-auto">
+                        <div class="col" id="docAdmitCol">
                             <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
                                 placeholder="name of doctor" class="form-control">
                         </div>
