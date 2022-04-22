@@ -16,6 +16,7 @@
             }
 
             body {
+              /* max-width: fit-content; */
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
             }
@@ -98,18 +99,93 @@
 
             }
 
+            body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
         </style>
+<!-- <div class="container-fluid border border-secondary">
+  <div class="sidebar">
+    <a class="active" href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+</div> -->
+
+
 
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Patient Info</h2>
+    <div class="col-lg-12 margin-tb border border-danger">
+      <div class="row">
+        <div class="col-lg-10 border border-warning">
+          <!-- <div class="pull-left"> -->
+              <h2>Patient Info</h2>
+          <!-- </div> -->
         </div>
-        <div class="topnav d-flex justify-content-center">
+        <div class="col">
+        asdf
+        </div>
+      </div>
+      
+
+        
+        
+        <div class="topnav d-flex justify-content-end">
          
             <div class="row">
               <div class="col-auto">
-              <a href="/patientlists" class="btn btn-outline-primary " role="button"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="blue" class="bi bi-house" viewBox="0 0 16 16">
+              <a href="/patientform" class="btn btn-outline-primary " role="button"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="blue" class="bi bi-house" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                   <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                   </svg>
@@ -128,6 +204,7 @@
             </div>
         </div>
     </div>
+    
 
 <div class="form-group row">
 @foreach($patInfo as $item)  
@@ -204,6 +281,7 @@
   </div>
   
 </div>
+
 <!-- <div class="row">
     <div class="col float-end">
     <a href="" class="btn btn-secondary btn-sm float-end" title="Patient lists">

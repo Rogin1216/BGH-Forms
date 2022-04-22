@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-// cancer form
+require __DIR__.'/auth.php';
+
 Route::get('/cancerForm/{id}','PatientController@createCancerform')->where('id','.*');  //create cancer form page 1
 Route::get('/cancerFormp2','PatientController@createCancerformp2');                     //create cancer form page 2
 Route::get('/cancerFormp3','PatientController@createCancerformp3');                     //create cancer form page 3
@@ -38,4 +41,3 @@ Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*');     
 
 Route::get('/example','PatientController@example');             //print Form
 Route::get('/exampleCH','PatientController@exampleCH');             //print Form
-

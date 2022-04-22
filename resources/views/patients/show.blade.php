@@ -41,9 +41,23 @@
         height: auto;
         width: 120px;
     }
+    .inputlabelunderlinelong{
+        border: none;
+        border-bottom: 1px solid black;
+        height: auto;
+        width: 700px;
+        
+    }
+    #padding{
+        padding: 70px;
+    }
+    .inputlabelunderlinelong::placeholder {
+  text-align: center;
+}
 
     .inputlabelunderline:focus,
-    .inputlabelunderline2:focus {
+    .inputlabelunderline2:focus,
+    .inputlabelunderlinelong{
         outline: none ;
     }
 
@@ -76,6 +90,9 @@
   /* text-align: center; */
   font-size: 15px;
 }
+.container > div{
+    padding: 2px;
+}
 
 #gridAid{
     display: grid;
@@ -107,7 +124,7 @@
 
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"  media='screen,print'>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
 </script>
@@ -119,10 +136,19 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
+<!-- <div class="flash-message">
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+      @if(Session::has('alert-' . $msg))
 
-@foreach($patients as $patients)
+      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      @endif
+    @endforeach
+  </div> -->
+@foreach($patients as $patients) @endforeach
+@foreach($chdata as $chdata)@endforeach
 
-<form action="{{ url ('/store/$patients->hpercode') }}" type="get">
+
+<form action="/store/{{$patients->enccode}}" type="get">
 
 <div class="card">
     <div class="card-header p-2 text-white" id="bgGreen">GENERAL DATA:</div>
@@ -136,44 +162,21 @@
                 <div class="item1">
                     <label>First Name:</label>
                     <input type="text" name="firstName" id="firstName" value="{{$patients->patfirst}}"
-                        class="form-control" onclick="EnableDisable();">
+                        class="form-control"  disabled>
                 </div>
                 <div class="item2">
                     <label>Middle name:</label>
                     <input type="text" name="middleName" id="middleName" value="{{$patients->patmiddle}}"
-                        class="form-control">
+                        class="form-control" disabled>
                 </div>
                 <div class="item3">
                     <label>Last name:</label>
-                    <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control">
+                    <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control" disabled>
                 </div>   
             </div>
+<br>
 
-            <!-- <div class="form-group row">
-
-                <div class="form-group col-md-2">
-                    <label>First Name:</label>
-                    <input type="text" name="firstName" id="firstName" value="{{$patients->patfirst}}"
-                        class="form-control" onclick="EnableDisable();"></br>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Middle name:</label>
-                    <input type="text" name="middleName" id="middleName" value="{{$patients->patmiddle}}"
-                        class="form-control"></br>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Last name:</label>
-                    <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control"></br>
-                </div>
-                <div class="form-group col-md-2">
-                    <input type="hidden" name="enccode" id="enccode" value="{{$patients->enccode}}" class="form-control" ></br>
-                </div>
-
-            </div> --><br>
-
-
-            @foreach($data as $chdata)
-                <div class="form-group  ">
+                <div class="form-group">
                     <div class="container">
                     <div class="row ">
                         <div class="col-auto">
@@ -182,13 +185,13 @@
                                     <label class="firstAid">First Aid Given:</label>
                                 </div>
                                 <div class="col-auto">
-                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="1">
+                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="1" {{ ($chdata->rdoAid == '1'? ' checked' : '') }}>
                                     <label class="form-check-label" for="aidYes">
                                         Yes</label>
                                 </div>
                                 <div class="col-auto">
                                     </label>
-                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="2">
+                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="2" {{ ($chdata->rdoAid == '2'? ' checked' : '') }}>
                                     <label class="form-check-label" for="aidNo">
                                         No</label>
                                     </label>
@@ -229,13 +232,13 @@
                                 <Label>Multiple injuries?</Label>
                             </div>
                             <div class="item2">
-                                <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo1" value="1">
+                                <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo1" value="1" {{ ($chdata->injryRdo == '1'? ' checked' : '') }}>
                                 <label class="form-check-label" for="injuryRdo1">
                                     Yes
                                 </label>
                             </div>
                             <div class="item3">
-                                <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo2" value="2">
+                                <input class="form-check-input" type="radio" name="injryRdo" id="injuryRdo2" value="2" {{ ($chdata->injryRdo == '2'? ' checked' : '') }}>
                                 <label class="form-check-label" for="injuryRdo2">
                                     No
                                 </label>
@@ -302,22 +305,22 @@
                                     <label class="form-check-label" for="burnCh">
                                         Burn (Degree of Burn & Extent of Body Surface involved) Degree:
                                     </label>
-                                    <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="1">
+                                    <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="1" {{ ($chdata->degreeRdoBtn == '1'? ' checked' : '') }}>
                                     <label class="" for="degreeRdoBtn1">
                                         1<sup>st</sup>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn2" value="2">
+                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn2" value="2" {{ ($chdata->degreeRdoBtn == '2'? ' checked' : '') }}>
                                         <label class="" for="degreeRdoBtn2">
                                             2<sup>nd</sup>
                                         </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn3" value="3">
+                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn3" value="3" {{ ($chdata->degreeRdoBtn == '3'? ' checked' : '') }}>
                                         <label class="" for="degreeRdoBtn3">
                                             3<sup>rd</sup>
                                         </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn4" value="4">
+                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn4" value="4" {{ ($chdata->degreeRdoBtn == '4'? ' checked' : '') }}>
                                         <label class="" for="degreeRdoBtn4">
                                             4<sup>th</sup>
                                         </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn5" value="5">
+                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn5" value="5" {{ ($chdata->degreeRdoBtn == '5'? ' checked' : '') }}>
                                         <label class="" for="degreeRdoBtn5">
                                             5<sup>th</sup>
                                         </label>
@@ -476,37 +479,37 @@
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="1" name="burnRdo" id="Heat">
+                            <input class="form-check-input" type="radio" value="1" name="burnRdo" id="Heat" {{ ($chdata->burnRdo == '1'? ' checked' : '') }}>
                             <label class="form-check-label" for="Heat">
                                 Heat
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="2" name="burnRdo" id="Fire">
+                            <input class="form-check-input" type="radio" value="2" name="burnRdo" id="Fire" {{ ($chdata->burnRdo == '2'? ' checked' : '') }}> 
                             <label class="form-check-label" for="Fire">
                                 Fire
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="3" name="burnRdo" id="Electricty">
+                            <input class="form-check-input" type="radio" value="3" name="burnRdo" id="Electricty" {{ ($chdata->burnRdo == '3'? ' checked' : '') }}>
                             <label class="form-check-label" for="Electricty">
                                 Electricty
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="4" name="burnRdo" id="Oil">
+                            <input class="form-check-input" type="radio" value="4" name="burnRdo" id="Oil" {{ ($chdata->burnRdo == '4'? ' checked' : '') }}>
                             <label class="form-check-label" for="Oil">
                                 Oil
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="5" name="burnRdo" id="Friction">
+                            <input class="form-check-input" type="radio" value="5" name="burnRdo" id="Friction" {{ ($chdata->burnRdo == '5'? ' checked' : '') }}>
                             <label class="form-check-label" for="Friction">
                                 Friction
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="6" name="burnRdo" id="Others2">
+                            <input class="form-check-input" type="radio" value="6" name="burnRdo" id="Others2" {{ ($chdata->burnRdo == '6'? ' checked' : '') }}>
                             <label class="form-check-label" for="Others2">
                                 Others,specify
                             </label>
@@ -549,37 +552,37 @@
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="1" name="drowningRdo" id="Sea">
+                            <input class="form-check-input" type="radio" value="1" name="drowningRdo" id="Sea" {{ ($chdata->drowningRdo == '1'? ' checked' : '') }}>
                             <label class="form-check-label" for="Sea">
                                 Sea
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="2" name="drowningRdo" id="River">
+                            <input class="form-check-input" type="radio" value="2" name="drowningRdo" id="River" {{ ($chdata->drowningRdo == '2'? ' checked' : '') }}>
                             <label class="form-check-label" for="River">
                                 River
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="3" name="drowningRdo" id="Lake">
+                            <input class="form-check-input" type="radio" value="3" name="drowningRdo" id="Lake" {{ ($chdata->drowningRdo == '3'? ' checked' : '') }}>
                             <label class="form-check-label" for="Lake">
                                 Lake
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="4" name="drowningRdo" id="Pool">
+                            <input class="form-check-input" type="radio" value="4" name="drowningRdo" id="Pool" {{ ($chdata->drowningRdo == '4'? ' checked' : '') }}>
                             <label class="form-check-label" for="Pool">
                                 Pool
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" value="5" name="drowningRdo" id="BathTub">
+                            <input class="form-check-input" type="radio" value="5" name="drowningRdo" id="BathTub" {{ ($chdata->drowningRdo == '5'? ' checked' : '') }}>
                             <label class="form-check-label" for="BathTub">
                                 Bath Tub
                             </label>
                         </div>
                         <div class="col col-lg-4">
-                            <input class="form-check-input" type="radio" value="6" name="drowningRdo" id="Others3">
+                            <input class="form-check-input" type="radio" value="6"  name="drowningRdo" id="Others3" {{ ($chdata->drowningRdo == '6'? ' checked' : '') }}>
                             <label class="form-check-label" for="Others3">
                                 Others,specify
                             </label>
@@ -597,25 +600,25 @@
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" name="natureRdo" id="Earthquake" value="1">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Earthquake" value="1" {{ ($chdata->natureRdo == '1'? ' checked' : '') }}>
                             <label class="form-check-label" for="Earthquake">
                                 Earthquake
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" name="natureRdo" id="Volcanic" value="2">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Volcanic" value="2" {{ ($chdata->natureRdo == '2'? ' checked' : '') }}>
                             <label class="form-check-label" for="Volcanic">
                                 Volcanic eruption
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" name="natureRdo" id="Typhoon" value="3">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Typhoon" value="3" {{ ($chdata->natureRdo == '3'? ' checked' : '') }}>
                             <label class="form-check-label" for="Typhoon">
                                 Typhoon
                             </label>
                         </div>
                         <div class="col-auto">
-                            <input class="form-check-input" type="radio" name="natureRdo" id="Landslide" value="4">
+                            <input class="form-check-input" type="radio" name="natureRdo" id="Landslide" value="4" {{ ($chdata->natureRdo == '4'? ' checked' : '') }}>
                             <label class="form-check-label" for="Landslide">
                                 Landslide/Avalanche
                             </label>
@@ -741,35 +744,35 @@
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" name="areaRdo"
-                                                        id="Land" value="1">
+                                                        id="Land" value="1" {{ ($chdata->areaRdo == '1'? ' checked' : '') }}>
                                                     <label class="form-check-label mx-auto" for="Land">
                                                         Land
                                                     </label>
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" name="areaRdo"
-                                                        id="Water" value="2">
+                                                        id="Water" value="2" {{ ($chdata->areaRdo == '2'? ' checked' : '') }}>
                                                     <label class="form-check-label mx-auto" for="Water">
                                                         Water
                                                     </label>
                                                 </div>
                                                 <div class="col col-lg-4">
                                                     <input class="form-check-input" type="radio" name="areaRdo"
-                                                        id="Air" value="3">
+                                                        id="Air" value="3" {{ ($chdata->areaRdo == '3'? ' checked' : '') }}>
                                                     <label class="form-check-label mx-auto" for="Air">
                                                         Air
                                                     </label>
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" name="collRdo"
-                                                        id="Collision" value="1">
+                                                        id="Collision" value="1" {{ ($chdata->collRdo == '1'? ' checked' : '') }}>
                                                     <label class="form-check-label mx-auto" for="Collision">
                                                         Collision
                                                     </label>
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" name="collRdo"
-                                                        id="Non-Collision" value="2">
+                                                        id="Non-Collision" value="2" {{ ($chdata->collRdo == '2'? ' checked' : '') }}>
                                                     <label class="form-check-label" for="Non-Collision">
                                                         Non-Collision
                                                     </label>
@@ -784,14 +787,14 @@
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" name="severRdo"
-                                                        id="Fatal Accident" value="1">
+                                                        id="Fatal Accident" value="1" {{ ($chdata->severRdo == '1'? ' checked' : '') }}>
                                                     <label class="form-check-label" for="Fatal Accident">
                                                         Fatal Accident
                                                     </label>
                                                 </div>
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" value="Serious"
-                                                        name="severRdo" id="Serious" value="2">
+                                                        name="severRdo" id="Serious" value="2" {{ ($chdata->severRdo == '2'? ' checked' : '') }}>
                                                     <label class="form-check-label" for="Serious">
                                                         Serious Injury Accident
                                                     </label>
@@ -799,7 +802,7 @@
 
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" value="Minor"
-                                                        name="severRdo" id="Minor" value="3">
+                                                        name="severRdo" id="Minor" value="3" {{ ($chdata->severRdo == '3'? ' checked' : '') }}>
                                                     <label class="form-check-label" for="Minor">
                                                         Minor Injury Accident
                                                     </label>
@@ -807,7 +810,7 @@
 
                                                 <div class="col-auto">
                                                     <input class="form-check-input" type="radio" value="Property"
-                                                        name="severRdo" id="Property" value="4">
+                                                        name="severRdo" id="Property" value="4" {{ ($chdata->severRdo == '4'? ' checked' : '') }}>
                                                     <label class="form-check-label" for="Property">
                                                         Property Damage Only
                                                     </label>
@@ -844,7 +847,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Pedestrian" value="1">
+                                                                        name="vehicleRdo" id="Pedestrian" value="1" {{ ($chdata->vehicleRdo == '1'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Pedestrian">
                                                                         None(Pedestrian)
                                                                     </label>
@@ -852,7 +855,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Car" value="2">
+                                                                        name="vehicleRdo" id="Car" value="2" {{ ($chdata->vehicleRdo == '2'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Car">
                                                                         Car
                                                                     </label>
@@ -860,7 +863,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Van" value="3">
+                                                                        name="vehicleRdo" id="Van" value="3" {{ ($chdata->vehicleRdo == '3'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Van">
                                                                         Van
                                                                     </label>
@@ -876,7 +879,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Bus" value="4">
+                                                                        name="vehicleRdo" id="Bus" value="4" {{ ($chdata->vehicleRdo == '4'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Bus">
                                                                         Bus
                                                                     </label>
@@ -884,7 +887,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Motorcycle" value="5">
+                                                                        name="vehicleRdo" id="Motorcycle" value="5" {{ ($chdata->vehicleRdo == '5'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Motorcycle">
                                                                         Motorcycle
                                                                     </label>
@@ -892,7 +895,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Bicycle" value="6">
+                                                                        name="vehicleRdo" id="Bicycle" value="6" {{ ($chdata->vehicleRdo == '6'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Bicycle">
                                                                         Bicycle
                                                                     </label>
@@ -900,7 +903,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Tricycle" value="7">
+                                                                        name="vehicleRdo" id="Tricycle" value="7" {{ ($chdata->vehicleRdo == '7'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Tricycle">
                                                                         Tricycle
                                                                     </label>
@@ -916,7 +919,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Others6" value="8">
+                                                                        name="vehicleRdo" id="Others6" value="8" {{ ($chdata->vehicleRdo == '8'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Others6"
                                                                         name="others6">
                                                                         Others,
@@ -927,7 +930,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="vehicleRdo" id="Unknown" value="9">
+                                                                        name="vehicleRdo" id="Unknown" value="9" {{ ($chdata->vehicleRdo == '9'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Unknown">
                                                                         Unknown
                                                                     </label>
@@ -959,15 +962,15 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Pedestrian" value="1">
-                                                                    <label class="form-check-label" for="Pedestrian">
+                                                                        name="otherRdo" id="Pedestrian1" value="1" {{ ($chdata->otherRdo == '1'? ' checked' : '') }}>
+                                                                    <label class="form-check-label" for="Pedestrian1">
                                                                         None(Pedestrian)
                                                                     </label>
                                                                 </div>
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Car1" value="2">
+                                                                        name="otherRdo" id="Car1" value="2" {{ ($chdata->otherRdo == '2'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Car1">
                                                                         Car
                                                                     </label>
@@ -975,7 +978,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Van1" value="3">
+                                                                        name="otherRdo" id="Van1" value="3" {{ ($chdata->otherRdo == '3'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Van1">
                                                                         Van
                                                                     </label>
@@ -991,7 +994,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Bus1" value="4">
+                                                                        name="otherRdo" id="Bus1" value="4" {{ ($chdata->otherRdo == '4'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Bus1">
                                                                         Bus
                                                                     </label>
@@ -999,7 +1002,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Motorcycle1" value="5">
+                                                                        name="otherRdo" id="Motorcycle1" value="5" {{ ($chdata->otherRdo == '5'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Motorcycle1">
                                                                         Motorcycle
                                                                     </label>
@@ -1007,7 +1010,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Bicycle1" value="6">
+                                                                        name="otherRdo" id="Bicycle1" value="6" {{ ($chdata->otherRdo == '6'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Bicycle1">
                                                                         Bicycle
                                                                     </label>
@@ -1015,7 +1018,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Tricycle1" value="">
+                                                                        name="otherRdo" id="Tricycle1" value="7" {{ ($chdata->otherRdo == '7'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Tricycle1">
                                                                         Tricycle
                                                                     </label>
@@ -1031,7 +1034,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Others7" value="7">
+                                                                        name="otherRdo" id="Others7" value="8" {{ ($chdata->otherRdo == '1'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Others7">
                                                                         Others,
                                                                     </label>
@@ -1042,7 +1045,7 @@
 
                                                                 <div class="col-auto">
                                                                     <input class="form-check-input" type="radio"
-                                                                        name="otherRdo" id="Unknown1" value="8">
+                                                                        name="otherRdo" id="Unknown1" value="9"{{ ($chdata->otherRdo == '1'? ' checked' : '') }}>
                                                                     <label class="form-check-label" for="Unknown1">
                                                                         Unknown
                                                                     </label>
@@ -1066,7 +1069,7 @@
                                                         <div class="col">
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Pedestrian2" value="1">
+                                                                    name="posRdo" id="Pedestrian2" value="1" {{ ($chdata->posRdo == '1'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Pedestrian2">
                                                                     Pedestrian
                                                                 </label>
@@ -1074,7 +1077,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Driver" value="2">
+                                                                    name="posRdo" id="Driver" value="2" {{ ($chdata->posRdo == '2'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Driver">
                                                                     Driver
                                                                 </label>
@@ -1082,7 +1085,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Captain" value="3">
+                                                                    name="posRdo" id="Captain" value="3" {{ ($chdata->posRdo == '3'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Captain">
                                                                     Captain
                                                                 </label>
@@ -1090,7 +1093,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Pilot" value="4">
+                                                                    name="posRdo" id="Pilot" value="4" {{ ($chdata->posRdo == '4'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Pilot">
                                                                     Pilot
                                                                 </label>
@@ -1098,7 +1101,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Front" value="5">
+                                                                    name="posRdo" id="Front" value="5" {{ ($chdata->posRdo == '5'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Front">
                                                                     Front Passenger
                                                                 </label>
@@ -1106,7 +1109,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Rear" value="6">
+                                                                    name="posRdo" id="Rear" value="6" {{ ($chdata->posRdo == '6'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Rear">
                                                                     Rear Passenger
                                                                 </label>
@@ -1114,7 +1117,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Others8" value="7">
+                                                                    name="posRdo" id="Others8" value="7" {{ ($chdata->posRdo == '7'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Others8">
                                                                     Others,
                                                                 </label>
@@ -1125,7 +1128,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="posRdo" id="Unknown2" value="8">
+                                                                    name="posRdo" id="Unknown2" value="8" {{ ($chdata->posRdo == '8'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Unknown2">
                                                                     Unknown
                                                                 </label>
@@ -1146,7 +1149,7 @@
                                                         <div class="col">
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="victimsRdo" id="Alone" value="1">
+                                                                    name="victimsRdo" id="Alone" value="1" {{ ($chdata->victimsRdo == '1'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Alone">
                                                                     Alone
                                                                 </label>
@@ -1154,7 +1157,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="victimsRdo" id="Withothers" value="2">
+                                                                    name="victimsRdo" id="Withothers" value="2" {{ ($chdata->victimsRdo == '2'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Withothers">
                                                                     With others, specify how many(excuding the victim)
                                                                 </label>
@@ -1179,7 +1182,7 @@
                                                         <div class="col">
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Home" value="1">
+                                                                    name="placeRdo" id="Home" value="1" {{ ($chdata->placeRdo == '1'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Home">
                                                                     Home
                                                                 </label>
@@ -1187,7 +1190,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="School" value="2">
+                                                                    name="placeRdo" id="School" value="2" {{ ($chdata->placeRdo == '2'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="School">
                                                                     School
                                                                 </label>
@@ -1195,7 +1198,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Road" value="3">
+                                                                    name="placeRdo" id="Road" value="3" {{ ($chdata->placeRdo == '3'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Road">
                                                                     Road
                                                                 </label>
@@ -1203,7 +1206,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Bars" value="4">
+                                                                    name="placeRdo" id="Bars" value="4" {{ ($chdata->placeRdo == '4'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Bars">
                                                                     Videoke Bars
                                                                 </label>
@@ -1211,7 +1214,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Workplace" value="5">
+                                                                    name="placeRdo" id="Workplace" value="5" {{ ($chdata->placeRdo == '5'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Workplace">
                                                                     Workplace, specify
                                                                 </label>
@@ -1221,7 +1224,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Others9" value="6">
+                                                                    name="placeRdo" id="Others9" value="6" {{ ($chdata->placeRdo == '6'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Others9">
                                                                     Others, specify
                                                                 </label>
@@ -1232,7 +1235,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="placeRdo" id="Unkown4" value="7">
+                                                                    name="placeRdo" id="Unkown4" value="7" {{ ($chdata->placeRdo == '7'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Unkown4">
                                                                     Unkown
                                                                 </label>
@@ -1252,7 +1255,7 @@
                                                         <div class="col">
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="activityRdo" id="Sports" value="1">
+                                                                    name="activityRdo" id="Sports" value="1" {{ ($chdata->activityRdo == '1'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Sports">
                                                                     Sports
                                                                 </label>
@@ -1260,7 +1263,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="activityRdo" id="Leisure" value="2">
+                                                                    name="activityRdo" id="Leisure" value="2" {{ ($chdata->activityRdo == '2'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Leisure">
                                                                     Leisure
                                                                 </label>
@@ -1268,7 +1271,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="activityRdo" id="Workrelated" value="3">
+                                                                    name="activityRdo" id="Workrelated" value="3" {{ ($chdata->activityRdo == '3'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Workrelated">
                                                                     Work related
                                                                 </label>
@@ -1276,7 +1279,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="activityRdo" id="Others10" value="4">
+                                                                    name="activityRdo" id="Others10" value="4" {{ ($chdata->activityRdo == '4'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Others10">
                                                                     Others, specify
                                                                 </label>
@@ -1287,7 +1290,7 @@
 
                                                             <div class="col-auto">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="activityRdo" id="Unkown5" value="5">
+                                                                    name="activityRdo" id="Unkown5" value="5" {{ ($chdata->activityRdo == '5'? ' checked' : '') }}>
                                                                 <label class="form-check-label" for="Unkown5">
                                                                     Unkown
                                                                 </label>
@@ -1479,15 +1482,15 @@
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="transferRdo" value="1"
-                                     id="transferRdoyes">
+                                     id="transferRdoyes" {{ ($chdata->transferRdo == '1'? ' checked' : '') }}>
                                 <label class="form-check-label" for="transferRdoyes">
                                     Yes
                                 </label>
                             </div>
                             <div class="col col-lg-1">
                                 <input class="form-check-input" type="radio" name="transferRdo" value="2"
-                                     id="transferRdono">
-                                <label class="form-check-label" for="transferRdono">
+                                     id="transferRdono" {{ ($chdata->transferRdo == '2'? ' checked' : '') }} checked="true">
+                                <label class="form-check-label" for="transferRdono" >
                                     No
                                 </label>
                             </div>
@@ -1499,15 +1502,15 @@
                             <div class="col-auto">
                                 <input type="hidden" name="referral" value="0">
                                 <input class="form-check-input" type="radio" name="referralRdo" value="1"
-                                     id="referralyes">
+                                     id="referralyes" {{ ($chdata->referralRdo == '1'? ' checked' : '') }}>
                                 <label class="form-check-label" for="referralyes">
                                     Yes
                                 </label>
                             </div>
                             <div class="col col-lg-1">
                                 <input class="form-check-input" type="radio" name="referralRdo" value="2"
-                                     id="referralno">
-                                <label class="form-check-label" for="referralno">
+                                     id="referralno" {{ ($chdata->referralRdo == '2'? ' checked' : '') }} checked="true">
+                                <label class="form-check-label" for="referralno" >
                                     No
                                 </label>
                             </div>
@@ -1535,14 +1538,14 @@
 
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="arrivalRdo" value="1"
-                                id="deadarrival">
+                                id="deadarrival" {{ ($chdata->arrivalRdo == '1'? ' checked' : '') }}>
                                 <label class="form-check-label" for="deadarrival">
                                     Dead on Arrival
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="arrivalRdo" value="2"
-                                id="arrival">
+                                id="arrival" {{ ($chdata->arrivalRdo == '2'? ' checked' : '') }}>
                                 <label class="form-check-label" for="arrival">
                                     Alive if alive, please check if:
                                 </label>
@@ -1550,14 +1553,14 @@
 
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="statusRdo" value="1"
-                                id="conscious">
+                                id="conscious" {{ ($chdata->statusRdo == '1'? ' checked' : '') }}>
                                 <label class="form-check-label" for="conscious">
                                     Conscious
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" name="statusRdo" value="2"
-                                    id="unconscious">
+                                    id="unconscious" {{ ($chdata->statusRdo == '2'? ' checked' : '') }}>
                                 <label class="form-check-label" for="unconscious">
                                     Unconscious
                                 </label>
@@ -1573,28 +1576,28 @@
 
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" value="1" 
-                                    name="transpoRdo" id="ambulance">
+                                    name="transpoRdo" id="ambulance" {{ ($chdata->transpoRdo == '1'? ' checked' : '') }} checked="true">
                                 <label class="form-check-label" for="ambulance">
                                     Ambulance
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" value="2" 
-                                    name="transpoRdo" id="police">
+                                    name="transpoRdo" id="police" {{ ($chdata->transpoRdo == '2'? ' checked' : '') }}>
                                 <label class="form-check-label" for="police">
                                     Police vehicle
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" value="3" 
-                                    name="transpoRdo" id="private">
+                                    name="transpoRdo" id="private" {{ ($chdata->transpoRdo == '3'? ' checked' : '') }}>
                                 <label class="form-check-label" for="private">
                                     Private vehicle
                                 </label>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio" value="4" 
-                                    name="transpoRdo" id="others13">
+                                    name="transpoRdo" id="others13" {{ ($chdata->transpoRdo == '4'? ' checked' : '') }}>
                                 <label class="form-check-label" for="others13">
                                     Others, specify
                                 </label>
@@ -1650,26 +1653,36 @@
                 <div class="row">
                     <div class="col">
                         <div class="row">
-                        <div class="col">
-                                <label class="form-check-label" for="disposition">
-                                    Disposition:
-                                </label>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="form-check-label" for="disposition">
+                                        Disposition:
+                                    </label>
+                                </div>
                                     <div class="row">
+                                    <div class="col-auto">
+                                        <label class="form-check-label" for="unknown5Ch">
+                                        
+                                        </label>
+                                    </div>
                                         <div class="col-auto px-md-5">
                                             <input class="form-check-input" type="radio" value="1" name="dispoRdo" id="admitted"
-                                                checked="true">
+                                                checked="true" {{ ($chdata->dispoRdo == '1'? ' checked' : '') }}>
                                             <label class="form-check-label" for="admitted">
                                                 Admitted
                                             </label>
                                         </div>
                                         <div class="col-auto px-md-5">
-                                            <input class="form-check-input" type="radio" value="2" name="dispoRdo" id="senthome">
+                                            <input class="form-check-input" type="radio" value="2" name="dispoRdo" id="senthome"
+                                            {{ ($chdata->dispoRdo == '2'? ' checked' : '') }}>
                                             <label class="form-check-label" for="senthome">
                                                 Treated and Sent Home
                                             </label>
                                         </div>
                                         <div class="col-auto">
-                                            <input class="form-check-input" type="radio" value="3" name="dispoRdo" id="transfer">
+                                            <input class="form-check-input" type="radio" value="3" name="dispoRdo" id="transfer"
+                                            {{ ($chdata->dispoRdo == '3'? ' checked' : '') }}>
                                             <label class="form-check-label" for="transfer">
                                                 Transferred to another facility/hospital, specify
                                             </label>
@@ -1678,28 +1691,32 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-auto">
+                                            <label class="form-check-label" for="unknown5Ch">
+                                            
+                                            </label>
+                                        </div>
                                         <div class="col-auto px-md-5">
-                                            <input class="form-check-input" type="radio" value="4" name="dispoRdo" id="HAMA">
+                                            <input class="form-check-input" type="radio" value="4" name="dispoRdo" id="HAMA"
+                                            {{ ($chdata->dispoRdo == '4'? ' checked' : '') }}>
                                             <label class="form-check-label" for="HAMA">
                                                 HAMA
                                             </label>
                                         </div>
                                         <div class="col-auto px-md-5">
                                             <input class="form-check-input" type="radio" value="5" name="dispoRdo"
-                                                id="absconded">
+                                                id="absconded" {{ ($chdata->dispoRdo == '5'? ' checked' : '') }}>
                                             <label class="form-check-label" for="absconded">
                                                 Absconded
                                             </label>
                                         </div>
                                     </div>
-                                
+                                    </div>
                             </div>
                         </div>
-                            
-
-                            
-                                <div class="row">
-                                    <div class="col-auto">
+                        <div class="col border-top border-secondary">
+                                <div class="row ">
+                                    <div class="col-auto ">
                                         <label class="form-check-label" for="outcome">
                                             Outcome:
                                         </label>
@@ -1726,7 +1743,276 @@
                                         </label>
                                     </div>
                                 </div>
+                                </div>
                     </div>
+                </div>
+                </div>
+
+                <!-- IN-PATIENT (for admitted hospital cases only) -->
+                <div class="form-group border border-secondary" >
+                
+                    <div class="p-2 bg-success text-white">
+                        <div class="row">
+                            <div class="col">B. IN-PATIENT (for admitted hospital cases only)</div>
+                            <div class="w-100 d-none d-md-block"></div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                            Complete Final Diagnosis
+                                                        </h6>
+                                <input type="text" class="inputlabelunderlinelong" name="inPatFinalDiag"
+                                                    value="{{$patients->inPatFinalDiag}}" placeholder="Text here">
+                                                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-auto">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Disposition
+                                                        </h6>
+                            </div>
+                            <div class="col-auto">
+                                <input class="form-check-input" type="radio"
+                                    name="inPatDispoRdo" id="inDischarged" value="1"{{ ($chdata->inPatDispoRdo == '1'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inDischarged">
+                                Discharged
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <input class="form-check-input" type="radio"
+                                    name="inPatDispoRdo" id="inHama" value="2"{{ ($chdata->inPatDispoRdo == '2'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inHama">
+                                HAMA
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <input class="form-check-input" type="radio"
+                                    name="inPatDispoRdo" id="inAbson" value="3"{{ ($chdata->inPatDispoRdo == '3'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inAbson">
+                                Absonconded
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                                <input class="form-check-input" type="radio"
+                                    name="inPatDispoRdo" id="inOthers" value="4"{{ ($chdata->inPatDispoRdo == '4'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inOthers">
+                                Others, specify:
+                                </label>
+                                <input type="text" class="inputlabelunderline" name="inPatOthers"
+                                                value="{{$patients->inPatOthers}}" placeholder="N/A">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <label class="form-check-label" for="unknown5Ch">
+                                
+                                </label>
+                            </div>
+                            <div class="col">
+                                <input class="form-check-input" type="radio"
+                                    name="inPatDispoRdo" id="inTransfer" value="5"{{ ($chdata->inPatDispoRdo == '5'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inTransfer">
+                                Transferred to another facility/hopital, specify:
+                                </label>
+                                <input type="text" class="inputlabelunderline" name="inPatTransfer"
+                                                value="{{$patients->inPatTransfer}}" placeholder="N/A">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col border-top border-secondary">
+                        <div class="row ">
+                            <div class="col-auto ">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Outcome
+                                                        </h6>
+                            </div>
+                            <div class="col-auto">
+                            
+                                <input class="form-check-input" type="radio"
+                                    name="inPatOutcomeRdo" id="inImprov" value="1" {{ ($chdata->inPatOutcomeRdo == '1'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inImprov">
+                                Improved
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                            
+                                <input class="form-check-input" type="radio"
+                                    name="inPatOutcomeRdo" id="inUnimprov" value="2" {{ ($chdata->inPatOutcomeRdo == '2'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inUnimprov">
+                                Unimproved
+                                </label>
+                            </div>
+                            <div class="col-auto">
+                            
+                                <input class="form-check-input" type="radio"
+                                    name="inPatOutcomeRdo" id="inDied" value="3" {{ ($chdata->inPatOutcomeRdo == '3'? ' checked' : '') }}>
+                                    
+                                <label class="form-check-label" for="inDied">
+                                Died
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col border-top border-secondary">
+                        <div class="row">
+                            <div class="col-auto">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                            ICD-10 Code/s: Nature of Injury:
+                            <input type="text" class="inputlabelunderline2" name="inPatNature"
+                                                value="{{$patients->inPatNature}}" placeholder="N/A">
+                                                        </h6>
+                                
+                            </div>
+                            <div class="col">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                            ICD-10 Code/s: External cause of Injury:
+                            <input type="text" class="inputlabelunderline2" name="inPatExternal"
+                                                value="{{$patients->inPatExternal}}" placeholder="N/A">
+                                                        </h6>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col border-top border-secondary">
+                        <div class="row">
+                            <div class="col">
+                            <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Comments:
+                                                        </h6>
+                                <input type="text" class="inputlabelunderlinelong" name="inPatComments"
+                                                value="{{$patients->inPatComments}}" placeholder="N/A">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="row">
+                        <div class="col-auto border-top border-bottom border-secondary">
+                            <div class="row">
+                                <div class="col-auto">
+                                <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Consultant in-charge
+                                                        </h6>
+                                    <input type="text" class="inputlabelunderline2" name="inPatLastName"
+                                                    value="{{$patients->inPatLastName}}" placeholder="Last Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatFirstName"
+                                                    value="{{$patients->inPatFirstName}}" placeholder="First Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatMiddleName"
+                                                    value="{{$patients->inPatMiddleName}}" placeholder="Middle Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatDept"
+                                                    value="{{$patients->inPatDept}}" placeholder="Department">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col border border-secondary">
+                                <input type="text" class="inputlabelunderline2" name="inPatLandline"
+                                                    value="{{$patients->inPatLandline}}" placeholder="Landline#">
+                                <input type="text" class="inputlabelunderline2" name="inPatMobile"
+                                                    value="{{$patients->inPatMobile}}" placeholder="Mobile#">
+                                <input type="text" class="inputlabelunderline" name="inPatEmail"
+                                                    value="{{$patients->inPatEmail}}" placeholder="Email ">
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Address
+                                                        </h6>
+                                            <input type="text" class="inputlabelunderline2" name="inPatStreet"
+                                                            value="{{$patients->inPatStreet}}" placeholder="# and Street Name">
+                                            <input type="text" class="inputlabelunderline2" name="inPatRegion"
+                                                            value="{{$patients->inPatRegion}}" placeholder="Region">
+                                            <input type="text" class="inputlabelunderline2" name="inPatProv"
+                                                            value="{{$patients->inPatProv}}" placeholder="Province">
+                                            <input type="text" class="inputlabelunderline2" name="inPatCity"
+                                                            value="{{$patients->inPatCity}}" placeholder="City/Municipality">
+                                            <input type="text" class="inputlabelunderline2" name="inPatBrngy"
+                                                            value="{{$patients->inPatBrngy}}" placeholder="Barangay">
+                                            <input type="text" class="inputlabelunderline2" name="inPatZip"
+                                                            value="{{$patients->inPatZip}}" placeholder="Zip Code">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                        <div class="row">
+                        <div class="col-auto border-top border-bottom border-secondary">
+                            <div class="row">
+                                <div class="col-auto">
+                                <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Completed By:
+                                                        </h6>
+                                    <input type="text" class="inputlabelunderline2" name="inPatLastName2"
+                                                    value="{{$patients->inPatLastName2}}" placeholder="Last Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatFirstName2"
+                                                    value="{{$patients->inPatFirstName2}}" placeholder="First Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatMiddleName2"
+                                                    value="{{$patients->inPatMiddleName2}}" placeholder="Middle Name">
+                                    <input type="text" class="inputlabelunderline2" name="inPatDept2"
+                                                    value="{{$patients->inPatDept2}}" placeholder="Department">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col border border-secondary">
+                                <input type="text" class="inputlabelunderline2" name="inPatLandline2"
+                                                    value="{{$patients->inPatLandline2}}" placeholder="Landline#">
+                                <input type="text" class="inputlabelunderline2" name="inPatMobile2"
+                                                    value="{{$patients->inPatMobile2}}" placeholder="Mobile#">
+                                <input type="text" class="inputlabelunderline" name="inPatEmail2"
+                                                    value="{{$patients->inPatEmail2}}" placeholder="Email ">
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                        <h6 class="form-check-label" for="flexCheckDefault">
+                                                            Address
+                                                        </h6>
+                                            <input type="text" class="inputlabelunderline2" name="inPatStreet2"
+                                                            value="{{$patients->inPatStreet2}}" placeholder="# and Street Name">
+                                            <input type="text" class="inputlabelunderline2" name="inPatRegion2"
+                                                            value="{{$patients->inPatRegion2}}" placeholder="Region">
+                                            <input type="text" class="inputlabelunderline2" name="inPatProv2"
+                                                            value="{{$patients->inPatProv2}}" placeholder="Province">
+                                            <input type="text" class="inputlabelunderline2" name="inPatCity2"
+                                                            value="{{$patients->inPatCity2}}" placeholder="City/Municipality">
+                                            <input type="text" class="inputlabelunderline2" name="inPatBrngy2"
+                                                            value="{{$patients->inPatBrngy2}}" placeholder="Barangay">
+                                            <input type="text" class="inputlabelunderline2" name="inPatZip2"
+                                                            value="{{$patients->inPatZip2}}" placeholder="Zip Code">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label for="birthday">Date Completed:</label>
+                                    <input type="date" value="{{$patients->inPatDate}}" name="inPatDate"/>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 </div>
             </div>
@@ -1752,10 +2038,10 @@
 </div>
 </div>
             </div>
-            @endforeach
-@endforeach
+
 
 </form>
+
 
                         
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

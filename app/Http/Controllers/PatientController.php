@@ -77,13 +77,14 @@ class PatientController extends Controller
 
 
      public function viewencounter($hpercode){
+        // dd($hpercode);
         $patInfo = DB::table('vwInjuryList')->select('patlast', 'patfirst', 'patmiddle')->where('hpercode',$hpercode)->limit(1)->get();
          $encounters = DB::table('vwInjuryList')->where('hpercode',$hpercode)->get();
         return view('patients.modal.encounters', compact(
             'patInfo',
             'encounters',
         ));
-      
+        
      }
      //open Injury form
     public function print($hpercode)
@@ -124,12 +125,13 @@ class PatientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$hpercode)
+    public function store(Request $request,$enccode)
     {
-            // dd($request->all());
-
+        // $hpercode = Vwinjurylist::find($hpercode);
+            // dd($enccode);
+            
         DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
-            '$request->enccode',
+            '$enccode',
             '$request->docAdmit',
             '$request->frstAid',
             '$request->abrasion',
@@ -167,9 +169,42 @@ class PatientController extends Controller
             '$request->icdNature',
             '$request->icdExternal',
             '$request->treatment',
-            '$request->transferred'
+            '$request->transferred',
+            '$request->inPatFinalDiag',
+            '$request->inPatOthers',
+            '$request->inPatTransfer',
+            '$request->inPatNature',
+            '$request->inPatExternal',
+            '$request->inPatComments',
+            '$request->inPatLastName',
+            '$request->inPatFirstName',
+            '$request->inPatMiddleName',
+            '$request->inPatDept',
+            '$request->inPatLandline',
+            '$request->inPatMobile',
+            '$request->inPatEmail',
+            '$request->inPatStreet',
+            '$request->inPatRegion',
+            '$request->inPatProv',
+            '$request->inPatCity',
+            '$request->inPatBrngy',
+            '$request->inPatZip',
+            '$request->inPatLastName2',
+            '$request->inPatFirstName2',
+            '$request->inPatMiddleName2',
+            '$request->inPatDept2',
+            '$request->inPatLandline2',
+            '$request->inPatMobile2',
+            '$request->inPatEmail2',
+            '$request->inPatStreet2',
+            '$request->inPatRegion2',
+            '$request->inPatProv2',
+            '$request->inPatCity2',
+            '$request->inPatBrngy2',
+            '$request->inPatZip2',
+            '$request->inPatDate'
             ");
-            // dd($request->frstAid);
+            // dd($request->inPatDate);
 
 
         //  dd($request->abrasion);
@@ -178,6 +213,7 @@ class PatientController extends Controller
         // dd($hpercode);
 
         DB::UPDATE("EXEC registry.dbo.InsertChValue
+            '$enccode',
             '$request->abrasionCh',
             '$request->avulsionCh',
             '$request->burnCh',
@@ -217,13 +253,35 @@ class PatientController extends Controller
             '$request->vestCh',
             '$request->others12Ch',
             '$request->unknown5Ch',
-            '$request->outcome'
+            '$request->outcome',
+            '$request->rdoAid',
+            '$request->injryRdo',
+            '$request->burnRdo',
+            '$request->drowningRdo',
+            '$request->natureRdo',
+            '$request->areaRdo',
+            '$request->collRdo',
+            '$request->severRdo',
+            '$request->vehicleRdo',
+            '$request->posRdo',
+            '$request->otherRdo',
+            '$request->victimsRdo',
+            '$request->placeRdo',
+            '$request->activityRdo',
+            '$request->transferRdo',
+            '$request->referralRdo',
+            '$request->arrivalRdo',
+            '$request->statusRdo',
+            '$request->transpoRdo',
+            '$request->dispoRdo',
+            '$request->degreeRdoBtn',
+            '$request->inPatDispoRdo',
+            '$request->inPatOutcomeRdo'
             ");
-            
-            
-
             // dd($request->all());
             
+
+            $request->session()->flash('alert-success', 'Saved ');
             return redirect()->back();
 
         
@@ -238,13 +296,13 @@ class PatientController extends Controller
     public function show(Request $request,$hpercode)
     {
         // dd($hpercode);
-        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
+        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
 
-        $data = DB::table('checkboxList')->get();
+        $chdata = DB::table('checkboxList')->select('*')->where('enccode',$hpercode)->get();
         // dd($request->all());
         //$patients = Vwinjurylist::select("*")->take(10)->distinct()->get();
         // dd($data);
-        return view('patients.show',compact('data'))->with('patients', $patients);
+        return view('patients.show',compact('chdata'))->with('patients', $patients);
         // return view('patients.show', compact(
         //     'patients',
         // ));
