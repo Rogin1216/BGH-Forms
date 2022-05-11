@@ -3,7 +3,18 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
 
     
 
@@ -18,7 +29,7 @@
             }
 
             .topnav {
-                overflow: hidden;
+                /* overflow: hidden; */
                 background-color: #e9e9e9;
             }
 
@@ -96,65 +107,54 @@
             }
 
         </style>
+        <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Patient Info</h2>
         </div>
-        <div class="topnav d-flex justify-content-center">
-         
+        <div class="topnav d-flex justify-content-start">
             <div class="row">
-              <div class="col-auto">
-              <a href="/    " class="btn btn-outline-primary " role="button"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="blue" class="bi bi-house" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-                  </svg>
-              </a>
-        <form action="{{ url ('/search') }}" class="form-inline" type="get">
-              </div>
-                <div class="col-auto">
-                        {{csrf_field()}}
-                        <input type="search" class="form-control" name="query" placeholder="Search..">
-                </div>
-                <div class="col-auto">
-                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Go</button>
-                </div>
-         </form>
-                
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/search">Search for patient</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Injury Registry Table
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
+                    <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
+                    <a class="dropdown-item" href="/archive">Archive</a>
+                    <a class="dropdown-item" href="/sampleForm">sample form</a>
+                    </div>
+                </li>
+                </ul>
+                <div class="mt-3 space-y-1">
+                <!-- Authentication -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form>
+            </div>
+            </div>
+            </nav>
             </div>
         </div>
-    
-
-
-
-        <table class="table table-bordered table-responsive-lg">
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>hpercode</th>
-
-                <th width="280px">Action</th>
-            </tr>
-            <tbody>
-
-                @foreach($all as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
-                    <td>{{ $item->hpercode}}</td>
-                    <td>
-                      <a href="/showID/{{$item->hpercode}}">show</a>
-
-                    </td>
-                </tr>
-                
-                @endforeach
-                </tbody>
-    </table>
     </div>
-    </div>
-
-    
-    {{$all->links()}}
-
+</div>
+</nav>
+ 
     @endsection

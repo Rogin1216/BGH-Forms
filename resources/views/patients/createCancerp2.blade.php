@@ -202,6 +202,9 @@ h1{
   border: 1.5px solid var(--first-color);
 }
 </style>
+
+@foreach($patinfo as $patients)
+
 <div class="container-fluid border border-secondary"><!-- start logo header --> 
     <div class="row "> 
         <div class="col-auto">
@@ -1380,16 +1383,18 @@ h1{
                 </li>
 
                 <li class="page-item active">
-                <a class="page-link" href="{{url ('/cancerFormp2') }}"><span class="sr-only">2</span></a>
+                <a class="page-link" href="{{url ('/cancerFormp2/{{$patients->hpercode}}') }}"><span class="sr-only">2</span></a>
                 </li>
 
                 <li class="page-item">
                 <a class="page-link" href="{{url ('/cancerFormp3') }}">3</a>
                 </li>
+                @endforeach
 
             </ul>
         </nav> 
     </html>
+
 <script>
     
     $(document).ready(function() {

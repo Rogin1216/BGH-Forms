@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,7 +18,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        // $collection = Http::get("http://192.168.7.188:8040/api/login");
+        // dd($collection);
+        // return view('auth.login',['collection'=>$collection['data']]);
         return view('auth.login');
+
+
+        // return Http::get("http://192.168.7.188:8040/api/login");
+        // return $collection->json();
     }
 
     /**
@@ -28,11 +36,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $request->authenticate(); 
 
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
+        // return Http::post("http://192.168.7.188:8040/api/login");
     }
 
     /**
@@ -49,6 +58,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

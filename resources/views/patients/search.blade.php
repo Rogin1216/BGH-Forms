@@ -16,7 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
 
-
+    
 
         <style>
             * {
@@ -108,38 +108,40 @@
 
         </style>
 <div class="row">
-<div class="col-lg-12 margin-tb">
+    <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Patient Info</h2>
         </div>
-        <div class="topnav d-flex justify-content-start">
-            <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/search">Search for patient</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Injury Registry Table
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
+        <div class="row">
+            <div class="topnav d-flex justify-content-start">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                            <li class="nav-ite  m active">
+                                <a class="nav-link" href="/search">Search for patient</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Injury Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
                     <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
-                    <a class="dropdown-item" href="/archive">Archive</a>
-                    </div>
-                </li>
-                </ul>
-            </div>
-            </nav>
+                                <a class="dropdown-item" href="/archive">Archive</a>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </div>
-    
+        
         <div class="row justify-content-center">
             <div class="col-auto">
                 <form action="{{ url ('/searchfilter') }}" class="form-inline" type="get">
@@ -155,36 +157,8 @@
                 </form>
             </div>
         </div>
-    <table class="table table-bordered table-responsive-lg table-hover">
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>hpercode</th>
-                <th width="280px">Action</th>
-            </tr>
-            <tbody>
-
-                @foreach($patient as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
-                    <td>{{ $item->hpercode}}</td>
-                    
-                    <td>
-                      <a href="/showID/{{$item->hpercode}}" class="btn btn-outline-primary btn-sm">show</a>
-                    </td>
-                </tr>
-                
-                @endforeach
-                </tbody>
-    </table>
     </div>
 </div>
 
-
-
-  @endsection
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+ 
+    @endsection

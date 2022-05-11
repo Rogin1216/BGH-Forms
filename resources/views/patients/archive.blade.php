@@ -16,6 +16,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
 
+    
+
 
         <style>
             * {
@@ -23,7 +25,6 @@
             }
 
             body {
-              /* max-width: fit-content; */
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
             }
@@ -106,84 +107,13 @@
 
             }
 
-            body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
-
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
         </style>
-<!-- <div class="container-fluid border border-secondary">
-  <div class="sidebar">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
-</div> -->
-
-
-
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-      <div class="row">
-        <div class="col-lg-10">
-          <!-- <div class="pull-left"> -->
-              <h2>Patient Info</h2>
-          <!-- </div> -->
+<div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Patient Info (Archive)</h2>
         </div>
-      </div>
-      
-<!--JavaScript - Disable Button after Click using JavaScript Function.-->
-<div class="topnav d-flex justify-content-start">
+        <div class="topnav d-flex justify-content-start">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
@@ -209,94 +139,65 @@ div.content {
             </div>
             </nav>
             </div>
-        </div>
+        </div> 
+    
+            <form action="{{ url('/searchDatefilter') }}" type="get">
+                        select patients from <input type="date" name="startDate"> to <input type="date" name="endDate">
+                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Go</button>
+            </form> 
+
+        
+    <table class="table table-bordered table-responsive-lg">
+            <tr>
+                <th>No</th>
+                <!-- <th>Name</th> -->
+                <th>Name</th>
+                <th>Admitted By:</th>
+                <th>hpercode</th>
+                <th>Date Completed</th>
+                <th>Status</th>
+                <!-- <th></th> -->
+            </tr>
+            <tbody>@foreach($all as $item)
+            <!-- <form action="/infoNext" type="get"> -->
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
+                    <td>{{ $item->docAdmit}} </td>
+                    <td>{{ $item->hpercode}} </td>
+                    <td>{{ $item->inPatDate}} </td>
+                    <td>{{ $item->status}} </td>
+                    <!-- <td><input type="checkbox" name="selected[]" id="selected" value="{{ $item->ENCCODE}}"></td> -->
+                    <!-- <td>
+                      <a href="">export to excel</a>
+                    </td> -->
+                </tr>
+                <!--MODAL FOR EACH PATIENT INFO-->
+                
+                @endforeach
+                </tbody>
+    </table>
+    <div class="col-auto float-end">
+                        
+                        <!-- <button type="submit" class="btn btn-outline-success d-print-none " ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
+                        <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
+                        </svg> Next</button> -->
+                </form>
+                        
+                        <!-- <a href="/infoNext/{{$item->ENCCODE}}" class="btn btn-outline-secondary btn-sm">Next</a> -->
+                        <!-- <a href="/infoNext" class="btn btn-outline-secondary btn-sm">Next</a> -->
+                       
+                        </div> 
+                        
     </div>
     
-
-<div class="form-group row">
-@foreach($patInfo as $item)  
-      <div class="form-group col-auto">
-          <label>First Name:</label>
-          <label name="firstName" id="firstName" class="form-control"
-              value="{{$item->patfirst}}" disabled>{{$item->patfirst}} </label></br>
-      </div>
-      <div class="form-group col-auto">
-          <label>Middle Name:</label>
-          <label name="middlename" id="middlename" class="form-control"
-              value="{{$item->patmiddle}}" disabled>{{$item->patmiddle}} </label></br>
-      </div>
-      <div class="form-group col-auto">
-          <label>Last Name:</label>
-          <label name="middlename" id="lastname" class="form-control"
-              value="{{$item->patlast}}" disabled>{{$item->patlast}} </label></br>
-      </div>
-      @endforeach
-
-      <div class="col-auto border border-secondary-left">
-        
-          <table class="table tb-sm table-hover">
-            <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Admission date</th>
-                  <th>Admission time</th>
-                  <th>Discharge date</th>
-                  <th>Discharge time</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-            </thead>
-            <tbody>
-              @foreach($encounters as $item)
-              <tr>
-                <td>{{$item->toecode}}</td>
-                <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
-
-                <script>
-                    
-                </script>
-                <td>{{date('F j,Y',  strtotime($item->admdate))}}</td>
-                <td>{{date('g:i a',  strtotime($item->admdate))}}</td>
-
-
-                <!-- <td>{{$item->disdate ?? null ?: '--' }}</td> -->
-                <td>{{date('F j,Y', strtotime($item->disdate ))}}</td>
-                <td>{{date('g:i a', strtotime($item->disdate ))}}</td>
-                <td><div class="dropdown">
-                    <a class="btn btn-outline-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Edit
-                    </a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/patientShow/{{$item->enccode}}">Injury Registration Form</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cancerForm/{{$item->enccode}}">Cancer Registration Form</a>
-                    </div>
-                    </div>
-                </td>
-                
-
-                <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode}}">print</a></td> -->
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-          
-      </div>
-      
-
-  </div>
-  
 </div>
-
-<!-- <div class="row">
-    <div class="col float-end">
-    <a href="" class="btn btn-secondary btn-sm float-end" title="Patient lists">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Back
-                        </a>
+<!-- @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
     </div>
-</div> -->
-
+@endif -->
 
 
   @endsection

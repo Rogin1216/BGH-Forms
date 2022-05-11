@@ -16,6 +16,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
 
+    
+
 
         <style>
             * {
@@ -23,7 +25,6 @@
             }
 
             body {
-              /* max-width: fit-content; */
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
             }
@@ -106,84 +107,13 @@
 
             }
 
-            body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
-
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
         </style>
-<!-- <div class="container-fluid border border-secondary">
-  <div class="sidebar">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
-</div> -->
-
-
-
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-      <div class="row">
-        <div class="col-lg-10">
-          <!-- <div class="pull-left"> -->
-              <h2>Patient Info</h2>
-          <!-- </div> -->
+<div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Patient Info <i>(Injury Registry Drafts)</i></h2>
         </div>
-      </div>
-      
-<!--JavaScript - Disable Button after Click using JavaScript Function.-->
-<div class="topnav d-flex justify-content-start">
+        <div class="topnav d-flex justify-content-start">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
@@ -197,7 +127,7 @@ div.content {
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Injury Registry Table
+                    Injury Registry Table   
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
@@ -210,92 +140,58 @@ div.content {
             </nav>
             </div>
         </div>
-    </div>
     
 
-<div class="form-group row">
-@foreach($patInfo as $item)  
-      <div class="form-group col-auto">
-          <label>First Name:</label>
-          <label name="firstName" id="firstName" class="form-control"
-              value="{{$item->patfirst}}" disabled>{{$item->patfirst}} </label></br>
-      </div>
-      <div class="form-group col-auto">
-          <label>Middle Name:</label>
-          <label name="middlename" id="middlename" class="form-control"
-              value="{{$item->patmiddle}}" disabled>{{$item->patmiddle}} </label></br>
-      </div>
-      <div class="form-group col-auto">
-          <label>Last Name:</label>
-          <label name="middlename" id="lastname" class="form-control"
-              value="{{$item->patlast}}" disabled>{{$item->patlast}} </label></br>
-      </div>
-      @endforeach
-
-      <div class="col-auto border border-secondary-left">
-        
-          <table class="table tb-sm table-hover">
-            <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Admission date</th>
-                  <th>Admission time</th>
-                  <th>Discharge date</th>
-                  <th>Discharge time</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-            </thead>
+    <table class="table table-sm table-bordered table-responsive-lg table table-hover">
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Admitted By:</th>
+                <th>Date Completed</th>
+                <th>Hospital Code</th>
+                <th>Status</th>
+                <th></th>
+                <!-- <th width="280px">Action</th> -->
+            </tr>
             <tbody>
-              @foreach($encounters as $item)
-              <tr>
-                <td>{{$item->toecode}}</td>
-                <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
 
-                <script>
-                    
-                </script>
-                <td>{{date('F j,Y',  strtotime($item->admdate))}}</td>
-                <td>{{date('g:i a',  strtotime($item->admdate))}}</td>
+                @foreach($all as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
+                    <td>{{ $item->docAdmit}}</td>
+                    <td>{{ $item->inPatDate}}</td>
+                    <td>{{ $item->hpercode}}</td>
+                    <td>{{ $item->status}}</td>
+                    <td>
 
-
-                <!-- <td>{{$item->disdate ?? null ?: '--' }}</td> -->
-                <td>{{date('F j,Y', strtotime($item->disdate ))}}</td>
-                <td>{{date('g:i a', strtotime($item->disdate ))}}</td>
-                <td><div class="dropdown">
-                    <a class="btn btn-outline-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="dropdown">
+                    <!-- <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="/patientShow/{{$item->enccode}}">Edit</a></li>
+                        <li><a class="dropdown-item" href="/export/{{$item->enccode}}" ><input type="hidden" name="sendToExport" id="sendToExport" value="completeForm"> Export</a></li>
+                    </ul>
+                    </div> -->
+                    <div class="dropdown">
+                    <a class="btn btn-success btn-sm" href="/patientShow/{{$item->enccode}}">
                         Edit
                     </a>
+                    <!-- <input type="checkbox" name="sendToExport" value="completeForm"> -->
+                    </div>
+                    
+                      <!-- <a class="btn btn-success btn-sm " href="/patientShow/{{$item->enccode}}">Edit</a>
+                      <a class="btn btn-danger btn-sm " href="/patientShow/{{$item->enccode}}">To export lists</a> -->
+                    </td>
+                </tr>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/patientShow/{{$item->enccode}}">Injury Registration Form</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cancerForm/{{$item->enccode}}">Cancer Registration Form</a>
-                    </div>
-                    </div>
-                </td>
                 
-
-                <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode}}">print</a></td> -->
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
-          
-      </div>
-      
-
-  </div>
-  
-</div>
-
-<!-- <div class="row">
-    <div class="col float-end">
-    <a href="" class="btn btn-secondary btn-sm float-end" title="Patient lists">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Back
-                        </a>
+                @endforeach
+                </tbody>
+    </table>
     </div>
-</div> -->
+</div>
 
 
 

@@ -2,37 +2,36 @@
 
 namespace App\Exports;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Vwinjurylist;
+use App\Models\finalInputInjuryRegistry;
 use App\Models\injuryRegistry;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
+use Illuminate\Support\Facades\DB;
 
-class UsersExport extends Controller implements FromCollection, WithHeadings
+
+
+class BulkUsersExport extends Controller implements FromCollection, WithHeadings
 {
-    protected $id;
+    protected $selected;
 
-        function __construct($id) {
-                $this->id = $id;
+        function __construct($selected) {
+                $this->selected = $selected;
         }
-
+    
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        // $enccode = Vwinjurylist::select('id', 'patFirst', 'patMiddle', 'patLast')->where('enccode',$enccode)->get();
-        // return Vwinjurylist::select('id', 'patFirst', 'patMiddle', 'patLast')->where('enccode','ER702732Jul182017132155')->get();
-        
-            return injuryRegistry::
-            join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
-            ->select('injuryRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'injuryRegistry.inPatDate','injuryRegistry.status')
-            ->where('injuryRegistry.enccode',$this->id)
-            ->get();
-        
-    } 
+
+        return injuryRegistry::
+        join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
+        ->select('vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','injuryRegistry.*', 'injuryRegistry.inPatDate','injuryRegistry.status')
+        ->where('injuryRegistry.status', '=' ,'completeForm')
+        ->get();
+        // return finalInputInjuryRegistry::where('ENCCODE',$this->selected)->get();
+    }
     public function headings() :array
     {
         return ["id", "ENCCODE", "frstAid","concussion", "contusion", "openType", "closedType", "wound", "traumaticAmputation", "others1", "bites", "others2", "chemical", "sharp", "others3"
@@ -40,6 +39,7 @@ class UsersExport extends Controller implements FromCollection, WithHeadings
         , "transferred", "firstName", "middleName", "lName", "docAdmit", "abrasion", "avulsion", "site", "icdNature", "icdExternal", "workplaceInput", "inPatFinalDiag", "inPatOthers", "inPatTransfer", "inPatNature"
         , "inPatExternal", "inPatComments", "inPatLastName", "inPatFirstName", "inPatMiddleName", "inPatDept", "inPatLandline", "inPatMobile", "inPatEmail", "inPatStreet", "inPatRegion", "inPatProv", "inPatCity"
         , "inPatBrngy", "inPatZip", "inPatLastName2", "inPatFirstName2", "inPatMiddleName2", "inPatDept2", "inPatLandline2", "inPatMobile2", "inPatEmail2", "inPatStreet2", "inPatRegion2", "inPatProv2", "inPatCity2"
-        , "inPatBrngy2", "inPatZip2", "inPatDate","status"];
+        , "inPatBrngy2", "inPatZip2", "inPatDate","Status","patfirst","patmiddle","patlast"];
     }
 }
+ 
