@@ -28,6 +28,7 @@ class BulkUsersExport extends Controller implements FromCollection, WithHeadings
         return injuryRegistry::
         join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
         ->select('vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','injuryRegistry.*', 'injuryRegistry.inPatDate','injuryRegistry.status')
+        ->select('new.reg_no','new.hpercode','new.pat_last_name','new.pat_first_name','new.pat_middle_name','new.pat_current_address_region','new.pat_current_address_province','new.pat_current_address_city','new.pat_sex','new.pat_date_of_birth','new.age_years','new.age_months','new.pat_days','new.plc_regcode','new.provcode','new.plc_ctycode','new.inj_date','new.inj_time','new.encounter_date','new.encounter_time','new.inj_inent_code')
         ->where('injuryRegistry.status', '=' ,'completeForm')
         ->get();
         // return finalInputInjuryRegistry::where('ENCCODE',$this->selected)->get();

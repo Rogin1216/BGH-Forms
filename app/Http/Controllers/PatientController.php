@@ -10,12 +10,15 @@ use App\Models\exportedInjuryRegList;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
+
 // exports
 // use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport;
 use App\Exports\BulkUsersExport;
 use App\Models\finalInputInjuryRegistry;
+use App\Providers\RouteServiceProvider;
+
 
 class PatientController extends Controller
 {
@@ -26,6 +29,15 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
+        // $jsonpost =json_decode($post->getStatusCode());
+
+        // dd($request->user());
+        // if ($request->user()->hasVerifiedEmail()) {
+        //     return redirect()->intended(RouteServiceProvider::HOME);
+        // }
+        // if(Session::has('loginId')){
+        //     dd($request->session());
+        // }
         return view('patients.index');
     }
     
@@ -62,7 +74,6 @@ class PatientController extends Controller
             'patInfo',
             'encounters',
         ));
-        
      }
 
     public function print($hpercode)
@@ -91,16 +102,16 @@ class PatientController extends Controller
         // dd($request);
         return view('patients.exampleCH');
     }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$enccode)
+    public function save(Request $request,$enccode)
     {
-        // dd($request->status);
+        // dd('patient contorller');
         // dd($request->patType);
 
         // $saveTo = $request->saveTo;
@@ -245,7 +256,208 @@ class PatientController extends Controller
             '$request->dispoRdo',
             '$request->outcome',
             '$request->inPatDispoRdo',
-            '$request->inPatOutcomeRdo'
+            '$request->inPatOutcomeRdo',
+            '$request->payCh',
+            '$request->charityCh',
+            '$request->nbbCh',
+            '$request->cspmapRdo',
+            '$request->zpackRdo',
+            '$request->ToPRdo',
+            '$request->rdoSex',
+            '$request->rdoCivStat',
+            '$request->civChAnul',
+            '$request->civChDiv',
+            '$request->smkRdo',
+            '$request->smkRdoYes',
+            '$request->shsRdo',
+            '$request->alcoRdo',
+            '$request->alcoRdoYes',
+            '$request->sexHisRdo',
+            '$request->vacChHep',
+            '$request->vacChHPV',
+            '$request->occRdo',
+            '$request->expChVap',
+            '$request->expChPest',
+            '$request->expChDye',
+            '$request->expChOth',
+            '$request->medRdo',
+            '$request->medChDiaMell',
+            '$request->medChHyper',
+            '$request->medChCarDis',
+            '$request->medChCerDis',
+            '$request->medChLivDis',
+            '$request->medChStd',
+            '$request->medOth',
+            '$request->mensStatus',
+            '$request->causeChNat',
+            '$request->causeChSurg',
+            '$request->causeChRad',
+            '$request->causeChMed',
+            '$request->contraCh',
+            '$request->obHisCh',
+            '$request->infHuPapCh',
+            '$request->infHepBCh',
+            '$request->infHelPyCh',
+            '$request->infOthCh',
+            '$request->refRdo',
+            '$request->ToDRdo',
+            '$request->preDiaCancRdo',
+            '$request->trChChemo',
+            '$request->trChSurg',
+            '$request->trChRad',
+            '$request->trChHorm',
+            '$request->trChNone',
+            '$request->outRdo',
+            '$request->STchAnal',
+            '$request->STchBone',
+            '$request->STchBreast',
+            '$request->STchCerv',
+            '$request->STchColon',
+            '$request->STchTumEso',
+            '$request->STchGast',
+            '$request->STchHead',
+            '$request->STchHepa',
+            '$request->STchKidney',
+            '$request->STchNeuro',
+            '$request->STchLung',
+            '$request->STchOva',
+            '$request->STchPanc',
+            '$request->STchPros',
+            '$request->STchRect',
+            '$request->STchSkin',
+            '$request->STchSoftTis',
+            '$request->STchTestis',
+            '$request->STchThy',
+            '$request->STchBlad',
+            '$request->STchUterine',
+            '$request->STchOther',
+            '$request->heMalChAll',
+            '$request->heMalChBcell',
+            '$request->heMalChTcell',
+            '$request->heMaChAML',
+            '$request->heMaChBlymp',
+            '$request->heMaChHodg',
+            '$request->heMaChMDS',
+            '$request->heMaChTlymp',
+            '$request->heMaChOth',
+            '$request->conChNa',
+            '$request->conSTchAnal',
+            '$request->conSTchBone',
+            '$request->conSTchBreast',
+            '$request->conSTchCerv',
+            '$request->conSTchColon',
+            '$request->conSTchTumEso',
+            '$request->conSTchGast',
+            '$request->conSTchHead',
+            '$request->conSTchHepa',
+            '$request->conSTchKidney',
+            '$request->conSTchNeuro',
+            '$request->conSTchLung',
+            '$request->conSTchOva',
+            '$request->conSTchPanc',
+            '$request->conSTchPros',
+            '$request->conSTchRect',
+            '$request->conSTchSkin',
+            '$request->conSTchSoftTis',
+            '$request->conSTchTestis',
+            '$request->conSTchThy',
+            '$request->conSTchBlad',
+            '$request->conSTchUterine',
+            '$request->conSTchOther',
+            '$request->conheMalChAll',
+            '$request->conheMalChBcell',
+            '$request->conheMalChTcell',
+            '$request->conheMaChAML',
+            '$request->conheMaChBlymp',
+            '$request->conheMaChHodg',
+            '$request->conheMaChMDS',
+            '$request->conheMaChTlymp',
+            '$request->conheMaChOth',
+            '$request->TaBchCBC',
+            '$request->TaBchFBS',
+            '$request->TaBchCreat',
+            '$request->TaBchAST',
+            '$request->TaBchANC',
+            '$request->TaBchCXR',
+            '$request->TaBchECG',
+            '$request->TaBchUTZ',
+            '$request->TaBchCT',
+            '$request->TaBchEND',
+            '$request->TaBchMRI',
+            '$request->TaBchOth',
+            '$request->latChLeft',
+            '$request->latChRight',
+            '$request->latChMid',
+            '$request->latChBilat',
+            '$request->latChUndet',
+            '$request->histoChEndo',
+            '$request->histoChFNAB',
+            '$request->histoChCore',
+            '$request->histoChEx',
+            '$request->histoRdoGrd',
+            '$request->tstage0',
+            '$request->tstageIIA',
+            '$request->tstageIIIA',
+            '$request->tstage1A',
+            '$request->tstage1B',
+            '$request->tstageIIB',
+            '$request->tstageIIIB',
+            '$request->tstageIIIC',
+            '$request->tstageIV',
+            '$request->stagIn',
+            '$request->stagLocal',
+            '$request->stagDir',
+            '$request->stagReg',
+            '$request->stag34',
+            '$request->stagDis',
+            '$request->stagUn',
+            '$request->stagNone',
+            '$request->stagDisLy',
+            '$request->stagBone',
+            '$request->stagLiver',
+            '$request->stagLung',
+            '$request->stagBrain',
+            '$request->stagOvary',
+            '$request->stagSkin',
+            '$request->stagOther',
+            '$request->stagUnk',
+            '$request->treatCurCom',
+            '$request->primTreat',
+            '$request->trAddSur',
+            '$request->trAddRad',
+            '$request->trAddChem',
+            '$request->traAddImm',
+            '$request->trAddHormo',
+            '$request->trAddUn',
+            '$request->trAddOth',
+            '$request->trPlAddSur',
+            '$request->trPlAddRad',
+            '$request->trPlAddChem',
+            '$request->trPlAddImm',
+            '$request->trPlAddHormo',
+            '$request->trPlAddUn',
+            '$request->trPlAddOth',
+            '$request->trTrSurg',
+            '$request->trTrRad',
+            '$request->trTrChem',
+            '$request->trTrImm',
+            '$request->trTrHormo',
+            '$request->trTrUn',
+            '$request->trTrOth',
+            '$request->trPlNeo',
+            '$request->trPlAdj',
+            '$request->trPlMeta',
+            '$request->radTherapy',
+            '$request->idSiteSetting',
+            '$request->radiaThReg',
+            '$request->radiaThbst',
+            '$request->radThSurg',
+            '$request->ffStat',
+            '$request->FUdeptGyne',
+            '$request->FUdeptHema',
+            '$request->FUdeptMo',
+            '$request->FUdeptPedia',
+            '$request->FUdepttrt'
             ");
 
             $request->session()->flash('alert-success', 'Saved ');
@@ -274,11 +486,11 @@ class PatientController extends Controller
                 )
                 );
         }
-        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
+        $info = DB::table('vwInjuryList')->select('*')->where('enccode',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
         $chdata = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
         return view('patients.show', compact(
             'chdata',
-            'patients',
+            'info',
             ));
 
     }

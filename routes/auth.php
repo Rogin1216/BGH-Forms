@@ -8,7 +8,13 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatientController;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -19,8 +25,17 @@ Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    //  Route::get('/login', function () {
+    // Only authenticated users may enter...
+    // return view('auth.login');});
+    // })->middleware('auth');           
 
+    // Route::get('/login', function () {
+    //     return view('auth.login');
+    // })->middleware(['auth'])->name('auth.login');
+
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+ 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
 
@@ -34,7 +49,46 @@ Route::middleware('guest')->group(function () {
                 ->name('password.update');
 });
 
+
+
+// Route::group(['middleware' => ['auth']], function () {
+    
+    // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    //     $request->fulfill();
+     
+    //     dd('asdf');
+    //     return redirect("/index");
+    // })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    // Route::get('/index','PatientController@index');
+//     Route::get('/search','PatientController@index');
+// });
+
+// Route::get('/index', function () {
+//     //
+// })->middleware('auth');
+
+// Route::get('profile', function () {
+    
+// })->middleware('verified');
+
+// Route::group(['middleware'=>['protectedPage']],function(){
+//     Route::get('/index','PatientController@index');
+//     Route::get('/search','PatientController@index');
+// });
+
+// Route::get('/index',[LoginController::class],'redirectToindex');
+// Route::get('/index',[HomeController::class,'index']);
+// Route::get('/index','HomeController@index');
+// Route::get('/index', function () {
+//     return view('index');
+// })->middleware(['auth'])->name('index');
+
+Route::get('/index',[AuthenticatedSessionController::class,'index'])->middleware('loggedin');
+
 Route::middleware('auth')->group(function () {
+    // Route::get('/index',[AuthenticatedSessionController::class,'index']);
+    
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 

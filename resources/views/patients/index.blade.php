@@ -133,7 +133,15 @@
                     <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
                     <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
                     <a class="dropdown-item" href="/archive">Archive</a>
-                    <a class="dropdown-item" href="/sampleForm">sample form</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Cancer Registry Table
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
+                    <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
                     </div>
                 </li>
                 </ul>

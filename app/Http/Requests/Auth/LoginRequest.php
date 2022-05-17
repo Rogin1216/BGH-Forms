@@ -7,7 +7,10 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Http;
+
 
 class LoginRequest extends FormRequest
 {
@@ -26,12 +29,19 @@ class LoginRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(request $request)
     {
+        $username = $request->input('name');
+        $password = $request->input('password');
         return [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
+        // return [
+        //     'email' => ['required', 'string', 'email'],
+        //     'password' => ['required', 'string'],
+        // ];
+        
     }
 
     /**
@@ -52,6 +62,7 @@ class LoginRequest extends FormRequest
                 'email' => trans('auth.failed'),
             ]);
         }
+
 
         RateLimiter::clear($this->throttleKey());
     }

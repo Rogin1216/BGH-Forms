@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/index';
+    
 
     /**
      * The controller namespace for the application.
@@ -27,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string|null
      */
     protected $namespace = 'App\\Http\\Controllers';
-
+ 
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -48,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
-
+ 
     /**
      * Configure the rate limiters for the application.
      *

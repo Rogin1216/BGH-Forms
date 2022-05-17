@@ -1,6 +1,24 @@
 @extends('patients.layouts')
 @section('content')
 <style>
+        #divpat{
+            width: 70%;
+        }
+        #divsex{
+            width: 30%;
+        }
+        #divaddress{
+            width: 50%;
+        }
+        #divbday{
+            width: 50%;
+        }
+        #inputshort{
+            width: 30%;
+        }
+        #injdate{
+            width: 50%;
+        }
         @media print {
         .rows-print-as-pages .container {
             page-break-after: always;
@@ -11,6 +29,13 @@
             page-break-before: avoid;
         }
         */
+        .col-lg-6 {
+            width: 100%;
+        }
+        .lastname-pat{
+            width: 100%;
+        }
+        
         }
         .header{
                 background-color: green;
@@ -153,12 +178,12 @@
   </div> -->
 
 
-@foreach($patients as $patients) 
+@foreach($info as $patients) 
     @foreach($chdata as $chdata) 
     @endforeach
     @endforeach
-
-<form action="/store/{{$patients->enccode}}" type="get">
+ 
+<form action="/save/{{$patients->enccode}}" type="get">
 <!-- <form action="/saveTo/{{$patients->enccode}}" type="get"> -->
 
 <div class="card">
@@ -170,20 +195,198 @@
 
             <!--<input type="checkbox" value="Edit" id="editChx"><label>Edit profile</label></br>-->
             <div class="grid-container">
-                <div class="item1">
-                    <label>First Name:</label>
-                    <input type="text" name="firstName" id="firstName" value="{{$patients->patfirst}}"
-                        class="form-control"  disabled>
+                <div class="row">
+                    <div class="col">
+                    <div class="row">
+        <div class="border-top border-start border-secondary divpat" id="divpat">
+            <b>Name of Patient</b>
+            <div class="row" id="patname">
+                <div class="col" id="patname">
+                <p class="small">last name</p> 
+                    <input type="text" class="inputlabelunderlineName" name="patLast" value="{{$patients->patlast}}" >
                 </div>
-                <div class="item2">
-                    <label>Middle name:</label>
-                    <input type="text" name="middleName" id="middleName" value="{{$patients->patmiddle}}"
-                        class="form-control" disabled>
+                <div class="col">
+                <p class="small">First name (inlcude suffix)</p>
+                    <input type="text" class="inputlabelunderlineName" name="patFirst" value="{{$patients->patfirst}}" >
                 </div>
-                <div class="item3">
-                    <label>Last name:</label>
-                    <input type="text" name="lName" id="lName" value="{{$patients->patlast}}" class="form-control" disabled>
-                </div>   
+                <div class="col">
+                <p class="small">Middle name</p>
+                    <input type="text" class="inputlabelunderlineName" name="patMiddle" value="{{$patients->patmiddle}}">
+                </div>
+            </div>
+        </div>
+        <div class="border border-end-0 border-secondary" id="divsex">
+            <b>Sex:</b>
+            <div class="row">
+                <div class="col">
+                        <input class="form-check-input" type="radio" value="Female" name="rdoSex" id="female" {{ ($chdata->rdoSex == 'Female'? ' checked' : '') }}>
+                        <label class="form-check-label" for="female">
+                            Female
+                        </label>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col">
+                        <input class="form-check-input" type="radio" value="male" name="rdoSex" id="male" {{ ($chdata->rdoSex == 'male'? ' checked' : '') }}>
+                        <label class="form-check-label" for="male">
+                            Male
+                        </label>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="border border-secondary" id="divaddress">
+            <b>Current Address</b>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patReg">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                            <p class="small">Region</p> 
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patProv">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                                <p class="small">Province</p> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patCity">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                                <p class="small">City/Municipality</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border border-secondary" id="divaddress">
+            <b>plc_Address</b>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patReg">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                            <p class="small">plc_regcode</p> 
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patProv">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                                <p class="small">plc_provcode</p> 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="text" class="inputlabelunderlineName" name="patCity">
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-check-label" for="">
+                                <p class="small">plc_ctycode</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="border-start border-end border-secondary" id="divbday">
+                <div class="row">
+                    <div class="col">
+                            Birthday:
+                        <input type="date" name="patBday">
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                    Age:
+                                    <input type="text" class="inputlabelunderlineName" name="age_years" id="inputshort">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                    Months:
+                                    <input type="text" class="inputlabelunderlineName" name="age_months" id="inputshort">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                    Days:
+                                    <input type="text" class="inputlabelunderlineName" name="age_days" id="inputshort">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class=" border-end border-secondary" id="divbday">
+            <div class="row">
+                <div class="col">
+                    inj_date
+                    <input type="date" class="inputlabelunderlineName" name="inj_date" id="inputshort">
+                </div>
+                <div class="col">
+                    inj_time
+                    <input type="date" class="inputlabelunderlineName" name="inj_time" id="inputshort">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    encounter_date
+                    <input type="date" class="inputlabelunderlineName" name="encounter_date" id="inputshort">
+                </div>
+                <div class="col">
+                    encounter_time
+                    <input type="date" class="inputlabelunderlineName" name="encounter_time" id="inputshort">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    time_report
+                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" value="time_report">
+                </div>
+                <div class="col">
+                    date_report
+                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" value="date_report">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border border-secondary">
+        <div class="col">
+            tempreg_no:
+            <input type="text" class="inputlabelunderlineName" name="tempreg_no" value="tempreg_no">
+        </div>
+        <div class="col">
+            Philhealth No:
+            <input type="text" class="inputlabelunderlineName" name="pat_phil_health" value="pat_phil_health">
+        </div>
+        <div class="col">
+            Facility No:
+            <input type="text" class="inputlabelunderlineName" name="pat_facility_no" value="pat_facility_no">
+        </div>
+    </div>
+                    </div>
+                </div>
             </div>
 <br>
 
@@ -2102,7 +2305,7 @@
     $('#print').click(function(){
         document.execCommand('print');
     })
-</script>
+</script> 
 
 <script type="text/javascript">
     (function () {

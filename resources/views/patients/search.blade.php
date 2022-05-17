@@ -135,6 +135,15 @@
                                 <a class="dropdown-item" href="/archive">Archive</a>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cancer Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
+                                <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
+                                </div>
+                            </li>
                             </ul>
                         </div>
                     </nav>
@@ -148,7 +157,7 @@
                     <div class="row">
                             <div class="col-auto">
                                     {{csrf_field()}}
-                                    <input type="search" class="form-control" name="query" placeholder="Search..">
+                                    <input type="search" claFss="form-control" name="query" placeholder="Search..">
                             </div>
                             <div class="col-auto">
                                     <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Go </button>
