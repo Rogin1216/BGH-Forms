@@ -65,4 +65,4 @@ Route::get('/export/{id}','PatientController@export')->where('id','.*');        
 Route::get('/exportbulk/{id}','PatientController@exportbulk')->where('id','.*');        //export bulk to Excel
 Route::get('/exportAndProcedure/{id}','PatientController@exportAndProcedure');          //export bulk to Excel
 // });
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php'; 

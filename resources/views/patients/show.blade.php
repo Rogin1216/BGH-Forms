@@ -179,12 +179,11 @@
 
 
 @foreach($info as $patients) 
-    @foreach($chdata as $chdata) 
+    @foreach($chdatalist as $chdata) 
     @endforeach
-    @endforeach
+@endforeach
  
-<form action="/save/{{$patients->enccode}}" type="get">
-<!-- <form action="/saveTo/{{$patients->enccode}}" type="get"> -->
+<form action="/save/{{$patients->enccode1}}" type="get">
 
 <div class="card">
     <div class="card-header p-2 text-white" id="bgGreen">GENERAL DATA:</div>
@@ -202,37 +201,25 @@
             <b>Name of Patient</b>
             <div class="row" id="patname">
                 <div class="col" id="patname">
-                <p class="small">last name</p> 
-                    <input type="text" class="inputlabelunderlineName" name="patLast" value="{{$patients->patlast}}" >
+                <p class="small"><i>last name</i> </p> 
+                <label for=""><b>{{$patients->patlast}}</b> </label>
+                    <!-- <input type="text" class="inputlabelunderline" name="patlast" value="" > -->
                 </div>
                 <div class="col">
-                <p class="small">First name (inlcude suffix)</p>
-                    <input type="text" class="inputlabelunderlineName" name="patFirst" value="{{$patients->patfirst}}" >
+                <p class="small"><i>First name (inlcude suffix)</i> </p>
+                <label for=""><b>{{$patients->patfirst}}</b> </label>
+                    <!-- <input type="text" class="inputlabelunderline" name="patfirst" value="" > -->
                 </div>
                 <div class="col">
-                <p class="small">Middle name</p>
-                    <input type="text" class="inputlabelunderlineName" name="patMiddle" value="{{$patients->patmiddle}}">
+                <p class="small"><i>Middle name</i> </p>
+                <label for=""><b> {{$patients->patmiddle}}</b></label>
+                    <!-- <input type="text" class="inputlabelunderline" name="patmiddle" value="{{$patients->patmiddle}}"> -->
                 </div>
             </div>
         </div>
         <div class="border border-end-0 border-secondary" id="divsex">
             <b>Sex:</b>
-            <div class="row">
-                <div class="col">
-                        <input class="form-check-input" type="radio" value="Female" name="rdoSex" id="female" {{ ($chdata->rdoSex == 'Female'? ' checked' : '') }}>
-                        <label class="form-check-label" for="female">
-                            Female
-                        </label>
-                </div>  
-            </div>
-            <div class="row">
-                <div class="col">
-                        <input class="form-check-input" type="radio" value="male" name="rdoSex" id="male" {{ ($chdata->rdoSex == 'male'? ' checked' : '') }}>
-                        <label class="form-check-label" for="male">
-                            Male
-                        </label>
-                </div>  
-            </div>
+            <label for="">{{$patients->pat_sex}}</label>
         </div>
     </div>
     <div class="row">
@@ -240,32 +227,31 @@
             <b>Current Address</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patReg">
+                <p class="small"><i>Region name</i> </p>
+                    <div class="row">
+                        <div class="col">
+                        <label for=""><b>{{$patients->pat_current_address_region_name}}</b></label>
+                        </div>
+                    </div>
+                                        
+                </div>
+                <div class="col">
+                <p class="small">Province</p> 
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
-                            <p class="small">Region</p> 
+                                
+                                <label for=""><b>{{$patients->pat_current_address_province_name}}</b></label>
                             </label>
                         </div>
                     </div>
-                    
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patProv">
+                <p class="small">City/Municipality</p>
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
-                                <p class="small">Province</p> 
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patCity">
-                    <div class="row">
-                        <div class="col">
-                            <label class="form-check-label" for="">
-                                <p class="small">City/Municipality</p>
+                                <b>{{$patients->pat_current_address_city_name}}</b>
                             </label>
                         </div>
                     </div>
@@ -276,7 +262,7 @@
             <b>plc_Address</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patReg">
+                    <input type="text" class="inputlabelunderline" name="plc_regcode">
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
@@ -287,7 +273,7 @@
                     
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patProv">
+                    <input type="text" class="inputlabelunderline" name="plc_provcode">
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
@@ -297,7 +283,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patCity">
+                    <input type="text" class="inputlabelunderline" name="plc_ctycode">
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
@@ -314,25 +300,24 @@
                 <div class="row">
                     <div class="col">
                             Birthday:
-                        <input type="date" name="patBday">
+                        {{date('F j,Y',  strtotime($patients->pat_date_of_birth))}}
+                        
+                        
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col">
                                     Age:
-                                    <input type="text" class="inputlabelunderlineName" name="age_years" id="inputshort">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                     Months:
-                                    <input type="text" class="inputlabelunderlineName" name="age_months" id="inputshort">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                     Days:
-                                    <input type="text" class="inputlabelunderlineName" name="age_days" id="inputshort">
                             </div>
                         </div>
                     </div>
@@ -342,31 +327,60 @@
             <div class="row">
                 <div class="col">
                     inj_date
-                    <input type="date" class="inputlabelunderlineName" name="inj_date" id="inputshort">
+                    <div class="row">
+                        <div class="col">
+                    <input type="date" class="inputlabelunderlineName" name="inj_date" id="">
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     inj_time
-                    <input type="date" class="inputlabelunderlineName" name="inj_time" id="inputshort">
+                    <div class="row">
+                        <div class="col">
+                    <input type="date" class="inputlabelunderlineName" name="inj_time" id="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     encounter_date
-                    <input type="date" class="inputlabelunderlineName" name="encounter_date" id="inputshort">
+                    <div class="row">
+                        <div class="col">
+                    <input type="date" class="inputlabelunderlineName" name="encounter_date" id="">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     encounter_time
-                    <input type="date" class="inputlabelunderlineName" name="encounter_time" id="inputshort">
+                    <div class="row">
+                        <div class="col">
+                    <input type="date" class="inputlabelunderlineName" name="encounter_time" id="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     time_report
-                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" value="time_report">
+                    <div class="row">
+                        <div class="col">
+                    <input type="time" id="appt" name="time_report" min="09:00" max="18:00" value="">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="col">
                     date_report
-                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" value="date_report">
+                    <div class="row">
+                        <div class="col">
+                    <input type="time" id="appt" name="date_report" min="09:00" max="18:00" value="">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,15 +388,15 @@
     <div class="row border border-secondary">
         <div class="col">
             tempreg_no:
-            <input type="text" class="inputlabelunderlineName" name="tempreg_no" value="tempreg_no">
+            <input type="text" class="inputlabelunderlineName" name="tempreg_no" value="{{$patients->tempreg_no}}">
         </div>
         <div class="col">
             Philhealth No:
-            <input type="text" class="inputlabelunderlineName" name="pat_phil_health" value="pat_phil_health">
+            <input type="text" class="inputlabelunderlineName" name="pat_phil_health_no" value="{{$patients->pat_phil_health_no}}">
         </div>
         <div class="col">
             Facility No:
-            <input type="text" class="inputlabelunderlineName" name="pat_facility_no" value="pat_facility_no">
+            <input type="text" class="inputlabelunderlineName" name="pat_facility_no" value="{{$patients->pat_facility_no}}">
         </div>
     </div>
                     </div>
@@ -426,7 +440,7 @@
                         
                         <div class="col" id="docAdmitCol">
                             <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
-                                placeholder="name of doctor" class="form-control" required>
+                                placeholder="name of doctor" class="form-control">
                         </div>
                     </div>
                     </div>
@@ -2116,24 +2130,24 @@
                                 <h6 class="form-check-label" for="flexCheckDefault">
                                                             Consultant in-charge
                                                         </h6>
-                                    <input type="text" class="inputlabelunderline2" name="inPatLastName"
-                                                    value="{{$patients->inPatLastName}}" placeholder="Last Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatFirstName"
-                                                    value="{{$patients->inPatFirstName}}" placeholder="First Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatMiddleName"
-                                                    value="{{$patients->inPatMiddleName}}" placeholder="Middle Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatDept"
-                                                    value="{{$patients->inPatDept}}" placeholder="Department">
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_last_name"
+                                                    value="{{$patients->consultant_in_charge_last_name}}" placeholder="Last Name">
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_first_name"
+                                                    value="{{$patients->consultant_in_charge_first_name}}" placeholder="First Name">
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_middle_name"
+                                                    value="{{$patients->consultant_in_charge_middle_name}}" placeholder="Middle Name">
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_department"
+                                                    value="{{$patients->consultant_in_charge_department}}" placeholder="Department">
                                 </div>
                             </div>
                         </div>
                         <div class="col border border-secondary">
-                                <input type="text" class="inputlabelunderline2" name="inPatLandline"
-                                                    value="{{$patients->inPatLandline}}" placeholder="Landline#">
-                                <input type="text" class="inputlabelunderline2" name="inPatMobile"
-                                                    value="{{$patients->inPatMobile}}" placeholder="Mobile#">
-                                <input type="text" class="inputlabelunderline" name="inPatEmail"
-                                                    value="{{$patients->inPatEmail}}" placeholder="Email ">
+                                <input type="text" class="inputlabelunderline2" name="consultant_landline"
+                                                    value="{{$patients->consultant_landline}}" placeholder="Landline#">
+                                <input type="text" class="inputlabelunderline2" name="consultant_mobile"
+                                                    value="{{$patients->consultant_mobile}}" placeholder="Mobile#">
+                                <input type="text" class="inputlabelunderline" name="consultant_email"
+                                                    value="{{$patients->consultant_email}}" placeholder="Email ">
                         </div>
                         </div>
                     </div>
@@ -2146,18 +2160,18 @@
                                         <h6 class="form-check-label" for="flexCheckDefault">
                                                             Address
                                                         </h6>
-                                            <input type="text" class="inputlabelunderline2" name="inPatStreet"
-                                                            value="{{$patients->inPatStreet}}" placeholder="# and Street Name">
-                                            <input type="text" class="inputlabelunderline2" name="inPatRegion"
-                                                            value="{{$patients->inPatRegion}}" placeholder="Region">
-                                            <input type="text" class="inputlabelunderline2" name="inPatProv"
-                                                            value="{{$patients->inPatProv}}" placeholder="Province">
-                                            <input type="text" class="inputlabelunderline2" name="inPatCity"
-                                                            value="{{$patients->inPatCity}}" placeholder="City/Municipality">
-                                            <input type="text" class="inputlabelunderline2" name="inPatBrngy"
-                                                            value="{{$patients->inPatBrngy}}" placeholder="Barangay">
-                                            <input type="text" class="inputlabelunderline2" name="inPatZip"
-                                                            value="{{$patients->inPatZip}}" placeholder="Zip Code">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_street_name"
+                                                            value="{{$patients->consultant_street_name}}" placeholder="# and Street Name">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_region"
+                                                            value="{{$patients->consultant_region}}" placeholder="Region">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_province"
+                                                            value="{{$patients->consultant_province}}" placeholder="Province">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_city"
+                                                            value="{{$patients->consultant_city}}" placeholder="City/Municipality">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_barangay"
+                                                            value="{{$patients->consultant_barangay}}" placeholder="Barangay">
+                                            <input type="text" class="inputlabelunderline2" name="consultant_zipcode"
+                                                            value="{{$patients->consultant_zipcode}}" placeholder="Zip Code">
                                         </div>
                                     </div>
                                 </div>
@@ -2172,24 +2186,24 @@
                                 <h6 class="form-check-label" for="flexCheckDefault">
                                                             Completed By:
                                                         </h6>
-                                    <input type="text" class="inputlabelunderline2" name="inPatLastName2"
-                                                    value="{{$patients->inPatLastName2}}" placeholder="Last Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatFirstName2"
-                                                    value="{{$patients->inPatFirstName2}}" placeholder="First Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatMiddleName2"
-                                                    value="{{$patients->inPatMiddleName2}}" placeholder="Middle Name">
-                                    <input type="text" class="inputlabelunderline2" name="inPatDept2"
-                                                    value="{{$patients->inPatDept2}}" placeholder="Department">
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_last_name"
+                                                    value="{{$patients->completedBy_last_name}}" placeholder="Last Name">
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_first_name"
+                                                    value="{{$patients->completedBy_first_name}}" placeholder="First Name">
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_middle_name"
+                                                    value="{{$patients->completedBy_middle_name}}" placeholder="Middle Name">
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_department"
+                                                    value="{{$patients->completedBy_department}}" placeholder="Department">
                                 </div>
                             </div>
                         </div>
                         <div class="col border border-secondary">
-                                <input type="text" class="inputlabelunderline2" name="inPatLandline2"
-                                                    value="{{$patients->inPatLandline2}}" placeholder="Landline#">
-                                <input type="text" class="inputlabelunderline2" name="inPatMobile2"
-                                                    value="{{$patients->inPatMobile2}}" placeholder="Mobile#">
-                                <input type="text" class="inputlabelunderline" name="inPatEmail2"
-                                                    value="{{$patients->inPatEmail2}}" placeholder="Email ">
+                                <input type="text" class="inputlabelunderline2" name="completedBy_landline"
+                                                    value="{{$patients->completedBy_landline}}" placeholder="Landline#">
+                                <input type="text" class="inputlabelunderline2" name="completedBy_mobile"
+                                                    value="{{$patients->completedBy_mobile}}" placeholder="Mobile#">
+                                <input type="text" class="inputlabelunderline" name="completedBy_email"
+                                                    value="{{$patients->completedBy_email}}" placeholder="Email ">
                         </div>
                         </div>
                     </div>
@@ -2202,33 +2216,28 @@
                                         <h6 class="form-check-label" for="flexCheckDefault">
                                                             Address
                                                         </h6>
-                                            <input type="text" class="inputlabelunderline2" name="inPatStreet2"
-                                                            value="{{$patients->inPatStreet2}}" placeholder="# and Street Name">
-                                            <input type="text" class="inputlabelunderline2" name="inPatRegion2"
-                                                            value="{{$patients->inPatRegion2}}" placeholder="Region">
-                                            <input type="text" class="inputlabelunderline2" name="inPatProv2"
-                                                            value="{{$patients->inPatProv2}}" placeholder="Province">
-                                            <input type="text" class="inputlabelunderline2" name="inPatCity2"
-                                                            value="{{$patients->inPatCity2}}" placeholder="City/Municipality">
-                                            <input type="text" class="inputlabelunderline2" name="inPatBrngy2"
-                                                            value="{{$patients->inPatBrngy2}}" placeholder="Barangay">
-                                            <input type="text" class="inputlabelunderline2" name="inPatZip2"
-                                                            value="{{$patients->inPatZip2}}" placeholder="Zip Code">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_street"
+                                                            value="{{$patients->completedBy_street}}" placeholder="# and Street Name">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_region"
+                                                            value="{{$patients->completedBy_region}}" placeholder="Region">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_province"
+                                                            value="{{$patients->completedBy_province}}" placeholder="Province">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_City"
+                                                            value="{{$patients->completedBy_City}}" placeholder="City/Municipality">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_barangay"
+                                                            value="{{$patients->completedBy_barangay}}" placeholder="Barangay">
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_zip"
+                                                            value="{{$patients->completedBy_zip}}" placeholder="Zip Code">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <label for="birthday">Date Completed:</label>
-                                    <input type="date" value="{{$patients->inPatDate}}" name="inPatDate" required>
+                                    <input type="date" value="{{$patients->date_completed}}" name="date_completed" required>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
 
-                        
-                        
                 </div>
                 </div>
             </div>
@@ -2273,7 +2282,7 @@
                             </svg> Print</button>
                         </div>
                         <!-- <div class="col-auto">
-                            <form action="/export/{{$patients->enccode}}" type="get">
+                            <form action="/export/{{$patients->enccode1}}" type="get">
                                 <input type="hidden" id="status" name="status" value="archive">
                             <button name="status" id="status" value="archive" type="submit" class="btn btn-outline-success d-print-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
                             <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>

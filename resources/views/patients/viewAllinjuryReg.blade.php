@@ -169,7 +169,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $a->patfirst}} {{ $a->patmiddle}} {{ $a->patlast}}</td>
                     <td>{{ $a->docAdmit}} </td>
-                    <td>{{ $a->inPatDate}} </td>
+                    <td>{{ $a->date_completed}} </td>
                     <td>{{ $a->enccode}}</td>
                     
                     <!-- <td>

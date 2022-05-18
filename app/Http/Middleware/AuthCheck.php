@@ -18,11 +18,11 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Session()->has('loginId')){
+        if(!Session()->has('loginId')){ 
         // if(!$request->session()->has('loginId')){
-            dd('loginId');
-            return redirect('login');
-            // return $next($request);
+            // dd('loginId');
+            // return redirect('login');
+            return $next($request);
         }
         else{
             // dd($next($request));

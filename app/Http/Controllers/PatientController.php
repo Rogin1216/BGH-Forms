@@ -3,13 +3,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patient;
-use App\Models\Vwinjurylist;
+use App\Models\vwInjuryList3;
 use App\Models\injuryRegistry;
 use App\Models\checkboxList;
 use App\Models\exportedInjuryRegList;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Carbon\Carbon; // Include Class in COntroller
 
 // exports
 // use Maatwebsite\Excel\Excel;
@@ -46,11 +47,11 @@ class PatientController extends Controller
         $startDate = $request->startDate;
         $endDate = $request->endDate;
         $datePat = DB::table('injuryRegistry')
-            ->join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
-            ->select('injuryRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'injuryRegistry.inPatDate')
-            ->whereBetween('injuryRegistry.inPatDate',[$startDate, $endDate])
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed')
+            ->whereBetween('injuryRegistry.date_completed',[$startDate, $endDate])
             ->where('injuryRegistry.status','archive')
-            ->orderBy('injuryRegistry.inPatDate', 'asc')
+            ->orderBy('injuryRegistry.date_completed', 'asc')
             ->get();
 
             return view('patients.searchDatefilter', [
@@ -68,8 +69,8 @@ class PatientController extends Controller
 
      public function viewencounter($hpercode){
         // dd($hpercode);
-        $patInfo = DB::table('vwInjuryList')->select('patlast', 'patfirst', 'patmiddle')->where('hpercode',$hpercode)->limit(1)->get();
-         $encounters = DB::table('vwInjuryList')->where('hpercode',$hpercode)->get();
+        $patInfo = DB::table('vwInjuryList3')->select('patlast', 'patfirst', 'patmiddle')->where('hpercode',$hpercode)->limit(1)->get();
+         $encounters = DB::table('vwInjuryList3')->where('hpercode',$hpercode)->get();
         return view('patients.modal.encounters', compact(
             'patInfo',
             'encounters',
@@ -78,14 +79,14 @@ class PatientController extends Controller
 
     public function print($hpercode)
     {
-        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
+        $patients = DB::table('vwInjuryList3')->select('*')->where('enccode1',$hpercode)->get();
         return view('patients.print')->with('patients', $patients);
     }
     //open Cancer form
     public function createCancerform($hpercode)
     {
         // dd($hpercode);
-        $patients = DB::table('vwInjuryList')->select('*')->where('enccode',$hpercode)->get();
+        $patients = DB::table('vwInjuryList3')->select('*')->where('enccode1',$hpercode)->get();
         return view('patients.createCancer')->with('patients', $patients);
         // return view('patients.createCancer');
     }
@@ -163,35 +164,44 @@ class PatientController extends Controller
             '$request->inPatNature',
             '$request->inPatExternal',
             '$request->inPatComments',
-            '$request->inPatLastName',
-            '$request->inPatFirstName',
-            '$request->inPatMiddleName',
-            '$request->inPatDept',
-            '$request->inPatLandline',
-            '$request->inPatMobile',
-            '$request->inPatEmail',
-            '$request->inPatStreet',
-            '$request->inPatRegion',
-            '$request->inPatProv',
-            '$request->inPatCity',
-            '$request->inPatBrngy',
-            '$request->inPatZip',
-            '$request->inPatLastName2',
-            '$request->inPatFirstName2',
-            '$request->inPatMiddleName2',
-            '$request->inPatDept2',
-            '$request->inPatLandline2',
-            '$request->inPatMobile2',
-            '$request->inPatEmail2',
-            '$request->inPatStreet2',
-            '$request->inPatRegion2',
-            '$request->inPatProv2',
-            '$request->inPatCity2',
-            '$request->inPatBrngy2',
-            '$request->inPatZip2',
-            '$request->inPatDate',
+            '$request->consultant_in_charge_last_name',
+            '$request->consultant_in_charge_first_name',
+            '$request->consultant_in_charge_middle_name',
+            '$request->consultant_in_charge_department',
+            '$request->consultant_landline',
+            '$request->consultant_mobile',
+            '$request->consultant_email',
+            '$request->consultant_street_name',
+            '$request->consultant_region',
+            '$request->consultant_province',
+            '$request->consultant_city',
+            '$request->consultant_barangay',
+            '$request->consultant_zipcode',
+            '$request->completedBy_last_name',
+            '$request->completedBy_first_name',
+            '$request->completedBy_middle_name',
+            '$request->completedBy_department',
+            '$request->completedBy_landline',
+            '$request->completedBy_mobile',
+            '$request->completedBy_email',
+            '$request->completedBy_street',
+            '$request->completedBy_region',
+            '$request->completedBy_province',
+            '$request->completedBy_City',
+            '$request->completedBy_barangay',
+            '$request->completedBy_zip',    
+            '$request->date_completed',
+            '$request->tempreg_no',
+            '$request->pat_phil_health_no',
+            '$request->pat_facility_no',
             '$request->status'
             ");
+            // '$request->inj_date',
+            // '$request->inj_time',
+            // '$request->encounter_date',
+            // '$request->encounter_time',
+            // '$request->time_report',
+            // '$request->date_report',
             DB::UPDATE("EXEC registry.dbo.InsertChValue
             '$enccode',
             '$request->rdoAid',
@@ -472,6 +482,14 @@ class PatientController extends Controller
      */
     public function show(Request $request,$enccode)
     {
+// $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
+// dd($request->date_of_birth);
+// $date=$info->patlast;
+// dd($request);
+// $request->date_of_birth = "2000-10-25";
+// $age = Carbon::parse($request->date_of_birth)->diff(Carbon::now())->y;
+// dd($age. " Years");
+        // dd('adsfdsa');
         if(checkboxList::where('enccode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
             // $enccode->save();
@@ -486,13 +504,13 @@ class PatientController extends Controller
                 )
                 );
         }
-        $info = DB::table('vwInjuryList')->select('*')->where('enccode',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
-        $chdata = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
+        $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
+        $chdatalist = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
+        // dd($chdata);
         return view('patients.show', compact(
-            'chdata',
             'info',
+            'chdatalist',
             ));
-
     }
 
     /**
@@ -539,8 +557,9 @@ class PatientController extends Controller
         // dd($request);
             $search_text = $request->input('query');
             // dd($search_text);
-               $patient = Vwinjurylist::select('patfirst','patmiddle','patlast', 'hpercode')
-            //    $patient = DB::table('vwInjuryList')
+               $patient = DB::table('vwInjuryList3')->select('patfirst','patmiddle','patlast', 'hpercode')
+            //    $patient = vwInjuryList3::select('patfirst','patmiddle','patlast', 'hpercode')
+            //    $patient = DB::table('vwInjuryList3')
                ->Where(DB::raw("concat(patfirst, ' ', patmiddle, ' ', patlast)"), 'LIKE', "%".$search_text."%")
                ->orwhere ('patfirst', 'LIKE', $search_text)
                ->orWhere ('patmiddle', 'LIKE', '%'.$search_text.'%')
@@ -562,8 +581,8 @@ class PatientController extends Controller
     public function viewinjuryReg(){
         
         $all = DB::table('injuryRegistry')
-            ->join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
-            ->select('injuryRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'injuryRegistry.inPatDate','injuryRegistry.status')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
             ->where('injuryRegistry.status', '=', 'drafts')
             ->get();
 
@@ -575,8 +594,8 @@ class PatientController extends Controller
     public function viewAllinjuryReg(request $request){
 
         $all = DB::table('injuryRegistry')
-        ->join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
-        ->select('injuryRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'injuryRegistry.inPatDate','injuryRegistry.status')
+        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
         ->where('injuryRegistry.status', '=', 'completeForm')
         ->get();
 
@@ -634,8 +653,8 @@ class PatientController extends Controller
         '$request->inPatNature',
         '$request->inPatExternal',
         '$request->inPatComments',
-        '$request->inPatLastName',
-        '$request->inPatFirstName',
+        '$request->inpat_last_nameName',
+        '$request->inpat_first_nameName',
         '$request->inPatMiddleName',
         '$request->inPatDept',
         '$request->inPatLandline',
@@ -647,8 +666,8 @@ class PatientController extends Controller
         '$request->inPatCity',
         '$request->inPatBrngy',
         '$request->inPatZip',
-        '$request->inPatLastName2',
-        '$request->inPatFirstName2',
+        '$request->inpat_last_nameName2',
+        '$request->inpat_first_nameName2',
         '$request->inPatMiddleName2',
         '$request->inPatDept2',
         '$request->inPatLandline2',
@@ -660,7 +679,7 @@ class PatientController extends Controller
         '$request->inPatCity2',
         '$request->inPatBrngy2',
         '$request->inPatZip2',
-        '$request->inPatDate'
+        '$request->date_completed'
         ");
 
         return $this->exportbulk($request);
@@ -718,8 +737,8 @@ class PatientController extends Controller
             '$request->inPatNature',
             '$request->inPatExternal',
             '$request->inPatComments',
-            '$request->inPatLastName',
-            '$request->inPatFirstName',
+            '$request->inpat_last_nameName',
+            '$request->inpat_first_nameName',
             '$request->inPatMiddleName',
             '$request->inPatDept',
             '$request->inPatLandline',
@@ -731,8 +750,8 @@ class PatientController extends Controller
             '$request->inPatCity',
             '$request->inPatBrngy',
             '$request->inPatZip',
-            '$request->inPatLastName2',
-            '$request->inPatFirstName2',
+            '$request->inpat_last_nameName2',
+            '$request->inpat_first_nameName2',
             '$request->inPatMiddleName2',
             '$request->inPatDept2',
             '$request->inPatLandline2',
@@ -744,7 +763,7 @@ class PatientController extends Controller
             '$request->inPatCity2',
             '$request->inPatBrngy2',
             '$request->inPatZip2',
-            '$request->inPatDate',
+            '$request->date_completed',
             '$request->status'
             ");
 
@@ -753,13 +772,13 @@ class PatientController extends Controller
     }
     public function infoNext(request $request,$enccode){
     
-        // $next = DB::table('finalInputInjuryRegistry')->select('*')->where('enccode',$enccode)->get();
+        // $next = DB::table('finalInputInjuryRegistry')->select('*')->where('enccode1',$enccode)->get();
         $next = DB::table('finalInputInjuryRegistry')->select('*')->where('ENCCODE',$enccode)->get();
         // dd($next);
         // DB::table('finalInputInjuryRegistry')
         // ->select('*')
-        // ->insert(['enccode'     =>   $next, ]);
-            // ->insert(array('enccode'     =>   $enccode,));
+        // ->insert(['enccode1'     =>   $next, ]);
+            // ->insert(array('enccode1'     =>   $enccode,));
         // dd('adsfasdfasdfads');
 
         DB::UPDATE("EXEC registry.dbo.exportedInjuryRegistry 
@@ -808,8 +827,8 @@ class PatientController extends Controller
         '$request->inPatNature',
         '$request->inPatExternal',
         '$request->inPatComments',
-        '$request->inPatLastName',
-        '$request->inPatFirstName',
+        '$request->inpat_last_nameName',
+        '$request->inpat_first_nameName',
         '$request->inPatMiddleName',
         '$request->inPatDept',
         '$request->inPatLandline',
@@ -821,8 +840,8 @@ class PatientController extends Controller
         '$request->inPatCity',
         '$request->inPatBrngy',
         '$request->inPatZip',
-        '$request->inPatLastName2',
-        '$request->inPatFirstName2',
+        '$request->inpat_last_nameName2',
+        '$request->inpat_first_nameName2',
         '$request->inPatMiddleName2',
         '$request->inPatDept2',
         '$request->inPatLandline2',
@@ -834,7 +853,7 @@ class PatientController extends Controller
         '$request->inPatCity2',
         '$request->inPatBrngy2',
         '$request->inPatZip2',
-        '$request->inPatDate'
+        '$request->date_completed'
         ");
 
         return view('patients.infoNext');
@@ -842,7 +861,36 @@ class PatientController extends Controller
     
     public function exportbulk(request $request,$enccode){
         // $exportRd = $request->exportRd;
+        $all = DB::table('injuryRegistry')
+        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        ->join('checkboxList', 'injuryRegistry.enccode', '=', 'checkboxList.enccode')
+        ->select(
+        'vwInjuryList3.tempreg_no', 'vwInjuryList3.hpercode', 'vwInjuryList3.patlast', 'vwInjuryList3.patfirst','vwInjuryList3.patmiddle',
+        'vwInjuryList3.pat_current_address_region','vwInjuryList3.pat_current_address_province','vwInjuryList3.pat_current_address_city',
+        'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_months',
+        'vwInjuryList3.age_days','vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date',
+        'vwInjuryList3.inj_time','vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','checkboxList.rdoAid','checkboxList.abrasionCh',
+        'injuryRegistry.abrasion','checkboxList.avulsionCh','injuryRegistry.avulsion','injuryRegistry.site','checkboxList.concussionCh',
+        'injuryRegistry.concussion','checkboxList.contusionCh','injuryRegistry.contusion','checkboxList.closedTypeCh','injuryRegistry.closedType',
+        'checkboxList.openTypeCh','injuryRegistry.openType','checkboxList.woundCh','injuryRegistry.wound','checkboxList.traumaCh','injuryRegistry.traumaticAmputation',
+        'checkboxList.others1Ch','injuryRegistry.others1','checkboxList.bitesCh','injuryRegistry.bites','checkboxList.burnRdo','injuryRegistry.others2',
+        'checkboxList.chemicalCh','injuryRegistry.others3','checkboxList.sharpCh','injuryRegistry.sharp','checkboxList.drowningRdo','checkboxList.fallCh',
+        'injuryRegistry.fall','checkboxList.gunshotCh','injuryRegistry.gunshot','checkboxList.hangingCh','checkboxList.maulingCh','checkboxList.transportCh',
+        'injuryRegistry.others4')
 
+        // ->select('vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode','injuryRegistry.*', 'injuryRegistry.date_completed','injuryRegistry.status')
+        // ->select(
+        // 'vwInjuryList3.hpercode','vwInjuryList3.pat_last_name','vwInjuryList3.pat_first_name','vwInjuryList3.pat_middle_name',
+        // 'vwInjuryList3.pat_current_address_region','vwInjuryList3.pat_current_address_province','vwInjuryList3.pat_current_address_city',
+        // 'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.pat_days',
+        // 'vwInjuryList3.plc_regcode','vwInjuryList3.provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date','vwInjuryList3.inj_time',
+        // 'vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','vwInjuryList3.inj_inent_code')
+
+        ->where('injuryRegistry.status', '=' ,'completeForm')
+        ->get();
+
+
+        dd($all);
             return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
 
 
@@ -855,8 +903,8 @@ class PatientController extends Controller
     }
     public function archive(){
         $all = DB::table('injuryRegistry')
-        ->join('vwInjuryList', 'injuryRegistry.enccode', '=', 'vwInjuryList.enccode')
-        ->select('injuryRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'injuryRegistry.inPatDate','injuryRegistry.status')
+        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
         
         ->where('injuryRegistry.status', '=' ,'archive')
         ->get();

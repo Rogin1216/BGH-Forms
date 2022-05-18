@@ -174,7 +174,7 @@
                     <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
                     <td>{{ $item->docAdmit}} </td>
                     <td>{{ $item->hpercode}} </td>
-                    <td>{{ $item->inPatDate}} </td>
+                    <td>{{ $item->date_completed}} </td>
                     <td>{{ $item->status}} </td>
                     <!-- <td><input type="checkbox" name="selected[]" id="selected" value="{{ $item->ENCCODE}}"></td> -->
                     <!-- <td>

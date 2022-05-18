@@ -277,15 +277,15 @@ div.content {
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="/patientShow/{{$item->enccode}}">Injury Registration Form</a>
+                        <a class="dropdown-item" href="/patientShow/{{$item->enccode1}}">Injury Registration Form</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/cancerForm/{{$item->enccode}}">Cancer Registration Form</a>
+                        <a class="dropdown-item" href="/cancerForm/{{$item->enccode1}}">Cancer Registration Form</a>
                     </div>
                     </div>
                 </td>
                 
 
-                <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode}}">print</a></td> -->
+                <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode1}}">print</a></td> -->
               </tr>
               @endforeach
             </tbody>
