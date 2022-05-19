@@ -194,14 +194,43 @@ class PatientController extends Controller
             '$request->tempreg_no',
             '$request->pat_phil_health_no',
             '$request->pat_facility_no',
+            '$request->inj_date',
+            '$request->inj_time',
+            '$request->encounter_date',
+            '$request->encounter_time',
+            '$request->time_report',
+            '$request->date_report',
+            '$request->pno',
+            '$request->pre_date',
+            '$request->status_validation',
+            '$request->hosp_reg_no',
+            '$request->hosp_cas_no',
+            '$request->rstatuscode',
+            '$request->temp_regcode',
+            '$request->temp_provcode',
+            '$request->temp_citycode',
+            '$request->ext_expo_nature_sp',
+            '$request->reg_no',
+            '$request->hosp_no',
+            '$request->inj_intent_code',
+            '$request->vawcyn',
+            '$request->ref_hosp_code',
+            '$request->ref_hosp_code_sp',
+            '$request->status_code',
+            '$request->disp_er_sp_oth',
             '$request->status'
             ");
-            // '$request->inj_date',
-            // '$request->inj_time',
-            // '$request->encounter_date',
-            // '$request->encounter_time',
-            // '$request->time_report',
-            // '$request->date_report',
+            // '$request->tempreg_no',
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            // '$request->ext_expo_nature_sp',
+            // '$request->reg_no',
+            
             DB::UPDATE("EXEC registry.dbo.InsertChValue
             '$enccode',
             '$request->rdoAid',
@@ -267,6 +296,14 @@ class PatientController extends Controller
             '$request->outcome',
             '$request->inPatDispoRdo',
             '$request->inPatOutcomeRdo',
+            '$request->firecracker_code',
+            '$request->ext_expo_nature_sp_ch',
+            '$request->risk_noneCh',
+            '$request->degree_burn_1',
+            '$request->degree_burn_2',
+            '$request->degree_burn_3',
+            '$request->degree_burn_4',
+            '$request->degree_burn_5',
             '$request->payCh',
             '$request->charityCh',
             '$request->nbbCh',
@@ -864,27 +901,43 @@ class PatientController extends Controller
         $all = DB::table('injuryRegistry')
         ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->join('checkboxList', 'injuryRegistry.enccode', '=', 'checkboxList.enccode')
-        ->select(
-        'vwInjuryList3.tempreg_no', 'vwInjuryList3.hpercode', 'vwInjuryList3.patlast', 'vwInjuryList3.patfirst','vwInjuryList3.patmiddle',
-        'vwInjuryList3.pat_current_address_region','vwInjuryList3.pat_current_address_province','vwInjuryList3.pat_current_address_city',
-        'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_months',
-        'vwInjuryList3.age_days','vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date',
-        'vwInjuryList3.inj_time','vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','checkboxList.rdoAid','checkboxList.abrasionCh',
-        'injuryRegistry.abrasion','checkboxList.avulsionCh','injuryRegistry.avulsion','injuryRegistry.site','checkboxList.concussionCh',
-        'injuryRegistry.concussion','checkboxList.contusionCh','injuryRegistry.contusion','checkboxList.closedTypeCh','injuryRegistry.closedType',
-        'checkboxList.openTypeCh','injuryRegistry.openType','checkboxList.woundCh','injuryRegistry.wound','checkboxList.traumaCh','injuryRegistry.traumaticAmputation',
-        'checkboxList.others1Ch','injuryRegistry.others1','checkboxList.bitesCh','injuryRegistry.bites','checkboxList.burnRdo','injuryRegistry.others2',
-        'checkboxList.chemicalCh','injuryRegistry.others3','checkboxList.sharpCh','injuryRegistry.sharp','checkboxList.drowningRdo','checkboxList.fallCh',
-        'injuryRegistry.fall','checkboxList.gunshotCh','injuryRegistry.gunshot','checkboxList.hangingCh','checkboxList.maulingCh','checkboxList.transportCh',
-        'injuryRegistry.others4')
 
-        // ->select('vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode','injuryRegistry.*', 'injuryRegistry.date_completed','injuryRegistry.status')
+        // vwInjuryList3.
+        // checkboxList.
+        // injuryRegistry.
+        ->select('vwInjuryList3.status_validation','vwInjuryList3.rstatuscode','vwInjuryList3.pat_facility_no','vwInjuryList3.date_report','vwInjuryList3.time_report',
+        'vwInjuryList3.reg_no','vwInjuryList3.tempreg_no','vwInjuryList3.hosp_no','vwInjuryList3.hosp_reg_no','vwInjuryList3..hosp_cas_no',
+        'vwInjuryList3.patType','vwInjuryList3.patlast','vwInjuryList3.patfirst','vwInjuryList3.patmiddle','vwInjuryList3.patsex','vwInjuryList3.pat_date_of_birth',
+        'vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_days','vwInjuryList3.pat_current_address_region_name','vwInjuryList3.pat_current_province_name',
+        'vwInjuryList3.pat_current_city_name','vwInjuryList3.tempreg_code','vwInjuryList3.temp_provcode','vwInjuryList3.temp_citycode','vwInjuryList3.pat_phil_health_no',
+        'vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date','vwInjuryList3.inj_time','vwInjuryList3.encounter_date',
+        'vwInjuryList3.encounter_time','vwInjuryList3.inj_intent_code','vwInjuryList3.vawcyn','checkboxList.rdoAid','vwInjuryList3.frstAid','vwInjuryList3.docAdmit',
+        'checkboxList.injryRdo','checkboxList.abrasionCh','checkboxList.abrasion','checkboxList.avulsionCh','vwInjuryList3.avulsion','burnCh','degree_burn_1','degree_burn_2',
+        'degree_burn_3','degree_burn_4','degree_burn_5','site','concussionCh','concussion','contusionCh','contusion','closedTypeCh','closedType','openTypeCh','openType',
+        'woundCh','wound','traumaCh','traumaticAmputation','others1Ch','others1','bitesCh','bites','burn1Ch','burnRdo','others2','chemicalCh','chemical','sharpCh','sharp',
+        'drowningCh','drowningRdo','others3','natureCh','natureRdo','ext_expo_nature_sp','fallCh','fall','firecrackerCh','firecracker_code','firecracker','assaultCh','gunshotCh',
+        'gunshot','hangingCh','maulingCh','transportCh','areaRdo','collRdo','vehicleRdo','Others6','otherRdo','others7','posRdo','others8','victimsRdo','withothers','placeRdo',
+        'workplaceInput','others9','activityRdo','others10','risk_noneCh','alcoholCh','sleepyCh','smokingCh','phoneCh','others11Ch','Others11','noneCh','unknown5Ch','airbagCh',
+        'helmetCh','childseatCh','seatbeltCh','vestCh','others12Ch','transferRdo','referralRdo','hospPhys','ref_hosp_code','ref_hosp_code_sp','status_code','transpoRdo',
+        'others13','impression','icdNature','icdExternal','dispoRdo','transferred','disp_er_sp_oth','outcome','inPatFinalDiag','inPatDispoRdo','inPatOthers','inPatTransfer',
+        'inPatOutcomeRdo','inPatNature','inPatExternal','inPatComments','Pat_Facility_Reg','Pat_Facility_Prov','Pat_Facility_City','fac_regno','upload','class','pre_date','pno')
+
+
+
         // ->select(
-        // 'vwInjuryList3.hpercode','vwInjuryList3.pat_last_name','vwInjuryList3.pat_first_name','vwInjuryList3.pat_middle_name',
+        // 'vwInjuryList3.tempreg_no', 'vwInjuryList3.hpercode', 'vwInjuryList3.patlast', 'vwInjuryList3.patfirst','vwInjuryList3.patmiddle',
         // 'vwInjuryList3.pat_current_address_region','vwInjuryList3.pat_current_address_province','vwInjuryList3.pat_current_address_city',
-        // 'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.pat_days',
-        // 'vwInjuryList3.plc_regcode','vwInjuryList3.provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date','vwInjuryList3.inj_time',
-        // 'vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','vwInjuryList3.inj_inent_code')
+        // 'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_months',
+        // 'vwInjuryList3.age_days','vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date',
+        // 'vwInjuryList3.inj_time','vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','checkboxList.rdoAid','checkboxList.abrasionCh',
+        // 'injuryRegistry.abrasion','checkboxList.avulsionCh','injuryRegistry.avulsion','injuryRegistry.site','checkboxList.concussionCh',
+        // 'injuryRegistry.concussion','checkboxList.contusionCh','injuryRegistry.contusion','checkboxList.closedTypeCh','injuryRegistry.closedType',
+        // 'checkboxList.openTypeCh','injuryRegistry.openType','checkboxList.woundCh','injuryRegistry.wound','checkboxList.traumaCh','injuryRegistry.traumaticAmputation',
+        // 'checkboxList.others1Ch','injuryRegistry.others1','checkboxList.bitesCh','injuryRegistry.bites','checkboxList.burnRdo','injuryRegistry.others2',
+        // 'checkboxList.chemicalCh','injuryRegistry.others3','checkboxList.sharpCh','injuryRegistry.sharp','checkboxList.drowningRdo','checkboxList.fallCh',
+        // 'injuryRegistry.fall','checkboxList.gunshotCh','injuryRegistry.gunshot','checkboxList.hangingCh','checkboxList.maulingCh','checkboxList.transportCh',
+        // 'injuryRegistry.others4')
+
 
         ->where('injuryRegistry.status', '=' ,'completeForm')
         ->get();
