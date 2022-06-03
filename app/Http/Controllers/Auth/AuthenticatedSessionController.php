@@ -21,9 +21,9 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(request $request)
     {
-        
+        // dd('create()');
         // $collection = Http::get("http://192.168.7.188:8040/api/login");
         // dd($collection);
         // return view('auth.login',['collection'=>$collection['data']]);
@@ -75,36 +75,61 @@ class AuthenticatedSessionController extends Controller
         // $statusCode =($post->getStatusCode());
         // $header = ($post->getHeader('Content-Type')[0]);
         // dd($statusCode);
+        // if (Auth::check()) {
+        //     // The user is logged in...
+            
+        // }
+        // $request->session()->put('loginId', $username);  
+
+        //         return redirect("/index");
+
+        // --------------------
         if($username){
             if($statusCode == 200){
                 // dd($username);
                 $request->session()->put('loginId', $username);  
+                // $user = Auth::username();
+                // dd(auth()->check());
+        // dd(auth()->$username);
+        // dd(auth()->check());
+                
                 return redirect("/index");
             }else{
-                return redirect("/login");
+                
+                return view("auth.login");
             }
         }else
         {
             return redirect("/login");
         }
+        // --------------------
+
+
         // 4bghrmc
         // 4yw
                 // $request->session()->put('loginId', $username);  
                 // return redirect("/index");
     }
-    public function __construct()
-    {
-        $this->middleware('loggedin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('loggedin');
+    // }
  
     public function index(request $request){
         // dd('INDEX');
-        // if(Session::has('loginId')){
-        //     dd($request->session());
-            return view('patients.index');
+        $loginId = $request->session()->get('loginId');
+        // dd($request->session()->get('loginId'));
+        // if(!Session::has('loginId')){
+            
+        // }
+        // else{
+            
+            return view('patients.index',)->with('loginId', $loginId);;
         // }
         // return redirect()->intended('home');
     }
+
+    
 
 
     /**
@@ -115,6 +140,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        dd('adsf');
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

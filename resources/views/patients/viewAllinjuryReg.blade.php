@@ -18,7 +18,6 @@
 
     
 
-
         <style>
             * {
                 box-sizing: border-box;
@@ -106,13 +105,59 @@
                 width: 3000px;
 
             }
+            .sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: green;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #818181;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+
+
+
 
         </style>
+                <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
 <div class="row">
-<div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Patient Info (Ready to Export)</h2>
-        </div>
+    <div class="col-lg-12 margin-tb">
+            <div class="row">
+                <div class="col col-lg-10">
+                    <div class="pull-left">
+                        <h2>Injury Registry(Complete forms)</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                        
+                    </div>
+                </div>
+            </div>
+
+        
+
+
+        
         <div class="topnav d-flex justify-content-start">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -122,7 +167,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Registry
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/search">Injury Registry</a>
+                    <a class="dropdown-item" href="/searchCancer">Cancer Registry</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item active">
                     <a class="nav-link" href="/search">Search for patient</span></a>
                 </li>
                 <li class="nav-item dropdown">
@@ -143,14 +197,41 @@
                     <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
                     <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
                     </div>
-                </li>
+                </li> -->
                 </ul>
+                <div class="mt-3 space-y-1">
+                <!-- Authentication -->
+                    <a href="logout">Logout</a>
+
+                <!-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form> -->
+                </div>
             </div>
             </nav>
             </div>
-        </div> 
-    
+        </div>
 
+
+<div class="sidenav">
+  <a href="/search">Search</a>
+  <hr>
+  <a href="/viewinjuryReg">Drafts</a>
+  <hr>
+  <a href="/viewAllinjuryReg">Complete</a>
+  <hr>
+  <a href="/archive">Archive</a>
+  <hr>
+</div>
+    
+    <div class="div">
+        
+    </div>
     <table class="table table-bordered table-responsive-lg">
             <tr>
                 <th>No</th>
@@ -194,7 +275,7 @@
                         
                         <!-- <input type="hidden" value="/" name="status" id="status"> -->
 
-                            <button type="submit" id="hidden" class="btn btn-outline-success d-print-none " ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
+                            <button type="submit" id="hidden" class="btn btn-outline-success d-print-none" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
                             <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
                             <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
                             </svg> Excel</button>
@@ -222,8 +303,7 @@
                         });});
                         </script>
 
-    </div> 
-             
+                </div> 
     </div>
     
 </div>

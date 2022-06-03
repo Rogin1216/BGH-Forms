@@ -16,6 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://www.position-absolute.com/creation/print/jquery.printPage.js"></script>
 
+    
 
         <style>
             * {
@@ -23,7 +24,6 @@
             }
 
             body {
-              /* max-width: fit-content; */
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
             }
@@ -105,85 +105,83 @@
                 width: 3000px;
 
             }
-
-            body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
-
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 200px;
-  background-color: #f1f1f1;
-  position: fixed;
+            .sidenav {
   height: 100%;
-  overflow: auto;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: green;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
+.sidenav a {
+  padding: 6px 6px 6px 32px;
   text-decoration: none;
-}
- 
-.sidebar a.active {
-  background-color: #04AA6D;
+  font-size: 25px;
   color: white;
+  display: block;
 }
 
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+.sidenav a:hover {
+  color: #818181;
 }
 
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
 }
 
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+label{
+    position:relative;
+}
+input[type="text"]{
+
+    width: 400px;
+    height: 40px;
+    padding: 0 15px;
+}
+button{
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    background:#2ccd78;
+    color:white;
+    padding:0 15px;
+    letter-spacing: 1.2px;
+    border:none;
 }
 
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
+
+
         </style>
-<!-- <div class="container-fluid border border-secondary">
-  <div class="sidebar">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
-  </div>
-</div> -->
-
-
-
+                <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
 <div class="row">
     <div class="col-lg-12 margin-tb">
-      <div class="row">
-        <div class="col-lg-10">
-          <!-- <div class="pull-left"> -->
-              <h2>Patient Info</h2>
-          <!-- </div> -->
-        </div>
-      </div>
-      
-<!--JavaScript - Disable Button after Click using JavaScript Function.-->
-<div class="topnav d-flex justify-content-start">
+            <div class="row">
+                <div class="col col-lg-10">
+                    <div class="pull-left">
+                        <h2>Injury Registry</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                        
+                    </div>
+                </div>
+            </div>
+
+        
+
+
+        
+        <div class="topnav d-flex justify-content-start">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
@@ -192,7 +190,16 @@ div.content {
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Registry
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/search">Injury Registry</a>
+                    <a class="dropdown-item" href="/searchCancer">Cancer Registry</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item active">
                     <a class="nav-link" href="/search">Search for patient</span></a>
                 </li>
                 <li class="nav-item dropdown">
@@ -213,16 +220,92 @@ div.content {
                     <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
                     <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
                     </div>
-                </li>
+                </li> -->
                 </ul>
+                <div class="mt-3 space-y-1">
+                <!-- Authentication -->
+                    <a href="logout">Logout</a>
+
+                <!-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form> -->
+                </div>
             </div>
             </nav>
             </div>
         </div>
     </div>
-    
+</div>
+<div class="sidenav">
+  <a href="/search">Search</a>
+  <hr>
+  <a href="/viewinjuryReg">Drafts</a>
+  <hr>
+  <a href="/viewAllinjuryReg">Complete</a>
+  <hr>
+  <a href="/archive">Archive</a>
+  <hr>
+</div>
 
-<div class="form-group row">
+<!-- <div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Patient Info</h2>
+        </div>
+        <div class="row">
+            <div class="topnav d-flex justify-content-start">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Registry
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/search">Injury Registry</a>
+                    <a class="dropdown-item" href="">Cancer Registry</a>
+                    </div>
+                </li>
+                            <ul class="navbar-nav">
+                            <li class="nav-ite  m active">
+                                <a class="nav-link" href="/search">Search for patient</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Injury Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
+                                <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
+                                <a class="dropdown-item" href="/archive">Archive</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cancer Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
+                                <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div> -->
+        
+        <div class="form-group row">
 @foreach($patInfo as $item)  
       <div class="form-group col-auto">
           <label>First Name:</label>
@@ -256,60 +339,39 @@ div.content {
                 </tr>
             </thead>
             <tbody>
-              @foreach($encounters as $item)
+        @foreach($encounters as $item)
               <tr>
                 <td>{{$item->toecode}}</td>
                 <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
-
                 <script>
-                    
                 </script>
                 <td>{{date('F j,Y',  strtotime($item->admdate))}}</td>
                 <td>{{date('g:i a',  strtotime($item->admdate))}}</td>
-
-
                 <!-- <td>{{$item->disdate ?? null ?: '--' }}</td> -->
                 <td>{{date('F j,Y', strtotime($item->disdate ))}}</td>
                 <td>{{date('g:i a', strtotime($item->disdate ))}}</td>
-                <td><div class="dropdown">
+                        
+                <td><a class="btn btn-outline-primary btn-sm" href="/patientShow/{{$item->enccode1}}">Injury Registry Form</a></td>
+                <!-- <td><div class="dropdown">
                     <a class="btn btn-outline-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Edit
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="/patientShow/{{$item->enccode1}}">Injury Registration Form</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/cancerForm/{{$item->enccode1}}">Cancer Registration Form</a>
                     </div>
                     </div>
-                </td>
-                
-
+                </td> -->
                 <!-- <td><a class="btn btn-warning btn-sm" href="/injuryForm/{{$item->enccode1}}">print</a></td> -->
               </tr>
               @endforeach
             </tbody>
           </table>
-          
       </div>
-      
-
   </div>
-  
-</div>
-
-<!-- <div class="row">
-    <div class="col float-end">
-    <a href="" class="btn btn-secondary btn-sm float-end" title="Patient lists">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Back
-                        </a>
-    </div>
+    <!-- </div>
 </div> -->
 
-
-
-  @endsection
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+ 
+    @endsection

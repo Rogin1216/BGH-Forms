@@ -20,6 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .login-form {
+
     width: 340px;
     margin: 50px auto;
   	font-size: 15px;
@@ -31,7 +32,7 @@
     padding: 30px;
 }
 .login-form h2 {
-    margin: 0 0 10px;
+  
 }
 .form-control, .btn {
     min-height: 38px;
@@ -42,7 +43,7 @@
     font-weight: bold;
 }
 .input-form{
-    margin: 0 0 0 50px;
+    margin: 0 0 0 30px;
 }
 </style>
 <x-guest-layout>
@@ -73,27 +74,35 @@
                 </div> -->
 
                 <!-- Email Address -->
-                <div>
-                    <!-- <x-label for="email" :value="__('Email: ')" /> -->
 
-                    <x-input id="email" class="block mt-1 w-full" 
-                    class="input-form"
-                    type="text" 
-                    placeholder="Email" 
-                    name="email"  required autofocus />
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <!-- <x-label for="email" :value="__('Email: ')" /> -->
+                            <x-input id="email" class="block mt-1 w-full" 
+                            class="input-form"
+                            type="text" 
+                            placeholder="Email" 
+                            name="email"  required autofocus />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-4">
+                            <!-- <x-label for="password" :value="__('Password: ')" /> -->
+
+                            <x-input id="password" class="block mt-1 w-full"
+                                            class="input-form"
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            required autocomplete="current-password" />
+                        </div>
+                    </div>
                 </div>
+                
 
                 <!-- Password -->
-                <div class="mt-4">
-                    <!-- <x-label for="password" :value="__('Password: ')" /> -->
-
-                    <x-input id="password" class="block mt-1 w-full"
-                                    class="input-form"
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    required autocomplete="current-password" />
-                </div>
+                
 
                 <!-- Remember Me -->
                 <!-- <div class="block mt-4">

@@ -7,6 +7,7 @@ use App\Models\vwInjuryList3;
 use App\Models\injuryRegistry;
 use App\Models\checkboxList;
 use App\Models\exportedInjuryRegList;
+use App\Models\vwRegionProvinceCityBarangay;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -30,20 +31,13 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        // $jsonpost =json_decode($post->getStatusCode());
-
-        // dd($request->user());
-        // if ($request->user()->hasVerifiedEmail()) {
-        //     return redirect()->intended(RouteServiceProvider::HOME);
-        // }
-        // if(Session::has('loginId')){
-        //     dd($request->session());
-        // }
+        
         return view('patients.index');
     }
     
     public function searchDatefilter(request $request){
 
+        
         $startDate = $request->startDate;
         $endDate = $request->endDate;
         $datePat = DB::table('injuryRegistry')
@@ -57,6 +51,7 @@ class PatientController extends Controller
             return view('patients.searchDatefilter', [
                 'datePat'=>$datePat
             ]);
+
     }
     
 
@@ -113,10 +108,10 @@ class PatientController extends Controller
     public function save(Request $request,$enccode)
     {
         // dd('patient contorller');
-        // dd($request->patType);
+        // dd($request);
 
         // $saveTo = $request->saveTo;
-            // dd($request->status);
+            //  dd($request);
         DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
             '$enccode',
             '$request->docAdmit',
@@ -126,8 +121,9 @@ class PatientController extends Controller
             '$request->site',
             '$request->concussion',
             '$request->contusion',
-            '$request->openType',
+            '$request->openType', 
             '$request->closedType',
+            
             '$request->wound',
             '$request->traumaticAmputation',
             '$request->others1',
@@ -138,6 +134,7 @@ class PatientController extends Controller
             '$request->others3',
             '$request->others4',
             '$request->gunshot',
+
             '$request->fall',
             '$request->firecracker',
             '$request->others5',
@@ -148,6 +145,7 @@ class PatientController extends Controller
             '$request->workplaceInput',
             '$request->others9',
             '$request->others10',
+
             '$request->others11',
             '$request->others12', 
             '$request->patType', 
@@ -158,6 +156,7 @@ class PatientController extends Controller
             '$request->icdExternal',
             '$request->treatment',
             '$request->transferred',
+
             '$request->inPatFinalDiag',
             '$request->inPatOthers',
             '$request->inPatTransfer',
@@ -168,6 +167,7 @@ class PatientController extends Controller
             '$request->consultant_in_charge_first_name',
             '$request->consultant_in_charge_middle_name',
             '$request->consultant_in_charge_department',
+
             '$request->consultant_landline',
             '$request->consultant_mobile',
             '$request->consultant_email',
@@ -178,6 +178,7 @@ class PatientController extends Controller
             '$request->consultant_barangay',
             '$request->consultant_zipcode',
             '$request->completedBy_last_name',
+
             '$request->completedBy_first_name',
             '$request->completedBy_middle_name',
             '$request->completedBy_department',
@@ -188,12 +189,18 @@ class PatientController extends Controller
             '$request->completedBy_region',
             '$request->completedBy_province',
             '$request->completedBy_City',
+
             '$request->completedBy_barangay',
             '$request->completedBy_zip',    
             '$request->date_completed',
             '$request->tempreg_no',
             '$request->pat_phil_health_no',
             '$request->pat_facility_no',
+            '$request->Pat_Facility_Reg',
+            '$request->Pat_Facility_City',
+            '$request->Pat_Facility_Prov',
+            '$request->Pat_Facility_Bgy',
+
             '$request->inj_date',
             '$request->inj_time',
             '$request->encounter_date',
@@ -204,6 +211,7 @@ class PatientController extends Controller
             '$request->pre_date',
             '$request->status_validation',
             '$request->hosp_reg_no',
+
             '$request->hosp_cas_no',
             '$request->rstatuscode',
             '$request->temp_regcode',
@@ -214,23 +222,28 @@ class PatientController extends Controller
             '$request->hosp_no',
             '$request->inj_intent_code',
             '$request->vawcyn',
+
             '$request->ref_hosp_code',
             '$request->ref_hosp_code_sp',
             '$request->status_code',
             '$request->disp_er_sp_oth',
+            '$request->safety_others',
+            '$request->disp_inpat_oth',
+            '$request->temp_regcodeinput',
+            '$request->temp_provcodeinput',
+            '$request->temp_ctycodeinput',
+            '$request->temp_bgycodeinput',
+
+            '$request->temp_bgycode',
+            '$request->plc_regcode',
+            '$request->plc_provcode',
+            '$request->plc_ctycode',
+            '$request->plc_bgycode',
+            '$request->plc_bgyname',
             '$request->status'
             ");
-            // '$request->tempreg_no',
-            // 
-            // 
-            // 
-            // 
-            // 
-            // 
-            // 
-            // '$request->ext_expo_nature_sp',
-            // '$request->reg_no',
-            
+            // 112
+            // '$request->temp_regcode',
             DB::UPDATE("EXEC registry.dbo.InsertChValue
             '$enccode',
             '$request->rdoAid',
@@ -238,6 +251,10 @@ class PatientController extends Controller
             '$request->abrasionCh',
             '$request->avulsionCh',
             '$request->burnCh',
+            '$request->degree_burn1',
+            '$request->degree_burn2',
+            '$request->degree_burn3',
+            '$request->degree_burn4',
             '$request->degreeRdoBtn',
             '$request->concussionCh',
             '$request->contusionCh',
@@ -248,6 +265,7 @@ class PatientController extends Controller
             '$request->traumaCh',
             '$request->others1Ch',
             '$request->bitesCh',
+
             '$request->burn1Ch',
             '$request->burnRdo',
             '$request->chemicalCh',
@@ -268,6 +286,7 @@ class PatientController extends Controller
             '$request->collRdo',
             '$request->severRdo',
             '$request->vehicleRdo',
+
             '$request->otherRdo',
             '$request->posRdo',
             '$request->victimsRdo',
@@ -288,6 +307,7 @@ class PatientController extends Controller
             '$request->others12Ch',
             '$request->unknown5Ch',
             '$request->transferRdo',
+
             '$request->referralRdo',
             '$request->arrivalRdo',
             '$request->statusRdo',
@@ -299,11 +319,6 @@ class PatientController extends Controller
             '$request->firecracker_code',
             '$request->ext_expo_nature_sp_ch',
             '$request->risk_noneCh',
-            '$request->degree_burn_1',
-            '$request->degree_burn_2',
-            '$request->degree_burn_3',
-            '$request->degree_burn_4',
-            '$request->degree_burn_5',
             '$request->payCh',
             '$request->charityCh',
             '$request->nbbCh',
@@ -313,6 +328,7 @@ class PatientController extends Controller
             '$request->rdoSex',
             '$request->rdoCivStat',
             '$request->civChAnul',
+
             '$request->civChDiv',
             '$request->smkRdo',
             '$request->smkRdoYes',
@@ -333,6 +349,7 @@ class PatientController extends Controller
             '$request->medChCarDis',
             '$request->medChCerDis',
             '$request->medChLivDis',
+
             '$request->medChStd',
             '$request->medOth',
             '$request->mensStatus',
@@ -353,6 +370,7 @@ class PatientController extends Controller
             '$request->trChSurg',
             '$request->trChRad',
             '$request->trChHorm',
+
             '$request->trChNone',
             '$request->outRdo',
             '$request->STchAnal',
@@ -373,6 +391,7 @@ class PatientController extends Controller
             '$request->STchRect',
             '$request->STchSkin',
             '$request->STchSoftTis',
+
             '$request->STchTestis',
             '$request->STchThy',
             '$request->STchBlad',
@@ -393,6 +412,7 @@ class PatientController extends Controller
             '$request->conSTchBreast',
             '$request->conSTchCerv',
             '$request->conSTchColon',
+
             '$request->conSTchTumEso',
             '$request->conSTchGast',
             '$request->conSTchHead',
@@ -413,6 +433,7 @@ class PatientController extends Controller
             '$request->conSTchOther',
             '$request->conheMalChAll',
             '$request->conheMalChBcell',
+
             '$request->conheMalChTcell',
             '$request->conheMaChAML',
             '$request->conheMaChBlymp',
@@ -433,6 +454,7 @@ class PatientController extends Controller
             '$request->TaBchMRI',
             '$request->TaBchOth',
             '$request->latChLeft',
+
             '$request->latChRight',
             '$request->latChMid',
             '$request->latChBilat',
@@ -453,6 +475,7 @@ class PatientController extends Controller
             '$request->tstageIV',
             '$request->stagIn',
             '$request->stagLocal',
+
             '$request->stagDir',
             '$request->stagReg',
             '$request->stag34',
@@ -473,6 +496,7 @@ class PatientController extends Controller
             '$request->trAddSur',
             '$request->trAddRad',
             '$request->trAddChem',
+
             '$request->traAddImm',
             '$request->trAddHormo',
             '$request->trAddUn',
@@ -493,6 +517,7 @@ class PatientController extends Controller
             '$request->trTrOth',
             '$request->trPlNeo',
             '$request->trPlAdj',
+
             '$request->trPlMeta',
             '$request->radTherapy',
             '$request->idSiteSetting',
@@ -504,7 +529,40 @@ class PatientController extends Controller
             '$request->FUdeptHema',
             '$request->FUdeptMo',
             '$request->FUdeptPedia',
-            '$request->FUdepttrt'
+            '$request->FUdepttrt',
+            '$request->copyCh',
+            '$request->inj_intent_code',
+            '$request->cancHis',
+             '$request->bgh1st1',
+            '$request->oth1st1',
+            '$request->bgh1st2',
+            '$request->oth1st2',
+            '$request->rem1st',
+
+            '$request->stable1st',
+            '$request->RR1st',
+            '$request->bgh2nd1',
+            '$request->oth2nd1',
+            '$request->bgh2nd2',
+            '$request->oth2nd2',
+            '$request->rem2nd',
+            '$request->stable2nd',
+            '$request->RR2nd',
+            '$request->bgh3rd1',
+            '$request->oth3rd1',
+            '$request->bgh3rd2',
+            '$request->oth3rd2',
+            '$request->rem3rd',
+            '$request->stable3rd',
+            '$request->RR3rd',
+            '$request->bgh4th1',
+            '$request->oth4th1',
+            '$request->bgh4th2',
+            '$request->oth4th2',
+
+            '$request->rem4th',
+            '$request->bgh4th2',
+            '$request->RR4th'
             ");
 
             $request->session()->flash('alert-success', 'Saved ');
@@ -517,6 +575,150 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function getRegion(request $request){
+        $regc = $request->post('regc');
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        ->select('provname','provcode','regcode')
+            ->where('regcode', $regc)   
+            ->distinct('provname')
+            ->orderBy('provname','asc')
+            ->get();
+        $html = '<option value="">Select prov</option>';
+        foreach($vwProvname as $list){
+            $html.='<option value="'.$list->provcode.'">'
+            .$list->provname.'</option>';
+        }
+        echo $html;
+    }
+    public function getProv(request $request){
+        $provc = $request->post('provc');
+        echo $provc;
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('ctyname','ctycode','provcode')
+        ->where('provcode',$provc)
+        ->distinct('ctyname')
+        ->orderBy('ctyname','asc')
+        ->get();
+        $html = '<option value="">Select City</option>';
+        foreach($vwCtyname as $list){
+            $html.='<option value="'.$list->ctycode.'">'
+            .$list->ctyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getCty(request $request){
+        $ctyc = $request->post('ctyc');
+        echo $ctyc;
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('bgyname','bgycode','ctycode')
+        ->where('ctycode',$ctyc)
+        ->distinct('bgyname')
+        ->orderBy('bgyname','asc')
+        ->get();
+        $html = '<option value="">Select Barangay</option>';
+        foreach($vwBgyname as $list){
+            $html.='<option value="'.$list->bgycode.'">'
+            .$list->bgyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getTempRegion(request $request){
+        $tregc = $request->post('tregc');
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        ->select('provname','provcode','regcode')
+            ->where('regcode', $tregc)   
+            ->distinct('provname')
+            ->orderBy('provname','asc')
+            ->get();
+        $html = '<option value="">Select prov</option>';
+        foreach($vwProvname as $list){
+            $html.='<option value="'.$list->provcode.'">'
+            .$list->provname.'</option>';
+        }
+        echo $html;
+    }
+    public function getTempProv(request $request){
+        $tprovc = $request->post('tprovc');
+        echo $tprovc;
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('ctyname','ctycode','provcode')
+        ->where('provcode',$tprovc)
+        ->distinct('ctyname')
+        ->orderBy('ctyname','asc')
+        ->get();
+        $html = '<option value="">Select City</option>';
+        foreach($vwCtyname as $list){
+            $html.='<option value="'.$list->ctycode.'">'
+            .$list->ctyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getTempCty(request $request){
+        $tctyc = $request->post('tctyc');
+        echo $tctyc;
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('bgyname','bgycode','ctycode')
+        ->where('ctycode',$tctyc)
+        ->distinct('bgyname')
+        ->orderBy('bgyname','asc')
+        ->get();
+        $html = '<option value="">Select Barangay</option>';
+        foreach($vwBgyname as $list){
+            $html.='<option value="'.$list->bgycode.'">'
+            .$list->bgyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getPlcReg(request $request){
+        $plcReg = $request->post('plcReg');
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        ->select('provname','provcode','regcode')
+            ->where('regcode', $plcReg)   
+            ->distinct('provname')
+            ->orderBy('provname','asc')
+            ->get();
+        $html = '<option value="">Select prov</option>';
+        foreach($vwProvname as $list){
+            $html.='<option value="'.$list->provcode.'">'
+            .$list->provname.'</option>';
+        }
+        echo $html;
+    }
+    public function getPlcProv(request $request){
+        $plcProv = $request->post('plcProv');
+        echo $plcProv;
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('ctyname','ctycode','provcode')
+        ->where('provcode',$plcProv)
+        ->distinct('ctyname')
+        ->orderBy('ctyname','asc')
+        ->get();
+        $html = '<option value="">Select City</option>';
+        foreach($vwCtyname as $list){
+            $html.='<option value="'.$list->ctycode.'">'
+            .$list->ctyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getPlcCty(request $request){
+        $plcCty = $request->post('plcCty');
+        echo $plcCty;
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('bgyname','bgycode','ctycode')
+        ->where('ctycode',$plcCty)
+        ->distinct('bgyname')
+        ->orderBy('bgyname','asc')
+        ->get();
+        $html = '<option value="">Select Barangay</option>';
+        foreach($vwBgyname as $list){
+            $html.='<option value="'.$list->bgycode.'">'
+            .$list->bgyname.'</option>';
+        }
+        echo $html;
+    }
+
+
+
     public function show(Request $request,$enccode)
     {
 // $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
@@ -526,7 +728,7 @@ class PatientController extends Controller
 // $request->date_of_birth = "2000-10-25";
 // $age = Carbon::parse($request->date_of_birth)->diff(Carbon::now())->y;
 // dd($age. " Years");
-        // dd('adsfdsa');
+        
         if(checkboxList::where('enccode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
             // $enccode->save();
@@ -541,12 +743,48 @@ class PatientController extends Controller
                 )
                 );
         }
-        $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();                                  //adsfasdfdsafadsfdsafdsafads<<------------
+        $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();
+        // dd($info);
+
+        // dd($info);                                    //adsfasdfdsafadsfdsafdsafads<<------------
         $chdatalist = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
-        // dd($chdata);
+        // $vwRegion = vwRegionProvinceCityBarangay::
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay')
+        // ->select('regcode','provname','ctyname','bgyname')->distinct()   
+        ->select('provname','provcode')
+            ->distinct('provname')
+            ->orderBy('provname','asc')
+            ->get();
+            
+        $vwRegname = DB::table('vwRegionProvinceCityBarangay')
+        // ->select('regcode','provname','ctyname','bgyname')->distinct()   
+        ->select('regname','regcode')
+            ->distinct('regname')
+            ->orderBy('regname','asc')
+            ->get();
+            // dd($vwRegname);
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        // ->select('regcode','provname','ctyname','bgyname')->distinct()   
+        ->select('ctyname','ctycode')
+            ->distinct('ctyname')
+            ->orderBy('ctyname','asc')
+            ->get();
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        // ->select('regcode','provname','ctyname','bgyname')->distinct()   
+        ->select('bgyname','bgycode')
+            ->distinct('bgyname')
+            ->orderBy('bgyname','asc')
+            ->get();
+        // dd($vwProvname);
+
+
         return view('patients.show', compact(
             'info',
             'chdatalist',
+            'vwProvname',
+            'vwRegname',
+            'vwCtyname',
+            'vwBgyname'
             ));
     }
 
@@ -612,8 +850,19 @@ class PatientController extends Controller
                 ));
 
     }
-    public function search(){
-        return view('patients.search');
+    public function search(request $request){
+
+        $all = DB::table('vwInjuryList3')
+        ->select('*')
+        // ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        // ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+        // ->select('injuryRegistry.*','vwInjuryList3.*')
+        ->paginate(10);
+        // dd($all);
+
+        return view('patients.search', [
+            'all'=>$all
+        ]);
     }
     public function viewinjuryReg(){
         
@@ -897,55 +1146,7 @@ class PatientController extends Controller
     }
     
     public function exportbulk(request $request,$enccode){
-        // $exportRd = $request->exportRd;
-        $all = DB::table('injuryRegistry')
-        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
-        ->join('checkboxList', 'injuryRegistry.enccode', '=', 'checkboxList.enccode')
 
-        // vwInjuryList3.
-        // checkboxList.
-        // injuryRegistry.
-        ->select('vwInjuryList3.status_validation','vwInjuryList3.rstatuscode','vwInjuryList3.pat_facility_no','vwInjuryList3.date_report','vwInjuryList3.time_report',
-        'vwInjuryList3.reg_no','vwInjuryList3.tempreg_no','vwInjuryList3.hosp_no','vwInjuryList3.hosp_reg_no','vwInjuryList3..hosp_cas_no',
-        'vwInjuryList3.patType','vwInjuryList3.patlast','vwInjuryList3.patfirst','vwInjuryList3.patmiddle','vwInjuryList3.patsex','vwInjuryList3.pat_date_of_birth',
-        'vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_days','vwInjuryList3.pat_current_address_region_name','vwInjuryList3.pat_current_province_name',
-        'vwInjuryList3.pat_current_city_name','vwInjuryList3.tempreg_code','vwInjuryList3.temp_provcode','vwInjuryList3.temp_citycode','vwInjuryList3.pat_phil_health_no',
-        'vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date','vwInjuryList3.inj_time','vwInjuryList3.encounter_date',
-        'vwInjuryList3.encounter_time','vwInjuryList3.inj_intent_code','vwInjuryList3.vawcyn','checkboxList.rdoAid','vwInjuryList3.frstAid','vwInjuryList3.docAdmit',
-        'checkboxList.injryRdo','checkboxList.abrasionCh','checkboxList.abrasion','checkboxList.avulsionCh','vwInjuryList3.avulsion','checkboxList.burnCh','checkboxList.degree_burn_1',
-        'checkboxList.degree_burn_2','checkboxList.degree_burn_3','checkboxList.degree_burn_4','checkboxList.degree_burn_5','vwInjuryList3.site','checkboxList.concussionCh','vwInjuryList3.concussion',
-        'checkboxList.contusionCh','vwInjuryList3.contusion','checkboxList.closedTypeCh','vwInjuryList3.closedType','checkboxList.openTypeCh','vwInjuryList3.openType','checkboxList.woundCh',
-        'vwInjuryList3.wound','checkboxList.traumaCh','vwInjuryList3.traumaticAmputation','checkboxList.others1Ch','vwInjuryList3.others1','checkboxList.bitesCh','vwInjuryList3.bites',
-        'checkboxList.burn1Ch','checkboxList.burnRdo','vwInjuryList3.others2','chemicalCh','chemical','sharpCh','sharp',
-        'drowningCh','drowningRdo','others3','natureCh','natureRdo','ext_expo_nature_sp','fallCh','fall','firecrackerCh','firecracker_code','firecracker','assaultCh','gunshotCh',
-        'gunshot','hangingCh','maulingCh','transportCh','areaRdo','collRdo','vehicleRdo','Others6','otherRdo','others7','posRdo','others8','victimsRdo','withothers','placeRdo',
-        'workplaceInput','others9','activityRdo','others10','risk_noneCh','alcoholCh','sleepyCh','smokingCh','phoneCh','others11Ch','Others11','noneCh','unknown5Ch','airbagCh',
-        'helmetCh','childseatCh','seatbeltCh','vestCh','others12Ch','transferRdo','referralRdo','hospPhys','ref_hosp_code','ref_hosp_code_sp','status_code','transpoRdo',
-        'others13','impression','icdNature','icdExternal','dispoRdo','transferred','disp_er_sp_oth','outcome','inPatFinalDiag','inPatDispoRdo','inPatOthers','inPatTransfer',
-        'inPatOutcomeRdo','inPatNature','inPatExternal','inPatComments','Pat_Facility_Reg','Pat_Facility_Prov','Pat_Facility_City','fac_regno','upload','class','pre_date','pno')
-
-
-
-        // ->select(
-        // 'vwInjuryList3.tempreg_no', 'vwInjuryList3.hpercode', 'vwInjuryList3.patlast', 'vwInjuryList3.patfirst','vwInjuryList3.patmiddle',
-        // 'vwInjuryList3.pat_current_address_region','vwInjuryList3.pat_current_address_province','vwInjuryList3.pat_current_address_city',
-        // 'vwInjuryList3.pat_sex','vwInjuryList3.pat_date_of_birth','vwInjuryList3.age_years','vwInjuryList3.age_months','vwInjuryList3.age_months',
-        // 'vwInjuryList3.age_days','vwInjuryList3.plc_regcode','vwInjuryList3.plc_provcode','vwInjuryList3.plc_ctycode','vwInjuryList3.inj_date',
-        // 'vwInjuryList3.inj_time','vwInjuryList3.encounter_date','vwInjuryList3.encounter_time','checkboxList.rdoAid','checkboxList.abrasionCh',
-        // 'injuryRegistry.abrasion','checkboxList.avulsionCh','injuryRegistry.avulsion','injuryRegistry.site','checkboxList.concussionCh',
-        // 'injuryRegistry.concussion','checkboxList.contusionCh','injuryRegistry.contusion','checkboxList.closedTypeCh','injuryRegistry.closedType',
-        // 'checkboxList.openTypeCh','injuryRegistry.openType','checkboxList.woundCh','injuryRegistry.wound','checkboxList.traumaCh','injuryRegistry.traumaticAmputation',
-        // 'checkboxList.others1Ch','injuryRegistry.others1','checkboxList.bitesCh','injuryRegistry.bites','checkboxList.burnRdo','injuryRegistry.others2',
-        // 'checkboxList.chemicalCh','injuryRegistry.others3','checkboxList.sharpCh','injuryRegistry.sharp','checkboxList.drowningRdo','checkboxList.fallCh',
-        // 'injuryRegistry.fall','checkboxList.gunshotCh','injuryRegistry.gunshot','checkboxList.hangingCh','checkboxList.maulingCh','checkboxList.transportCh',
-        // 'injuryRegistry.others4')
-
-
-        ->where('injuryRegistry.status', '=' ,'completeForm')
-        ->get();
-
-
-        dd($all);
             return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
 
 
@@ -978,6 +1179,19 @@ class PatientController extends Controller
         ->update(['status' => 'archive']);
 
             return $this->archive();
+
+    }
+
+    public function logout(request $request){
+        // dd($request->session());
+        // if($request->session()->has('loginId'));
+        // dd(session()->has('loginId'));
+        if(session()->has('loginId'))
+        {
+            session()->pull('loginId');
+            // dd(session()->has('loginId'));
+            return redirect('/login');
+        }
 
     }
 }

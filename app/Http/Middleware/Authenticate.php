@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
+
+
 class Authenticate extends Middleware
 {
     /**
@@ -15,24 +17,51 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        // dd(!$request->session()->has('loginId'));
+        
+
+        // if(!$request->session()->has('loginId')){
+        // // if($request->expectsJson()){
+            
+        //     // return '/login';
+        //     return route('login');
+        // }
+        // dd($request->session());
+        // dd($request->session()->has('loginId'));
+        // dd(auth()->check());
         if(!$request->session()->has('loginId')){
-            // dd('loginId');
-            // dd($request->session());
-            // return redirect('login');
-            return '/login';
+            // dd('!request');
+            // redirect ('login');
+            return view("patients.index");
+            // return '/index';
         }
         else{
-            // return ('index');
+            
+            // dd('route(index)');
+        // } 
+        // else {
+            // Auth::logout(); // user must logout before redirect them
+            // return redirect()->guest('login');
+        //   }
+            // return view('patients.index');
+            // redirect('/index');
+            // return response()->view('patients.index');
+            // return '/index';
         }
 
-        // dd($request->expectsJson());
-        // dd($request);
-        // if (!$request->expectsJson()) {
-            // dd(!$request->expectsJson());
-            // return route('login');
-            // return ('login');
-            // return redirect('/index');
+        
+        // if(auth()->check()){
+            // dd('route(index)');
+        //     return route('login');
         // }
+        // else{
+            // dd('else');
+
+        // }
+        // elseif($request->session()->has('loginId')){
+        //   dd('index');
+        // }
+        
+
+
     }
 }

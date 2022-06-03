@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
  
 use Illuminate\Http\Request;
-use App\Models\Vwinjurylist;
+use App\Models\familyHistoryMembers;
 use App\Models\checkboxList;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UsersExport;
 use App\Exports\BulkUsersExport;
 use App\Models\cancerRegistry;
+use App\Models\vwRegionProvinceCityBarangay;
 
 class CancerController extends Controller
 {
@@ -33,7 +34,41 @@ class CancerController extends Controller
     { 
         //
     }
+    public function addFamMember(request $request){
+        $data = $request->post('data');
+        dd($data);
+    }
 
+    public function searchCancer(request $request){
+        // dd('search');
+        $all = DB::SELECT("EXEC registry.dbo.spCancerMasterList");
+        
+        // dd($all);
+
+        return view('patients.searchCancer', [
+            'all'=>$all
+        ]);
+    }
+    public function searchCancerfilter(request $request){
+        $search_text = $request->input('query');
+            // dd($search_text);
+               $patient = DB::table('vwCancerMasterList')->select('patfirst','patmiddle','patlast', 'hpercode')
+            //    $patient = vwInjuryList3::select('patfirst','patmiddle','patlast', 'hpercode')
+            //    $patient = DB::table('vwInjuryList3')
+               ->Where(DB::raw("concat(patfirst, ' ', patmiddle, ' ', patlast)"), 'LIKE', "%".$search_text."%")
+               ->orwhere ('patfirst', 'LIKE', $search_text)
+               ->orWhere ('patmiddle', 'LIKE', '%'.$search_text.'%')
+               ->orWhere ('patlast', 'LIKE', '%'.$search_text.'%')
+               ->orWhere ('hpercode', 'LIKE', '%'.$search_text.'%') 
+               ->distinct()
+               ->orderBy('patlast', 'asc')
+               ->get();
+                // dd($patient);
+               return view('patients.searchCancerfilter', compact(
+                   'patient',
+
+                ));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -42,8 +77,39 @@ class CancerController extends Controller
      */
     public function store(Request $request,$enccode)
     {
-        dd('cancercontroller');
-        // dd($patfirst);
+        // dd($request);
+        $fam = $request->familyMember;
+        // dd($fam);
+        foreach($fam as $key=>$insert){
+
+            $addMember = [
+                'familyMember' =>$request->familyMember[$key],
+                'typeOfCancer' =>$request->typeOfCancer[$key],
+                'consanguinity' =>$request->consanguinity[$key],
+                'ageAtDiagnosis' =>$request->ageAtDiagnosis[$key]
+            ];
+            // dd($addMember);
+            DB::table('familyHistoryMembers')->insert($addMember);
+            // familyHistoryMembers::insert($addMember);
+        }
+        return $this->viewCancerDraft();
+
+       
+        // dd($addMember);
+        // dd($enccode);
+        // dd($patfirs.t);
+        // dd($request->family_member);
+        // DB::UPDATE("EXEC registry.dbo.InsertFamilyCancerHistory
+        // ",array($request->family_member)
+
+        // );
+
+        // '$enccode',
+        // '$request->family_member',
+        // '$request->type_of_cancer',
+        // '$request->consanguinity',
+        // '$request->age_at_diagnosis'
+
         DB::UPDATE("EXEC registry.dbo.InsertValueToCancerRegistry
         '$enccode',
         '$request->patPackYr', 
@@ -176,15 +242,25 @@ class CancerController extends Controller
         '$request->oncoFirst',
         '$request->oncoMiddle',
         '$request->regPersonnel',
-        '$request->status'
+        '$request->status',
+
+        '$request->trPrimDate',
+        '$request->date_surgery',
+        '$request->date_follow_up'
+
         ");
-        DB::UPDATE("EXEC registry.dbo.InsertChValue
+        // dd($enccode);
+            DB::UPDATE("EXEC registry.dbo.InsertChValue
             '$enccode',
             '$request->rdoAid',
             '$request->injryRdo',
             '$request->abrasionCh',
             '$request->avulsionCh',
             '$request->burnCh',
+            '$request->degree_burn1',
+            '$request->degree_burn2',
+            '$request->degree_burn3',
+            '$request->degree_burn4',
             '$request->degreeRdoBtn',
             '$request->concussionCh',
             '$request->contusionCh',
@@ -195,6 +271,7 @@ class CancerController extends Controller
             '$request->traumaCh',
             '$request->others1Ch',
             '$request->bitesCh',
+
             '$request->burn1Ch',
             '$request->burnRdo',
             '$request->chemicalCh',
@@ -215,6 +292,7 @@ class CancerController extends Controller
             '$request->collRdo',
             '$request->severRdo',
             '$request->vehicleRdo',
+
             '$request->otherRdo',
             '$request->posRdo',
             '$request->victimsRdo',
@@ -235,6 +313,7 @@ class CancerController extends Controller
             '$request->others12Ch',
             '$request->unknown5Ch',
             '$request->transferRdo',
+
             '$request->referralRdo',
             '$request->arrivalRdo',
             '$request->statusRdo',
@@ -243,6 +322,7 @@ class CancerController extends Controller
             '$request->outcome',
             '$request->inPatDispoRdo',
             '$request->inPatOutcomeRdo',
+            '$request->firecracker_code',
             '$request->payCh',
             '$request->charityCh',
             '$request->nbbCh',
@@ -254,6 +334,7 @@ class CancerController extends Controller
             '$request->civChAnul',
             '$request->civChDiv',
             '$request->smkRdo',
+
             '$request->smkRdoYes',
             '$request->shsRdo',
             '$request->alcoRdo',
@@ -274,6 +355,7 @@ class CancerController extends Controller
             '$request->medChLivDis',
             '$request->medChStd',
             '$request->medOth',
+
             '$request->mensStatus',
             '$request->causeChNat',
             '$request->causeChSurg',
@@ -294,6 +376,7 @@ class CancerController extends Controller
             '$request->trChHorm',
             '$request->trChNone',
             '$request->outRdo',
+
             '$request->STchAnal',
             '$request->STchBone',
             '$request->STchBreast',
@@ -314,6 +397,7 @@ class CancerController extends Controller
             '$request->STchSoftTis',
             '$request->STchTestis',
             '$request->STchThy',
+
             '$request->STchBlad',
             '$request->STchUterine',
             '$request->STchOther',
@@ -334,6 +418,7 @@ class CancerController extends Controller
             '$request->conSTchColon',
             '$request->conSTchTumEso',
             '$request->conSTchGast',
+
             '$request->conSTchHead',
             '$request->conSTchHepa',
             '$request->conSTchKidney',
@@ -354,6 +439,7 @@ class CancerController extends Controller
             '$request->conheMalChBcell',
             '$request->conheMalChTcell',
             '$request->conheMaChAML',
+
             '$request->conheMaChBlymp',
             '$request->conheMaChHodg',
             '$request->conheMaChMDS',
@@ -374,6 +460,7 @@ class CancerController extends Controller
             '$request->latChLeft',
             '$request->latChRight',
             '$request->latChMid',
+
             '$request->latChBilat',
             '$request->latChUndet',
             '$request->histoChEndo',
@@ -394,6 +481,7 @@ class CancerController extends Controller
             '$request->stagLocal',
             '$request->stagDir',
             '$request->stagReg',
+
             '$request->stag34',
             '$request->stagDis',
             '$request->stagUn',
@@ -414,6 +502,7 @@ class CancerController extends Controller
             '$request->trAddChem',
             '$request->traAddImm',
             '$request->trAddHormo',
+
             '$request->trAddUn',
             '$request->trAddOth',
             '$request->trPlAddSur',
@@ -434,6 +523,7 @@ class CancerController extends Controller
             '$request->trPlAdj',
             '$request->trPlMeta',
             '$request->radTherapy',
+
             '$request->idSiteSetting',
             '$request->radiaThReg',
             '$request->radiaThbst',
@@ -443,33 +533,163 @@ class CancerController extends Controller
             '$request->FUdeptHema',
             '$request->FUdeptMo',
             '$request->FUdeptPedia',
-            '$request->FUdepttrt'
+            '$request->FUdepttrt',
+            '$request->ext_expo_nature_sp_ch',
+            '$request->risk_noneCh',
+            '$request->copyCh',
+            '$request->inj_intent_code',
+            '$request->cancHis',
+            '$request->bgh1st1',
+            '$request->oth1st1',
+            '$request->bgh1st2',
+            '$request->oth1st2',
+            '$request->rem1st',
+
+            '$request->stable1st',
+            '$request->RR1st',
+            '$request->bgh2nd1',
+            '$request->oth2nd1',
+            '$request->bgh2nd2',
+            '$request->oth2nd2',
+            '$request->rem2nd',
+            '$request->stable2nd',
+            '$request->RR2nd',
+            '$request->bgh3rd1',
+            '$request->oth3rd1',
+            '$request->bgh3rd2',
+            '$request->oth3rd2',
+            '$request->rem3rd',
+            '$request->stable3rd',
+            '$request->RR3rd',
+            '$request->bgh4th1',
+            '$request->oth4th1',
+            '$request->bgh4th2',
+            '$request->oth4th2',
+
+            '$request->rem4th',
+            '$request->bgh4th2',
+            '$request->RR4th'
             ");
 
         // dd($request);
         return $this->viewCancerDraft();
     }
     public function viewCancerDraft(){
-        $all = DB::table('cancerRegistry')
-            ->join('vwInjuryList', 'cancerRegistry.enccode', '=', 'vwInjuryList.enccode')
-            ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','cancerRegistry.status')
-            ->where('cancerRegistry.status', '=', 'drafts')
+        // $all = DB::table('cancerRegistry2')
+        //     ->join('vwInjuryList', 'cancerRegistry2.hpercode', '=', 'vwInjuryList.enccode')
+        //     ->select('cancerRegistry2.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','cancerRegistry2.status')
+        //     ->where('cancerRegistry2.status', '=', 'drafts')
+        //     ->get();
+
+        $all = DB::table('cancerRegistry2')
+            ->join('vwCancerMasterList', 'cancerRegistry2.hpercode', '=', 'vwCancerMasterList.hpercode')
+            ->select('cancerRegistry2.*', 'vwCancerMasterList.patfirst', 'vwCancerMasterList.patmiddle', 'vwCancerMasterList.patlast', 
+                    'vwCancerMasterList.hpercode', 'vwCancerMasterList.hpercode','vwCancerMasterList.tsdesc','cancerRegistry2.status')
+            ->where('cancerRegistry2.status', '=', 'drafts')
             ->get();
+
 
             return view('patients.viewCancerDraft', [
                 'all'=>$all
             ]);
     }
-    public function viewCancerComplete(){
-        $all = DB::table('cancerRegistry')
-            ->join('vwInjuryList', 'cancerRegistry.enccode', '=', 'vwInjuryList.enccode')
-            ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','cancerRegistry.status')
-            ->where('cancerRegistry.status', '=', 'completeForm')
+    public function viewCancerComplete(request $request){
+        // dd($hpercode);
+        // $all = DB::table('cancerRegistry')
+        //     ->join('vwInjuryList', 'cancerRegistry.enccode', '=', 'vwInjuryList.enccode')
+        //     ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','cancerRegistry.status')
+        //     ->where('cancerRegistry.status', '=', 'completeForm')
+        //     ->get();
+
+        $all = DB::table('cancerRegistry2')
+            ->join('vwCancerMasterList', 'cancerRegistry2.hpercode', '=', 'vwCancerMasterList.hpercode')
+            ->select('cancerRegistry2.*', 'vwCancerMasterList.patfirst', 'vwCancerMasterList.patmiddle', 'vwCancerMasterList.patlast', 
+                    'vwCancerMasterList.hpercode', 'vwCancerMasterList.hpercode','vwCancerMasterList.tsdesc','cancerRegistry2.status')
+            ->where('cancerRegistry2.status', '=', 'completeForm')
             ->get();
 
             return view('patients.viewCancerComplete', [
                 'all'=>$all
             ]);
+    }
+    public function viewCancerForm(request $request, $enccode){
+        // dd($hpercode);
+    //     $patinfo = DB::table('cancerRegistry2')
+    //     ->join('vwCancerMasterList', 'cancerRegistry2.hpercode', '=', 'vwCancerMasterList.hpercode')
+    //     // ->select('cancerRegistry.*','vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast','vwInjuryList.hpercode', 'vwInjuryList.enccode')
+    //     ->select('cancerRegistry2.*','vwCancerMasterList.*')
+    //     ->where('cancerRegistry2.hpercode',$hpercode)
+    //     // ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'cancerForm.status')
+    //     ->get();
+        
+    //     $chdata = DB::table('checkboxList')->select('*')->where('enccode',$hpercode)->get();
+    // // dd($patinfo );
+    //     return view('patients.viewCancerForm',[
+    //         'patinfo'=>$patinfo,
+    //         'chdata'=>$chdata
+    //     ]);
+
+    if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
+        // $enccode = checkboxList::find($enccode);
+        // $enccode->save();
+    }else
+        {
+            DB::table('cancerRegistry2')
+            ->insert(
+                array(
+                    'hpercode'     =>   $enccode, 
+                )
+                );
+        }
+
+    if(checkboxList::where('enccode', '=', $enccode)->exists()){
+        // $enccode = checkboxList::find($enccode);
+        // $enccode->save();
+        // dd('exists');
+    }else
+        {
+            DB::table('checkboxList')
+            ->insert(
+                array(
+                    'enccode'     =>   $enccode, 
+                )
+                );
+        }
+    
+    // $vw3 = DB::table('vwInjuryList3')
+    // ->select('*')
+    // ->where('enccode','ER1180068Aug092019210633')
+    // ->get();
+    // dd($vw3);
+    
+    
+    // $patinfo = DB::table('cancerRegistry2')
+    // ->join('vwInjuryList', 'cancerRegistry2.hpercode', '=', 'vwInjuryList.enccode')
+    // // ->select('cancerRegistry.*','vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast','vwInjuryList.hpercode', 'vwInjuryList.enccode')
+    // ->select('cancerRegistry2.*','vwInjuryList.*')
+    // ->where('cancerRegistry2.hpercode',$enccode)
+    // // ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'cancerForm.status')
+    // ->get();
+    $header = DB::SELECT("EXEC cancer.cancerRegisterHeader 
+    '$enccode'");
+    $patinfo = DB::table('cancerRegistry2')
+    ->select('*')
+    ->where('hpercode',$enccode)
+    ->get();
+    // dd($header);
+    $chdata = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
+    // dd($patinfo );
+    return view('patients.viewCancerForm',[
+        'patinfo'=>$patinfo,
+        'chdata'=>$chdata,
+        'header'=>$header,
+    ]);
+
+
+    }
+    public function cancerEnccode($enccode){
+// dd('cancerEnccode');
+
     }
 
     /**
@@ -517,46 +737,61 @@ class CancerController extends Controller
     }
 
     public function createCancerform(request $request, $enccode){
-        // dd($hpercode);
-        if(cancerRegistry::where('enccode', '=', $enccode)->exists()){
+        // dd($request);
+        if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
             // $enccode->save();
-        }
-        else
-        {
-            DB::table('cancerRegistry')
-            ->insert(
-                array(
-                       'enccode'     =>   $enccode, 
-                )
-                );
-        }
+        }else
+            {
+                DB::table('cancerRegistry2')
+                ->insert(
+                    array(
+                        'hpercode'     =>   $enccode, 
+                    )
+                    );
+            }
 
         if(checkboxList::where('enccode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
             // $enccode->save();
-        }
-        else
-        {
-            DB::table('checkboxList')
-            ->insert(
-                array(
-                       'enccode'     =>   $enccode, 
-                )
-                );
-        }
+            // dd('exists');
+        }else
+            {
+                DB::table('checkboxList')
+                ->insert(
+                    array(
+                        'enccode'     =>   $enccode, 
+                    )
+                    );
+            }
         
-        $patinfo = DB::table('cancerRegistry')
-        ->join('vwInjuryList', 'cancerRegistry.enccode', '=', 'vwInjuryList.enccode')
-        ->select('cancerRegistry.*','vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast','vwInjuryList.hpercode', 'vwInjuryList.enccode')
-        ->where('cancerRegistry.enccode',$enccode)
-        // ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'cancerForm.status')
+        // $vw3 = DB::table('vwInjuryList3')
+        // ->select('*')
+        // ->where('enccode','ER1180068Aug092019210633')
+        // ->get();
+        // dd($vw3);
+        
+        
+        // $patinfo = DB::table('cancerRegistry2')
+        // ->join('vwInjuryList', 'cancerRegistry2.hpercode', '=', 'vwInjuryList.enccode')
+        // // ->select('cancerRegistry.*','vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast','vwInjuryList.hpercode', 'vwInjuryList.enccode')
+        // ->select('cancerRegistry2.*','vwInjuryList.*')
+        // ->where('cancerRegistry2.hpercode',$enccode)
+        // // ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'cancerForm.status')
+        // ->get();
+        $header = DB::SELECT("EXEC cancer.cancerRegisterHeader 
+        '$enccode'");
+        $patinfo = DB::table('cancerRegistry2')
+        ->select('*')
+        ->where('hpercode',$enccode)
         ->get();
+        // dd($header);
         $chdata = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
-    // dd($patinfo );
+        // dd($patinfo );
         return view('patients.createCancer',[
             'patinfo'=>$patinfo,
-            'chdata'=>$chdata
+            'chdata'=>$chdata,
+            'header'=>$header,
         ]);
     }
     public function createCancerformp2(request $request, $hpercode){
@@ -597,5 +832,52 @@ class CancerController extends Controller
         ]);
 
         // return view('patients.sampleForm');
+    }
+    public function getRegion(request $request){
+        $regc = $request->post('regc');
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        ->select('provname','provcode','regcode')
+            ->where('regcode', $regc)   
+            ->distinct('provname')
+            ->orderBy('provname','asc')
+            ->get();
+        $html = '<option value="">Select prov</option>';
+        foreach($vwProvname as $list){
+            $html.='<option value="'.$list->provcode.'">'
+            .$list->provname.'</option>';
+        }
+        echo $html;
+    }
+    public function getProv(request $request){
+        $provc = $request->post('provc');
+        echo $provc;
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('ctyname','ctycode','provcode')
+        ->where('provcode',$provc)
+        ->distinct('ctyname')
+        ->orderBy('ctyname','asc')
+        ->get();
+        $html = '<option value="">Select City</option>';
+        foreach($vwCtyname as $list){
+            $html.='<option value="'.$list->ctycode.'">'
+            .$list->ctyname.'</option>';
+        }
+        echo $html;
+    }
+    public function getCty(request $request){
+        $ctyc = $request->post('ctyc');
+        echo $ctyc;
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        ->select('bgyname','bgycode','ctycode')
+        ->where('ctycode',$ctyc)
+        ->distinct('bgyname')
+        ->orderBy('bgyname','asc')
+        ->get();
+        $html = '<option value="">Select Barangay</option>';
+        foreach($vwBgyname as $list){
+            $html.='<option value="'.$list->bgycode.'">'
+            .$list->bgyname.'</option>';
+        }
+        echo $html;
     }
 }

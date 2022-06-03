@@ -18,7 +18,6 @@
 
     
 
-
         <style>
             * {
                 box-sizing: border-box;
@@ -106,13 +105,82 @@
                 width: 3000px;
 
             }
+            .sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: green;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #818181;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+label{
+    position:relative;
+}
+input[type="text"]{
+
+    width: 400px;
+    height: 40px;
+    padding: 0 15px;
+}
+button{
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    background:#2ccd78;
+    color:white;
+    padding:0 15px;
+    letter-spacing: 1.2px;
+    border:none;
+}
+
+
 
         </style>
+                <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
 <div class="row">
-<div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Patient Info <i>(Injury Registry Drafts)</i></h2>
-        </div>
+    <div class="col-lg-12 margin-tb">
+            <div class="row">
+                <div class="col col-lg-10">
+                    <div class="pull-left">
+                        <h2>Injury Registry(Drafts)</h2>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="">
+                        
+                    </div>
+                </div>
+            </div>
+
+        
+
+
+        
         <div class="topnav d-flex justify-content-start">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -122,12 +190,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Registry
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/search">Injury Registry</a>
+                    <a class="dropdown-item" href="/searchCancer">Cancer Registry</a>
+                    </div>
+                </li>
+                <!-- <li class="nav-item active">
                     <a class="nav-link" href="/search">Search for patient</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Injury Registry Table   
+                    Injury Registry Table
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
@@ -143,15 +220,92 @@
                     <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
                     <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
                     </div>
-                </li>
+                </li> -->
                 </ul>
+                <div class="mt-3 space-y-1">
+                <!-- Authentication -->
+                    <a href="logout">Logout</a>
+
+                <!-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
+                </form> -->
+                </div>
             </div>
             </nav>
             </div>
         </div>
-    
+    </div>
+</div>
+<div class="sidenav">
+  <a href="/search">Search</a>
+  <hr>
+  <a href="/viewinjuryReg">Drafts</a>
+  <hr>
+  <a href="/viewAllinjuryReg">Complete</a>
+  <hr>
+  <a href="/archive">Archive</a>
+  <hr>
+</div>
 
-    <table class="table table-sm table-bordered table-responsive-lg table table-hover">
+<!-- <div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Patient Info</h2>
+        </div>
+        <div class="row">
+            <div class="topnav d-flex justify-content-start">
+                <div class="row">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                        <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Registry
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/search">Injury Registry</a>
+                    <a class="dropdown-item" href="">Cancer Registry</a>
+                    </div>
+                </li>
+                            <ul class="navbar-nav">
+                            <li class="nav-ite  m active">
+                                <a class="nav-link" href="/search">Search for patient</span></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Injury Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
+                                <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
+                                <a class="dropdown-item" href="/archive">Archive</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cancer Registry Table
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
+                                <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div> -->
+        
+        <table class="table table-sm table-bordered table-responsive-lg table table-hover">
             <tr>
                 <th>No</th>
                 <th>Name</th>
@@ -199,13 +353,8 @@
                 @endforeach
                 </tbody>
     </table>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
 
-
-
-  @endsection
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+ 
+    @endsection
