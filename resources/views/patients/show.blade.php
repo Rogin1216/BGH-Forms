@@ -985,6 +985,13 @@
                                         No</label>
                                     </label>
                                 </div>
+                                <div class="col-auto">
+                                    </label>
+                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidUnk" value="Unknown"  {{ ($chdata->rdoAid == 'Unknown'? ' checked' : '') }}>
+                                    <label class="form-check-label" for="aidUnk">
+                                        Unknown</label>
+                                    </label>
+                                </div>
                             </div>
 
                             </div>
@@ -2594,8 +2601,8 @@
                                         </label>
                                     </div>
                                         <div class="col-auto px-md-5">
-                                            <input class="form-check-input" type="radio" value="disposition" name="dispoRdo" id="admitted"
-                                                checked="true" {{ ($chdata->dispoRdo == 'disposition'? ' checked' : '') }}>
+                                            <input class="form-check-input" required type="radio" value="disposition" name="dispoRdo" id="admitted"
+                                                 {{ ($chdata->dispoRdo == 'disposition'? ' checked' : '') }}>
                                             <label class="form-check-label" for="admitted">
                                                 Admitted
                                             </label>
@@ -2653,7 +2660,7 @@
                                         </label>
                                     </div>
                                     <div class="col-auto">
-                                        <input class="form-check-input" type="radio" value="improved" name="outcome" id="improved" checked="true"
+                                        <input class="form-check-input" required type="radio" value="improved" name="outcome" id="improved"
                                         {{ ($chdata->outcome == 'improved'? ' checked' : '') }}>
                                         <label class="form-check-label" for="improved">
                                             Improved

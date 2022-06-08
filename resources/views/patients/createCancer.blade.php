@@ -1241,20 +1241,24 @@ h1{
                                 <th>Consanguinity</th>
                                 <th>Type of Cancer</th>
                                 <th>Age at Diagnosis</th>
+                                <!-- <th>patient_hpercode</th>
+                                <th>familyHistoryMembers_id</th> -->
                                 <th><button class="btn btn-success add_item_btn">add</button></th>
                             </tr>
                         </thead>
                         <tbody>
-                    <!-- foreach(encounters as item) -->
-                        <!-- <tr>
-                            <td>{{$item->admdate ?? null ?: '--' }}</td>
-                            <td><input type="text" name="family_member[]"></td>
-                            <td><input type="text" name="type_of_cancer[]"></td>
-                            <td><input type="text" name="consanguinity[]"></td>
-                            <td><input type="text" name="age_at_diagnosis[]"></td>
-                            <td></td>
-                        </tr> -->
-                    <!-- endforeach -->
+                    @foreach($relative as $item)
+                        <tr>
+                            <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
+                            <td>{{$item->familyMember}}</td>
+                            <td>{{$item->consanguinity}}</td>
+                            <td>{{$item->typeOfCancer}}</td>
+                            <td>{{$item->ageAtDiagnosis}}</td>
+                            <!-- <td>{{$item->patient_hpercode}}</td>
+                            <td>{{$item->familyHistoryMembers_id}}</td> -->
+                            
+                        </tr>
+                    @endforeach
                         </tbody>
                     </table>
                     <!-- <button class="btn btn-outline-primary" id="add_btn">add member</button> -->
@@ -1271,8 +1275,8 @@ h1{
                         $("#show_item").prepend(`
                             <tr>
                                 <td><input type="text" name="familyMember[]"></td>
-                                <td><input type="text" name="typeOfCancer[]"></td>
                                 <td><input type="text" name="consanguinity[]"></td>
+                                <td><input type="text" name="typeOfCancer[]"></td>
                                 <td><input type="text" name="ageAtDiagnosis[]"></td>
                                 <td><button class="btn btn-outline-danger delete_item_btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>

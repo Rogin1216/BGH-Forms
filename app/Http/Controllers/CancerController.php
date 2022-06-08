@@ -78,37 +78,99 @@ class CancerController extends Controller
     public function store(Request $request,$enccode)
     {
         // dd($request);
+        // $famTable = DB::table('familyCancerHistory')
+        // ->select('*')
+        // ->get();
+        // dd($famTable);
+        $table1 = DB::table('registry.cancer.familyHistoryMembers')
+        ->select('*')
+        // ->where('patient_hpercode',$enccode)
+        ->get();
         $fam = $request->familyMember;
         // dd($fam);
-        foreach($fam as $key=>$insert){
 
-            $addMember = [
-                'familyMember' =>$request->familyMember[$key],
-                'typeOfCancer' =>$request->typeOfCancer[$key],
-                'consanguinity' =>$request->consanguinity[$key],
-                'ageAtDiagnosis' =>$request->ageAtDiagnosis[$key]
-            ];
-            // dd($addMember);
-            DB::table('familyHistoryMembers')->insert($addMember);
-            // familyHistoryMembers::insert($addMember);
+        $table2=DB::table('registry.cancer.familyHistoryOfCancer')
+        ->select('*')
+        ->get();
+        // dd($table2);
+
+        if (is_null($fam)){
+            // dd($fam);
         }
-        return $this->viewCancerDraft();
+        else{
+            foreach($fam as $key=>$insert){
+                //INSERT into table familyHistoryMembers
+                $addMember = [
+                    'familyMember' =>$request->familyMember[$key],
+                    'consanguinity' =>$request->consanguinity[$key],
+                    'typeOfCancer' =>$request->typeOfCancer[$key],
+                    'ageAtDiagnosis' =>$request->ageAtDiagnosis[$key]
+                ]; 
+                // dd($fam);
+                DB::table('registry.cancer.familyHistoryMembers')->insert($addMember);
+                // for($x = 0; $x < $arr12;$x++){
+                //     $relative = [
+                //         'patient_hpercode' => $enccode,
+                //         'familyHistoryMembers_id' => $arr12[$x]
+                //     ];
+                //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
+                // }
 
-       
-        // dd($addMember);
-        // dd($enccode);
-        // dd($patfirs.t);
-        // dd($request->family_member);
-        // DB::UPDATE("EXEC registry.dbo.InsertFamilyCancerHistory
-        // ",array($request->family_member)
+                // foreach($arr12 as $i){
+                //     $relative = [
+                //         'patient_hpercode' => $enccode,
+                //         'familyHistoryMembers_id' => $arr12[$i]
+                //     ];
+                //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
+                // }
+                //  $relativeID->each(function ($collection) {
+            //     // dd($alphabet, $collection);
+            //     $item1 = $collection;
+            //     dd($item1);
+            //     $relative = [
+            //         // 'patient_hpercode' => $enccode,
+            //         'familyHistoryMembers_id' => $item1
+            //     ];
+            //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
+                
+            // });
 
-        // );
+                // $test = (int)$relativeID;
+                // dd($test);
+                // $id=intval($relativeID);
+                // $relative = [
+                //     'patient_hpercode' => $enccode,
+                //     'familyHistoryMembers_id' => $item1
+                // ];
+                // DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
+            }
+             //INSERT into table familyHistoryOfCancer
+            // dd($fam);
+             $relativeID =  DB::table('registry.cancer.familyHistoryMembers')
+             ->select('id')
+             ->where('familyMember',$fam)
+             ->get()
+             ->toArray();
+             // $arr = array();
+             // foreach($relativeID as $s){
+             //     array_push($arr, $s->id);
+             // }
+             dd($relativeID);
+             $arr12 = array();
+             foreach($relativeID as $s){
+                 array_push($arr12, $s->id);
+             }
+            //  dd($arr12);
 
-        // '$enccode',
-        // '$request->family_member',
-        // '$request->type_of_cancer',
-        // '$request->consanguinity',
-        // '$request->age_at_diagnosis'
+             foreach($arr12 as $key=>$insert){
+                     $addRelative = [
+                         'patient_hpercode' =>$enccode,
+                         'familyHistoryMembers_id'=>$arr12[$key]
+                     ];
+                     DB::table('registry.cancer.familyHistoryOfCancer')->insert($addRelative);
+            }
+        }
+
 
         DB::UPDATE("EXEC registry.dbo.InsertValueToCancerRegistry
         '$enccode',
@@ -580,7 +642,7 @@ class CancerController extends Controller
         //     ->select('cancerRegistry2.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode','cancerRegistry2.status')
         //     ->where('cancerRegistry2.status', '=', 'drafts')
         //     ->get();
-
+        
         $all = DB::table('cancerRegistry2')
             ->join('vwCancerMasterList', 'cancerRegistry2.hpercode', '=', 'vwCancerMasterList.hpercode')
             ->select('cancerRegistry2.*', 'vwCancerMasterList.patfirst', 'vwCancerMasterList.patmiddle', 'vwCancerMasterList.patlast', 
@@ -628,6 +690,7 @@ class CancerController extends Controller
     //         'patinfo'=>$patinfo,
     //         'chdata'=>$chdata
     //     ]);
+    
 
     if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
         // $enccode = checkboxList::find($enccode);
@@ -738,6 +801,22 @@ class CancerController extends Controller
 
     public function createCancerform(request $request, $enccode){
         // dd($request);
+        // FROM [registry].[cancer].[familyHistoryMembers] fm inner join [registry].[cancer].[familyHistoryOfCancer] fh 
+        // on fm.id = fh.familyHistoryMembers_id
+
+        $relative = DB::table('registry.cancer.familyHistoryMembers as t1')
+        ->join('registry.cancer.familyHistoryOfCancer as t2','t2.familyHistoryMembers_id', '=' , 't1.id')
+        ->select('*')
+        ->where('t2.patient_hpercode',$enccode)
+        ->get();
+        // dd($relative);
+
+
+        // $famHistoryMember = DB::table('registry.cancer.familyHistoryMembers')
+        // ->where('hpercode',$enccode)
+        // ->get();
+        // dd($famHistoryMember);
+
         if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
             // $enccode->save();
@@ -792,6 +871,7 @@ class CancerController extends Controller
             'patinfo'=>$patinfo,
             'chdata'=>$chdata,
             'header'=>$header,
+            'relative'=>$relative
         ]);
     }
     public function createCancerformp2(request $request, $hpercode){

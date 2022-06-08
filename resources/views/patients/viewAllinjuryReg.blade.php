@@ -251,7 +251,7 @@
                     <td>{{ $a->patfirst}} {{ $a->patmiddle}} {{ $a->patlast}}</td>
                     <td>{{ $a->docAdmit}} </td>
                     <td>{{ $a->date_completed}} </td>
-                    <td>{{ $a->enccode}}</td>
+                    <td>{{ $a->status}}</td>
                     
                     <!-- <td>
                       <a href="">export to excel</a>
