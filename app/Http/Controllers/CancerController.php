@@ -108,18 +108,18 @@ class CancerController extends Controller
                 ]; 
                 // dd($fam);
                 DB::table('registry.cancer.familyHistoryMembers')->insert($addMember);
-                // for($x = 0; $x < $arr12;$x++){
+                // for($x = 0; $x < $arr17;$x++){
                 //     $relative = [
                 //         'patient_hpercode' => $enccode,
-                //         'familyHistoryMembers_id' => $arr12[$x]
+                //         'familyHistoryMembers_id' => $arr17[$x]
                 //     ];
                 //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
                 // }
 
-                // foreach($arr12 as $i){
+                // foreach($arr17 as $i){
                 //     $relative = [
                 //         'patient_hpercode' => $enccode,
-                //         'familyHistoryMembers_id' => $arr12[$i]
+                //         'familyHistoryMembers_id' => $arr17[$i]
                 //     ];
                 //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
                 // }
@@ -146,29 +146,50 @@ class CancerController extends Controller
             }
              //INSERT into table familyHistoryOfCancer
             // dd($fam);
-             $relativeID =  DB::table('registry.cancer.familyHistoryMembers')
-             ->select('id')
-             ->where('familyMember',$fam)
-             ->get()
-             ->toArray();
-             // $arr = array();
-             // foreach($relativeID as $s){
-             //     array_push($arr, $s->id);
-             // }
-             dd($relativeID);
-             $arr12 = array();
-             foreach($relativeID as $s){
-                 array_push($arr12, $s->id);
-             }
-            //  dd($arr12);
 
-             foreach($arr12 as $key=>$insert){
-                     $addRelative = [
-                         'patient_hpercode' =>$enccode,
-                         'familyHistoryMembers_id'=>$arr12[$key]
-                     ];
-                     DB::table('registry.cancer.familyHistoryOfCancer')->insert($addRelative);
+            for($i = 0; $i < count($fam);$i++){
+
+                $relativeID =  DB::table('registry.cancer.familyHistoryMembers')
+                ->select('id')
+                ->whereIn('familyMember',$fam)
+                ->get()
+                ->toArray();
+                // dd($relativeID);
+                $arr17 = array();
+                foreach($relativeID as $s){
+                 array_push($arr17, $s->id);
+                }
+                // dd($arr17);
+                    DB::table('registry.cancer.familyHistoryOfCancer')->insert([
+                        'patient_hpercode' =>$enccode,
+                        'familyHistoryMembers_id'=>$arr17[$i]
+                    ]);
             }
+            // dd($arr17);
+            // dd($relativeID);
+
+            //  $relativeID =  DB::table('registry.cancer.familyHistoryMembers')
+            //  ->select('id')
+            //  ->where('familyMember',$fam)
+            //  ->get()
+            //  ->toArray();
+            //  // $arr = array();
+            //  // foreach($relativeID as $s){
+            //  //     array_push($arr, $s->id);
+            //  // }
+            // //  dd($relativeID);
+            //  $arr17 = array();
+            //  foreach($relativeID as $s){
+            //      array_push($arr17, $s->id);
+            //  }
+            // //  dd($arr17);
+            //  foreach($arr17 as $key=>$insert){
+            //          $addRelative = [
+            //              'patient_hpercode' =>$enccode,
+            //              'familyHistoryMembers_id'=>$arr17[$key]
+            //          ];
+            //          DB::table('registry.cancer.familyHistoryOfCancer')->insert($addRelative);
+            // }
         }
 
 
