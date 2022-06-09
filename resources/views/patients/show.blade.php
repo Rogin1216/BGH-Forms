@@ -4,6 +4,12 @@
         #divpat{
             column-width: 70%;
         }
+        .divpat{
+            font-size: 13px;
+        }
+        .divpat1{
+            font-size: 14px;
+        }
         #divsex{
             width: 30%;
         }
@@ -70,7 +76,7 @@
         border: none;
         border-bottom: 1px solid black;
         height: auto;
-        width: 700px;
+        width: 650px;
         
     }
     #frsAidComm{
@@ -197,7 +203,7 @@
  
 <form action="/save/{{$patients->enccode1}}" type="get">
 
-<div class="card">
+<div class="card" style="width: 62rem;">
     <div class="card-header p-2 text-white" id="bgGreen">GENERAL DATA:</div>
     <!-- <div class="header">GENERAL DATA</div> -->
     <div class="card-body border border-secondary">
@@ -205,7 +211,7 @@
             {!! csrf_field() !!}
 
             <!--<input type="checkbox" value="Edit" id="editChx"><label>Edit profile</label></br>-->
-            <div class="col border border-secondary">
+            <div class="col border border-secondary divpat">
 <div class="row">
     <div class="col" id="firstPanel">
         <div class="row">
@@ -213,42 +219,58 @@
                     <b>Name of Patient</b>
                     <div class="row" id="patname">
                         <div class="col" id="patname">
-                        <p class="small"><i>last name</i> </p> 
-                        <label for="">{{$patients->patlast}} </label>
-                            <!-- <input type="text" class="inputlabelunderline" name="patlast" value="" > -->
+                            <div class="row">
+                                <div class="col">
+                                <i>Last name: </i>
+                                    <!-- <p class="small"> </p>  -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{$patients->patlast}}
+                                </div>
+                            </div>
                         </div>
                         <div class="col">
-                        <p class="small"><i>First name (inlcude suffix)</i> </p>
-                        <label for="">{{$patients->patfirst}} </label>
-                            <!-- <input type="text" class="inputlabelunderline" name="patfirst" value="" > -->
+                            <div class="row">
+                                <div class="col">
+                                    <i>First name (w/ suffix)</i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">{{$patients->patfirst}} </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="col">
-                        <p class="small"><i>Middle name</i> </p>
-                        <label for=""> {{$patients->patmiddle}}</label>
-                            <!-- <input type="text" class="inputlabelunderline" name="patmiddle" value="{{$patients->patmiddle}}"> -->
+                            <div class="row">
+                                <div class="col">
+                                <i>Middle name</i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                <label for=""> {{$patients->patmiddle}}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
             
             
-                <div class="col border-start border-secondary">
+                <div class="col border-start border-secondary divpat">
                     <div class="row">
-                        <div class="col">
+                        <div class="col ">
                             Registry No:
                                 <input type="text" class="inputlabelunderlineName" name="reg_no" value="{{$patients->reg_no}}">
                         </div>
                     </div>
-                <div class="row">
-                        <div class="col">
-                            Philhealth No:
-                            <input type="text" class="inputlabelunderlineName" name="pat_phil_health_no" value="{{$patients->pat_phil_health_no}}">
-                        </div>
-                </div>
                     <div class="row">
-                        <div class="" id="divsex">
-                            <b>Sex:</b>
-                            <label for="">{{$patients->pat_sex}}</label>
-                        </div>
+                            <div class="col">
+                                Philhealth No:
+                                <input type="text" class="inputlabelunderlineName" name="pat_phil_health_no" value="{{$patients->pat_phil_health_no}}">
+                            </div>
                     </div>
                 </div>
         </div>
@@ -258,16 +280,27 @@
             <b>Current Address</b>
             <div class="row">
                 <div class="col">
-                <p class="small" ><i>Region name</i> </p>
                     <div class="row">
                         <div class="col">
-                        <input type="text" class="inputlabelunderline" value="{{$patients->pat_current_address_region_name}}" id="pat_current_address">
+                            <!-- <p class="small" ><i>Region name</i> </p> -->
+                           <i>Region Name</i> 
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                        <!-- {{$patients->pat_current_address_region_name}} -->
+                            <input type="text" class="inputlabelunderline" value="{{$patients->pat_current_address_region_name}}" id="pat_current_address">
                         </div>
                     </div>
                                         
                 </div>
                 <div class="col">
-                <p class="small">Province</p> 
+                    <div class="row">
+                        <div class="col">
+                            <i>Province</i>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <label class="form-check-label" for="">
@@ -276,9 +309,14 @@
 
                         </div>
                     </div>
+                    
                 </div>
                 <div class="col">
-                <p class="small">City/Municipality</p>
+                    <div class="row">
+                        <div class="col">
+                            <i>City/Municipality</i>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <input type="text" class="inputlabelunderline" value="{{$patients->pat_current_address_city_name}}" id="pat_current_city">
@@ -286,7 +324,11 @@
                     </div>
                 </div>
                 <div class="col">
-                <p class="small">Barangay</p>
+                    <div class="row">
+                        <div class="col">
+                            <i>Barangay</i>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <input type="text" class="inputlabelunderline" value="{{$patients->pat_current_address_brgy_name}}" id="pat_current_bgy">
@@ -301,10 +343,10 @@
         <b>Temporary Address</b>
             <!-- <input type="hidden" name="copyCh" value="N">
             <input type="checkbox" id="copyCh" name="copyCh" value="1" {{ ($chdata->copyCh == '1'? ' checked' : '') }}> -->
-            <label for="copyCh"><small><i>(same as current address)</i></small></label>
+            <!-- <label for="copyCh"><small><i>(same as current address)</i></small></label> -->
             <div class="row">
                 <div class="col">
-                <p class="small"><i>Region name</i></p>
+                <i>Region name</i>
                     <div class="row">
                         <div class="col">
                         <select id="temp_regcode" name="temp_regcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -317,14 +359,9 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col" id="divTemprecodeinput">
-                            <input type="text" id="temp_regcodeinput" name="temp_regcodeinput" value="{{$patients->temp_regcodeinput}}" disabled>
-                        </div>
-                    </div> -->
                 </div>
                 <div class="col">
-                <p class="small"><i>Province name</i></p>
+                <i>Province name</i>
                     <div class="row">
                         <div class="col">
                         <select id="temp_provcode" name="temp_provcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -333,22 +370,9 @@
                         </select>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col" id="divTempprocodeinput">
-                            <input type="text" id="temp_provcodeinput" name="temp_provcodeinput" value="{{$patients->temp_provcodeinput}}" disabled>
-                        </div>
-                    </div> -->
-                    <!-- <div class="row">
-                        <div class="col">
-                        <select id="temp_regcode" name="temp_regcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" id="temp_regcodeinput" >
-                        </div>
-                    </div>  -->
                 </div>
                 <div class="col">
-                <p class="small"><i>City/Municipality</i></p>
+                <i>City/Municipality</i>
                     <div class="row">
                         <div class="col">
                         <select id="temp_citycode" name="temp_citycode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -357,22 +381,9 @@
                         </select>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col" id="divTemctycodeinput">
-                            <input type="text" id="temp_ctycodeinput" name="temp_ctycodeinput" value="{{$patients->temp_ctycodeinput}}"disabled>
-                        </div>
-                    </div> -->
-                    <!-- <div class="row">
-                        <div class="col">
-                        <select id="temp_regcode" name="temp_regcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" id="temp_regcodeinput" >
-                        </div>
-                    </div>  -->
                 </div>
                 <div class="col">
-                <p class="small"><i>Barangay</i></p>
+                <i>Barangay</i>
                     <div class="row">
                         <div class="col">
                         <select id="temp_bgycode" name="temp_bgycode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -381,29 +392,16 @@
                         </select>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col" id="divTempbgycodeinput">
-                            <input type="text" id="temp_bgycodeinput" name="temp_bgycodeinput" value="{{$patients->temp_bgycodeinput}}" disabled>
-                        </div>
-                    </div> -->
-                    <!-- <div class="row">
-                        <div class="col">
-                        <select id="temp_regcode" name="temp_regcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" id="temp_regcodeinput" >
-                        </div>
-                    </div>  -->
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col border-top border-secondary" id="divaddress">
-            <b>Place of incident</b> <small><i><label for="" style="color:red;">(Required)</label></i></small>
+            <b>Place of incident</b> <small><i style="color:red;">(REQUIRED)</i></small>
             <div class="row">
                 <div class="col">
-                <p class="small"><i>Region name</i></p>
+                <i>Region name</i>
                     <div class="row">
                         <div class="col">
                         <select id="plc_regcode" required name="plc_regcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example" >
@@ -419,7 +417,7 @@
                     
                 </div>
                 <div class="col">
-                    <p class="small"><i>Province Name</i></p>
+                    <i>Province Name</i>
                     <div class="row">
                         <div class="col">
                             <select id="plc_provcode" name="plc_provcode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -431,7 +429,7 @@
                 </div>
 
                 <div class="col">
-                    <p class="small"><i>City Name</i></p>
+                    <i>City Name</i>
                     <div class="row">
                         <div class="col">
                             <select id="plc_ctycode" name="plc_ctycode" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -443,7 +441,7 @@
                 </div>
 
                 <div class="col">
-                    <p class="small"><i>Barangay Name</i></p>
+                    <i>Barangay Name</i>
                     <div class="row">
                         <div class="col">
                             <select id="plc_bgyname" name="plc_bgyname" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
@@ -545,13 +543,22 @@
 
         </script>
     <div class="row ">
-        <div class="border-top border-end border-secondary" id="divbday">
+        <div class="col col-sm-4 border-top border-end border-secondary" id="divbday">
                 <div class="row">
                     <div class="col">
                           <b>Birthday:</b>  
-                        {{date('F j,Y',  strtotime($patients->pat_date_of_birth))}}
-                        
-                        
+                        <div class="row">
+                            <div class="col">
+                            {{date('F j,Y',  strtotime($patients->pat_date_of_birth))}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col" id="divsex">
+                                <b>Sex:</b>
+                                <label for="">{{$patients->pat_sex}}</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="col">
                         <div class="row">
@@ -572,7 +579,7 @@
                     </div>
                 </div>
         </div>
-        <div class=" border-top border-secondary" id="divbday">
+        <div class="col border-top border-secondary" id="divbday">
             <div class="row">
                 <div class="col">
                     <b>Injury Date</b> 
@@ -585,6 +592,26 @@
                     </div>
                 </div>
                 <div class="col">
+                    <b>Encounter date</b> 
+                    <div class="row">
+                        <div class="col">
+                    <!-- <input type="date" class="inputlabelunderlineName" name="encounter_date" id="encounter_date" value="{{$patients->encounter_date}}"> -->
+                    {{date('F j,Y',  strtotime($patients->encounter_date))}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <b>Date report</b> 
+                    <div class="row">
+                        <div class="col">
+                    <input type="date" class="inputlabelunderlineName" required id="appt" name="date_report" value="{{$patients->date_report}}" >
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <b>Injury Time</b> 
                     <div class="row">
                         <div class="col">
@@ -595,17 +622,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <b>Encounter date</b> 
-                    <div class="row">
-                        <div class="col">
-                    <!-- <input type="date" class="inputlabelunderlineName" name="encounter_date" id="encounter_date" value="{{$patients->encounter_date}}"> -->
-                    {{date('F j,Y',  strtotime($patients->encounter_date))}}
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="col">
                     <b>Encounter time</b> 
                     <div class="row">
@@ -616,37 +633,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <b>Date report</b> 
-                    <div class="row">
-                        <div class="col">
-                    <input type="date" class="inputlabelunderlineName" id="appt" name="date_report" value="{{$patients->date_report}}" >
-
-                        </div>
-                    </div>
-                </div>
                 <div class="col">
                     <b>Time report</b> 
                     <div class="row">
                         <div class="col">
-                    <input type="time" id="appt" name="time_report" max="18:00" value="{{$patients->time_report}}">
+                    <input type="time" id="appt" name="time_report" required max="18:00" value="{{$patients->time_report}}">
 
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
     <div class="row border-top border-secondary">
         <div class="col">
             <div class="row">
-                <div class="col">
-                    Facility No:
-                    <input type="text" class="inputlabelunderline" name="pat_facility_no" value="{{$patients->pat_facility_no}}">
-                </div>
+                
             </div>
             <div class="row">
             <div class="col">
@@ -657,19 +659,9 @@
             </div>
             <div class="row">
                 <div class="col">
-                <!-- <select id="Pat_Facility_Reg" name="Pat_Facility_Reg" class="form-select-sm regioncategory" aria-label=".form-select-sm example">
-                    <option value="{{$patients->Pat_Facility_Reg}}">{{$patients->Pat_Facility_Reg}}</option>
-                    <option value="">---</option>
-                    @foreach($vwRegname as $item)
-                    <option value="{{$item->regcode}}">{{$item->regname}}</option>
-                    @endforeach
-                </select> -->
                 <label for="">CAR</label>
                 </div>
             </div>
-
-
-            
         </div>
         <div class="col">
             <div class="row">
@@ -692,6 +684,10 @@
             <div class="row">
                 <div class="col">
                    <b>Facility City:</b> 
+                </div>
+                <div class="col">
+                   <b>Facility No:</b> 
+                    <!-- <input type="text" class="inputlabelunderline" name="pat_facility_no" value="{{$patients->pat_facility_no}}"> -->
                 </div>
             </div>
             <div class="row">
@@ -930,18 +926,24 @@
 
                 <div class="form-group">
                     
-                    <div class="container">
+                    <div class="container" >
 
                             <div class="row">
-                                <div class="col">
+                                <div class="col" >
                                     <div class="row">
                                         <div class="col-auto">
                                            <b>Injury Intent:</b> 
                                         </div>
-                                        <div class="col-auto">
+                                        <div class="col-auto" >
                                             <input class="form-check-input" type="radio" name="inj_intent_code" id="Unintentional/Accidental" value="Unintentional/Accidental" checked {{ ($chdata->inj_intent_code == 'Unintentional/Accidental'? ' checked' : '') }}>
-                                            <label for="Unintentional/Accidental">Unintentional/Accidental</label>
-                                           
+                                            <label for="Unintentional/Accidental" id="divpat1">Unintentional/Accidental</label>
+                                           <div class="row">
+                                            <div class="col-auto">
+                                                <input class="form-check-input" type="radio" name="inj_intent_code" id="Undetermined" value="Undetermined" {{ ($chdata->inj_intent_code == 'Undetermined'? ' checked' : '') }}>
+                                                <label for="Undetermined">Undetermined</label>
+
+                                            </div>
+                                           </div>
                                         </div>
                                         <div class="col-auto">
                                             <input class="form-check-input" type="radio" name="inj_intent_code" id="IntentionalV" value="Intentional(violence)" {{ ($chdata->inj_intent_code == 'Intentional(violence)'? ' checked' : '') }}>
@@ -958,56 +960,50 @@
                                             <label for="IntentionalS">Intentional(self-inflict)</label>
 
                                         </div>
-                                        <div class="col-auto">
-                                            <input class="form-check-input" type="radio" name="inj_intent_code" id="Undetermined" value="Undetermined" {{ ($chdata->inj_intent_code == 'Undetermined'? ' checked' : '') }}>
-                                            <label for="Undetermined">Undetermined</label>
-
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                     <div class="row ">
                         <div class="col ">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <label class="firstAid"><b>First Aid Given:</b> </label>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <label class="firstAid"><b>First Aid Given:</b> </label>
+                                    </div>
+                                    <div class="col-auto">
+                                    <!-- <input type="hidden" name="rdoAid" value="N"> -->
+                                        <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="Yes" checked{{ ($chdata->rdoAid == 'Yes'? ' checked' : '') }}>
+                                        <label class="form-check-label" for="aidYes">
+                                            Yes</label>
+                                    </div>
+                                    <div class="col-auto">
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="No"  {{ ($chdata->rdoAid == 'No'? ' checked' : '') }}>
+                                        <label class="form-check-label" for="aidNo">
+                                            No</label>
+                                        </label>
+                                    </div>
+                                    <div class="col-auto">
+                                        </label>
+                                        <input class="form-check-input" type="radio" name="rdoAid" id="aidUnk" value="Unknown"  {{ ($chdata->rdoAid == 'Unknown'? ' checked' : '') }}>
+                                        <label class="form-check-label" for="aidUnk">
+                                            Unknown</label>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="col-auto">
-                                <!-- <input type="hidden" name="rdoAid" value="N"> -->
-                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidYes" value="Yes" checked{{ ($chdata->rdoAid == 'Yes'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="aidYes">
-                                        Yes</label>
-                                </div>
-                                <div class="col-auto">
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidNo" value="No"  {{ ($chdata->rdoAid == 'No'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="aidNo">
-                                        No</label>
-                                    </label>
-                                </div>
-                                <div class="col-auto">
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="rdoAid" id="aidUnk" value="Unknown"  {{ ($chdata->rdoAid == 'Unknown'? ' checked' : '') }}>
-                                    <label class="form-check-label" for="aidUnk">
-                                        Unknown</label>
-                                    </label>
-                                </div>
-                            </div>
-
-                            </div>
-                            <div class="col">
-                               <b>By whom:</b> 
-                            </div>
+                        </div>
+                        <div class="col">
+                            <b>By whom:</b> 
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-auto" id="frsAidComm">
                         <textarea class="form-control" name="frstAid" id="frstAid"
-                            placeholder="no comment"  >{{$patients->frstAid}}</textarea>
+                            placeholder="-- No first aid given --" >{{$patients->frstAid}}</textarea>
                         </div>
-                        
                         <div class="col" id="docAdmitCol">
                             <input type="text" required name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
-                                placeholder="name of doctor" class="form-control">
+                            placeholder=" -- Name Here --" class="form-control">
                         </div>
                     </div>
                     </div>
@@ -1019,9 +1015,7 @@
                 <h5>Nature of Injury/ies:</h5>
                 <div class="innerdiv">
                     <div class="row">
-                        <div class="col col-lg-2">
-                            <!-- <Label>Multiple injuries?</Label> -->
-                        </div>
+                        
                         
                         <div class="grid-containter" id="gridInjuries">
                             <div class="item1">
@@ -1052,7 +1046,7 @@
 
                     <!--checkbox from abrasion-->
                     <div class="form-group row-md-4">
-                        <div class="container">
+                        <div class="container divpat1">
                         
                             <div class="row">
                                 <div class="col col-lg-5">
@@ -1117,36 +1111,6 @@
                                             placeholder="N/A">
                                 </div>
                             </div>
-                            <!-- <div class="row">
-                                <div class="col col-lg-16">
-                                    <label class="form-check-label" for="burnCh">
-                                        Burn (Degree of Burn & Extent of Body Surface involved) Degree:
-                                    </label>
-                                    <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn1" value="1st" {{ ($chdata->degreeRdoBtn == '1st'? ' checked' : '') }} >
-                                    <label class="" for="degreeRdoBtn1">
-                                        1<sup>st</sup>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn2" value="2nd" {{ ($chdata->degreeRdoBtn == '2nd'? ' checked' : '') }}>
-                                        <label class="" for="degreeRdoBtn2">
-                                            2<sup>nd</sup>
-                                        </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn3" value="3rd" {{ ($chdata->degreeRdoBtn == '3rd'? ' checked' : '') }}>
-                                        <label class="" for="degreeRdoBtn3">
-                                            3<sup>rd</sup>
-                                        </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn4" value="4th" {{ ($chdata->degreeRdoBtn == '4th'? ' checked' : '') }}>
-                                        <label class="" for="degreeRdoBtn4">
-                                            4<sup>th</sup>
-                                        </label>
-                                        <input class="" type="radio" name="degreeRdoBtn" id="degreeRdoBtn5" value="5th" {{ ($chdata->degreeRdoBtn == '5th'? ' checked' : '') }}>
-                                        <label class="" for="degreeRdoBtn5">
-                                            5<sup>th</sup>
-                                        </label>
-                                        <label>Site:</label>
-                                        <input type="text" class="inputlabelunderline" value="{{$patients->site}}" name="site" id="burnChInput"
-                                            placeholder="N/A">
-                                    </label>
-                                </div>
-                            </div> -->
                             
                             <div class="row">
                                 <div class="col col-lg-5">
@@ -1279,7 +1243,7 @@
         <div class="container">
             <h5>External Cause/s of Injury/ies:</h5>
             <div class="row">
-                <div class="col">
+                <div class="col divpat1">
                 <input type="hidden" name="bitesCh" value="N">
                     <input class="form-check-input" type="checkbox" name="bitesCh" id="bitesCh" value="Yes" {{ ($chdata->bitesCh == 'Yes'? ' checked' : '') }}>
                     <label class="form-check-label" for="bitesCh">
@@ -1615,7 +1579,7 @@
                             <h5>FOR TRANSPORT/VEHICULAR ACCIDENT ONLY:</h5>
                         </div>
                     </div>
-                        <div class="col border-top border-secondary">
+                        <div class="col border-top border-secondary divpat1">
                                             <div class="row border-bottom border-secondary">
                                                 <div class="col-auto">
                                                     <label>For transport/vehicular accident only:</label>
@@ -2312,6 +2276,16 @@
                                                         <label class="form-check-label" for="seatbeltCh">
                                                             Seatbelt
                                                         </label>
+                                                        <div class="row">
+                                                            <div class="col-auto">
+                                                                <input type="hidden" name="unknown5Ch" value="N">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        name="unknown5Ch" id="unknown5Ch" value="Yes"{{ ($chdata->unknown5Ch == 'Yes'? ' checked' : '') }}>
+                                                                    <label class="form-check-label" for="unknown5Ch">
+                                                                        Unknown
+                                                                    </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="col-auto">
@@ -2338,20 +2312,7 @@
                                                         </div>
                                                     
 
-                                                    <div class="col-auto">
-                                                    <input type="hidden" name="unknown5Ch" value="N">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            name="unknown5Ch" id="unknown5Ch" value="Yes"{{ ($chdata->unknown5Ch == 'Yes'? ' checked' : '') }}>
-                                                        <label class="form-check-label" for="unknown5Ch">
-                                                            Unknown
-                                                        </label>
-                                                        <div class="row">
-                                                        
-                                                    </div>
-
                                                     
-                                                
-                                            </div>
                                             <!--33e end-->
                                         
                             <!--TRANSPORT/VEHICULAR PART-->
@@ -2360,9 +2321,9 @@
                 </div>
                 <!--collapsible button-->
 
-                <hr>
+                <!-- <hr> -->
 
-                <div class="form-group border border-secondary">
+                <div class="form-group border border-secondary divpat1">
                     <div class="p-2 bg-success text-white">
                         <div class="row">
                             <div class="col">HOSPITAL/FACILITY DATA:</div>
@@ -2699,20 +2660,18 @@
                         <div class="row">
                             <div class="col">
                             <h6 class="form-check-label" for="flexCheckDefault">
-                            Complete Final Diagnosis
-                                                        </h6>
-                                <input type="text" class="inputlabelunderlinelong" name="inPatFinalDiag"
+                            Complete Final Diagnosis:</h6>           
+                            </div>
+                            <div class="col">
+                            <input type="text" class="inputlabelunderlinelong" name="inPatFinalDiag"
                                                     value="{{$patients->inPatFinalDiag}}" placeholder="Text here">
-                                                    
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="row">
                             <div class="col-auto">
-                            <h6 class="form-check-label" for="flexCheckDefault">
-                            Disposition
-                                                        </h6>
+                                <h6 class="form-check-label" for="flexCheckDefault">Disposition</h6>
                             </div>
                             <div class="col-auto">
                                 <input class="form-check-input" type="radio"
@@ -2851,23 +2810,23 @@
                                 <h6 class="form-check-label" for="flexCheckDefault">
                                                             Consultant in-charge
                                                         </h6>
-                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_last_name"
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_last_name" id="consultant_in_charge_last_name"
                                                     value="{{$patients->consultant_in_charge_last_name}}" placeholder="Last Name">
-                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_first_name"
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_first_name" id="consultant_in_charge_first_name"
                                                     value="{{$patients->consultant_in_charge_first_name}}" placeholder="First Name">
-                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_middle_name"
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_middle_name" id="consultant_in_charge_middle_name"
                                                     value="{{$patients->consultant_in_charge_middle_name}}" placeholder="Middle Name">
-                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_department"
+                                    <input type="text" class="inputlabelunderline2" name="consultant_in_charge_department" id="consultant_in_charge_department"
                                                     value="{{$patients->consultant_in_charge_department}}" placeholder="Department">
                                 </div>
                             </div>
                         </div>
                         <div class="col border border-secondary">
-                                <input type="text" class="inputlabelunderline2" name="consultant_landline"
+                                <input type="text" class="inputlabelunderline2" name="consultant_landline" id="consultant_landline"
                                                     value="{{$patients->consultant_landline}}" placeholder="Landline#">
-                                <input type="text" class="inputlabelunderline2" name="consultant_mobile"
+                                <input type="text" class="inputlabelunderline2" name="consultant_mobile" id="consultant_mobile"
                                                     value="{{$patients->consultant_mobile}}" placeholder="Mobile#">
-                                <input type="text" class="inputlabelunderline" name="consultant_email"
+                                <input type="text" class="inputlabelunderline" name="consultant_email" id="consultant_email"
                                                     value="{{$patients->consultant_email}}" placeholder="Email ">
                         </div>
                         </div>
@@ -2881,17 +2840,17 @@
                                         <h6 class="form-check-label" for="flexCheckDefault">
                                                             Address
                                                         </h6>
-                                            <input type="text" class="inputlabelunderline2" name="consultant_street_name"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_street_name" id="consultant_street_name"
                                                             value="{{$patients->consultant_street_name}}" placeholder="# and Street Name">
-                                            <input type="text" class="inputlabelunderline2" name="consultant_region"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_region" id="consultant_region"
                                                             value="{{$patients->consultant_region}}" placeholder="Region">
-                                            <input type="text" class="inputlabelunderline2" name="consultant_province"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_province" id="consultant_province"
                                                             value="{{$patients->consultant_province}}" placeholder="Province">
-                                            <input type="text" class="inputlabelunderline2" name="consultant_city"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_city" id="consultant_city"
                                                             value="{{$patients->consultant_city}}" placeholder="City/Municipality">
-                                            <input type="text" class="inputlabelunderline2" name="consultant_barangay"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_barangay" id="consultant_barangay"
                                                             value="{{$patients->consultant_barangay}}" placeholder="Barangay">
-                                            <input type="text" class="inputlabelunderline2" name="consultant_zipcode"
+                                            <input type="text" class="inputlabelunderline2" name="consultant_zipcode" id="consultant_zipcode"
                                                             value="{{$patients->consultant_zipcode}}" placeholder="Zip Code">
                                         </div>
                                     </div>
@@ -2904,26 +2863,43 @@
                         <div class="col-auto border-top border-bottom border-secondary">
                             <div class="row">
                                 <div class="col-auto">
-                                <h6 class="form-check-label" for="flexCheckDefault">
-                                                            Completed By:
-                                                        </h6>
-                                    <input type="text" class="inputlabelunderline2" name="completedBy_last_name"
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <h6 class="form-check-label" for="flexCheckDefault">Completed By:</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                        <input type="hidden" name="chsame" value="0">
+                                            <input type="checkbox" value="1" name="chsame" id="chsame" {{ ($chdata->chsame == '1'? ' checked' : '') }}>
+                                            <label for="chsame"><i>(Same as consultant)</i></label>
+                                        </div>
+                                        <div class="col">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_last_name" id="completedBy_last_name"
                                                     value="{{$patients->completedBy_last_name}}" placeholder="Last Name">
-                                    <input type="text" class="inputlabelunderline2" name="completedBy_first_name"
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_first_name" id="completedBy_first_name"
                                                     value="{{$patients->completedBy_first_name}}" placeholder="First Name">
-                                    <input type="text" class="inputlabelunderline2" name="completedBy_middle_name"
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_middle_name" id="completedBy_middle_name"
                                                     value="{{$patients->completedBy_middle_name}}" placeholder="Middle Name">
-                                    <input type="text" class="inputlabelunderline2" name="completedBy_department"
+                                    <input type="text" class="inputlabelunderline2" name="completedBy_department" id="completedBy_department"
                                                     value="{{$patients->completedBy_department}}" placeholder="Department">
+                                        </div>
+                                    </div>
+                                
+                                
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="col border border-secondary">
-                                <input type="text" class="inputlabelunderline2" name="completedBy_landline"
+                                <input type="text" class="inputlabelunderline2" name="completedBy_landline" id="completedBy_landline"
                                                     value="{{$patients->completedBy_landline}}" placeholder="Landline#">
-                                <input type="text" class="inputlabelunderline2" name="completedBy_mobile"
+                                <input type="text" class="inputlabelunderline2" name="completedBy_mobile" id="completedBy_mobile"
                                                     value="{{$patients->completedBy_mobile}}" placeholder="Mobile#">
-                                <input type="text" class="inputlabelunderline" name="completedBy_email"
+                                <input type="text" class="inputlabelunderline" name="completedBy_email" id="completedBy_email"
                                                     value="{{$patients->completedBy_email}}" placeholder="Email ">
                         </div>
                         </div>
@@ -2937,23 +2913,23 @@
                                         <h6 class="form-check-label" for="flexCheckDefault">
                                                             Address
                                                         </h6>
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_street"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_street" id="completedBy_street"
                                                             value="{{$patients->completedBy_street}}" placeholder="# and Street Name">
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_region"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_region" id="completedBy_region"
                                                             value="{{$patients->completedBy_region}}" placeholder="Region">
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_province"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_province" id="completedBy_province"
                                                             value="{{$patients->completedBy_province}}" placeholder="Province">
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_City"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_City" id="completedBy_City"
                                                             value="{{$patients->completedBy_City}}" placeholder="City/Municipality">
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_barangay"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_barangay" id="completedBy_barangay"
                                                             value="{{$patients->completedBy_barangay}}" placeholder="Barangay">
-                                            <input type="text" class="inputlabelunderline2" name="completedBy_zip"
+                                            <input type="text" class="inputlabelunderline2" name="completedBy_zip" id="completedBy_zip"
                                                             value="{{$patients->completedBy_zip}}" placeholder="Zip Code">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <label for="birthday">Date Completed:</label>
+                                    <label for="date_completed">Date Completed:</label>
                                     <input type="date" value="{{$patients->date_completed}}" name="date_completed" required>
                                 </div>
                             </div>
@@ -2976,12 +2952,6 @@
                             </svg> Back
                             </a>
                         </div>   
-                        <!-- <div class="col d-flex justify-content-end">
-                        <button type="submit" class="btn btn-outline-primary d-print-none"><i class="fa fa-search"></i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                        </svg> Save to</button>
-                        </div> -->
 
                         <div class="col d-flex justify-content-end">
                              <button id="saveinto" type="submit" class="btn btn-outline-primary d-print-none" onclick="return confirm(&quot;WARNING! saving into 'Final Output' will delete the current patient in DRAFTS, Continue?&quot;)"><i class="fa fa-search"></i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
@@ -2994,7 +2964,7 @@
                             </select>
                             
                         </div>
-                        </form>
+                        
                         <div class="col-auto d-flex justify-content-end">
                             <button type="submit" class="btn btn-outline-warning d-print-none" id="print"><i class="fa fa-search"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
@@ -3002,19 +2972,10 @@
                             <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
                             </svg> Print</button>
                         </div>
-                        <!-- <div class="col-auto">
-                            <form action="/export/{{$patients->enccode1}}" type="get">
-                                <input type="hidden" id="status" name="status" value="archive">
-                            <button name="status" id="status" value="archive" type="submit" class="btn btn-outline-success d-print-none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
-                            <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
-                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                            </svg> <label for="" id="status" name="status" value="archive"></label> Excel</button>
-                            </form>
-                        </div> -->
                     </div>
-                
                 </div>
             </div>
+            </form>
             
     <!-- </div>
 </div>
@@ -3055,7 +3016,9 @@
         var natureCh = document.getElementById("natureCh");
         var aidNo = document.getElementById("aidNo");
         var aidYes = document.getElementById("aidYes");
+        var aidUnk = document.getElementById("aidUnk");
         var deadarrival = document.getElementById("deadarrival");
+        var chsame = document.getElementById("chsame");
 
         Abrasion.addEventListener('click', function (){
         if(this.checked){
@@ -3300,7 +3263,9 @@
 
         others5Ch.addEventListener('click', function (){
         if(this.checked){
+            
             others5Input.disabled = '';
+
         }else{
             others5Input.value= '';
             others5Input.disabled = 'true';
@@ -3319,13 +3284,54 @@
                 frstAid.disabled = false;
             }
         });
-        deadarrival.addEventListener('click', function () {
+        
+       aidUnk.addEventListener('click', function(){
+           if(this.checked){
+               frstAid.disabled = false;
+           }
+       })
+       chsame.addEventListener('click', function(){
             if(this.checked){
-                conscious.checked = '';
-                unconscious.checked = '';
+                $('#completedBy_last_name').val($('#consultant_in_charge_last_name').val())
+                $('#completedBy_first_name').val($('#consultant_in_charge_first_name').val())
+                $('#completedBy_middle_name').val($('#consultant_in_charge_middle_name').val())
+                $('#completedBy_department').val($('#consultant_in_charge_department').val())
+                $('#completedBy_landline').val($('#consultant_landline').val())
+                $('#completedBy_mobile').val($('#consultant_mobile').val())
+                $('#completedBy_email').val($('#consultant_email').val())
+                $('#completedBy_street').val($('#consultant_street_name').val())
+                $('#completedBy_region').val($('#consultant_region').val())
+                $('#completedBy_province').val($('#consultant_province').val())
+                $('#completedBy_City').val($('#consultant_city').val())
+                $('#completedBy_barangay').val($('#consultant_barangay').val())
+                $('#completedBy_zip').val($('#consultant_zipcode').val())
+                
             }
-
+            else{
+                // $('#completedBy_last_name').val();
+                completedBy_last_name.value = '';
+                completedBy_first_name.value = '';
+                completedBy_middle_name.value = '';
+                completedBy_department.value = '';
+                completedBy_landline.value = '';
+                completedBy_mobile.value = '';
+                completedBy_email.value = '';
+                completedBy_street.value = '';
+                completedBy_region.value = '';
+                completedBy_province.value = '';
+                completedBy_City.value = '';
+                completedBy_barangay.value = '';
+                completedBy_zip.value = '';
+            }
         });
+        // deadarrival.addEventListener('click', function () {
+        //     if(this.checked){
+        //         conscious.checked = '';
+        //         unconscious.checked = '';
+        //     }
+
+        // });
+        
         
         
         

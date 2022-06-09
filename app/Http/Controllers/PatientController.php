@@ -562,7 +562,8 @@ class PatientController extends Controller
 
             '$request->rem4th',
             '$request->bgh4th2',
-            '$request->RR4th'
+            '$request->RR4th',
+            '$request->chsame'
             ");
 
             $request->session()->flash('alert-success', 'Saved ');

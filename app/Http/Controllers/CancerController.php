@@ -152,7 +152,7 @@ class CancerController extends Controller
                 $relativeID =  DB::table('registry.cancer.familyHistoryMembers')
                 ->select('id')
                 ->whereIn('familyMember',$fam)
-                ->get()
+                ->get()     
                 ->toArray();
                 // dd($relativeID);
                 $arr17 = array();
