@@ -125,7 +125,8 @@
 
         <div class="topnav d-flex justify-content-start">
             <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="col">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -141,33 +142,12 @@
                     <a class="dropdown-item" href="/searchCancer">Cancer Registry</a>
                     </div>
                 </li>
-                <!-- <li class="nav-item active">
-                    <a class="nav-link" href="/search">Search for patient</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Injury Registry Table
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/viewinjuryReg">Drafts</a>
-                    <a class="dropdown-item" href="/viewAllinjuryReg">Complete Forms</a>
-                    <a class="dropdown-item" href="/archive">Archive</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cancer Registry Table
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/viewCancerDraft">Drafts</a>
-                    <a class="dropdown-item" href="/viewCancerComplete">Complete Forms</a>
-                    </div>
-                </li> -->
                 </ul>
-                <div class="mt-3 space-y-1">
+                </div>
+            
+                <div class="col">
                 <!-- Authentication -->
                     <a href="logout">Logout</a>
-
                 <!-- <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <x-responsive-nav-link :href="route('logout')"
@@ -186,3 +166,5 @@
 </nav>
  
     @endsection
+
+    

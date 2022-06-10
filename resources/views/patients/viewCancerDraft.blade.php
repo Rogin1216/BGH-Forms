@@ -201,7 +201,7 @@ button{
                 </li>
 
                 </ul>
-                <div class="mt-3 space-y-1">
+                <div class="col">
                 <!-- Authentication -->
                     <a href="logout" >Logout</a>
 

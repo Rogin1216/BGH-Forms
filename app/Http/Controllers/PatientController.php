@@ -108,9 +108,8 @@ class PatientController extends Controller
     public function save(Request $request,$enccode)
     {
         // dd('patient contorller');
-        // dd($request);
-
-        // $saveTo = $request->saveTo;
+        // dd($request->account_name);
+        
             //  dd($request);
         DB::UPDATE("EXEC registry.dbo.InsertingValuesInto 
             '$enccode',
@@ -745,7 +744,7 @@ class PatientController extends Controller
                 );
         }
         $info = DB::table('vwInjuryList3')->select('*')->where('enccode1',$enccode)->get();
-        // dd($info);
+        $loginId = $request->session()->get('loginId');
 
         // dd($info);                                    //adsfasdfdsafadsfdsafdsafads<<------------
         $chdatalist = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
@@ -785,7 +784,8 @@ class PatientController extends Controller
             'vwProvname',
             'vwRegname',
             'vwCtyname',
-            'vwBgyname'
+            'vwBgyname',
+            'loginId'
             ));
     }
 
@@ -879,7 +879,7 @@ class PatientController extends Controller
 
     }
     public function viewAllinjuryReg(request $request){
-
+        $loginId = $request->session()->get('loginId');
         $all = DB::table('injuryRegistry')
         ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
@@ -888,7 +888,7 @@ class PatientController extends Controller
 
         $next = DB::table('injuryRegistry')->select('*')->get();
 
-        return view('patients.viewAllinjuryReg')->with('all',$all)->with('next',$next);
+        return view('patients.viewAllinjuryReg',compact('loginId'))->with('all',$all)->with('next',$next);
     }
 
     public function exportAndProcedure(request $request,$enccode){
@@ -1147,13 +1147,37 @@ class PatientController extends Controller
     }
     
     public function exportbulk(request $request,$enccode){
-
+        $encPat = DB::table('injuryRegistry')
+        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+        ->where('injuryRegistry.status', '=', 'completeForm')
+        ->get();
+        // dd($request->ENCCODE);
+        
+            $patEncArr = array();
+            foreach($encPat as $s){
+             array_push($patEncArr, $s->ENCCODE);
+            }
+            // dd($patEncArr);
+            $patDateArr = array();
+            foreach($encPat as $s){
+             array_push($patDateArr, $request->date_exported);
+            }
+            // dd($patDateArr);
+            for($i = 0; $i < count($patEncArr);$i++){
+                // $insertExcelHistory = [
+                    DB::table('registry.dbo.injuryReg_ExportHistory')->insert([
+                    'hpercode' =>$patEncArr[$i],
+                    'account_name' =>$request->account_name,
+                    'date_exported' =>$request->date_exported
+                ]); 
+            }
+            
             return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
 
 
     }
     public function exporttt(request $request){
-        // dd("asdfasdfdsa");
         return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
 
         
@@ -1175,6 +1199,7 @@ class PatientController extends Controller
     }
     public function setArchive(request $request){
         // dd($enccode);
+        
         DB::table('injuryRegistry')
         ->where('status','completeForm')
         ->update(['status' => 'archive']);

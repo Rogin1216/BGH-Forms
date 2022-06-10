@@ -167,6 +167,9 @@
 #firstPanel{
     width: auto;
 }
+#popup {
+  display:none;
+}
 </style>
 <!-- <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -455,91 +458,91 @@
         </div>
     </div>
         <script>
-        var copyCh = document.getElementById("copyCh");
-            // var biteInput = document.getElementById("biteInput");
-            copyCh.addEventListener('click', function() {
-                var x = document.getElementById("divTempprocodeinput");
-                var y = document.getElementById("divTemprecodeinput");
-                var z = document.getElementById("divTemctycodeinput");
-                var a = document.getElementById("divTempbgycodeinput");
-                var treg = document.getElementById("temp_regcodeinput");
-                var tprov = document.getElementById("temp_provcodeinput");
-                var tcty = document.getElementById("temp_ctycodeinput");
-                var tbgy = document.getElementById("temp_bgycodeinput");
-                var aa = document.getElementById("temp_regcode");
-                var bb = document.getElementById("temp_provcode");
-                var cc = document.getElementById("temp_citycode");
-                var dd = document.getElementById("temp_bgycode");
-                var opTempregode = document.getElementById("opTempregode");
-                // if (x.style.display && y.style.display && z.style.display && a.style.display === "block") {
-                //     x.style.display = "none";
-                //     y.style.display = "none";
-                //     z.style.display = "none";
-                //     a.style.display = "none";
-                // } else {
-                //     x.style.display = "block";
-                //     y.style.display = "block";
-                //     z.style.display = "block";
-                //     a.style.display = "block";
-                // }
-                if(this.checked){
-                    opTempregode.value = document.getElementById("pat_current_address").value;
-                    treg.value = document.getElementById("pat_current_address").value;
-                    tprov.value = document.getElementById("pat_current_province").value;
-                    tcty.value = document.getElementById("pat_current_city").value;
-                    tbgy.value = document.getElementById("pat_current_bgy").value;
+        // var copyCh = document.getElementById("copyCh");
+        //     // var biteInput = document.getElementById("biteInput");
+        //     copyCh.addEventListener('click', function() {
+        //         var x = document.getElementById("divTempprocodeinput");
+        //         var y = document.getElementById("divTemprecodeinput");
+        //         var z = document.getElementById("divTemctycodeinput");
+        //         var a = document.getElementById("divTempbgycodeinput");
+        //         var treg = document.getElementById("temp_regcodeinput");
+        //         var tprov = document.getElementById("temp_provcodeinput");
+        //         var tcty = document.getElementById("temp_ctycodeinput");
+        //         var tbgy = document.getElementById("temp_bgycodeinput");
+        //         var aa = document.getElementById("temp_regcode");
+        //         var bb = document.getElementById("temp_provcode");
+        //         var cc = document.getElementById("temp_citycode");
+        //         var dd = document.getElementById("temp_bgycode");
+        //         var opTempregode = document.getElementById("opTempregode");
+        //         // if (x.style.display && y.style.display && z.style.display && a.style.display === "block") {
+        //         //     x.style.display = "none";
+        //         //     y.style.display = "none";
+        //         //     z.style.display = "none";
+        //         //     a.style.display = "none";
+        //         // } else {
+        //         //     x.style.display = "block";
+        //         //     y.style.display = "block";
+        //         //     z.style.display = "block";
+        //         //     a.style.display = "block";
+        //         // }
+        //         if(this.checked){
+        //             opTempregode.value = document.getElementById("pat_current_address").value;
+        //             treg.value = document.getElementById("pat_current_address").value;
+        //             tprov.value = document.getElementById("pat_current_province").value;
+        //             tcty.value = document.getElementById("pat_current_city").value;
+        //             tbgy.value = document.getElementById("pat_current_bgy").value;
 
-                    // aa.disabled = 'true';
-                    // aa.value = '';
-                    bb.disabled = 'true';
-                    bb.value = '';
-                    cc.disabled = 'true';
-                    cc.value = '';
-                    dd.disabled = 'true';
-                    dd.value = '';
-                    // y.disabled = '';
-                    // z.disabled = '';
-                    // a.disabled = '';
+        //             // aa.disabled = 'true';
+        //             // aa.value = '';
+        //             bb.disabled = 'true';
+        //             bb.value = '';
+        //             cc.disabled = 'true';
+        //             cc.value = '';
+        //             dd.disabled = 'true';
+        //             dd.value = '';
+        //             // y.disabled = '';
+        //             // z.disabled = '';
+        //             // a.disabled = '';
 
-                    tbgy.disabled = '';
-                    treg.disabled = '';
-                    tprov.disabled = '';
-                    tcty.disabled = '';
-                    // $("#temp_regcode").hide();
-                    // $("#temp_provcode").hide();
-                    // $("#temp_ctycode").hide();
-                    // $("#temp_bgycode").hide();
+        //             tbgy.disabled = '';
+        //             treg.disabled = '';
+        //             tprov.disabled = '';
+        //             tcty.disabled = '';
+        //             // $("#temp_regcode").hide();
+        //             // $("#temp_provcode").hide();
+        //             // $("#temp_ctycode").hide();
+        //             // $("#temp_bgycode").hide();
 
-                    // $("#temp_regcodeinput").show();
-                    // $("#temp_provcodeinput").show();
-                    // $("#temp_ctycodeinput").show();
-                    // $("#temp_bgycodeinput").show();
-                }
-                else{
-                    treg.value = "";
-                    tprov.value = "";
-                    tcty.value = "";
-                    tbgy.value = "";
+        //             // $("#temp_regcodeinput").show();
+        //             // $("#temp_provcodeinput").show();
+        //             // $("#temp_ctycodeinput").show();
+        //             // $("#temp_bgycodeinput").show();
+        //         }
+        //         else{
+        //             treg.value = "";
+        //             tprov.value = "";
+        //             tcty.value = "";
+        //             tbgy.value = "";
 
-                    // aa.disabled = '';
-                    bb.disabled = '';
-                    cc.disabled = '';
-                    dd.disabled = '';
-                    // x.disabled = 'true';
-                    // z.disabled = 'true';
-                    // a.disabled = 'true';
+        //             // aa.disabled = '';
+        //             bb.disabled = '';
+        //             cc.disabled = '';
+        //             dd.disabled = '';
+        //             // x.disabled = 'true';
+        //             // z.disabled = 'true';
+        //             // a.disabled = 'true';
 
-                    tcty.disabled = 'true';
-                    tprov.disabled = 'true';
-                    treg.disabled = 'true';
-                    tbgy.disabled = 'true';
+        //             tcty.disabled = 'true';
+        //             tprov.disabled = 'true';
+        //             treg.disabled = 'true';
+        //             tbgy.disabled = 'true';
 
-                    // $("#temp_regcode").show();
-                    // $("#temp_provcode").show();
-                    // $("#temp_ctycode").show(); 
-                    // $("#temp_bgycode").show();
-                }
-            });
+        //             // $("#temp_regcode").show();
+        //             // $("#temp_provcode").show();
+        //             // $("#temp_ctycode").show(); 
+        //             // $("#temp_bgycode").show();
+        //         }
+        //     });
 
         </script>
     <div class="row ">
@@ -993,7 +996,7 @@
                                 </div>
                         </div>
                         <div class="col">
-                            <b>By whom:</b> 
+                            <b>By whom(required if yes):</b> 
                         </div>
                     </div>
                     <div class="row">
@@ -2952,7 +2955,9 @@
                             </svg> Back
                             </a>
                         </div>   
-
+                        
+                        <input type="hidden" id="account_name" name="account_name" value="{{$loginId}}">
+                        <input type="hidden" id="date_exported" name="date_exported" value="{{ date('F j, Y, g:i a') }}">
                         <div class="col d-flex justify-content-end">
                              <button id="saveinto" type="submit" class="btn btn-outline-primary d-print-none" onclick="return confirm(&quot;WARNING! saving into 'Final Output' will delete the current patient in DRAFTS, Continue?&quot;)"><i class="fa fa-search"></i><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                             <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -2966,7 +2971,7 @@
                         </div>
                         
                         <div class="col-auto d-flex justify-content-end">
-                            <button type="submit" class="btn btn-outline-warning d-print-none" id="print"><i class="fa fa-search"></i>
+                            <button type="submit" title="saveInto" class="btn btn-outline-warning d-print-none" id="print"><i class="fa fa-search"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
                             <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
                             <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"/>
@@ -2989,21 +2994,36 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
 </script>
-<script src="jquery.min.js"></script>
+<!-- <script src="jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- <script src="{{ URL::asset('js/printThis.js') }}"></script> -->
 <script>
     $('#print').click(function(){
         document.execCommand('print');
     })
+    var saveinto = document.getElementById("saveinto");
 
     $(document).ready(function(){
-        $(document).on('change','regioncategory',function(){
-            var reg_id=$(this).val();
-            console.log(reg_id);
+        // console.log({!! json_encode($info, JSON_HEX_TAG) !!});
 
-            
-        })
+        $.each({!! json_encode($info, JSON_HEX_TAG) !!}, function(key, value) {
+            if((value.status)=='archive'){
+                saveinto.disabled = 'true';
+                console.log("Status is set to = " + value.status);
+                saveinto.title = 'adsfsadf';
+                // hover button msg box ("already been converted");
+            }else{
+                console.log("Status is set to = " + value.status);
+                
+            }
+        });
+
+        if(aidYes.checked){
+            // frstAid = require;
+            frstAid.setAttribute('required', 'true');
+        }
+        
+        
     })
 </script> 
 
@@ -3324,6 +3344,8 @@
                 completedBy_zip.value = '';
             }
         });
+
+        
         // deadarrival.addEventListener('click', function () {
         //     if(this.checked){
         //         conscious.checked = '';

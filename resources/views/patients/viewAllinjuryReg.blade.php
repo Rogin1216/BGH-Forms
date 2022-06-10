@@ -199,7 +199,7 @@
                     </div>
                 </li> -->
                 </ul>
-                <div class="mt-3 space-y-1">
+                <div class="col">
                 <!-- Authentication -->
                     <a href="logout">Logout</a>
 
@@ -264,7 +264,8 @@
                 @endforeach 
                 </tbody>
                 </table>
-                
+                <input type="hidden" id="account_name" name="account_name" value="{{$loginId}}">
+                        <input type="hidden" id="date_exported" name="date_exported" value="{{ date('F j, Y, g:i a') }}">
                 <div class="col-auto float-end">
                         <!-- <button type="submit" class="btn btn-outline-success d-print-none " ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
                         <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
@@ -300,7 +301,11 @@
                             $('button').click(function(){
                                 $('#hidden').hide();
                                 $('#shown').show();
-                        });});
+                        });
+                        $('#hidden').click(function(){
+                            console.log(new Date().toUTCString());
+                        })
+                    });
                         </script>
 
                 </div> 

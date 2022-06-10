@@ -157,7 +157,12 @@ button{
     letter-spacing: 1.2px;
     border:none;
 }
+#wrapper{
+max-height: 90px;
+/* display: flex; */
+overflow-y: auto;
 
+}
 
 
         </style>
@@ -201,7 +206,7 @@ button{
                 </li>
 
                 </ul>
-                <div class="mt-3 space-y-1">
+                <div class="col">
                 <!-- Authentication -->
                     <a href="logout" >Logout</a>
 
@@ -245,7 +250,7 @@ button{
                     </label>
                 </form>
 
-                <table class="table table-bordered table-responsive-lg">
+                <table class="table table-bordered table-responsive-lg" id="wrapper">
                     <thead>   
                         <tr>
                             <th>No</th>
@@ -256,17 +261,15 @@ button{
                         </tr>
                     </thead>
                     <tbody>
-                        
                     @foreach($all as $x)
-                        <tr>
+                        <tr >
                             <td>{{ $loop->iteration }}</td>
                             <td>{{$x->patfirst}} {{$x->patmiddle}} {{$x->patlast}}</td>
                             <td>{{$x->tsdesc}}</td>
                             <td>{{$x->hpercode}}</td>
                             <td><a href="/cancerForm/{{$x->hpercode}}" class="btn btn-warning btn-sm">show</a></td>
-
                         </tr>
-                        @endforeach
+                    @endforeach   
                     </tbody>
                 </table>
 

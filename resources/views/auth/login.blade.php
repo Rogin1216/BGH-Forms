@@ -20,22 +20,23 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 .login-form {
-
+    top:50px;
     width: 340px;
-    margin: 50px auto;
+    /* height: 500px; */
+    margin: 60px auto;
   	font-size: 15px;
 }
 .login-form form {
-    margin-bottom: 10px;
+    margin: 150px 0 0 0;
     background: #f7f7f7;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
 }
 .login-form h2 {
   
 }
 .form-control, .btn {
-    min-height: 38px;
+    min-height: 50px;
     border-radius: 2px;
 }
 .btn {        
@@ -44,6 +45,16 @@
 }
 .input-form{
     margin: 0 0 0 30px;
+}
+#input{
+    margin: 50px 0 0 0;
+}
+.logo{
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    top:-60px;
+    left:100px;
 }
 </style>
 <x-guest-layout>
@@ -56,10 +67,12 @@
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
-
+        
         <!-- Validation Errors -->
-        <div  class="login-form">
-            
+        <div class="login-form">
+        <div class="col">
+                            <img src="{{ asset('images/bghmc-logo.png') }}" class="logo" alt="..." >
+                        </div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <!-- username -->
@@ -74,10 +87,13 @@
                 </div> -->
 
                 <!-- Email Address -->
-
-                <div class="col">
+                
+                <div class="col" >
                     <div class="row">
-                        <div class="col">
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col" id="input">
                             <!-- <x-label for="email" :value="__('Email: ')" /> -->
                             <x-input id="email" class="block mt-1 w-full" 
                             class="input-form"
@@ -98,6 +114,24 @@
                                             required autocomplete="current-password" />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                        <div class="flex items-center justify-end mt-4">
+                    <!-- @if (Route::has('password.request'))
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </a>
+                    @endif -->
+                    <div class="d-flex justify-content-center">
+                        <!-- <x-button class="btn btn-secondary">
+                            {{ __('Log in') }}
+                        </x-button> -->
+                        <button class="btn btn-secondary">{{ __('Log in') }}</button>
+                    </div>
+                    
+                </div>
+                        </div>
+                    </div>
                 </div>
                 
 
@@ -112,19 +146,7 @@
                     </label>
                 </div> -->
 
-                <div class="flex items-center justify-end mt-4">
-                    <!-- @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif -->
-                    <div class="d-flex justify-content-center">
-                        <x-button class="btn btn-secondary">
-                            {{ __('Log in') }}
-                        </x-button>
-                    </div>
-                    
-                </div>
+                
             </form>
         </div>
         <center><x-auth-validation-errors class="mb-4" :errors="$errors" /></center>

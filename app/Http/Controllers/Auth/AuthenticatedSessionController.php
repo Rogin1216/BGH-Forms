@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
         $post =  Http::post("http://192.168.7.188:8040/api/login",[
             'username' => $username,
             'password' => $password
-        ]);
+        ]); 
         // $client = new GuzzleHttp\Client();
         // $user = ('GET', 'http://192.168.7.188:8040/api/login', [
         //     'auth' => ['user', 'pass']
