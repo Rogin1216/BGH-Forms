@@ -859,7 +859,6 @@
                         }
                     })
                 });
-                
         });
         // jQuery(document).ready(function(){
         //     jQuery('#provname').change(function() {
@@ -3007,6 +3006,8 @@
         // console.log({!! json_encode($info, JSON_HEX_TAG) !!});
 
         $.each({!! json_encode($info, JSON_HEX_TAG) !!}, function(key, value) {
+            // dd($info);
+            console.log(value.status);
             if((value.status)=='archive'){
                 saveinto.disabled = 'true';
                 console.log("Status is set to = " + value.status);

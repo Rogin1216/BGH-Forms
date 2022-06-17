@@ -101,7 +101,7 @@ background-color: #f0dea8;
 .inputlabelunderline{
   border: none;
   height: auto;
-  width: 150px;
+  width: 100px;
 }
 .inputlabelunderlineYel{
   border: none;
@@ -247,7 +247,7 @@ h1{
   border: 1.5px solid var(--first-color);
 }
 #show2_item, #show3_item{
-max-height: 90px;
+max-height: 110px;
 /* display: flex; */
 overflow-y: auto;
 
@@ -260,7 +260,10 @@ text-align: center;
 }
 </style>
 <body>
-
+    
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <!-- <form id="regForm" action="/action_page.php"> -->
   <!-- One "tab" for each step in the form: -->
 <div class="tab">    
@@ -1343,6 +1346,11 @@ text-align: center;
 
 
                         $(document).on('click','.delete_item_btn', function(e){
+                            e.preventDefault();
+                            let row_item = $(this).parent().parent();
+                            $(row_item).remove();
+                        })
+                        $(document).on('click','.delete_item_btn2', function(e){
                             e.preventDefault();
                             let row_item = $(this).parent().parent();
                             $(row_item).remove();
@@ -2700,40 +2708,172 @@ text-align: center;
                     <b>Final Diagnosis (PLEASE FILL UP COMPLETELY, INDICATE STAGE, SITE OF METS, ER, PR, HER2, EGFR etc )</b>
                 </div>
             </div>
+
+
+<!-- Modal Serum -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Serum Biomarker Data:</h5>
+        <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <table id="show2_item"> -->
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for=""><b>Serum Biomarker:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerDesc" name="bioMarkerDesc" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for=""><b>Level:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerLevel" name="bioMarkerLevel" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           <label for=""><b>Ref range:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerRange" name="bioMarkerRange" value="">
+                        </div>
+                    </div>
+                    <input type="hidden" id="bioMarkerDate" name="bioMarkerDate" value="{{ date('F j, Y') }}">
+                    <input type="hidden" id="bioMarkerType" name="bioMarkerType" value="0">
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        
+        <button href="" id="serumDataInsert" name="serumDataInsert" type="button" class="btn btn-primary" data-bs-dismiss="modal">Insert Data</button>
+        <!-- <input type="submit" class="btn btn-primary" name="serumDataInsert" id="serumDataInsert" value="Insert Data"> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Serum EDIT -->
+<div class="modal fade" id="editSerumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Serum Biomarker Data:</h5>
+        <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> -->
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+
+          <!-- <span aria-hidden="true">&times;</span> -->
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <table id="show2_item"> -->
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for=""><b>Serum Biomarker:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerDescEdit" name="bioMarkerDesc">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for=""><b>Level:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerLevelEdit" name="bioMarkerLevel" value="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           <label for=""><b>Ref range:</b> </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="bioMarkerRangeEdit" name="bioMarkerRange" value="">
+                        </div>
+                    </div>
+                    <input type="hidden" id="bioMarkerDate" name="bioMarkerDate" value="{{ date('F j, Y') }}">
+                    <input type="hidden" id="bioMarkerType" name="bioMarkerType" value="0">
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+      <button class="btn btn-outline-danger" id="serumDataDelete" name="serumDataDelete" data-bs-dismiss="modal" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg></button>
+        <button href="" id="serumDataSave" name="serumDataSave" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Data</button>
+        <!-- <input type="submit" class="btn btn-primary" name="serumDataInsert" id="serumDataInsert" value="Insert Data"> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ---- -->
+
+
+
+<!-- ---- -->
+
             <!-- Serum -->
             <div class="row">
                 <div class="col border border-secondary border-top-0">
                     <div class="row">
                         <div class="col border-bottom border-secondary" id="divpeach">
                         <b>SERUM BIOMARKER DATA:</b>
-                        <!-- <div class="wrapper">
-                            <div class="item">1</div>
-                            <div class="item">2</div>
-                            <div class="item">3</div>
-                            <div class="item">4</div>
-                            <div class="item">5</div>
-                        </div> -->
+
                         </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-auto">
-                            Serum biomarker
-                        </div>
-                        <div class="col">
-                            Level
-                        </div>
-                        <div class="col">
-                            Ref range
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-success btn-sm add2_item_btn" >Add</button>
-                        </div>
-                        
                     </div>
                     <div class="row" id="show2_item">
+                    <table class="" >
+                        <thead>
+                            <tr>
+                                <th><small>Serum biomarker</small> </th>
+                                <th><small>Level</small> </th>
+                                <th><small>Ref range</small> </th>
+                                <th><small>Date</small> </th>
+            
+                                <th><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button></th>
+                            </tr>
+                        </thead>
+                        @foreach($serumTable as $a)
+                        <tr>
+                                <td>{{$a->bioMarkerDesc}}</td>
+                                <td>{{$a->bioMarkerLevel}}</td>
+                                <td>{{$a->bioMarkerRange}}</td>
+                                <td>{{$a->bioMarkerDate}}</td>
+                                <td><button type="button" value="{{$a->id}}" id="editModal" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editSerumModal">edit</button></td>
+                        </tr>
+                        @endforeach
+
+                    </table>
                         
                     </div>
+                    <!-- <div class="row" id="show2_item">
+                        
+                    </div> -->
                 </div>
                 <div class="col border-end border-bottom border-secondary">
                     <div class="row">
@@ -2759,31 +2899,106 @@ text-align: center;
                     </div>
                 </div>
                 <script>
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    jQuery(document).ready(function(){
+                        jQuery('#serumDataInsert').click(function() {
+                            let a=jQuery("#bioMarkerDesc").val();
+                            let b=jQuery("#bioMarkerLevel").val();
+                            let c=jQuery("#bioMarkerRange").val();
+                            let d=jQuery("#bioMarkerDate").val();
+                            let e=jQuery("#bioMarkerType").val();
+                            // alert('asdfsadf serum');
+                            $.ajax({url: "/insertSerum",
+                                    data:{"bioMarkerDesc":a,
+                                        "bioMarkerLevel":b,
+                                        "bioMarkerRange":c,
+                                        "bioMarkerDate":d,
+                                        "bioMarkerType":e
+                                        },
+                                    success: function(result){
+                                    }
+                        })
+                    })
+                        
+                    });
+
                     $(document).ready(function() {
+                        $(document).on('click','#editModal', function(){
+                            var id = $(this).val();
+                            // alert(id);
+                            $.ajax({
+                                type: "GET",
+                                url:"/editSerum",
+                                data: {
+                                    'id': id,
+                                },
+                                success: function (response){
+                                    $('#bioMarkerDescEdit').val(response.bioMarkerDesc);
+                                    $('#bioMarkerLevelEdit').val(response.bioMarkerLevel);
+                                    $('#bioMarkerRangeEdit').val(response.bioMarkerRange);
+                                 console.log(response);
+                                    // console.log(  $('#bioMarkerDescEdit').val());/
+                                }
+                            })
+                        })
+                        $(document).on('click','#serumDataSave',function(){
+                            var id = $(this).val();
+                            var bmd = $('#bioMarkerDescEdit').val();
+                            // alert(bioMarkerDesc);
+                            $.ajax({
+                                type:"GET",
+                                url:"/saveSerum",
+                                data:{
+                                    'bioMarkerDesc': bmd,
+                                },
+                                success: function(response){
+                                    console.log(response);
+                                }
+                            })
+                        })
+                        $(document).on('click','#serumDataDelete',function(){
+                            var del = $(this).val();
+                            alert(del);
+                            // $.ajax({
+                            //     type:"GET",
+                            //     url:"/deleteSerum",
+                            //     data:{
+                            //         'id': id
+                            //     }
+                            // })
+                        })
+                        
+
+                    // $.each({!! json_encode($serumTable, JSON_HEX_TAG) !!}, function(key, value) {
+                    //     console.log(value.id);
+                    // });
+                        // $("#serumDataInsert").click(function(e){
+                        //     // alert('Serum inserted');
+                        //     $.ajax({url: "/insertSerum", success: function(result){
+                                
+                        //     }
+                        // })});
                         $(".add2_item_btn").click(function(e){
                             e.preventDefault();
                         $("#show2_item").prepend(`
-                        <div class="row">
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-outline-danger btn-sm delete_item_btn"><small><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <tr>
+                            <td><input type="text" class="inputlabelunderline" id="serum_serum_biomarker" name="serum_serum_biomarker[]" value="serumValue" placeholder="---"</td>
+                            <td><input type="text" class="inputlabelunderline" name="bioMarkerLevel[]" value="" placeholder="---"</td>
+                            <td><input type="text" class="inputlabelunderline" name="bioMarkerRange[]" value="" placeholder="---"</td>
+                            <td><input type="text" class="inputlabelunderline" name="" value="" placeholder="---"</td>
+                            <td><button class="btn btn-outline-danger btn-sm delete_item_btn"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
   <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-</svg></small></button>
-                            </div>
-                        </div>
+</svg></button></td>
+                        </tr>
                         `);
 
                         });
-                    });
+                    });     
                     $(document).ready(function() {
                         $(".add3_item_btn").click(function(e){
                             e.preventDefault();
@@ -3079,7 +3294,7 @@ text-align: center;
                                 </div>
                                 </div>
                             </div>
-                            <div class="col border border-start-0 border-danger">
+                            <div class="col border border-start-0 border-secondary">
                             <div class="row">
                                 <div class="col">
                                     <div class="row">
@@ -4052,6 +4267,7 @@ function fixStepIndicator(n) {
         }
         });
 })
+
 </script>
 
 </body>

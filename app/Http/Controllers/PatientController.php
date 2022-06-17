@@ -1147,6 +1147,7 @@ class PatientController extends Controller
     }
     
     public function exportbulk(request $request,$enccode){
+        // dd($request->account_name);
         $encPat = DB::table('injuryRegistry')
         ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')

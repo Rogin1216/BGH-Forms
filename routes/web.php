@@ -47,6 +47,10 @@ Route::get('/sampleForm/{id}','CancerController@sampleForm')->where('id','.*'); 
 Route::post('/addFamMember','CancerController@addFamMember');
 Route::get('/searchCancer','CancerController@searchCancer');
 Route::get('/searchCancerfilter','CancerController@searchCancerfilter');
+Route::get('/insertSerum','CancerController@insertSerum');
+Route::get('/editSerum','CancerController@editSerum');
+Route::get('/saveSerum','CancerController@saveSerum');
+Route::get('/deleteSerum','CancerController@deleteSerum');
 // injury form
 Route::get('/search','PatientController@search');                                       //search
 Route::get('/searchfilter','PatientController@searchfilter');                           //search for patient

@@ -75,9 +75,39 @@ class CancerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function insertSerum(Request $request){
+
+        // dd($request->bioMarkerDesc);
+        $serumData = [
+            'bioMarkerDesc' =>$request->bioMarkerDesc,
+            'bioMarkerLevel' => $request->bioMarkerLevel,
+            'bioMarkerRange' => $request->bioMarkerRange,
+            'bioMarkerDate' =>$request->bioMarkerDate,
+            'bioMarkerType' =>$request->bioMarkerType
+        ];
+        // dd($serumData);
+
+        DB::table('registry.cancer.bioMarker')->insert($serumData);
+
+    }
+    public function editSerum(Request $request){
+        return DB::table('registry.cancer.bioMarker')->where('id',$request->id)->first();
+        // dd($request->id);
+        // dd('adsfsadf');
+    }
+    public function saveSerum(Request $request){
+        // dd($request->bioMarkerDesc);
+
+    }
+    public function deleteSerum(Request $request){
+        dd($request->id);
+        
+        return $request->bioMarkerDesc;
+    }
+
     public function store(Request $request,$enccode)
     {
-        // dd($request);
+        // dd("asdf");
         // $famTable = DB::table('familyCancerHistory')
         // ->select('*')
         // ->get();
@@ -713,6 +743,11 @@ class CancerController extends Controller
     //         'patinfo'=>$patinfo,
     //         'chdata'=>$chdata
     //     ]);
+    $relative = DB::table('registry.cancer.familyHistoryMembers as t1')
+        ->join('registry.cancer.familyHistoryOfCancer as t2','t2.familyHistoryMembers_id', '=' , 't1.id')
+        ->select('*')
+        ->where('t2.patient_hpercode',$enccode)
+        ->get();
     
 
     if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
@@ -769,6 +804,7 @@ class CancerController extends Controller
         'patinfo'=>$patinfo,
         'chdata'=>$chdata,
         'header'=>$header,
+        'relative' =>$relative
     ]);
 
 
@@ -826,7 +862,9 @@ class CancerController extends Controller
         // dd($request);
         // FROM [registry].[cancer].[familyHistoryMembers] fm inner join [registry].[cancer].[familyHistoryOfCancer] fh 
         // on fm.id = fh.familyHistoryMembers_id
-
+        $serumTable = DB::table('registry.cancer.bioMarker')
+        ->select()
+        ->get();
         $relative = DB::table('registry.cancer.familyHistoryMembers as t1')
         ->join('registry.cancer.familyHistoryOfCancer as t2','t2.familyHistoryMembers_id', '=' , 't1.id')
         ->select('*')
@@ -894,7 +932,8 @@ class CancerController extends Controller
             'patinfo'=>$patinfo,
             'chdata'=>$chdata,
             'header'=>$header,
-            'relative'=>$relative
+            'relative'=>$relative,
+            'serumTable'=>$serumTable
         ]);
     }
     public function createCancerformp2(request $request, $hpercode){

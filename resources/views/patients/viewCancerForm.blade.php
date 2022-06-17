@@ -445,7 +445,7 @@ h1{
         </div>
             
     </div>
-
+ 
     <div class="row">
         <div class="col col-lg-6 border-top border-start border-secondary">
             <b>Name of Patient</b>
@@ -1133,30 +1133,31 @@ h1{
                 
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
                 <div class="col-auto border border-secondary-left">
-                    <table class="table tb-sm table-hover">
+                <table class="table tb-sm table-hover overflow-auto" id="show_item">
                         <thead>
                             <tr>
                                 <th>Family Member</th>
                                 <th>Consanguinity</th>
                                 <th>Type of Cancer</th>
                                 <th>Age at Diagnosis</th>
+                                <!-- <th>patient_hpercode</th>
+                                <th>familyHistoryMembers_id</th> -->
+                                <th><button class="btn btn-success add_item_btn">add</button></th>
                             </tr>
                         </thead>
                         <tbody>
-                    <!-- foreach(encounters as item) -->
+                    @foreach($relative as $item)
                         <tr>
                             <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
-                            <!-- <td><input type="text" name="family_member[]"></td>
-                            <td><input type="text" name="type_of_cancer[]"></td>
-                            <td><input type="text" name="consanguinity[]"></td>
-                            <td><input type="text" name="age_at_diagnosis[]"></td> -->
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td>asdf</td>
-                            <td><button class="btn btn-success add_item_btn">add</button></td>
+                            <td>{{$item->familyMember}}</td>
+                            <td>{{$item->consanguinity}}</td>
+                            <td>{{$item->typeOfCancer}}</td>
+                            <td>{{$item->ageAtDiagnosis}}</td>
+                            <!-- <td>{{$item->patient_hpercode}}</td>
+                            <td>{{$item->familyHistoryMembers_id}}</td> -->
+                            
                         </tr>
-                    <!-- endforeach -->
+                    @endforeach
                         </tbody>
                     </table>
                     
@@ -2947,7 +2948,7 @@ h1{
                                 </div>
                                 </div>
                             </div>
-                            <div class="col border border-start-0 border-danger">
+                            <div class="col border border-start-0 border-secondary">
                             <div class="row">
                                 <div class="col">
                                     <div class="row">
