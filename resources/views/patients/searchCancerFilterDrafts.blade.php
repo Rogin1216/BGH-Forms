@@ -157,12 +157,7 @@ button{
     letter-spacing: 1.2px;
     border:none;
 }
-#wrapper{
-max-height: 90px;
-/* display: flex; */
-overflow-y: auto;
 
-}
 
 
         </style>
@@ -172,7 +167,7 @@ overflow-y: auto;
             <div class="row">
                 <div class="col col-lg-10">
                     <div class="pull-left">
-                        <h2>Cancer Registry</h2>
+                        <h2>Cancer Registry(Drafts)</h2>
                     </div>
                 </div>
                 <div class="col">
@@ -206,7 +201,7 @@ overflow-y: auto;
                 </li>
 
                 </ul>
-                <div class="col">
+                <div class="mt-3 space-y-1">
                 <!-- Authentication -->
                     <a href="logout" >Logout</a>
 
@@ -227,21 +222,9 @@ overflow-y: auto;
 
 </div>
 
-        <div class="row justify-content-center">
+<div class="row justify-content-center">
             <div class="col-auto">
-                <form action="{{ url ('/searchCancerfilter') }}" class="form-inline" type="get">
-                    
-                    <!-- <div class="row">
-                            <div class="col-auto">
-                                    {{csrf_field()}}
-                                    <input type="search" claFss="form-control"  placeholder="Search.." >
-                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i>Go </button>
-                            </div>
-                            <div class="col-auto">
-                                    
-                            </div>
-                    </div> -->
-
+                <form action="{{ url ('/searchCancerfilterDrafts') }}" class="form-inline" type="get">
                     <label for="">
                         <input type="text"name="query" placeholder="Enter patient name..">
                         <button class="btn btn-warning"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -249,32 +232,30 @@ overflow-y: auto;
 </svg></button>
                     </label>
                 </form>
-
-                <table class="table table-bordered table-responsive-lg" id="wrapper">
-                    <thead>   
-                        <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>tsdesc</th>
-                            <th>Hpercode</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($all as $x)
-                        <tr >
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{$x->patfirst}} {{$x->patmiddle}} {{$x->patlast}}</td>
-                            <td>{{$x->tsdesc}}</td>
-                            <td>{{$x->hpercode}}</td>
-                            <td><a href="/cancerForm/{{$x->hpercode}}" class="btn btn-warning btn-sm">show</a></td>
-                        </tr>
-                    @endforeach   
-                    </tbody>
-                </table>
-
-
             </div>
+            <table class="table table-bordered table-responsive-lg table-hover">
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>hpercode</th>
+                <th width="280px">Action</th>
+            </tr>
+            <tbody>
+
+                @foreach($patient as $item)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
+                    <td>{{ $item->hpercode}}</td>
+                    
+                    <td>
+                      <a href="/cancerForm/{{$item->hpercode}}" class="btn btn-warning btn-sm">show</a>
+                    </td>
+                </tr>
+                
+                @endforeach
+                </tbody>
+    </table>
         </div>
 
  

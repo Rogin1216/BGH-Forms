@@ -217,14 +217,14 @@ button{
   <hr>
   <a href="/viewCancerDraft">Drafts</a>
   <hr>
-  <a href="/viewCancerComplete">Complete</a>
-  <hr>
+  <!-- <a href="/viewCancerComplete">Complete</a>
+  <hr> -->
 
 </div>
 
         <div class="row justify-content-center">
             <div class="col-auto">
-                <form action="{{ url ('/searchCancerfilter') }}" class="form-inline" type="get">
+                <form action="{{ url ('/searchCancerfilterDrafts') }}" class="form-inline" type="get">
                     <!-- <div class="row">
                             <div class="col-auto">
                                     {{csrf_field()}}

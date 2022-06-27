@@ -98,6 +98,9 @@ background-color: #031694;
 #divpeach{
 background-color: #f0dea8;
 }
+#divInfo{
+background-color:#33b5e5;
+}
 .inputlabelunderline{
   border: none;
   height: auto;
@@ -246,11 +249,15 @@ h1{
 .form__input:focus{
   border: 1.5px solid var(--first-color);
 }
-#show2_item, #show3_item{
-max-height: 110px;
+#show2_item, #show3_item, #follow_up_add{
+max-height: 130px;
 /* display: flex; */
 overflow-y: auto;
-
+}
+#modalDatelab,#famDivmodal{
+    max-height: 700px;
+/* display: flex; */
+overflow-y: auto;
 }
 #show3_item .item{
 min-width: 100px;
@@ -258,12 +265,25 @@ height: 100px;
 line-height: 110px;
 text-align: center;
 }
+#famDiv{
+    padding-top:110px
+}
+#show2_item{
+    padding-top:20px;
+    padding-left:80px
+}
 </style>
 <body>
     
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <!-- <form id="regForm" action="/action_page.php"> -->
   <!-- One "tab" for each step in the form: -->
 <div class="tab">    
@@ -410,7 +430,7 @@ text-align: center;
         <div class="col col-lg-4 border border-bottom-0 border-secondary form-outline" id="divyellow">
 
                 <p><b>Cancer Registry Personnel:</b></p>
-                <input type="text" class="inputlabelunderlineYel" name="regPersonnel" value="{{$patients->regPersonnel}}" placeholder="Name here..">
+                <input type="text" class="inputlabelunderlineYel" readonly name="regPersonnel" value="{{$loginId}}" placeholder="Name here..">
 
         </div>
             <div class="col-auto border-top border-secondary">
@@ -1210,73 +1230,21 @@ text-align: center;
         </div>
 
         <div class="col border-end border-secondary">
-            <div class="row">
+            <div class="row ">
                 <div class="col" id="divyellow">
                    <b>FAMILY HISTORY OF CANCER</b> 
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="form-check-input" type="radio" value="N" name="cancHis" id="cancNo" {{ ($chdata->cancHis == 'N'? ' checked' : '') }}>
-                        <label for="cancNo">NO Family history of cancer</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input class="form-check-input" type="radio" value="Y" name="cancHis" id="cancYes" {{ ($chdata->cancHis == 'Y'? ' checked' : '') }}>
-                        <label for="cancYes">With Family history of cancer, if yes:</label>
-                    </div>
-                </div>
-
-                <!-- <div id="show_item">
-                    <div class="row">   
-                        <div class="col-auto">
-                            <input type="text" name="family" class="form-control">
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" name="consanguinity" class="form-control">
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" name="typeOfCancer" class="form-control">
-                        </div>
-                        <div class="col-auto">
-                            <input type="text" name="ageAtDiagnosis" class="form-control">
-                        </div>
-                    </div>
-                </div> -->
+                @include('patients.modal.FamilyHistory')
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-                <div class="col-auto border border-warning ">
-                    <!-- <div class="overflow-auto">
-                    This is an example of using .overflow-auto on an element with set width and height dimensions. By design, this content will vertically scroll.
+                <div class="d-flex justify-content-center" id="famDiv">
+                    <!-- <div class="row">
+                        <div class="col"> -->
+                        <button type="button" id="familyHistory" value="" class="btn btn-outline-info btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#familyHistory">Family History of Cancer <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
+                    <!-- </div>
                     </div> -->
-                    <table class="table tb-sm table-hover overflow-auto" id="show_item">
-                        <thead>
-                            <tr>
-                                <th>Family Member</th>
-                                <th>Consanguinity</th>
-                                <th>Type of Cancer</th>
-                                <th>Age at Diagnosis</th>
-                                <!-- <th>patient_hpercode</th>
-                                <th>familyHistoryMembers_id</th> -->
-                                <th><button class="btn btn-success add_item_btn">add</button></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    @foreach($relative as $item)
-                        <tr>
-                            <!-- <td>{{$item->admdate ?? null ?: '--' }}</td> -->
-                            <td>{{$item->familyMember}}</td>
-                            <td>{{$item->consanguinity}}</td>
-                            <td>{{$item->typeOfCancer}}</td>
-                            <td>{{$item->ageAtDiagnosis}}</td>
-                            <!-- <td>{{$item->patient_hpercode}}</td>
-                            <td>{{$item->familyHistoryMembers_id}}</td> -->
-                            
-                        </tr>
-                    @endforeach
-                        </tbody>
-                    </table>
-                    <!-- <button class="btn btn-outline-primary" id="add_btn">add member</button> -->
                     
                     <script>
                         $.ajaxSetup({
@@ -1285,70 +1253,83 @@ text-align: center;
                             }
                         });
                         $(document).ready(function(){
-                            $(".add_item_btn").click(function(e){
+                            $("#addFam").click(function(){
+                                var hpercode = $(this).val();
+                                let a=jQuery("#familyMember").val();
+                                let b=jQuery("#consanguinity").val();
+                                let c=jQuery("#typeOfCancer").val();
+                                let d=jQuery("#ageAtDiagnosis").val();
+                                let e=jQuery("#fam").val();
+
+                                console.log("hpercode: "+hpercode);
+                                $.ajax({url:"/insertData",
+                                        type:"GET",
+                                        data:{ "familyMember":a,
+                                            "consanguinity":b,
+                                            "typeOfCancer":c,
+                                            "ageAtDiagnosis":d,
+                                            "fam":e,
+                                            "hpercode": hpercode
+                                        },
+                                        success: function(response){
+                                            $('#familyMember').val('');
+                                            $('#consanguinity').val('');
+                                            $('#typeOfCancer').val('');
+                                            $('#ageAtDiagnosis').val('');
+                                            // $("#famDiv").load(" #famDiv");
+                                            $("#show_item").load(" #show_item");
+                                            console.log(response);
+                                        }
+                                    })
+
+                            })
+                            $(document).on('click','#deleteFam', function(e){
+                            e.preventDefault();
+                            // console.log('adsfa');
+                            // let followup = $('#rowDeleteFam')
+                            // let followup = $(this).val();
+                            // console.log(followup);
+                            // $(followup).remove();
+                            var id = $(this).val();
+                            $.ajax({
+                                    type:"POST",
+                                    url:"/deleteFam",
+                                    data:{
+                                        'id': id
+                                    },
+                                    success: function(response){
+                                        // $("#famDiv").load(" #famDiv");
+                                        // console.log(id);
+                                        $("#show_item").load(" #show_item");
+                                    }
+                                })
+                            
+                        })
+                            $(document).on('click','#serumDataDelete',function(e){
                                 e.preventDefault();
-                        $("#show_item").prepend(`
-                            <tr>
-                                <td><input type="text" name="familyMember[]"></td>
-                                <td><input type="text" name="consanguinity[]"></td>
-                                <td><input type="text" name="typeOfCancer[]"></td>
-                                <td><input type="text" name="ageAtDiagnosis[]"></td>
-                                <td><button class="btn btn-outline-danger delete_item_btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg></button></td>
-                            </tr>`);
-                            });
-                            // $("#add_form").submit(function(e){
-                            //     e.preventDefault();
-                                
-                            //     $(".add_btn").val('adding..');
-                            //     let addBtn=$(".add_btn").val();
-                            //     // let addBtn='$(this).val()';
-                            //     alert(addBtn);
-                            //     var data = $(this).serialize()
-                            //     $.ajax({
-                            //         url:'/addFamMember',
-                            //         method: 'post',
-                            //         data: data,
-                            //         "_token": "{{ csrf_token() }}",
-                            //         success: function(response){
-                            //             console.log(response);
-                            //         }
-                            //     });
-                            // });
+                                var id = $(this).val();
+                                // console.log(id);    
+                                $.ajax({
+                                    type:"POST",
+                                    url:"/deleteSerum",
+                                    data:{
+                                        'id': id
+                                    },
+                                    success: function(response){
+                                        // console.log('delete serum');
+                                        $("#serum_table").load(" #serum_table");
+                                    }
+                                })
+                            })
+   
                         });
 
-                        // $('#user_form').on('submit', function(event){
-                        // event.preventDefault();
-                        // var count_data = 0;
-                        // $('.first_name').each(function(){
-                        // count_data = count_data + 1;
-                        // });
-                        // if(count_data > 0)
-                        // {
-                        // var form_data = $(this).serialize();
-                        // $.ajax({
-                        //     url:"insert.php",
-                        //     method:"POST",
-                        //     data:form_data,
-                        //     success:function(data)
-                        //     {
-                        //     $('#user_data').find("tr:gt(0)").remove();
-                        //     $('#action_alert').html('<p>Data Inserted Successfully</p>');
-                        //     $('#action_alert').dialog('open');
-                        //     }
-                        // })
-                        // }
-
-
-
-
-
+                        
                         $(document).on('click','.delete_item_btn', function(e){
                             e.preventDefault();
                             let row_item = $(this).parent().parent();
                             $(row_item).remove();
+                            
                         })
                         $(document).on('click','.delete_item_btn2', function(e){
                             e.preventDefault();
@@ -2701,7 +2682,7 @@ text-align: center;
   <div class="tab">
   <div class="container">
     <div class="row">
-        <div class="col ">
+        <div class="col border border-secondary">
             <!-- final diagnosis -->
             <div class="row">
                 <div class="col border border-secondary border-top-0" id="divyellow">
@@ -2711,320 +2692,52 @@ text-align: center;
 
 
 <!-- Modal Serum -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Serum Biomarker Data:</h5>
-        <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> -->
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
+@include('patients.modal.MolecularBioMarker')
+@include('patients.modal.SerumBioMarker')
+@include('patients.modal.FollowUp')
 
-          <!-- <span aria-hidden="true">&times;</span> -->
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- <table id="show2_item"> -->
-            <div class="row">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <label for=""><b>Serum Biomarker:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerDesc" name="bioMarkerDesc" value="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for=""><b>Level:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerLevel" name="bioMarkerLevel" value="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                           <label for=""><b>Ref range:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerRange" name="bioMarkerRange" value="">
-                        </div>
-                    </div>
-                    <input type="hidden" id="bioMarkerDate" name="bioMarkerDate" value="{{ date('F j, Y') }}">
-                    <input type="hidden" id="bioMarkerType" name="bioMarkerType" value="0">
-                </div>
-            </div>
-      </div>
-      <div class="modal-footer">
-        
-        <button href="" id="serumDataInsert" name="serumDataInsert" type="button" class="btn btn-primary" data-bs-dismiss="modal">Insert Data</button>
-        <!-- <input type="submit" class="btn btn-primary" name="serumDataInsert" id="serumDataInsert" value="Insert Data"> -->
-      </div>
-    </div>
-  </div>
-</div>
 <!-- Modal Serum EDIT -->
-<div class="modal fade" id="editSerumModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Serum Biomarker Data:</h5>
-        <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"> -->
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">X</button>
-
-          <!-- <span aria-hidden="true">&times;</span> -->
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- <table id="show2_item"> -->
-            <div class="row">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <label for=""><b>Serum Biomarker:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerDescEdit" name="bioMarkerDesc">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for=""><b>Level:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerLevelEdit" name="bioMarkerLevel" value="">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                           <label for=""><b>Ref range:</b> </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="text" id="bioMarkerRangeEdit" name="bioMarkerRange" value="">
-                        </div>
-                    </div>
-                    <input type="hidden" id="bioMarkerDate" name="bioMarkerDate" value="{{ date('F j, Y') }}">
-                    <input type="hidden" id="bioMarkerType" name="bioMarkerType" value="0">
-                </div>
-            </div>
-      </div>
-      <div class="modal-footer">
-      <button class="btn btn-outline-danger" id="serumDataDelete" name="serumDataDelete" data-bs-dismiss="modal" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                            </svg></button>
-        <button href="" id="serumDataSave" name="serumDataSave" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save Data</button>
-        <!-- <input type="submit" class="btn btn-primary" name="serumDataInsert" id="serumDataInsert" value="Insert Data"> -->
-      </div>
-    </div>
-  </div>
-</div>
-<!-- ---- -->
-
-
-
-<!-- ---- -->
-
+<!-- Modal Molecular -->
+<!-- Modal Molecular EDIT -->
             <!-- Serum -->
-            <div class="row">
-                <div class="col border border-secondary border-top-0">
+            <div class="row ">
+               
+                <div class="col border-start border-secondary" id="serumContent" >
                     <div class="row">
                         <div class="col border-bottom border-secondary" id="divpeach">
-                        <b>SERUM BIOMARKER DATA:</b>
+                        <b>SERUM BIOMARKER:</b>
 
                         </div>
                     </div>
-                    <div class="row" id="show2_item">
-                    <table class="" >
-                        <thead>
-                            <tr>
-                                <th><small>Serum biomarker</small> </th>
-                                <th><small>Level</small> </th>
-                                <th><small>Ref range</small> </th>
-                                <th><small>Date</small> </th>
-            
-                                <th><button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button></th>
-                            </tr>
-                        </thead>
-                        @foreach($serumTable as $a)
-                        <tr>
-                                <td>{{$a->bioMarkerDesc}}</td>
-                                <td>{{$a->bioMarkerLevel}}</td>
-                                <td>{{$a->bioMarkerRange}}</td>
-                                <td>{{$a->bioMarkerDate}}</td>
-                                <td><button type="button" value="{{$a->id}}" id="editModal" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editSerumModal">edit</button></td>
-                        </tr>
-                        @endforeach
+                    <div class="row" id="show2_item" >
+                        <div class="col-auto">
+                        <button type="button" id="showSerum" value="{{$patients->hpercode}}" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Serum Biomarker Data <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
+                        </div>
 
-                    </table>
                         
                     </div>
-                    <!-- <div class="row" id="show2_item">
-                        
-                    </div> -->
                 </div>
-                <div class="col border-end border-bottom border-secondary">
+                <div class="col border-start border-end border-secondary" id="moleContent">
                     <div class="row">
                         <div class="col border-bottom border-secondary" id="divpeach">
                         <b>MOLECULAR BIOMARKER DATA:</b>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" id="show2_item">
                         <div class="col-auto">
-                            Molecular marker
-                        </div>
-                        <div class="col">
-                            Level
-                        </div>
-                        <div class="col">
-                            Ref range
-                        </div>
-                        <div class="col">
-                         <button class="btn btn-success  btn-sm add3_item_btn">Add</button>
+                        <button type="button" id="showMole" value="{{$patients->hpercode}}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#moleModal">Molecular Biomarker Data <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
                         </div>
                     </div>
                     <div class="row" id="show3_item">
                     </div>
                 </div>
-                <script>
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    jQuery(document).ready(function(){
-                        jQuery('#serumDataInsert').click(function() {
-                            let a=jQuery("#bioMarkerDesc").val();
-                            let b=jQuery("#bioMarkerLevel").val();
-                            let c=jQuery("#bioMarkerRange").val();
-                            let d=jQuery("#bioMarkerDate").val();
-                            let e=jQuery("#bioMarkerType").val();
-                            // alert('asdfsadf serum');
-                            $.ajax({url: "/insertSerum",
-                                    data:{"bioMarkerDesc":a,
-                                        "bioMarkerLevel":b,
-                                        "bioMarkerRange":c,
-                                        "bioMarkerDate":d,
-                                        "bioMarkerType":e
-                                        },
-                                    success: function(result){
-                                    }
-                        })
-                    })
-                        
-                    });
+                @include('patients.bioMarkerScript.serum')
+                @include('patients.bioMarkerScript.molecular')
 
-                    $(document).ready(function() {
-                        $(document).on('click','#editModal', function(){
-                            var id = $(this).val();
-                            // alert(id);
-                            $.ajax({
-                                type: "GET",
-                                url:"/editSerum",
-                                data: {
-                                    'id': id,
-                                },
-                                success: function (response){
-                                    $('#bioMarkerDescEdit').val(response.bioMarkerDesc);
-                                    $('#bioMarkerLevelEdit').val(response.bioMarkerLevel);
-                                    $('#bioMarkerRangeEdit').val(response.bioMarkerRange);
-                                 console.log(response);
-                                    // console.log(  $('#bioMarkerDescEdit').val());/
-                                }
-                            })
-                        })
-                        $(document).on('click','#serumDataSave',function(){
-                            var id = $(this).val();
-                            var bmd = $('#bioMarkerDescEdit').val();
-                            // alert(bioMarkerDesc);
-                            $.ajax({
-                                type:"GET",
-                                url:"/saveSerum",
-                                data:{
-                                    'bioMarkerDesc': bmd,
-                                },
-                                success: function(response){
-                                    console.log(response);
-                                }
-                            })
-                        })
-                        $(document).on('click','#serumDataDelete',function(){
-                            var del = $(this).val();
-                            alert(del);
-                            // $.ajax({
-                            //     type:"GET",
-                            //     url:"/deleteSerum",
-                            //     data:{
-                            //         'id': id
-                            //     }
-                            // })
-                        })
-                        
-
-                    // $.each({!! json_encode($serumTable, JSON_HEX_TAG) !!}, function(key, value) {
-                    //     console.log(value.id);
-                    // });
-                        // $("#serumDataInsert").click(function(e){
-                        //     // alert('Serum inserted');
-                        //     $.ajax({url: "/insertSerum", success: function(result){
-                                
-                        //     }
-                        // })});
-                        $(".add2_item_btn").click(function(e){
-                            e.preventDefault();
-                        $("#show2_item").prepend(`
-                        <tr>
-                            <td><input type="text" class="inputlabelunderline" id="serum_serum_biomarker" name="serum_serum_biomarker[]" value="serumValue" placeholder="---"</td>
-                            <td><input type="text" class="inputlabelunderline" name="bioMarkerLevel[]" value="" placeholder="---"</td>
-                            <td><input type="text" class="inputlabelunderline" name="bioMarkerRange[]" value="" placeholder="---"</td>
-                            <td><input type="text" class="inputlabelunderline" name="" value="" placeholder="---"</td>
-                            <td><button class="btn btn-outline-danger btn-sm delete_item_btn"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-</svg></button></td>
-                        </tr>
-                        `);
-
-                        });
-                    });     
-                    $(document).ready(function() {
-                        $(".add3_item_btn").click(function(e){
-                            e.preventDefault();
-                        $("#show3_item").prepend(`
-                        <div class="row">
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col-auto">
-                                <input type="text" class="inputlabelunderlineShort" name="" value="">
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-outline-danger btn-sm delete_item_btn"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-</svg></button>
-                            </div>
-                        </div>
-                        `);
-
-                        });
-                    });
-                </script>
 
                 <div class="col col-lg-4 border-end border-bottom border-secondary">
                     <div class="row">
@@ -3974,15 +3687,51 @@ text-align: center;
                 </div>
                 
             </div>
+            @include('patients.modal.DateLabRecords')
+            
             <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col text-white" id="divIndigo">
-                        <b>FOLLOW UP</b>
+                        <b>Follow up:</b>
+                        
+                        <!-- <button type="button" id="followUpAdd" class="btn btn-success btn-sm">+</button> -->
+                        <!-- <button type="button" id="followUpAdd" value="{{$patients->hpercode}}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#followup">+</button> -->
+                        </div>
+                        
+                    </div>
+                    <div class="row border border-secondary" id="follow_up_add">
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-3">
+                            <button type="button" class="btn btn-outline-info" >FOLLOW UP RECORD: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
+                        </div>
+                        <div class="col col-lg-3">
+                            <button type="button" class="btn btn-outline-primary" id="dateLabRecbtn"  data-bs-toggle="modal" data-bs-target="#dateLabRecModal">DATE LAB RECORDS: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
                         </div>
                     </div>
-                    <div class="row border-end border-secondary">
-                        <div class="col col-lg-4 border border-secondary border-bottom-0 border-top-0">
+                <div class="row" >
+                    <div class="col">
+                        <table>
+                            <thead>
+                                <th>
+                                    <!-- Date -->
+                                </th>
+                                <th>
+                                    <!-- Status -->
+                                </th>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <!-- <input type="date"> -->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- <div class="row">
+                        <div class="col col-lg-2 border border-secondary border-bottom-0 border-top-0">
                             <div class="row">
                                 <div class="col">
                                     Date:
@@ -3994,7 +3743,7 @@ text-align: center;
                                 </div>
                             </div>
                         </div>
-                        <div class="col col-lg-5 ">
+                        <div class="col col-lg-7 ">
                            <div class="row">
                                <div class="col ">
                                    Status:
@@ -4013,21 +3762,36 @@ text-align: center;
                                     <input class="form-check-input" type="radio" value="3" name="ffStat" id="FUwoDead" {{ ($chdata->ffStat == '3'? ' checked' : '') }}>
                                     <label for="FUwoDead">Dead</label>
                                </div>
+                               <div class="col-auto">
+                                    <input class="form-check-input" type="radio" value="4" name="ffStat" id="FUtrans">
+                                    <label for="FUtrans">Transferred to another solution</label>
+                               </div>
                            </div>
                         </div>
-                        <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    Time from last treatment:
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col">
+                                        Time from last treatment:
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="text" class="inputlabelunderlineName" name="timeTreat" value="{{$patients->timeTreat}}">
+                                        months
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input type="text" class="inputlabelunderlineName" name="timeTreat" value="{{$patients->timeTreat}}">
-                                    months
-                                </div>
+                        </div> -->
+                    </div>
+                </div>
+                
+                <!-- <div class="row">
+                            <div class="col">
+                                <button>add</button>
                             </div>
-                        </div>
+                        </div> -->
+                        
+                        
                     </div>
                     <div class="row">
                         <div class="col border border-secondary">
@@ -4039,7 +3803,17 @@ text-align: center;
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <!-- <div class="col">
+                                            <input type="radio" name="oncoRdo" id="asdf">
+                                            <label for="asdf">Service</label>
+                                        </div> -->
                                         <div class="col">
+                                        <input class="form-check-input" type="radio" value="" name="oncoRdo" id="oncoService">
+                                        <label class="form-check-label" for="oncoService">
+                                            Service
+                                        </label>
+                                        </div>
+                                        <!-- <div class="col">
                                             <div class="row">
                                                 <div class="col">
                                                     <input type="text" class="inputlabelunderlineName" name="oncoLast" value="{{$patients->oncoLast}}">
@@ -4052,8 +3826,8 @@ text-align: center;
                                                     </small>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col">
+                                        </div> -->
+                                        <!-- <div class="col">
                                             <div class="row">
                                                 <div class="col">
                                                     <input type="text" class="inputlabelunderlineName" name="oncoFirst" value="{{$patients->oncoFirst}}">
@@ -4066,8 +3840,8 @@ text-align: center;
                                                     </small>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col">
+                                        </div> -->
+                                        <!-- <div class="col">
                                             <div class="row">
                                                 <div class="col">
                                                     <input type="text" class="inputlabelunderlineName" name="oncoMiddle" value="{{$patients->oncoMiddle}}">
@@ -4080,11 +3854,40 @@ text-align: center;
                                                     </small>
                                                 </div>
                                             </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="row">
+                                    <div class="col">
+                                        <input class="form-check-input" type="radio" value="" name="oncoRdo" id="oncoPay">
+                                        <label class="form-check-label" for="oncoPay">
+                                            Pay
+                                        </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="row">
+                                        <div class="col">
+                                            <b>Chemotherapy Volume</b>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="radio" value="" name="chemvalRdo" id="chemvalService">
+                                            <label class="form-check-label" for="chemvalService">
+                                                Service
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class="form-check-input" type="radio" value="" name="chemvalRdo" id="chemvalPay">
+                                            <label class="form-check-label" for="chemvalPay">
+                                                Pay
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
                                         <div class="col">
                                         <input type="hidden" name="FUdeptGyne" value="0">
                                             <input class="form-check-input" type="checkbox" value="1" name="FUdeptGyne" id="FUdeptGyne" {{ ($chdata->FUdeptGyne == '1'? ' checked' : '') }}>
@@ -4118,17 +3921,18 @@ text-align: center;
                                             <input class="form-check-input" type="checkbox" value="1" name="FUdepttrt" id="FUdepttrt" {{ ($chdata->FUdepttrt == '1'? ' checked' : '') }}>
                                             <label for="FUdepttrt">Rad</label>
                                         </div>
-                                    </div>
-
+                                    </div> -->
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
-</div>
+
 
   </div>
   <!-- <div style="overflow:auto;"> -->
@@ -4136,18 +3940,23 @@ text-align: center;
           <div class="col">
               <div class="row justify-content-md-center">
                   <div class="col-lg-2">
-                    <a href="/viewCancerDraft" class="btn btn-outline-primary ">back</a>
+                    <a href="/viewCancerDraft" class="btn btn-primary "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
+  <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+  <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+</svg> Back </a>
                   </div>
                   <div class="col-lg-2">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                     <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
                   </div>
                   <div class="col-lg-2">
-                  <button type="submit">Save Into</button>
-                        <select id="status" name="status" class="form-select-sm d-print-none" aria-label=".form-select-sm example">
+                  <button type="submit"name="status" class="btn btn-warning" value="drafts">Save <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+  <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+</svg></button>
+                        <!-- <select id="status" name="status" class="form-select-sm d-print-none" aria-label=".form-select-sm example">
                                 <option value="drafts">Drafts</option>
                                 <option value="completeForm">Final Output</option>
-                        </select>
+                        </select> -->
                   </div>
               </div>
               <div class="row">

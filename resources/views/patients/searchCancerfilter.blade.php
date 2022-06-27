@@ -217,8 +217,8 @@ button{
   <hr>
   <a href="/viewCancerDraft">Drafts</a>
   <hr>
-  <a href="/viewCancerComplete">Complete</a>
-  <hr>
+  <!-- <a href="/viewCancerComplete">Complete</a>
+  <hr> -->
 
 </div>
 

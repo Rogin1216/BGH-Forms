@@ -56,7 +56,7 @@ class CancerController extends Controller
             //    $patient = vwInjuryList3::select('patfirst','patmiddle','patlast', 'hpercode')
             //    $patient = DB::table('vwInjuryList3')
                ->Where(DB::raw("concat(patfirst, ' ', patmiddle, ' ', patlast)"), 'LIKE', "%".$search_text."%")
-               ->orwhere ('patfirst', 'LIKE', $search_text)
+               ->orwhere ('patfirst', 'LIKE', '%'.$search_text.'%')
                ->orWhere ('patmiddle', 'LIKE', '%'.$search_text.'%')
                ->orWhere ('patlast', 'LIKE', '%'.$search_text.'%')
                ->orWhere ('hpercode', 'LIKE', '%'.$search_text.'%') 
@@ -69,45 +69,207 @@ class CancerController extends Controller
 
                 ));
     }
+    public function searchCancerfilterDrafts(request $request){
+        // dd('adsf');
+        $search_text = $request->input('query');
+            // dd($search_text);
+               $patient = DB::table('vwCancerMasterList')
+               ->join('cancerRegistry2', 'vwCancerMasterList.hpercode','=', 'cancerRegistry2.hpercode')
+               ->select('vwCancerMasterList.patfirst','vwCancerMasterList.patmiddle','vwCancerMasterList.patlast', 'vwCancerMasterList.hpercode')
+            //    $patient = vwInjuryList3::select('patfirst','patmiddle','patlast', 'hpercode')
+            //    $patient = DB::table('vwInjuryList3')
+               
+               ->Where(DB::raw("concat(vwCancerMasterList.patfirst, ' ', vwCancerMasterList.patmiddle, ' ', vwCancerMasterList.patlast)"), 
+               'LIKE', "%".$search_text."%")
+               ->where('cancerRegistry2.status','cancerRegistry2.drafts')
+               ->orwhere ('vwCancerMasterList.patfirst', 'LIKE', '%'.$search_text.'%')
+               ->orWhere ('vwCancerMasterList.patmiddle', 'LIKE', '%'.$search_text.'%')
+               ->orWhere ('vwCancerMasterList.patlast', 'LIKE', '%'.$search_text.'%')
+               ->orWhere ('vwCancerMasterList.hpercode', 'LIKE', '%'.$search_text.'%') 
+               ->distinct()
+               ->orderBy('vwCancerMasterList.patlast', 'asc')
+               ->get();
+
+                // dd($patient);
+               return view('patients.searchCancerfilterDrafts', compact(
+                   'patient',
+
+                ));
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function insertSerum(Request $request){
+    public function insertData(Request $request){
 
+        
+        // dd($request->fam);
+        // $id=$request->id;
         // dd($request->bioMarkerDesc);
-        $serumData = [
+        $familyMemberData = [
+            'familyMember'=>$request->familyMember,
+            'consanguinity'=>$request->consanguinity,
+            'typeOfCancer'=>$request->typeOfCancer,
+            'ageAtDiagnosis'=>$request->ageAtDiagnosis
+        ];
+        // dd($familyMemberData);
+        $moleData = [
             'bioMarkerDesc' =>$request->bioMarkerDesc,
             'bioMarkerLevel' => $request->bioMarkerLevel,
             'bioMarkerRange' => $request->bioMarkerRange,
             'bioMarkerDate' =>$request->bioMarkerDate,
             'bioMarkerType' =>$request->bioMarkerType
         ];
+        // dd($moleData);
+        $serumData = [
+            'bioMarkerDesc' =>$request->bioMarkerDesc1,
+            'bioMarkerLevel' => $request->bioMarkerLevel1,
+            'bioMarkerRange' => $request->bioMarkerRange1,
+            'bioMarkerDate' =>$request->bioMarkerDate,
+            'bioMarkerType' =>$request->bioMarkerType1
+        ];
         // dd($serumData);
-
-        DB::table('registry.cancer.bioMarker')->insert($serumData);
+        if($request->fam == '1'){
+            // dd($request->hpercode);
+            DB::table('registry.cancer.familyHistoryMembers')->insert($familyMemberData);
+            // dd('saved');
+            $ID = DB::table('registry.cancer.familyHistoryMembers')
+                ->select('id')
+                ->latest('id')->first();
+                // dd($ID);
+                $a = $ID->id;
+                // dd($a);
+                DB::table('registry.cancer.familyHistoryOfCancer')
+                ->insert([
+                    'patient_hpercode'=>$request->hpercode,
+                    'familyHistoryMembers_id'=>$a
+                ]);
+        }
+        if($request->bioMarkerType1 == NULL){
+            // dd('mole data');
+            DB::table('registry.cancer.bioMarker')->insert($moleData);
+            $x=$request->bioMarkerDesc;
+            $ID = DB::table('registry.cancer.bioMarker')
+                ->select('id')
+                ->latest('id')->first();
+                // dd($ID);
+            $a = $ID->id;
+                // dd($a); 
+// insert hpercode and ID
+            DB::table('registry.cancer.patientBioMarker')
+            ->insert([
+                'hpercode' => $request->hpercode,
+                'bioMarker_id' => $a
+            ]);
+        }
+        else{
+            // dd('serum');
+            DB::table('registry.cancer.bioMarker')->insert($serumData);
+            $x=$request->bioMarkerDesc1;
+            $ID = DB::table('registry.cancer.bioMarker')
+                ->select('id')
+                ->latest('id')->first();
+                // dd($ID);
+            $a = $ID->id;
+//                 // dd($a); 
+// // insert hpercode and ID
+            DB::table('registry.cancer.patientBioMarker')
+            ->insert([
+                'hpercode' => $request->hpercode,
+                'bioMarker_id' => $a
+            ]);
+        }       
 
     }
+
     public function editSerum(Request $request){
+        // $a=DB::table('registry.cancer.bioMarker')->where('id',$request->id)->first();
+        // $a=$request->id;
+        // dd($a + "editSerum");
+        // dd("editSerum");
         return DB::table('registry.cancer.bioMarker')->where('id',$request->id)->first();
-        // dd($request->id);
-        // dd('adsfsadf');
+    }
+    public function editMole(Request $request){
+        return DB::table('registry.cancer.bioMarker')->where('id',$request->id)->first();
     }
     public function saveSerum(Request $request){
-        // dd($request->bioMarkerDesc);
+        // edit 
+        // dd($request);
+        // dd('save serum');
+        // dd($request->bioMarkerType);
+        $type = $request->bioMarkerType;
+        return DB::table('registry.cancer.bioMarker')
+        ->select()
+        ->where('id', $request->id)
+        ->update([
+            'bioMarkerDesc' => $request->bioMarkerDesc,
+            'bioMarkerLevel' => $request->bioMarkerLevel,
+            'bioMarkerRange' => $request->bioMarkerRange,
+        ]);
+        
 
     }
+    public function saveMole(Request $request){
+        // dd($request);
+        // dd('save serum');
+        // dd($request->bioMarkerType);
+        $type = $request->bioMarkerType;
+        return DB::table('registry.cancer.bioMarker')
+        ->select()
+        ->where('id', $request->id)
+        // ->first()
+        ->update([
+            'bioMarkerDesc' => $request->bioMarkerDesc,
+            'bioMarkerLevel' => $request->bioMarkerLevel,
+            'bioMarkerRange' => $request->bioMarkerRange,
+        ]);
+    }
+    // public function saveSerum(Request $request){
+    //     // dd($request);
+    //     $id=$request->id;
+    //     $bioDesc = $request->bioMarkerDesc;
+    //     $bioLevel = $request->bioMarkerLevel;
+    //     $bioRange = $request->bioMarkerRange;
+    //     return DB::table('registry.cancer.bioMarker')
+    //     ->where('id', $id)
+    //     // ->first()
+    //     ->update([
+    //         'bioMarkerDesc' => $bioDesc,
+    //         'bioMarkerLevel' => $bioLevel,
+    //         'bioMarkerRange' => $bioRange,
+    //     ]);
+    // }
     public function deleteSerum(Request $request){
-        dd($request->id);
-        
-        return $request->bioMarkerDesc;
+        $id=$request->id;
+        // dd($id);
+        DB::table('registry.cancer.bioMarker')
+        ->select()
+        ->where('id',$id)
+        ->delete();
+        DB::table('registry.cancer.patientBioMarker')
+        ->select()
+        ->where('bioMarker_id',$id)
+        ->delete();
+        return true;
+    }
+    public function deleteFam(Request $request){
+        $id=$request->id;
+        DB::table('registry.cancer.familyHistoryMembers')
+        ->where('id', $id)
+        ->delete();
+        DB::table('registry.cancer.familyHistoryOfCancer')
+        ->where('familyHistoryMembers_id', $id)
+        ->delete();
+        return true;
     }
 
     public function store(Request $request,$enccode)
     {
-        // dd("asdf");
+        // dd($request->bioMarkerDesc);
         // $famTable = DB::table('familyCancerHistory')
         // ->select('*')
         // ->get();
@@ -138,41 +300,6 @@ class CancerController extends Controller
                 ]; 
                 // dd($fam);
                 DB::table('registry.cancer.familyHistoryMembers')->insert($addMember);
-                // for($x = 0; $x < $arr17;$x++){
-                //     $relative = [
-                //         'patient_hpercode' => $enccode,
-                //         'familyHistoryMembers_id' => $arr17[$x]
-                //     ];
-                //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
-                // }
-
-                // foreach($arr17 as $i){
-                //     $relative = [
-                //         'patient_hpercode' => $enccode,
-                //         'familyHistoryMembers_id' => $arr17[$i]
-                //     ];
-                //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
-                // }
-                //  $relativeID->each(function ($collection) {
-            //     // dd($alphabet, $collection);
-            //     $item1 = $collection;
-            //     dd($item1);
-            //     $relative = [
-            //         // 'patient_hpercode' => $enccode,
-            //         'familyHistoryMembers_id' => $item1
-            //     ];
-            //     DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
-                
-            // });
-
-                // $test = (int)$relativeID;
-                // dd($test);
-                // $id=intval($relativeID);
-                // $relative = [
-                //     'patient_hpercode' => $enccode,
-                //     'familyHistoryMembers_id' => $item1
-                // ];
-                // DB::table('registry.cancer.familyHistoryOfCancer')->insert($relative);
             }
              //INSERT into table familyHistoryOfCancer
             // dd($fam);
@@ -743,6 +870,7 @@ class CancerController extends Controller
     //         'patinfo'=>$patinfo,
     //         'chdata'=>$chdata
     //     ]);
+    
     $relative = DB::table('registry.cancer.familyHistoryMembers as t1')
         ->join('registry.cancer.familyHistoryOfCancer as t2','t2.familyHistoryMembers_id', '=' , 't1.id')
         ->select('*')
@@ -793,6 +921,7 @@ class CancerController extends Controller
     // ->get();
     $header = DB::SELECT("EXEC cancer.cancerRegisterHeader 
     '$enccode'");
+    
     $patinfo = DB::table('cancerRegistry2')
     ->select('*')
     ->where('hpercode',$enccode)
@@ -859,24 +988,39 @@ class CancerController extends Controller
     }
 
     public function createCancerform(request $request, $enccode){
-        // dd($request);
+        // dd($enccode);
         // FROM [registry].[cancer].[familyHistoryMembers] fm inner join [registry].[cancer].[familyHistoryOfCancer] fh 
         // on fm.id = fh.familyHistoryMembers_id
-        $serumTable = DB::table('registry.cancer.bioMarker')
-        ->select()
-        ->get();
+        // $serumTable = DB::table('registry.cancer.bioMarker')
+        // // ->select()
+        // ->where('bioMarkerType','0')
+        // ->get();
+        // $molecTable = DB::table('registry.cancer.bioMarker')
+        // // ->select()
+        // ->where('bioMarkerType','1')
+        // ->get();
+        
+        $loginId = $request->session()->get('loginId');
         $relative = DB::table('registry.cancer.familyHistoryMembers as t1')
         ->join('registry.cancer.familyHistoryOfCancer as t2','t2.familyHistoryMembers_id', '=' , 't1.id')
         ->select('*')
         ->where('t2.patient_hpercode',$enccode)
         ->get();
         // dd($relative);
+        $patientBiomarkerS = DB::table('registry.cancer.biomarker as t1')
+        ->join('registry.cancer.patientBioMarker as t2','t2.bioMarker_id', '=' , 't1.id')
+        ->select('*')
+        ->where('hpercode',$enccode)
+        ->where('t1.bioMarkerType','0')
+        ->get();
+        // dd($patientBiomarkerS);
+        $patientBiomarkerM = DB::table('registry.cancer.biomarker as t1')
+        ->join('registry.cancer.patientBioMarker as t2','t2.bioMarker_id', '=' , 't1.id')
+        ->select('*')
+        ->where('hpercode',$enccode)
+        ->where('t1.bioMarkerType','1')
+        ->get();
 
-
-        // $famHistoryMember = DB::table('registry.cancer.familyHistoryMembers')
-        // ->where('hpercode',$enccode)
-        // ->get();
-        // dd($famHistoryMember);
 
         if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
             // $enccode = checkboxList::find($enccode);
@@ -919,6 +1063,9 @@ class CancerController extends Controller
         // ->where('cancerRegistry2.hpercode',$enccode)
         // // ->select('cancerRegistry.*', 'vwInjuryList.patfirst', 'vwInjuryList.patmiddle', 'vwInjuryList.patlast', 'vwInjuryList.hpercode', 'vwInjuryList.enccode', 'cancerForm.status')
         // ->get();
+        $datelabs = DB::SELECT("EXEC cancer.spDateLabs
+        '$enccode'");
+        // dd($datelabs);
         $header = DB::SELECT("EXEC cancer.cancerRegisterHeader 
         '$enccode'");
         $patinfo = DB::table('cancerRegistry2')
@@ -933,7 +1080,10 @@ class CancerController extends Controller
             'chdata'=>$chdata,
             'header'=>$header,
             'relative'=>$relative,
-            'serumTable'=>$serumTable
+            'patientBiomarkerS'=>$patientBiomarkerS,
+            'patientBiomarkerM'=>$patientBiomarkerM,
+            'loginId'=>$loginId,
+            'datelabs'=>$datelabs
         ]);
     }
     public function createCancerformp2(request $request, $hpercode){
