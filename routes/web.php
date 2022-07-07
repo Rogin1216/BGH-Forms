@@ -36,6 +36,7 @@ Route::get('/dashboard', function () {
 Route::middleware('loggedin')->group(function () {
 // Route::auth();
 // Route::group(['middleware' => 'auth'], function () {
+
 // cancer injury form
 Route::get('/viewCancerDraft','CancerController@viewCancerDraft');                           //view draft cancer patient lists
 Route::get('/viewCancerComplete','CancerController@viewCancerComplete');                     //view complete cancer patient lists
@@ -48,13 +49,16 @@ Route::post('/addFamMember','CancerController@addFamMember');
 Route::get('/searchCancer','CancerController@searchCancer');
 Route::get('/searchCancerfilter','CancerController@searchCancerfilter');
 Route::get('/searchCancerfilterDrafts','CancerController@searchCancerfilterDrafts');
-Route::get('/insertData','CancerController@insertData');                                    //insert serum/mole data
+Route::get('/insertData','CancerController@insertData');                                    
+Route::get('/insertSerumData','CancerController@insertSerumData');                          //insert serum data
 Route::get('/editSerum','CancerController@editSerum');
 Route::get('/editMole','CancerController@editMole');
 Route::post('/saveSerum','CancerController@saveSerum');
 Route::post('/saveMole','CancerController@saveMole');
 Route::post('/deleteSerum','CancerController@deleteSerum');
 Route::post('/deleteFam','CancerController@deleteFam');
+Route::get('/insertConcData','CancerController@insertConcData');
+
 // injury form
 Route::get('/search','PatientController@search');                                       //search
 Route::get('/searchfilter','PatientController@searchfilter');                           //search for patient

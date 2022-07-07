@@ -254,8 +254,8 @@ max-height: 130px;
 /* display: flex; */
 overflow-y: auto;
 }
-#modalDatelab,#famDivmodal{
-    max-height: 700px;
+#modalDatelab,#famDivmodal,#serum_table,#followUp_table{
+    max-height: 400px;
 /* display: flex; */
 overflow-y: auto;
 }
@@ -272,6 +272,48 @@ text-align: center;
     padding-top:20px;
     padding-left:80px
 }
+.highcharts-figure,
+.highcharts-data-table table {
+  min-width: 360px;
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #ebebeb;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+  padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
 </style>
 <body>
     
@@ -280,14 +322,18 @@ text-align: center;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <!-- <form id="regForm" action="/action_page.php"> -->
   <!-- One "tab" for each step in the form: -->
 <div class="tab">    
-@foreach($patinfo as $patients)
+@foreach($joinCancerRegSite as $patients)
 @foreach($header as $head)
 @foreach($chdata as $chdata)
 <form action="/store/{{$patients->hpercode}}" type="get" id="add_form">
@@ -435,7 +481,7 @@ text-align: center;
         </div>
             <div class="col-auto border-top border-secondary">
                 Hospital No.
-                {{$head->hpercode}}
+                <!-- {{$head->hpercode}} -->
                 <div class="row">
                     <div class="col pt-4">
                         Philhealth No.
@@ -444,7 +490,7 @@ text-align: center;
                 
             </div>
             <div class="col border-top border-secondary">
-                    <input type="text" class="inputlabelunderline" name="hpNum" placeholder="---">
+                    <input type="text" readonly class="inputlabelunderline" name="hpNum" value="{{$head->hpercode}}">
                     <div class="row">
                         <div class="col pt-4">
                             <input type="text" class="inputlabelunderline" name="patPhilNum" placeholder="---">
@@ -457,7 +503,7 @@ text-align: center;
             <div class="row">
                 <div class="col text-black">
 
-                        <input class="form-check-input" type="radio" value="OPD" name="ToPRdo" id="opd" {{ ($chdata->ToPRdo == 'OPD'? ' checked' : '') }}>
+                        <input class="form-check-input" checked type="radio" value="OPD" name="ToPRdo" id="opd" {{ ($chdata->ToPRdo == 'OPD'? ' checked' : '') }}>
                         <label class="form-check-label" for="opd">
                             OPD
                         </label>
@@ -480,13 +526,13 @@ text-align: center;
             <b>Name of Patient</b>
             <div class="row">
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patLast" value="{{$head->patlast}}" >
+                    <input type="text" readonly class="inputlabelunderlineName" name="patLast" value="{{$head->patlast}}" >
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patFirst" value="{{$head->patfirst}}" >
+                    <input type="text" readonly class="inputlabelunderlineName" name="patFirst" value="{{$head->patfirst}}" >
                 </div>
                 <div class="col">
-                    <input type="text" class="inputlabelunderlineName" name="patMiddle" value="{{$head->patmiddle}}">
+                    <input type="text" readonly class="inputlabelunderlineName" name="patMiddle" value="{{$head->patmiddle}}">
                 </div>
             </div>
             <div class="row">
@@ -501,10 +547,9 @@ text-align: center;
                 </div>
             </div>
         </div>
-        <div class="col col-lg-2 border border-bottom-0 border-end-0 border-secondary">
-            <b>Sex:</b>
-            {{$head->patsex}}
-            <!-- <div class="row">
+        <!-- <div class="col col-lg-2 border border-bottom-0 border-end-0 border-secondary">
+            
+            <div class="row">
                 <div class="col">
                         <input class="form-check-input" type="radio" value="Female" name="rdoSex" id="female" {{ ($chdata->rdoSex == 'Female'? ' checked' : '') }}>
                         <label class="form-check-label" for="female">
@@ -519,58 +564,24 @@ text-align: center;
                             Male
                         </label>
                 </div>  
-            </div> -->
-        </div>
+            </div>
+        </div> -->
 
         <div class="col border border-bottom-0 border-secondary">
-            <b>Civil Status:</b>
-            <label for="">{{$head->patcstat}}</label>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col">
-                    <input class="form-check-input" type="radio" value="single" name="rdoCivStat" id="single" {{ ($head->patcstat == 'Single'? ' checked' : '') }}>
-                    <label class="form-check-label" for="single">
-                        Single
-                    </label>
-                    <input class="form-check-input" type="radio" value="co-habitation" name="rdoCivStat" id="habit" {{ ($head->patcstat == 'Co-habitation'? ' checked' : '') }}>
-                    <label class="form-check-label" for="habit">
-                        Co-Habitation
-                    </label>
-                    <input class="form-check-input" type="radio" value="separated" name="rdoCivStat" id="separated" {{ ($head->patcstat == 'Separated'? ' checked' : '') }}>
-                    <label class="form-check-label" for="separated">
-                        Separated
-                    </label>
-                    <div class="row">
-                        <div class="col">
-                        <input class="form-check-input" type="radio" value="widow" name="rdoCivStat" id="widow" {{ ($head->patcstat == 'Widow'? ' checked' : '') }}>
-                            <label class="form-check-label" for="widow">
-                                Widow/e
-                            </label>
-                        </div>
-                        <div class="col">
-                        <input class="form-check-input" type="radio" value="married" name="rdoCivStat" id="married" {{ ($head->patcstat == 'Married'? ' checked' : '') }}>
-                            <label class="form-check-label" for="married">
-                                Married
-                            </label>
-                        </div>
-                        <div class="col">
-                            <input type="hidden" name="civChAnul" value="0">
-                            <input class="form-check-input" type="checkbox" value="anulled" name="civChAnul" id="annul" {{ ($chdata->civChAnul == 'Anulled'? ' checked' : '') }}>
-                            <label class="form-check-label" for="annul">
-                                Anulled
-                            </label>
-                            <div class="row">
-                                <div class="col">
-                                <input type="hidden" name="civChDiv" value="0">
-                                <input class="form-check-input" type="checkbox" value="divorced" name="civChDiv" id="divorced" {{ ($chdata->civChDiv == 'Divorced'? ' checked' : '') }}>
-                                <label class="form-check-label" for="divorced">
-                                    Divorced
-                                </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <b>Sex:</b>
+                {{$head->patsex}}
                 </div>
-            </div> -->
+            </div>
+            <div class="row">
+                <div class="col">
+                <b>Civil Status:</b>
+                <label for="">{{$head->patcstat}}</label>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
     <div class="row">
@@ -579,42 +590,10 @@ text-align: center;
             <div class="row">
                 <div class="col">
                     <label for="">
-                        
                         {{$head->patAddr}}</label>
-                    <!-- <input type="text" class="" name="patNoSt" value="{{$head->patAddr}}"> -->
                 </div>
             </div>
             <div class="row">
-                <!-- <div class="col">
-                        <label class="form-check-label" for="">
-                            <p class="small"> Patient Address</p>
-                        </label>
-                </div> -->
-                <!-- <div class="col">
-                        <label class="form-check-label" for="">
-                           <p class="small">Region</p> 
-                        </label>
-                </div>
-                <div class="col">
-                        <label class="form-check-label" for="">
-                            <p class="small">Province</p> 
-                        </label>
-                </div>
-                <div class="col">
-                        <label class="form-check-label" for="">
-                            <p class="small">City/Municipality</p>
-                        </label>
-                </div>
-                <div class="col">
-                        <label class="form-check-label" for="">
-                            <p class="small">Barangay</p> 
-                        </label>
-                </div>
-                <div class="col">
-                        <label class="form-check-label" for="">
-                            <p class="small">Zip Code</p>  
-                        </label>
-                </div> -->
             </div>
         </div>
         <div class="col">
@@ -625,7 +604,7 @@ text-align: center;
                 <div class="row">
                     <div class="col">
                         <label for="">{{$head->pattel}}</label>
-                        <input type="text" class="inputlabelunderline" name="patNum" placeholder="---">
+                        <!-- <input type="text" class="inputlabelunderline" name="patNum" placeholder="---"> -->
                     </div>
                 </div>
             </div>
@@ -654,14 +633,13 @@ text-align: center;
             <label for="">{{$head->patAge}} yrs old</label>
             <div class="row">
                 <div class="col">
-                    <input type="text" width="10px" class="inputlabelunderlineShort" name="patCancAge" >years old
+                    <input type="number" width="10px" class="inputlabelunderlineShort" name="patCancAge" >years old
                 </div>
             </div>
         </div>
         <div class="col border-start border-end border-secondary">
                 Birthday:
                 {{date('F j,Y',  strtotime($head->patbdate))}}
-                <!-- <input type="date" name="patBday"> -->
         </div>
         <div class="col border-end border-secondary">
             <div class="row">
@@ -670,7 +648,6 @@ text-align: center;
                 </div>
                 <div class="col">
                     <label for="">{{$head->reldesc}}</label>
-                    <!-- <input type="text" class="inputlabelunderline" name="patRel" placeholder="---"> -->
                 </div>
             </div>
             <div class="row">
@@ -679,7 +656,6 @@ text-align: center;
                 </div>
                 <div class="col">
                     <label for="">{{$head->natdesc}}</label>
-                    <!-- <input type="text" class="inputlabelunderline" name="patNat" placeholder="---"> -->
                 </div>
             </div>
         </div>
@@ -842,7 +818,7 @@ text-align: center;
                         <div class="row">
                             <div class="col">
                                 <label for=""># of sexual partners:</label>
-                                <input type="text" class="inputlabelunderlineShort" name="patNumSex" value="{{$patients->patNumSex}}"> 
+                                <input type="number" class="inputlabelunderlineShort" name="patNumSex" value="{{$patients->patNumSex}}"> 
                             </div>
                         </div>
                     </div>
@@ -1238,14 +1214,9 @@ text-align: center;
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
                 <div class="d-flex justify-content-center" id="famDiv">
-                    <!-- <div class="row">
-                        <div class="col"> -->
                         <button type="button" id="familyHistory" value="" class="btn btn-outline-info btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#familyHistory">Family History of Cancer <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg></button>
-                    <!-- </div>
-                    </div> -->
-                    
                     <script>
                         $.ajaxSetup({
                             headers: {
@@ -1290,6 +1261,7 @@ text-align: center;
                             // let followup = $(this).val();
                             // console.log(followup);
                             // $(followup).remove();
+                            // alert('asdfsad');
                             var id = $(this).val();
                             $.ajax({
                                     type:"POST",
@@ -1305,39 +1277,8 @@ text-align: center;
                                 })
                             
                         })
-                            $(document).on('click','#serumDataDelete',function(e){
-                                e.preventDefault();
-                                var id = $(this).val();
-                                // console.log(id);    
-                                $.ajax({
-                                    type:"POST",
-                                    url:"/deleteSerum",
-                                    data:{
-                                        'id': id
-                                    },
-                                    success: function(response){
-                                        // console.log('delete serum');
-                                        $("#serum_table").load(" #serum_table");
-                                    }
-                                })
-                            })
-   
+
                         });
-
-                        
-                        $(document).on('click','.delete_item_btn', function(e){
-                            e.preventDefault();
-                            let row_item = $(this).parent().parent();
-                            $(row_item).remove();
-                            
-                        })
-                        $(document).on('click','.delete_item_btn2', function(e){
-                            e.preventDefault();
-                            let row_item = $(this).parent().parent();
-                            $(row_item).remove();
-                        })
-                        
-
                     </script>
                 </div>
             </div>
@@ -1660,7 +1601,44 @@ text-align: center;
                     <b>PRIMARY CURRENT CANCER SITE/DIAGNOSIS</b>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row" id="" >
+                        <div class="col-auto">
+                        <button type="button" name="PCcancer" id="PCcancer" value="{{$patients->hpercode}}" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#PCcancerModal">Add <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button>
+                        </div>
+                    </div> -->
+                    <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Solid Tumor:</label>
+                <select id="primaryCancerSiteST" class="form-select" name="primaryCancerSiteST" value="">
+                    <option value="">{{$patients->STDesc}}</option>
+                    @foreach($cancerSite as $a)
+                    <option value="{{$a->id}}">{{$a->siteDesc}}</option>
+                    @endforeach  
+                    </select>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Specify:</span>
+                    <input type="text" class="form-control" id="concSolidTumorInputST" name="concSolidTumorInputST" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Hematolymphoid malignancies:</label>
+                <select id="primaryCancerSiteHM" class="form-select" name="primaryCancerSiteHM" value="">
+                    <option value="">{{$patients->HMDesc}}</option>
+                    @foreach($cancerSiteHM as $a)
+                    <option value="{{$a->id}}">{{$a->siteDesc}}</option>
+                    @endforeach  
+                    </select>
+                    <span class="input-group-text" id="inputGroup-sizing-default">Specify:</span>
+                    <input type="text" class="form-control" id="concSolidTumorInputHM" name="concSolidTumorInputHM" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+        </div>
+            <!-- <div class="row">
                 <div class="col">
                     <div class="row">
                         <div class="col col-lg-8">
@@ -1940,20 +1918,83 @@ text-align: center;
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- CONCURRENT CANCER SITE/DIAGNOSIS (IF APPLICABLE) -->
+    @include('patients.modal.ConcurrentCancer')
     <div class="row">
         <div class="col">
             <div class="row">
                 <div class="col border-top border-bottom border-secondary" id="divLightblue">
                     <b>CONCURRENT CANCER SITE/DIAGNOSIS (IF APPLICABLE)</b>
                     <input type="hidden" name="conChNa" value="0">
-                    <input class="form-check-input" type="checkbox" value="1" name="conChNa" id="NA" checked {{ ($chdata->conChNa == '1'? ' checked' : '') }}>
-                    <label for="NA" ><b>N/A</b> </label>
+                    <!-- <button type="button" id="conc_btn" value="{{$patients->hpercode}}" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#PCcancerModal">Add Concurrent <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
+                            </svg></button> -->
+                    <!-- <input class="form-check-input" type="checkbox" value="1" name="conChNa" id="NA"  {{ ($chdata->conChNa == '1'? ' checked' : '') }}>
+                    <label for="NA" ><b>N/A</b> </label> -->
                 </div>
             </div>
+            <!-- <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                        <table class="table table-bordered" id="conTable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="2">Solid Tumor:</th>
+                                    <th>Action:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($joinConcCancerSiteST as $a)
+                            <tr>
+                                    <td>{{$a->siteDesc}} - {{$a->type_id}} </td>
+                                    <td></td>
+                            </tr>
+                            @endforeach
+                            <thead class="thead-light">
+                                <tr>
+                                        <th colspan="2">Hematolymphoid malignancies:</th>
+                                </tr>
+                            </thead>
+                            @foreach($joinConcCancerSiteHM as $b)
+                            <tr>
+                                    <td>{{$b->siteDesc}} - {{$b->type_id}}</td>
+                                    <td></td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="col">
+                        <table class="table table-bordered shadow p-3 mb-5 bg-white rounded">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th colspan="2">Hematolymphoid malignancies:</th>
+                                    <th>Action:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($joinConcCancerSiteHM as $b)
+                            <tr>
+                                    <td>{{$b->siteDesc}} - {{$b->type_id}}</td>
+                                    <td></td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+
+            
+
+
+            
             <div class="row" id="NAdiv">
                 <div class="col">
                     <div class="row">
@@ -2689,16 +2730,9 @@ text-align: center;
                     <b>Final Diagnosis (PLEASE FILL UP COMPLETELY, INDICATE STAGE, SITE OF METS, ER, PR, HER2, EGFR etc )</b>
                 </div>
             </div>
-
-
-<!-- Modal Serum -->
 @include('patients.modal.MolecularBioMarker')
 @include('patients.modal.SerumBioMarker')
 @include('patients.modal.FollowUp')
-
-<!-- Modal Serum EDIT -->
-<!-- Modal Molecular -->
-<!-- Modal Molecular EDIT -->
             <!-- Serum -->
             <div class="row ">
                
@@ -2715,8 +2749,6 @@ text-align: center;
                             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg></button>
                         </div>
-
-                        
                     </div>
                 </div>
                 <div class="col border-start border-end border-secondary" id="moleContent">
@@ -2725,20 +2757,40 @@ text-align: center;
                         <b>MOLECULAR BIOMARKER DATA:</b>
                         </div>
                     </div>
-                    <div class="row" id="show2_item">
+                    <div class="row">
+                        <div class="col">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><small>Biomarker</small> </th>
+                                        <th><small>Level</small></th>
+                                        <th><small>Ref Range</small></th>
+
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td><input type="text" class="inputlabelunderlineShort" name="molMar" value="{{$patients->molMar}}" ></td>
+                                    <td><input type="text" class="inputlabelunderlineShort" name="molLvl" value="{{$patients->molLvl}}" ></td>
+                                    <td><input type="text" class="inputlabelunderlineShort" name="molRange" value="{{$patients->molRange}}" ></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row" id="show2_item">
                         <div class="col-auto">
                         <button type="button" id="showMole" value="{{$patients->hpercode}}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#moleModal">Molecular Biomarker Data <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg></button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row" id="show3_item">
                     </div>
                 </div>
                 @include('patients.bioMarkerScript.serum')
                 @include('patients.bioMarkerScript.molecular')
 
-
+ 
                 <div class="col col-lg-4 border-end border-bottom border-secondary">
                     <div class="row">
                         <div class="col border-bottom border-secondary" id="divpeach">
@@ -3694,16 +3746,13 @@ text-align: center;
                     <div class="row">
                         <div class="col text-white" id="divIndigo">
                         <b>Follow up:</b>
-                        
-                        <!-- <button type="button" id="followUpAdd" class="btn btn-success btn-sm">+</button> -->
-                        <!-- <button type="button" id="followUpAdd" value="{{$patients->hpercode}}" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#followup">+</button> -->
                         </div>
                         
                     </div>
                     <div class="row border border-secondary" id="follow_up_add">
                     <div class="row justify-content-md-center">
                         <div class="col col-lg-3">
-                            <button type="button" class="btn btn-outline-info" >FOLLOW UP RECORD: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
+                            <button type="button" value="{{$patients->hpercode}}" class="btn btn-outline-info" id="followupBtn"  data-bs-toggle="modal" data-bs-target="#followupModal" >FOLLOW UP RECORD: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-angle-expand" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg></button>
                         </div>
@@ -3808,7 +3857,7 @@ text-align: center;
                                             <label for="asdf">Service</label>
                                         </div> -->
                                         <div class="col">
-                                        <input class="form-check-input" type="radio" value="" name="oncoRdo" id="oncoService">
+                                        <input class="form-check-input" type="radio" value="1" name="oncoRdo" id="oncoService" {{ ($chdata->oncoRdo == '1'? ' checked' : '') }}>
                                         <label class="form-check-label" for="oncoService">
                                             Service
                                         </label>
@@ -3858,7 +3907,7 @@ text-align: center;
                                     </div>
                                     <div class="row">
                                     <div class="col">
-                                        <input class="form-check-input" type="radio" value="" name="oncoRdo" id="oncoPay">
+                                        <input class="form-check-input" type="radio" value="2" name="oncoRdo" id="oncoPay" {{ ($chdata->oncoRdo == '2'? ' checked' : '') }}>
                                         <label class="form-check-label" for="oncoPay">
                                             Pay
                                         </label>
@@ -3873,7 +3922,7 @@ text-align: center;
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <input class="form-check-input" type="radio" value="" name="chemvalRdo" id="chemvalService">
+                                            <input class="form-check-input" type="radio" value="1" name="chemvalRdo" id="chemvalService" {{ ($chdata->chemvalRdo == '1'? ' checked' : '') }}>
                                             <label class="form-check-label" for="chemvalService">
                                                 Service
                                             </label>
@@ -3881,7 +3930,7 @@ text-align: center;
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <input class="form-check-input" type="radio" value="" name="chemvalRdo" id="chemvalPay">
+                                            <input class="form-check-input" type="radio" value="2" name="chemvalRdo" id="chemvalPay" {{ ($chdata->chemvalRdo == '2'? ' checked' : '') }}>
                                             <label class="form-check-label" for="chemvalPay">
                                                 Pay
                                             </label>
@@ -3940,7 +3989,7 @@ text-align: center;
           <div class="col">
               <div class="row justify-content-md-center">
                   <div class="col-lg-2">
-                    <a href="/viewCancerDraft" class="btn btn-primary "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
+                    <a href="/viewCancerDraft" class="btn btn-secondary "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
   <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
   <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
 </svg> Back </a>
@@ -3953,10 +4002,6 @@ text-align: center;
                   <button type="submit"name="status" class="btn btn-warning" value="drafts">Save <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
   <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
 </svg></button>
-                        <!-- <select id="status" name="status" class="form-select-sm d-print-none" aria-label=".form-select-sm example">
-                                <option value="drafts">Drafts</option>
-                                <option value="completeForm">Final Output</option>
-                        </select> -->
                   </div>
               </div>
               <div class="row">
@@ -3970,7 +4015,7 @@ text-align: center;
     </div>
 
         
-  
+   
 
   <!-- </div> -->
   
@@ -4004,7 +4049,7 @@ function showTab(n) {
     document.getElementById("nextBtn").style.display = "none";
   } else {
     document.getElementById("nextBtn").style.display = "inline";
-    document.getElementById("nextBtn").innerHTML = "Next";
+    document.getElementById("nextBtn").innerHTML = "Next ";
   }
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)

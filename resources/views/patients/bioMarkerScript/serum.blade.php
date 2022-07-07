@@ -7,34 +7,55 @@
                             // alert(hpercode +"asdfa");
                             jQuery('#serumDataInsert').click(function() {
                             let a=jQuery("#bioMarkerDesc1").val();
-                            let b=jQuery("#bioMarkerLevel1").val();
+                            let b=jQuery("#value").val();
                             let c=jQuery("#bioMarkerRange1").val();
                             let d=jQuery("#bioMarkerDate").val();
-                            let e=jQuery("#bioMarkerType1").val();
+                            // let e=jQuery("#bioMarkerType1").val();
+                            let e=jQuery("#bioMarker_id").val();
                             // let f=jQuery("#bioMarkerDesc1").val();
                             // alert(a);
-                            // console.log(a);
-                            $.ajax({url: "/insertData",
+                            // console.log(e);
+                            $.ajax({url: "/insertSerumData",
                                     type:"GET",
-                                    data:{"bioMarkerDesc1":a,
-                                        "bioMarkerLevel1":b,
-                                        "bioMarkerRange1":c,
+                                    data:{
+                                        // "bioMarkerDesc1":a,
+                                        "value":b,
+                                        // "bioMarkerRange1":c,
                                         "bioMarkerDate":d,
-                                        "bioMarkerType1":e,
+                                        "bioMarker_id":e,
                                         "hpercode": hpercode,
                                         },
                                     success: function(response){
-                                        $('#bioMarkerDesc1').val('');
-                                        $('#bioMarkerLevel1').val('');
+                                        $('#bioMarker_id').val('');
+                                        $('#value').val('');
                                         $('#bioMarkerRange1').val('');
-                                        $("#serumContent").load(" #serumContent");
+                                        // $('#bioMarkerDate').val('');
+                                        // $("#serumContent").load(" #serumContent");
                                         console.log(hpercode + " serum data");
                                  console.log('Data inserted');  
                                  $("#serum_table").load(" #serum_table");
+                                 $("#chartcontainer").load(" #chartcontainer");
                                  
                                     }
                         })
                     });
+                    $(document).on('click','#serumDataDelete',function(e){
+                                e.preventDefault();
+                                var id = $(this).val();
+                                // console.log(id);    
+                                // alert('SERUM BLADE');
+                                $.ajax({
+                                    type:"POST",
+                                    url:"/deleteSerum",
+                                    data:{
+                                        'id': id
+                                    },
+                                    success: function(response){
+                                        console.log('deleted serum id ' + id);
+                                        $("#serum_table").load(" #serum_table");
+                                    }
+                                })
+                            })
                         })
                     });
 

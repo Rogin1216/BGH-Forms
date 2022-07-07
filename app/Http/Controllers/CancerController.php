@@ -104,10 +104,40 @@ class CancerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function insertConcData(Request $request){
+        // dd($request->prim_id[0]);
+        // dd($request);
+        $concdataST = [
+            'hpercode'=>$request->hpercode,
+            'conc_id'=>$request->concCancerSiteST,
+        ];
+        $concdataHM = [
+            'hpercode'=>$request->hpercode,
+            'conc_id'=>$request->concCancerSiteHM,
+        ];
+        // dd($concdataHM);
+        // $db = DB::SELECT('select * from conc_cancerSite');
+        // $db = DB::SELECT('insert into conc_cancerSite
+        // (hpercode,coc_id)
+        // values('$request->concCancerSiteST')');
+        DB::table('conc_cancerSite')->insert($concdataST);
+        DB::table('conc_cancerSite')->insert($concdataHM);
+ 
+        
+    }
+    public function insertSerumData(Request $request){
+        $serumData = [
+            'value' =>$request->value,
+            'hpercode' => $request->hpercode,
+            'bioMarkerDate' =>$request->bioMarkerDate,
+            'bioMarker_id' =>$request->bioMarker_id
+        ];
+        DB::table('registry.cancer.bioMarker2')->insert($serumData);  
+    }
     public function insertData(Request $request){
 
         
-        // dd($request->fam);
+        // dd($request->hpercode);
         // $id=$request->id;
         // dd($request->bioMarkerDesc);
         $familyMemberData = [
@@ -125,13 +155,7 @@ class CancerController extends Controller
             'bioMarkerType' =>$request->bioMarkerType
         ];
         // dd($moleData);
-        $serumData = [
-            'bioMarkerDesc' =>$request->bioMarkerDesc1,
-            'bioMarkerLevel' => $request->bioMarkerLevel1,
-            'bioMarkerRange' => $request->bioMarkerRange1,
-            'bioMarkerDate' =>$request->bioMarkerDate,
-            'bioMarkerType' =>$request->bioMarkerType1
-        ];
+        
         // dd($serumData);
         if($request->fam == '1'){
             // dd($request->hpercode);
@@ -168,7 +192,7 @@ class CancerController extends Controller
         }
         else{
             // dd('serum');
-            DB::table('registry.cancer.bioMarker')->insert($serumData);
+            // DB::table('registry.cancer.bioMarker2')->insert($serumData);
             $x=$request->bioMarkerDesc1;
             $ID = DB::table('registry.cancer.bioMarker')
                 ->select('id')
@@ -182,7 +206,8 @@ class CancerController extends Controller
                 'hpercode' => $request->hpercode,
                 'bioMarker_id' => $a
             ]);
-        }       
+        }
+             
 
     }
 
@@ -269,6 +294,19 @@ class CancerController extends Controller
 
     public function store(Request $request,$enccode)
     {
+        // dd($request);
+        $cancer_input1 =[
+            'hpercode'=>$enccode,
+            'input'=>$request->concSolidTumorInputST,
+        ];
+        $cancer_input2 =[
+            'hpercode'=>$enccode,
+            'input'=>$request->concSolidTumorInputHM,
+        ];
+
+        DB::table('cancer_input_text')->insert($cancer_input1);
+        DB::table('cancer_input_text')->insert($cancer_input2);
+
         // dd($request->bioMarkerDesc);
         // $famTable = DB::table('familyCancerHistory')
         // ->select('*')
@@ -486,7 +524,9 @@ class CancerController extends Controller
 
         '$request->trPrimDate',
         '$request->date_surgery',
-        '$request->date_follow_up'
+        '$request->date_follow_up',
+        '$request->primaryCancerSiteST',
+        '$request->primaryCancerSiteHM'
 
         ");
         // dd($enccode);
@@ -809,7 +849,9 @@ class CancerController extends Controller
             '$request->rem4th',
             '$request->bgh4th2',
             '$request->RR4th',
-            '$request->chsame'
+            '$request->chsame',
+            '$request->oncoRdo',
+            '$request->chemvalRdo'
 
             ");
 
@@ -988,7 +1030,8 @@ class CancerController extends Controller
     }
 
     public function createCancerform(request $request, $enccode){
-        // dd($enccode);
+    
+        // dd($SpBioMarker);
         // FROM [registry].[cancer].[familyHistoryMembers] fm inner join [registry].[cancer].[familyHistoryOfCancer] fh 
         // on fm.id = fh.familyHistoryMembers_id
         // $serumTable = DB::table('registry.cancer.bioMarker')
@@ -1020,6 +1063,18 @@ class CancerController extends Controller
         ->where('hpercode',$enccode)
         ->where('t1.bioMarkerType','1')
         ->get();
+        $cancerSite = DB::table('registry.cancer.cancerSite')
+        ->select()
+        ->where('type_id','ST')
+        ->get();
+        $cancerSiteHM = DB::table('registry.cancer.cancerSite')
+        ->select()
+        ->where('type_id','HM')
+        ->get();
+        $bioMarkerList = DB::table('registry.cancer.bioMarkerList')
+        ->select()
+        ->get();
+        // dd($bioMarkerList);
 
 
         if(DB::table('cancerRegistry2')->where('hpercode', '=', $enccode)->exists()){
@@ -1072,9 +1127,48 @@ class CancerController extends Controller
         ->select('*')
         ->where('hpercode',$enccode)
         ->get();
-        // dd($header);
+        $joinCancerRegSite = DB::table('cancerRegistry2 as t1')
+        ->leftjoin('cancer.cancerSite as t2','t1.primaryCancerSiteST','=','t2.id')
+        ->leftjoin('cancer.cancerSite as t3','t1.primaryCancerSiteHM','=','t3.id')
+        ->select('*','t2.siteDesc as STDesc','t3.siteDesc as HMDesc')
+        // t2.siteDesc as STDesc, t3.siteDesc as HMDesc
+        ->where('t1.hpercode', $enccode)
+        ->get();
+        $joinConcCancerSiteST = DB::table('conc_cancerSite as t1')
+        ->leftjoin('cancer.cancerSite as t2','t1.conc_id','=','t2.id')
+        ->select()
+        ->where('hpercode',$enccode)
+        ->where('type_id','ST')
+        ->get();
+        $joinConcCancerSiteHM = DB::table('conc_cancerSite as t1')
+        ->leftjoin('cancer.cancerSite as t2','t1.conc_id','=','t2.id')
+        ->select()
+        ->where('hpercode',$enccode)
+        ->where('type_id','HM')
+        ->get();
+        $followUpStatus = DB::SELECT("EXEC cancer.patientEncounters
+        '$enccode'");
+        $SpBioMarker = DB::SELECT("EXEC cancer.spPatientBioMarker
+        '$enccode'");
+        //dd($SpBioMarker);
+
+        // FOR CHART
+        $spChart = DB::SELECT("exec registry.cancer.bioMarkerChartData '$enccode'");
+        $encodeSpChart = json_encode($spChart, JSON_NUMERIC_CHECK);           // ENCODE $spChart
+        $check = str_replace('"','',(string) $encodeSpChart);
+
+        $chartDate = DB::table('cancer.bioMarker2')
+        ->select('bioMarkerdate')
+        ->distinct('bioMarkerdate')
+        ->get();
+        $arrDate = [];
+            foreach($chartDate as $s){
+                 array_push($arrDate, $s->bioMarkerdate);
+        }
+        $encodeDate = json_encode($arrDate, JSON_NUMERIC_CHECK);  
+        // dd($encodeDate);
+
         $chdata = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
-        // dd($patinfo );
         return view('patients.createCancer',[
             'patinfo'=>$patinfo,
             'chdata'=>$chdata,
@@ -1083,7 +1177,19 @@ class CancerController extends Controller
             'patientBiomarkerS'=>$patientBiomarkerS,
             'patientBiomarkerM'=>$patientBiomarkerM,
             'loginId'=>$loginId,
-            'datelabs'=>$datelabs
+            'datelabs'=>$datelabs,
+            'cancerSite'=>$cancerSite,
+            'cancerSiteHM'=>$cancerSiteHM,
+            'joinCancerRegSite'=>$joinCancerRegSite,
+            'joinConcCancerSiteST'=>$joinConcCancerSiteST,
+            'joinConcCancerSiteHM'=>$joinConcCancerSiteHM,
+            'bioMarkerList'=>$bioMarkerList,
+            'SpBioMarker'=>$SpBioMarker,
+            'followUpStatus'=>$followUpStatus,
+            'encodeSpChart'=>$check,
+            'chartDate'=>$chartDate,
+            'encodeDate'=>$encodeDate
+
         ]);
     }
     public function createCancerformp2(request $request, $hpercode){

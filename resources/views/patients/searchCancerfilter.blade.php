@@ -167,7 +167,7 @@ button{
             <div class="row">
                 <div class="col col-lg-10">
                     <div class="pull-left">
-                        <h2>Cancer Registry(Drafts)</h2>
+                        <h2>Cancer Registry</h2>
                     </div>
                 </div>
                 <div class="col">
@@ -181,7 +181,7 @@ button{
 
 
         
-        <div class="topnav d-flex justify-content-start">
+            <div class="topnav">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
@@ -201,21 +201,28 @@ button{
                 </li>
 
                 </ul>
-                <div class="mt-3 space-y-1">
+                
+            </div>
+            <div class="col-auto">
                 <!-- Authentication -->
-                    <a href="logout" >Logout</a>
+                    <a href="logout">Logout <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+</svg></a>
 
                 </div>
-            </div>
             </nav>
             </div>
         </div>
     </div>
 </div>
 <div class="sidenav">
-  <a href="/searchCancer">Search</a>
+  <a href="/searchCancer">Search <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg></a>
   <hr>
-  <a href="/viewCancerDraft">Drafts</a>
+  <a href="/viewCancerDraft">Drafts <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+  <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
+</svg></a>
   <hr>
   <!-- <a href="/viewCancerComplete">Complete</a>
   <hr> -->
