@@ -236,7 +236,7 @@
                         <div class="col" id="patname">
                             <div class="row">
                                 <div class="col">
-                                <i>Last name: </i>
+                                <b><i>Last name: </i></b>
                                     <!-- <p class="small"> </p>  -->
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                    <i>First name (w/ suffix)</i>
+                                    <b><i>First name (w/ suffix)</i></b>
                                 </div>
                             </div>
                             <div class="row">
@@ -261,7 +261,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col">
-                                <i>Middle name</i>
+                                <b><i>Middle name</i></b>
                                 </div>
                             </div>
                             <div class="row">
@@ -277,13 +277,13 @@
                 <div class="col border-start border-secondary divpat p-2">
                     <div class="row">
                         <div class="col ">
-                            Registry No:
+                            <b>Registry No:</b>
                                 <input type="text" class="inputlabelunderlineName" name="reg_no" value="{{$patients->reg_no}}">
                         </div>
                     </div>
                     <div class="row">
                             <div class="col">
-                                Philhealth No:
+                                <b>Philhealth No:</b>
                                 <input type="text" class="inputlabelunderlineName" name="pat_phil_health_no" value="{{$patients->pat_phil_health_no}}">
                             </div>
                     </div>
