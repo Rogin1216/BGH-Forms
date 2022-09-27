@@ -218,7 +218,7 @@
 <form action="/save/{{$patients->enccode1}}" type="get" class="was-validated">
 <!-- <form action="/search#drafts" type="get"> -->
 
-<div class="container" id="mainContainer">
+<div class="container-xl" id="mainContainer">
     <div class="card-header p-2 text-white" id="bgGreen">GENERAL DATA:</div>
     <!-- <div class="header">GENERAL DATA</div> -->
     <div class="card-body border border-secondary">
@@ -230,7 +230,7 @@
 <div class="row">
     <div class="col" id="firstPanel">
         <div class="row">
-            <div class="col divpat p-2" id="divpat">
+            <div class="col divpat" id="divpat">
                     <!-- <b>Name of Patient</b> -->
                     <div class="row" id="patname">
                         <div class="col" id="patname">
@@ -461,7 +461,7 @@
                     <i>Barangay Name</i>
                     <div class="row">
                         <div class="col">
-                            <select id="plc_bgyname"  name="plc_bgyname" class="form-select inputlabelunderlineName" aria-label=".form-select-sm example">
+                            <select id="plc_bgycode"  name="plc_bgycode" class="form-select inputlabelunderlineName" aria-label=".form-select-sm example">
                                 <option value="{{$patients->plc_bgycode}}">{{$patients->plc_bgyname}}</option> 
                                 <option value="">---</option>
                             </select>
@@ -901,7 +901,7 @@
                             "_token": "{{ csrf_token() }}",
                         },
                         success:function(result){ 
-                            jQuery('#plc_bgyname').html(result)
+                            jQuery('#plc_bgycode').html(result)
                         }
                     })
                 });
@@ -1060,8 +1060,6 @@
                 <h5>Nature of Injury/ies:</h5>
                 <div class="innerdiv">
                     <div class="row">
-                        
-                        
                         <div class="grid-containter" id="gridInjuries">
                             <div class="item1">
                                 <Label>Multiple injuries?</Label>
@@ -1082,12 +1080,12 @@
                         </div>
                     </div>
 
-                    <div class="row mx-md-n3">
+                    <!-- <div class="row mx-md-n3">
                         <div class="col px-md-3">
                             <label class="labelmarginleft"><u>(Check all applicable, indicate in the blank space opposte
                                     each type of injury the body location(site) affected and other deatils)</u></label>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!--checkbox from abrasion-->
                     <div class="form-group row-md-4">
@@ -2716,7 +2714,7 @@
                 </div>
 
                 <!-- IN-PATIENT (for admitted hospital cases only) -->
-                <div class="form-group" >
+                <!-- <div class="form-group" >
                 
                     <div class="p-2 bg-success text-white">
                         <div class="row">
@@ -2999,19 +2997,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
                                 
-                                    <label for="date_completed">Date Completed:</label>
-                                    <input type="date" value="{{$patients->date_completed}}" name="date_completed" required>
-                                    <small><i style="color:red;"><svg xmlns="http://www.w3.org/2000/svg" class="d-print-none" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
-                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
-                                    </svg></i></small> 
-                                </div>
                             </div>
                         </div>
 
-                </div>
+                </div> -->
+                
                 </div>
             </div>
             </form>

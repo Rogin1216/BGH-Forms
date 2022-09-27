@@ -109,7 +109,7 @@ class PatientController extends Controller
      */
     public function save(Request $request,$enccode)
     {
-        //dd($request->plc_regcode);
+        // dd($request->plc_regcode, $request->plc_provcode, $request->plc_ctycode, $request->plc_bgyname);
         // dd($request->account_name);
         
             //  dd($request);
@@ -239,8 +239,8 @@ class PatientController extends Controller
             '$request->plc_regcode',
             '$request->plc_provcode',
             '$request->plc_ctycode',
-            '$request->plc_bgycode',
             '$request->plc_bgyname',
+            '$request->plc_bgycode',
             '$request->date_of_birth',
             '$request->status'
             ");
@@ -706,6 +706,7 @@ class PatientController extends Controller
             .$list->ctyname.'</option>';
         }
         echo $html;
+        
     }
     public function getPlcCty(request $request){
         $plcCty = $request->post('plcCty');
