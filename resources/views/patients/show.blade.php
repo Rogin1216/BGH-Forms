@@ -66,7 +66,7 @@
     .inputlabelunderlineName{
         border: none;
         height: auto;
-        width: 130px;
+        width: 180px;
     }
     .inputlabelunderline {
         border: none;
@@ -230,7 +230,7 @@
 <div class="row">
     <div class="col" id="firstPanel">
         <div class="row">
-            <div class="col divpat" id="divpat">
+            <div class="col divpat " id="divpat">
                     <!-- <b>Name of Patient</b> -->
                     <div class="row" id="patname">
                         <div class="col" id="patname">
@@ -432,7 +432,7 @@
                     </div>
                     
                 </div>
-                <div class="col">
+                <div class="col ">
                     <i>Province Name</i>
                     <div class="row">
                         <div class="col">
@@ -461,7 +461,7 @@
                     <i>Barangay Name</i>
                     <div class="row">
                         <div class="col">
-                            <select id="plc_bgycode"  name="plc_bgycode" class="form-select inputlabelunderlineName" aria-label=".form-select-sm example">
+                            <select id="plc_bgycode"  name="plc_bgycode" class="form-select inputlabelunderlineName " aria-label=".form-select-sm example">
                                 <option value="{{$patients->plc_bgycode}}">{{$patients->plc_bgyname}}</option> 
                                 <option value="">---</option>
                             </select>
@@ -563,9 +563,12 @@
         <div class="col col-sm-4 border-top border-end border-secondary" id="divbday">
                 <div class="row">
                     <div class="col">
-                          <b>Birthday:</b>  
+                          
                         <div class="row">
-                            <div class="col">
+                            <div class="col-auto">
+                            <b>Birthday:</b>  
+                            </div>
+                            <div class="col-auto">
                             <!-- {{date('F j,Y',  strtotime($patients->pat_date_of_birth))}} -->
                             <input type="text" class="inputlabelunderlineName" id="date_of_birth" name="date_of_birth" readonly value="{{date('d/m/Y',  strtotime($patients->pat_date_of_birth))}}">
                             </div>
@@ -597,7 +600,7 @@
                     </div>
                 </div>
         </div>
-        <div class="col border-top border-secondary p-2" id="divbday">
+        <div class="col border-top border-secondary" id="divbday">
             <div class="row">
                 <div class="col">
                     <b>Injury Date</b> 
