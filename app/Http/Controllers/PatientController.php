@@ -969,8 +969,13 @@ class PatientController extends Controller
             ->where('injuryRegistry.status', '=' ,'archive')
             ->get();
         $sumArchive = json_encode(count($archive));
+        $totalExport = DB::table('registry.dbo.injuryReg_ExportHistory')
+        
+        ->where('account_name',$loginId)
+        ->count();
+        $jsonCount=json_encode($totalExport);
 
-        return view('patients.search',compact('loginId','sumDrafts','sumComplete','sumArchive'))
+        return view('patients.search',compact('loginId','sumDrafts','sumComplete','sumArchive','jsonCount'))
         ->with('all',$all)
         ->with('drafts',$drafts)
         ->with('complete',$complete)
@@ -1267,7 +1272,9 @@ class PatientController extends Controller
     }
     
     public function exportbulk(request $request){
-        // dd('exportbulk');
+        // dd('asdfasdf');
+        
+            // dd($jsonCount);
         $encPat = DB::table('injuryRegistry')
         ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
@@ -1293,6 +1300,7 @@ class PatientController extends Controller
                     'date_exported' =>$request->date_exported
                 ]); 
             }
+            
             // $excel = Excel::download(new BulkUsersExport($request), 'AllUser.csv');
             // dd('exportbulk');
             // Excel::store(new BulkUsersExport($request), 'invoices.xlsx');

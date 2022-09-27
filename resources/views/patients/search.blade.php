@@ -26,7 +26,7 @@
 <body>
 <nav class="navbar navbar-dark fixed-top bg-light flex-md-nowrap p-1">
     <a class="navbar-brand" href="/search"><img src="{{ asset('images/bghmc-banner.png') }}" class="rounded float-left align-items-center" alt="..." width="350px" height="30px"></a>
-    <i>Account Name: {{$loginId}}</i>
+    <i>Account Name: {{$loginId}}</i> Total export: {{$jsonCount}} 
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap logout">
           <!-- <a class="nav-link" href="#">Sign out</a> -->
