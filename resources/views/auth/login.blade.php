@@ -69,7 +69,13 @@
         <x-auth-session-status class="mb-4" :status="session('status')" />
         
         <!-- Validation Errors -->
+        <div class="row ">
+            <div class="col align-self-center">           
+            <center><b>Trauma Injury Registry</b></center>            
+            </div>
+        </div>
         <div class="login-form">
+        
         <div class="col">
                             <img src="{{ asset('images/bghmc-logo.png') }}" class="logo" alt="..." >
                         </div>
@@ -89,9 +95,7 @@
                 <!-- Email Address -->
                 
                 <div class="col" >
-                    <div class="row">
-                        
-                    </div>
+                    
                     <div class="row">
                         <div class="col" id="input">
                             <!-- <x-label for="email" :value="__('Email: ')" /> -->
@@ -114,6 +118,7 @@
                                             required autocomplete="current-password" />
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col">
                         <div class="flex items-center justify-end mt-4">

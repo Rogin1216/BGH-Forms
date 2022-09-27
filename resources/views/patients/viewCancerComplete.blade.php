@@ -189,7 +189,7 @@ button{
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <!-- <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select Registry
@@ -200,10 +200,10 @@ button{
                     </div>
                 </li>
 
-                </ul>
+                </ul> -->
                 <div class="col">
                 <!-- Authentication -->
-                    <a href="logout" >Logout</a>
+                    <a href="logout">Logout</a>
 
                 </div>
             </div>

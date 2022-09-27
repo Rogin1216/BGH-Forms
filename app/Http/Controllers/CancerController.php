@@ -1133,7 +1133,7 @@ class CancerController extends Controller
         ->select('*','t2.siteDesc as STDesc','t3.siteDesc as HMDesc')
         // t2.siteDesc as STDesc, t3.siteDesc as HMDesc
         ->where('t1.hpercode', $enccode)
-        ->get();
+        ->get(); 
         $joinConcCancerSiteST = DB::table('conc_cancerSite as t1')
         ->leftjoin('cancer.cancerSite as t2','t1.conc_id','=','t2.id')
         ->select()
@@ -1156,7 +1156,7 @@ class CancerController extends Controller
         $spChart = DB::SELECT("exec registry.cancer.bioMarkerChartData '$enccode'");
         $encodeSpChart = json_encode($spChart, JSON_NUMERIC_CHECK);           // ENCODE $spChart
         $check = str_replace('"','',(string) $encodeSpChart);
-
+            // dd($check);
         $chartDate = DB::table('cancer.bioMarker2')
         ->select('bioMarkerdate')
         ->distinct('bioMarkerdate')

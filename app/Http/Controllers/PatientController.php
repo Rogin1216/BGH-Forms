@@ -11,7 +11,8 @@ use App\Models\vwRegionProvinceCityBarangay;
 use PhpParser\Node\Expr\AssignOp\Pow;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Carbon\Carbon; // Include Class in COntroller
+use Carbon\Carbon; // Include Class in COntroller;
+
 
 // exports
 // use Maatwebsite\Excel\Excel;
@@ -20,7 +21,7 @@ use App\Exports\UsersExport;
 use App\Exports\BulkUsersExport;
 use App\Models\finalInputInjuryRegistry;
 use App\Providers\RouteServiceProvider;
-
+use ZipArchive;
 
 class PatientController extends Controller
 {
@@ -54,7 +55,7 @@ class PatientController extends Controller
 
     }
     
-
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -74,6 +75,7 @@ class PatientController extends Controller
 
     public function print($hpercode)
     {
+        dd('asdf');
         $patients = DB::table('vwInjuryList3')->select('*')->where('enccode1',$hpercode)->get();
         return view('patients.print')->with('patients', $patients);
     }
@@ -107,7 +109,7 @@ class PatientController extends Controller
      */
     public function save(Request $request,$enccode)
     {
-        // dd('patient contorller');
+        //dd($request->plc_regcode);
         // dd($request->account_name);
         
             //  dd($request);
@@ -239,6 +241,7 @@ class PatientController extends Controller
             '$request->plc_ctycode',
             '$request->plc_bgycode',
             '$request->plc_bgyname',
+            '$request->date_of_birth',
             '$request->status'
             ");
             // 112
@@ -567,8 +570,9 @@ class PatientController extends Controller
             '$request->chemvalRdo'
             ");
 
+            // dd($request);
             $request->session()->flash('alert-success', 'Saved ');
-            return $this->viewinjuryReg();
+            return $this->search($request);
     }
 
     /**
@@ -579,7 +583,7 @@ class PatientController extends Controller
      */
     public function getRegion(request $request){
         $regc = $request->post('regc');
-        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay2')  
         ->select('provname','provcode','regcode')
             ->where('regcode', $regc)   
             ->distinct('provname')
@@ -595,7 +599,7 @@ class PatientController extends Controller
     public function getProv(request $request){
         $provc = $request->post('provc');
         echo $provc;
-        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('ctyname','ctycode','provcode')
         ->where('provcode',$provc)
         ->distinct('ctyname')
@@ -611,7 +615,7 @@ class PatientController extends Controller
     public function getCty(request $request){
         $ctyc = $request->post('ctyc');
         echo $ctyc;
-        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('bgyname','bgycode','ctycode')
         ->where('ctycode',$ctyc)
         ->distinct('bgyname')
@@ -626,7 +630,7 @@ class PatientController extends Controller
     }
     public function getTempRegion(request $request){
         $tregc = $request->post('tregc');
-        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay2')  
         ->select('provname','provcode','regcode')
             ->where('regcode', $tregc)   
             ->distinct('provname')
@@ -642,7 +646,7 @@ class PatientController extends Controller
     public function getTempProv(request $request){
         $tprovc = $request->post('tprovc');
         echo $tprovc;
-        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('ctyname','ctycode','provcode')
         ->where('provcode',$tprovc)
         ->distinct('ctyname')
@@ -658,7 +662,7 @@ class PatientController extends Controller
     public function getTempCty(request $request){
         $tctyc = $request->post('tctyc');
         echo $tctyc;
-        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('bgyname','bgycode','ctycode')
         ->where('ctycode',$tctyc)
         ->distinct('bgyname')
@@ -673,7 +677,7 @@ class PatientController extends Controller
     }
     public function getPlcReg(request $request){
         $plcReg = $request->post('plcReg');
-        $vwProvname = DB::table('vwRegionProvinceCityBarangay')  
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay2')  
         ->select('provname','provcode','regcode')
             ->where('regcode', $plcReg)   
             ->distinct('provname')
@@ -684,12 +688,13 @@ class PatientController extends Controller
             $html.='<option value="'.$list->provcode.'">'
             .$list->provname.'</option>';
         }
+        
         echo $html;
     }
     public function getPlcProv(request $request){
         $plcProv = $request->post('plcProv');
         echo $plcProv;
-        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('ctyname','ctycode','provcode')
         ->where('provcode',$plcProv)
         ->distinct('ctyname')
@@ -705,7 +710,7 @@ class PatientController extends Controller
     public function getPlcCty(request $request){
         $plcCty = $request->post('plcCty');
         echo $plcCty;
-        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay2')
         ->select('bgyname','bgycode','ctycode')
         ->where('ctycode',$plcCty)
         ->distinct('bgyname')
@@ -716,9 +721,28 @@ class PatientController extends Controller
             $html.='<option value="'.$list->bgycode.'">'
             .$list->bgyname.'</option>';
         }
+
         echo $html;
     }
 
+    public function getStatus(request $request){
+        $status = $request->status;
+        $all = DB::table('injuryRegistry')
+        ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        ->select('*')
+        ->get();
+        if($request->ajax()){
+            $tableRes = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=', $status)
+            ->get();
+            return response()->json(['tableRes'=>$tableRes]);
+        }
+        
+        $tableRes = $all;
+        return view('patients.search',compact('all','tableRes'));
+    }
 
 
     public function show(Request $request,$enccode)
@@ -738,7 +762,7 @@ class PatientController extends Controller
         else
         {
             
-            DB::table('checkboxList')
+            DB::table ('checkboxList')
             ->insert(
                 array(
                        'enccode'     =>   $enccode, 
@@ -751,34 +775,40 @@ class PatientController extends Controller
         // dd($info);                                    //adsfasdfdsafadsfdsafdsafads<<------------
         $chdatalist = DB::table('checkboxList')->select('*')->where('enccode',$enccode)->get();
         // $vwRegion = vwRegionProvinceCityBarangay::
-        $vwProvname = DB::table('vwRegionProvinceCityBarangay')
+        $vwProvname = DB::table('vwRegionProvinceCityBarangay2')
         // ->select('regcode','provname','ctyname','bgyname')->distinct()   
         ->select('provname','provcode')
             ->distinct('provname')
             ->orderBy('provname','asc')
             ->get();
             
-        $vwRegname = DB::table('vwRegionProvinceCityBarangay')
+        $vwRegname = DB::table('vwRegionProvinceCityBarangay2')
         // ->select('regcode','provname','ctyname','bgyname')->distinct()   
         ->select('regname','regcode')
             ->distinct('regname')
             ->orderBy('regname','asc')
             ->get();
             // dd($vwRegname);
-        $vwCtyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwCtyname = DB::table('vwRegionProvinceCityBarangay2')
         // ->select('regcode','provname','ctyname','bgyname')->distinct()   
         ->select('ctyname','ctycode')
             ->distinct('ctyname')
             ->orderBy('ctyname','asc')
             ->get();
-        $vwBgyname = DB::table('vwRegionProvinceCityBarangay')
+        $vwBgyname = DB::table('vwRegionProvinceCityBarangay2')
         // ->select('regcode','provname','ctyname','bgyname')->distinct()   
         ->select('bgyname','bgycode')
             ->distinct('bgyname')
             ->orderBy('bgyname','asc')
             ->get();
         // dd($vwProvname);
-
+        $hosp_code = DB::table('hospital_code')
+        ->select()
+        ->get();
+        // dd($hosp_code);
+        $statusTB = DB::table('statusTB')
+        ->select()
+        ->get();
 
         return view('patients.show', compact(
             'info',
@@ -787,7 +817,9 @@ class PatientController extends Controller
             'vwRegname',
             'vwCtyname',
             'vwBgyname',
-            'loginId'
+            'loginId',
+            'hosp_code',
+            'statusTB'
             ));
     }
 
@@ -835,7 +867,7 @@ class PatientController extends Controller
         // dd($request);
             $search_text = $request->input('query');
             // dd($search_text);
-               $patient = DB::table('vwInjuryList3')->select('patfirst','patmiddle','patlast', 'hpercode')
+               $searchResult = DB::table('vwInjuryList3')->select('*')
             //    $patient = vwInjuryList3::select('patfirst','patmiddle','patlast', 'hpercode')
             //    $patient = DB::table('vwInjuryList3')
                ->Where(DB::raw("concat(patfirst, ' ', patmiddle, ' ', patlast)"), 'LIKE', "%".$search_text."%")
@@ -847,25 +879,110 @@ class PatientController extends Controller
                ->orderBy('patlast', 'asc')
                ->get();
                 // dd($patient);
-               return view('patients.searchfilter', compact(
-                   'patient',
 
-                ));
+        $drafts = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=', 'drafts')
+            ->get();
+        $loginId = $request->session()->get('loginId');
+        $complete = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=', 'completeForm')
+            ->get();
+        $next = DB::table('injuryRegistry')->select('*')->get();
+        $archive = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=' ,'archive')
+            ->get();
+
+        return view('patients.searchfilter',compact('loginId'))
+        // ->with('all',$all)
+        ->with('drafts',$drafts)
+        ->with('complete',$complete)
+        ->with('next',$next)
+        ->with('archive',$archive)
+        ->with('searchResult',$searchResult)
+        ;
+            //    return view('patients.searchfilter', compact(
+            //        'searchResult',
+
+            //     ));
 
     }
     public function search(request $request){
+        // dd($request);
+        // dd($this->getStatus($request))
+        // $status = $this->getStatus($request);
+        
+        $status = $request->status;
+        // if($request->ajax()){
+        //     $tableRes = DB::table('injuryRegistry')
+        //     ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+        //     ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+        //     ->where('injuryRegistry.status', '=', $status)
+        //     ->get();
+        //     return response()->json(['tableRes'=>$tableRes]);
+        // }
 
-        $all = DB::table('vwInjuryList3')
-        ->select('*')
+        if($request->ajax()){
+            $table = DB::table('vwInjurylist3')
+            ->leftjoin('injuryRegistry', 'vwInjuryList3.enccode', '=', 'injuryRegistry.enccode')
+            ->select('*')
+            ->get();
+            return ;
+
+        }
+        
+        // dd($status);
+        $all = DB::table('vwInjurylist3')
         // ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
-        // ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
-        // ->select('injuryRegistry.*','vwInjuryList3.*')
+        ->leftjoin('injuryRegistry', 'vwInjuryList3.enccode', '=', 'injuryRegistry.enccode')
+        // ->select('injuryRegistry.*', 'vwInjuryList3.*')
+        ->select('*')
+        // ->get();
         ->paginate(10);
-        // dd($all);
+            // dd($all);
+        // $tableRes = $all;
 
-        return view('patients.search', [
-            'all'=>$all
-        ]);
+        $drafts = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=', 'drafts')
+            ->get();
+        $sumDrafts = json_encode(count($drafts));
+        
+        $loginId = $request->session()->get('loginId');
+        $complete = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=', 'completeForm')
+            ->get();
+        $sumComplete = json_encode(count($complete));
+        $next = DB::table('injuryRegistry')->select('*')->get();
+        $archive = DB::table('injuryRegistry')
+            ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
+            ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
+            ->where('injuryRegistry.status', '=' ,'archive')
+            ->get();
+        $sumArchive = json_encode(count($archive));
+
+        return view('patients.search',compact('loginId','sumDrafts','sumComplete','sumArchive'))
+        ->with('all',$all)
+        ->with('drafts',$drafts)
+        ->with('complete',$complete)
+        ->with('next',$next)
+        ->with('archive',$archive)
+        // ->with('tableRes',$tableRes)
+        ;
+        // [
+        //     'all'=>$all,
+        //     'drafts'=>$drafts,
+        //     'complete'=>$complete,
+        //     'next'=>$next
+        // ]);
     }
     public function viewinjuryReg(){
         
@@ -878,7 +995,6 @@ class PatientController extends Controller
             return view('patients.viewinjuryReg', [
                 'all'=>$all
             ]);
-
     }
     public function viewAllinjuryReg(request $request){
         $loginId = $request->session()->get('loginId');
@@ -890,7 +1006,8 @@ class PatientController extends Controller
 
         $next = DB::table('injuryRegistry')->select('*')->get();
 
-        return view('patients.viewAllinjuryReg',compact('loginId'))->with('all',$all)->with('next',$next);
+        return view('patients.viewAllinjuryReg',compact('loginId'))
+        ->with('all',$all)->with('next',$next);
     }
 
     public function exportAndProcedure(request $request,$enccode){
@@ -1148,8 +1265,8 @@ class PatientController extends Controller
         return view('patients.infoNext');
     }
     
-    public function exportbulk(request $request,$enccode){
-        // dd($request->account_name);
+    public function exportbulk(request $request){
+        // dd('exportbulk');
         $encPat = DB::table('injuryRegistry')
         ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->select('injuryRegistry.*', 'vwInjuryList3.patfirst', 'vwInjuryList3.patmiddle', 'vwInjuryList3.patlast', 'vwInjuryList3.hpercode', 'vwInjuryList3.enccode', 'injuryRegistry.date_completed','injuryRegistry.status')
@@ -1175,15 +1292,37 @@ class PatientController extends Controller
                     'date_exported' =>$request->date_exported
                 ]); 
             }
+            // $excel = Excel::download(new BulkUsersExport($request), 'AllUser.csv');
+            // dd('exportbulk');
+            // Excel::store(new BulkUsersExport($request), 'invoices.xlsx');
+            // return true;
+            return Excel::download(new BulkUsersExport($request), 'Injury_list.csv');
+            // return $excel;
+
+            //create zip file
+            // $zip_file = "C:/Users/ROGIN/Desktop/exported_trauma_list.zip"; //destination and name
+            // touch($zip_file);
+
+            // $zip  = new ZipArchive;
+            // $this_zip = $zip->open($zip_file);
             
-            return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
+            // // if($this_zip){
+            // //      $zip->addFile($excel);
+            // // }
 
+            // //create zip file
+            // $zip_file = "../file/all-image.zip"; //destination and name
+            // touch($zip_file);
 
-    }
-    public function exporttt(request $request){
-        return Excel::download(new BulkUsersExport($request), 'AllUser.xlsx');
+            // $zip  = new ZipArchive;
+            // $this_zip = $zip->open($zip_file);
 
-        
+            // if($this_zip){
+            //     $file_with_path = "../image/1.jpg";
+            //     $name="1.zip";
+            //     $zip->addFile($file_with_path,$name);
+            // }
+
     }
     public function archive(){
         $all = DB::table('injuryRegistry')
@@ -1202,12 +1341,23 @@ class PatientController extends Controller
     }
     public function setArchive(request $request){
         // dd($enccode);
-        
+            // $zip_file = "C:/Users/ROGIN/Desktop/Injury_list.zip"; //destination and name
+            // touch($zip_file);
+
+            // $zip  = new ZipArchive;
+            // $this_zip = $zip->open($zip_file);
+            
+            // if($this_zip){
+            //     $file_with_path = "C:/Users/ROGIN/Desktop/Injury_list.csv";
+            //         $name="Injury_list.csv";
+            //         $zip->addFile($file_with_path,$name);
+            // }
         DB::table('injuryRegistry')
         ->where('status','completeForm')
         ->update(['status' => 'archive']);
 
-            return $this->archive();
+            // return $this->archive();
+            return $this->search($request);
 
     }
 

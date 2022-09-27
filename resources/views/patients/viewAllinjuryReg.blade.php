@@ -154,18 +154,18 @@
                 </div>
             </div>
 
-        
+
 
 
         
             <div class="topnav">
             <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/index"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
+            <a class="navbar-brand" href="/search"><img src="{{ asset('images/bghmc-logo.png') }}" class="rounded float-left align-items-center" alt="..." width="50px" height="50px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,7 +179,7 @@
 
                 </ul>
                 
-            </div>
+            </div> -->
             <div class="col-auto">
                 <!-- Authentication -->
                     <a href="logout">Logout <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
@@ -228,7 +228,7 @@
             <tbody>
             <!-- <form action="/infoNext" type="get"> -->
                 <tr>@foreach($all as $a)
-                    <form action="/exportbulk/{{$a->enccode}}" type="get">
+                    <form action="/exportbulk" type="get">
                 
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $a->patfirst}} {{ $a->patmiddle}} {{ $a->patlast}}</td>
@@ -250,15 +250,6 @@
                 <input type="hidden" id="account_name" name="account_name" value="{{$loginId}}">
                         <input type="hidden" id="date_exported" name="date_exported" value="{{ date('F j, Y, g:i a') }}">
                 <div class="col-auto float-end">
-                        <!-- <button type="submit" class="btn btn-outline-success d-print-none " ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
-                        <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
-                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                        </svg> Next</button> -->
-                <!-- </form> -->
-
-                        
-                        <!-- <input type="hidden" value="/" name="status" id="status"> -->
-
                             <button type="submit" id="hidden" class="btn btn-outline-success d-print-none" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text" viewBox="0 0 16 16">
                             <path d="M5 4a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8a.5.5 0 0 0 0 1h6a.5.5 0 0 0 0-1H5zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1H5z"/>
                             <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
@@ -276,7 +267,7 @@
                             <path d="M10.854 7.854a.5.5 0 0 0-.708-.708L7.5 9.793 6.354 8.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3Z"/>
                             </svg>Done</button>
                     </form>
-                        
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                         <script>
                         $(document).ready(function(){
                             $('#hidden').show();
@@ -285,10 +276,57 @@
                                 $('#hidden').hide();
                                 $('#shown').show();
                         });
-                        $('#hidden').click(function(){
-                            console.log(new Date().toUTCString());
-                        })
+                        // $('#hidden').click(function(){
+                        //     console.log(new Date().toUTCString());
+                        //     swal({
+                        //         text: 'Enter CSV title',
+                        //         content: "input",
+                        //         button: {
+                        //             text: "Submit",
+                        //             closeModal: true,
+                        //         },
+                        //         })
+                        //         .then((response)=>{
+                        //             console.log('response');
+                        //             jQuery.ajax({
+                        //                 url:'/exportbulk', 
+                        //                 type:'get',
+                        //                 // data: {'provc': provc,
+                        //                 //     "_token": "{{ csrf_token() }}",
+                        //                 // },
+                        //             })
+                        //         })
+                        // })
+
+                        
                     });
+                    // function clickMe(){
+                    //         console.log('click me');
+                    //         swal({
+                    //             text: 'Enter CSV title',
+                    //             content: "input",
+                    //             button: {
+                    //                 text: "Submit",
+                    //                 closeModal: false,
+                    //             },
+                    //             });
+                    //     }
+
+                //     jQuery('#hidden').change(function() {
+                //         alert('hidden');
+                //     let provc=jQuery(this).val();
+                //     // alert (provc);
+                //     jQuery.ajax({
+                //         url:'/getProv', 
+                //         type:'post',
+                //         data: {'provc': provc,
+                //             "_token": "{{ csrf_token() }}",
+                //         },
+                //         success:function(result){ 
+                //             jQuery('#Pat_Facility_City').html(result)
+                //         }
+                //     })
+                // });
                         </script>
 
                 </div> 

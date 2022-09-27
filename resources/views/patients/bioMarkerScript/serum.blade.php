@@ -34,7 +34,7 @@
                                         console.log(hpercode + " serum data");
                                  console.log('Data inserted');  
                                  $("#serum_table").load(" #serum_table");
-                                 $("#chartcontainer").load(" #chartcontainer");
+                                //  $("#chartcontainer").load(" #chartcontainer");
                                  
                                     }
                         })

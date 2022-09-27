@@ -66,7 +66,7 @@ Route::middleware('guest')->group(function () {
     // Route::get('/index',[AuthenticatedSessionController::class,'index']);
 
 
-// });  
+// });   
 // Route::auth();
 // Route::get('/index',[PatientController::class,'index'])->middleware('auth');
 // Route::get('/index',[AuthenticatedSessionController::class,'index'])->middleware('loggedin');

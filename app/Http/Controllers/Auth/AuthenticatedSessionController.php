@@ -27,6 +27,7 @@ class AuthenticatedSessionController extends Controller
         // $collection = Http::get("http://192.168.7.188:8040/api/login");
         // dd($collection);
         // return view('auth.login',['collection'=>$collection['data']]);
+        // dd('login');
         return view('auth.login');
 
         // return Http::get("http://192.168.7.188:8040/api/login");
@@ -93,14 +94,14 @@ class AuthenticatedSessionController extends Controller
         // dd(auth()->$username);
         // dd(auth()->check());
                 
-                return redirect("/index");
+                return redirect("/search");
             }else{
                 
                 return view("auth.login");
             }
         }else
         {
-            return redirect("/login");
+            return redirect("/");
         }
         // --------------------
 

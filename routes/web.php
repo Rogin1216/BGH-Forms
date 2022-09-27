@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 Route::get('/users','UserController@index'); 
 
@@ -60,7 +60,8 @@ Route::post('/deleteFam','CancerController@deleteFam');
 Route::get('/insertConcData','CancerController@insertConcData');
 
 // injury form
-Route::get('/search','PatientController@search');                                       //search
+Route::get('/search','PatientController@search'); 
+Route::get('/getStatus','PatientController@getStatus');                                      //search
 Route::get('/searchfilter','PatientController@searchfilter');                           //search for patient
 Route::get('/searchDatefilter','PatientController@searchDatefilter');                   //search for patient from date
 Route::get('/index','PatientController@index');                                         //view index
@@ -82,13 +83,15 @@ Route::post('/getTempCty','PatientController@getTempCty');
 Route::post('/getPlcReg','PatientController@getPlcReg');
 Route::post('/getPlcProv','PatientController@getPlcProv');
 Route::post('/getPlcCty','PatientController@getPlcCty');
+
 Route::get('/save/{id}','PatientController@save')->where('id','.*');                  //save injury form
 Route::get('/store/{id}','CancerController@store')->where('id','.*');                  //save injury form
 Route::get('/saveTo/{id}','PatientController@saveTo')->where('id','.*');                //
 Route::get('/injuryForm/{id}','PatientController@print')->where('id','.*');             //print Form
 Route::get('/export/{id}','PatientController@export')->where('id','.*');                //export to Excel
 
-Route::get('/exportbulk/{id}','PatientController@exportbulk')->where('id','.*');        //export bulk to Excel
+// Route::get('/exportbulk/{id}','PatientController@exportbulk')->where('id','.*');        //export bulk to Excel
+Route::get('/exportbulk','PatientController@exportbulk');        //export bulk to Excel
 Route::get('/exportAndProcedure/{id}','PatientController@exportAndProcedure');          //export bulk to Excel
 });
 Route::get('/logout' , 'PatientController@logout');
