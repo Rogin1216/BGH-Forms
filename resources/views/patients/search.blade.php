@@ -28,7 +28,7 @@
 </head>
 <!-- @include('patients.modal.totalExport') -->
 <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" >
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Account Export Details</h5>
