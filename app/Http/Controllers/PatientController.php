@@ -975,12 +975,19 @@ class PatientController extends Controller
         ->count();
         $jsonCount=json_encode($totalExport);
 
+        $accountExport = DB::table('injuryReg_ExportHistory')
+        ->select()
+        // ->get();
+        ->orderBy('date_exported', 'desc')
+        ->paginate(10);
+
         return view('patients.search',compact('loginId','sumDrafts','sumComplete','sumArchive','jsonCount'))
         ->with('all',$all)
         ->with('drafts',$drafts)
         ->with('complete',$complete)
         ->with('next',$next)
         ->with('archive',$archive)
+        ->with('accountExport',$accountExport)
         // ->with('tableRes',$tableRes)
         ;
         // [

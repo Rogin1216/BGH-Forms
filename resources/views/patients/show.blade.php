@@ -983,14 +983,14 @@
                                         </div>
                                         <div class="col-auto" >
                                             <input class="form-check-input" type="radio" name="inj_intent_code" id="Unintentional/Accidental" value="01"  {{ ($chdata->inj_intent_code == 'Unintentional/Accidental'? ' checked' : '') }}>
-                                            <label for="Unintentional/Accidental" id="divpat1">Unintentional/Accidental</label>
+                                            <label class="form-check-label" for="Unintentional/Accidental" id="divpat1">Unintentional/Accidental</label>
                                            <!-- <div class="row">
                                             
                                            </div> -->
                                         </div>
                                         <div class="col-auto">
                                             <input class="form-check-input" type="radio" name="inj_intent_code" id="IntentionalV" value="02" {{ ($chdata->inj_intent_code == '02'? ' checked' : '') }}>
-                                            <label for="IntentionalV">Intentional (violence)</label>
+                                            <label class="form-check-label" for="IntentionalV">Intentional (violence)</label>
 
                                         </div>
                                         <div class="col-auto">
@@ -1000,12 +1000,12 @@
                                         </div>
                                         <div class="col-auto">
                                             <input class="form-check-input" type="radio" name="inj_intent_code" id="IntentionalS" value="03" {{ ($chdata->inj_intent_code == '03'? ' checked' : '') }}>
-                                            <label for="IntentionalS">Intentional(self-inflict)</label>
+                                            <label class="form-check-label" for="IntentionalS">Intentional(self-inflict)</label>
 
                                         </div>
                                         <div class="col-auto">
                                                 <input class="form-check-input" type="radio" name="inj_intent_code" id="Undetermined" value="99" {{ ($chdata->inj_intent_code == '99'? ' checked' : '') }}>
-                                                <label for="Undetermined">Undetermined</label>
+                                                <label class="form-check-label" for="Undetermined">Undetermined</label>
 
                                             </div>
                                         
@@ -1626,6 +1626,7 @@
                
             <hr>
             <!-- External cause panel -->
+            <section>
             <div class="form-group rows-print-as-pages border border-secondary">
             
                     <div class="row">
@@ -3007,6 +3008,7 @@
                 </div> -->
                 
                 </div>
+                </section>
             </div>
             </form>
             <div class="row">
