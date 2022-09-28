@@ -71,7 +71,7 @@
         <!-- Validation Errors -->
         <div class="row ">
             <div class="col align-self-center">           
-            <center><b>Trauma Injury Registry</b></center>            
+            <center><i><b>Trauma Injury Registry</b></i></center>            
             </div>
         </div>
         <div class="login-form">
@@ -102,7 +102,7 @@
                             <x-input id="email" class="block mt-1 w-full" 
                             class="input-form"
                             type="text" 
-                            placeholder="Email" 
+                            placeholder="HOMIS" 
                             name="email"  required autofocus />
                         </div>
                     </div>

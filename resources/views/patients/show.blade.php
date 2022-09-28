@@ -2718,7 +2718,7 @@
                 </div>
 
                 <!-- IN-PATIENT (for admitted hospital cases only) -->
-                <!-- <div class="form-group" >
+                <div class="form-group" >
                 
                     <div class="p-2 bg-success text-white">
                         <div class="row">
@@ -3005,7 +3005,7 @@
                             </div>
                         </div>
 
-                </div> -->
+                </div>
                 
                 </div>
                 </section>
