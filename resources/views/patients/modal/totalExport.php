@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" >
+<div class="modal fade" id="totalExport" aria-labelledby="exampleModalLabel" >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

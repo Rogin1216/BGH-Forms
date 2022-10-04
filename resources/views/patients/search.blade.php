@@ -68,9 +68,9 @@
     <a class="navbar-brand" href="/search"><img src="{{ asset('images/bghmc-banner.png') }}" class="rounded float-left align-items-center" alt="..." width="350px" height="30px"></a>
     <i>Account Name: {{$loginId}}</i> 
 
-    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Total export: {{$jsonCount}}
-    </button>
+    <!-- <button  class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#totalExport"> -->
+        <!-- Export: {{$jsonCount}} -->
+    <!-- </button> -->
 
 
 
