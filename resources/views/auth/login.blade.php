@@ -71,7 +71,7 @@
         <!-- Validation Errors -->
         <div class="row ">
             <div class="col align-self-center">           
-            <center><i><b>Trauma Injury Registry</b></i></center>            
+            <center><i><b>Trauma Injury Registry adsfasdfds</b></i></center>            
             </div>
         </div>
         <div class="login-form">
