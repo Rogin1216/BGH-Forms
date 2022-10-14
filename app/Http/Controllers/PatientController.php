@@ -942,6 +942,7 @@ class PatientController extends Controller
         // ->join('vwInjuryList3', 'injuryRegistry.enccode', '=', 'vwInjuryList3.enccode')
         ->leftjoin('injuryRegistry', 'vwInjuryList3.enccode', '=', 'injuryRegistry.enccode')
         // ->select('injuryRegistry.*', 'vwInjuryList3.*')
+        ->orderByDesc('admdate')
         ->select('*')
         // ->get();
         ->paginate(10);

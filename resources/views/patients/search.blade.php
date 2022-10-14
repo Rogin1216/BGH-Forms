@@ -316,7 +316,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Admitted By:</th>
-                <th>Date Completed</th>
+                <!-- <th>Date Saved</th> -->
                 <th>Hospital Code</th>
                 <th>Status</th>
                 <th></th>
@@ -329,7 +329,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->patfirst}} {{ $item->patmiddle}} {{ $item->patlast}}</td>
                     <td>{{ $item->docAdmit}}</td>
-                    <td>{{ $item->date_completed}}</td>
+                    <!-- <td>{{ $item->date_completed}}</td> -->
                     <td>{{ $item->hpercode}}</td>
                     <td>{{ $item->status}}</td>
                     <td>
@@ -372,7 +372,7 @@
                 <!-- <th>Name</th> -->
                 <th>Name</th>
                 <th>Admitted By:</th>
-                <th>Date Completed</th>
+                <!-- <th>Date Completed</th> -->
                 <th>Status</th>
                 <!-- <th></th> -->
             </tr>
@@ -384,7 +384,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $a->patfirst}} {{ $a->patmiddle}} {{ $a->patlast}}</td>
                     <td>{{ $a->docAdmit}} </td>
-                    <td>{{ $a->date_completed}} </td>
+                    <!-- <td>{{ $a->date_completed}} </td> -->
                     <td>{{ $a->status}}</td>
                     
                     <!-- <td>

@@ -690,7 +690,6 @@
                                         </div>
                                     </div>
                                     <div class="col">
-
                                         <div class="row">
                                             <div class="col">
                                                 <b>Date report </b>
@@ -1166,11 +1165,11 @@
                         <div class="col-auto" id="frsAidComm">
                             <textarea class="form-control" name="frstAid" id="frstAid"
                                 {{ ($chdata->rdoAid == 'N' ? ' disabled' : '') }}
-                                placeholder="-- No first aid given --">{{$patients->frstAid}}</textarea>
+                                >{{$patients->frstAid}}</textarea>
                         </div>
                         <div class="col" id="docAdmitCol">
                             <input type="text" name="docAdmit" id="docAdmit" value="{{$patients->docAdmit}}"
-                                {{ ($chdata->rdoAid == 'N' ? ' disabled' : '') }} placeholder=" -- Name Here --"
+                                {{ ($chdata->rdoAid == 'N' ? ' disabled' : '') }} 
                                 class="form-control">
                         </div>
                     </div>
@@ -1225,7 +1224,7 @@
                                         Abrasion
                                     </label>
                                     <input type="text" class="inputlabelunderline" name="abrasion" id="abrasionInput"
-                                        value="{{$patients->abrasion}}" placeholder="N/A">
+                                        value="{{$patients->abrasion}}">
                                 </div>
                             </div>
 
@@ -1238,7 +1237,7 @@
                                         Avulsion
                                     </label>
                                     <input type="text" class="inputlabelunderline" name="avulsion" id="avulsionInput"
-                                        value="{{$patients->avulsion}}" placeholder="N/A">
+                                        value="{{$patients->avulsion}}">
                                 </div>
                             </div>
 
@@ -1285,7 +1284,7 @@
 
                                         <label>Site:</label>
                                         <input type="text" class="inputlabelunderline" value="{{$patients->site}}"
-                                            name="site" id="burnChInput" placeholder="N/A">
+                                            name="site" id="burnChInput">
                                 </div>
                             </div>
 
@@ -1299,7 +1298,7 @@
                                         Concussion
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->concussion}}"
-                                        name="concussion" id="concussionInput" placeholder="N/A">
+                                        name="concussion" id="concussionInput">
                                 </div>
                             </div>
 
@@ -1312,7 +1311,7 @@
                                         Contusion
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->contusion}}"
-                                        name="contusion" id="contusionInput" placeholder="N/A">
+                                        name="contusion" id="contusionInput">
                                 </div>
                             </div>
 
@@ -1338,7 +1337,7 @@
                                                         Open Type
                                                     </label>
                                                     <input type="text" class="inputlabelunderline"
-                                                        value="{{$patients->openType}}" placeholder="N/A"
+                                                        value="{{$patients->openType}}"
                                                         name="openType" id="openTypeInput">
                                                     <label class="form-check-label" for="Open Type">
                                                         (ex. comminuted, depressed fracture)
@@ -1360,7 +1359,7 @@
                                                     </label>
                                                     <input type="text" class="inputlabelunderline" name="closedType"
                                                         id="closedTypeInput" value="{{$patients->closedType}}"
-                                                        placeholder="N/A">
+                                                    >
                                                     <label class="form-check-label" for="closedType">
                                                         (ex. Compound, infected fracture)
                                                     </label>
@@ -1380,7 +1379,7 @@
                                             Open/Wound Laceration
                                         </label>
                                         <input type="text" class="inputlabelunderline" value="{{$patients->wound}}"
-                                            name="wound" id="woundInput" placeholder="N/A">
+                                            name="wound" id="woundInput">
                                     </label>
                                 </div>
                                 <label class="form-check-label" for="flexCheckDefault">
@@ -1399,7 +1398,7 @@
                                         Traumatic Amputation
                                     </label>
                                     <input type="text" class="inputlabelunderline" name="traumaticAmputation"
-                                        id="traumaInput" value="{{$patients->traumaticAmputation}}" placeholder="N/A">
+                                        id="traumaInput" value="{{$patients->traumaticAmputation}}">
                                 </div>
                             </div>
 
@@ -1413,7 +1412,7 @@
                                         Others: Pls. specify injury and the body part/s affected:
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others1}}"
-                                        name="others1" id="others1Input" placeholder="N/A">
+                                        name="others1" id="others1Input">
                                 </div>
                             </div>
                         </div>
@@ -1434,7 +1433,7 @@
                                 Bites/stings, Specify animal/insect:
                             </label>
                             <input type="text" class="inputlabelunderline" value="{{$patients->bites}}"
-                                placeholder="N/A" name="bites" id="biteInput">
+                             name="bites" id="biteInput">
 
                             <div class="row">
                                 <div class="col-auto">
@@ -1487,7 +1486,7 @@
                                         Others,specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others2}}"
-                                        name="others2" id="others2Input" placeholder="N/A">
+                                        name="others2" id="others2Input">
                                 </div>
 
                             </div>
@@ -1502,7 +1501,7 @@
                                         Chemical/Substance, specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->chemical}}"
-                                        name="chemical" id="chemInput" placeholder="N/A">
+                                        name="chemical" id="chemInput">
                                     <!-- </div>
                             </div> -->
                                 </div>
@@ -1516,7 +1515,7 @@
                                         Contact with sharp objects, specify object
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->sharp}}"
-                                        name="sharp" id="sharpInput" placeholder="N/A">
+                                        name="sharp" id="sharpInput">
                                 </div>
                             </div>
 
@@ -1571,7 +1570,7 @@
                                         Others,specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others3}}"
-                                        name="others3" id="others3Input" placeholder="N/A">
+                                        name="others3" id="others3Input">
                                 </div>
                             </div>
 
@@ -1620,7 +1619,7 @@
                                     </label>
                                     <input type="text" class="inputlabelunderline"
                                         value="{{$patients->ext_expo_nature_sp}}" name="ext_expo_nature_sp"
-                                        id="ext_expo_nature_sp" placeholder="N/A">
+                                        id="ext_expo_nature_sp">
                                 </div>
                             </div>
                             <div class="row">
@@ -1633,7 +1632,7 @@
                                         Gunshot, Specify weapon
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->gunshot}}"
-                                        name="gunshot" id="gunshotInput" placeholder="N/A">
+                                        name="gunshot" id="gunshotInput">
                                 </div>
                             </div>
 
@@ -1679,7 +1678,7 @@
                                         Fall, specify, from/in/on/into
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->fall}}"
-                                        name="fall" id="fallInput" placeholder="N/A">
+                                        name="fall" id="fallInput">
                                 </div>
                             </div>
 
@@ -1763,7 +1762,7 @@
                                             <label class="form-check-label" for="firecracker_code_6">Others: </label>
                                             <input type="text" class="inputlabelunderline"
                                                 value="{{$patients->firecracker}}" name="firecracker"
-                                                id="firecrackInput" placeholder="N/A">
+                                                id="firecrackInput">
                                         </div>
                                     </div>
                                 </div>
@@ -1789,7 +1788,7 @@
                                         Others,specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others5}}"
-                                        name="others5" id="others5Input" placeholder="N/A">
+                                        name="others5" id="others5Input">
                                 </div>
                             </div>
                         </div>
@@ -2003,7 +2002,7 @@
                                                     Others,
                                                 </label>
                                                 <input type="text" class="inputlabelunderline"
-                                                    value="{{$patients->others6}}" placeholder="N/A" name="others6">
+                                                    value="{{$patients->others6}}" name="others6">
                                             </div>
 
                                             <div class="col-auto">
@@ -2123,7 +2122,7 @@
                                                     Others,
                                                 </label>
                                                 <input type="text" class="inputlabelunderline" name="others7"
-                                                    value="{{ $patients->others7}}" placeholder="N/A">
+                                                    value="{{ $patients->others7}}">
                                             </div>
 
                                             <div class="col-auto">
@@ -2206,7 +2205,7 @@
                                                 Others,
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="others8"
-                                                value="{{ $patients->others8}}" placeholder="N/A">
+                                                value="{{ $patients->others8}}">
                                         </div>
 
                                         <div class="col-auto">
@@ -2246,7 +2245,7 @@
                                                 With others, specify how many(excuding the victim)
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="withothers"
-                                                value="{{$patients->withothers}}" placeholder="N/A">
+                                                value="{{$patients->withothers}}">
                                         </div>
 
                                     </div>
@@ -2303,7 +2302,7 @@
                                                 Workplace, specify
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="workplaceInput"
-                                                value="{{ $patients->workplaceInput}}" placeholder="N/A">
+                                                value="{{ $patients->workplaceInput}}">
                                         </div>
 
                                         <div class="col-auto">
@@ -2313,7 +2312,7 @@
                                                 Others, specify
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="others9"
-                                                value="{{ $patients->others9}}" placeholder="N/A">
+                                                value="{{ $patients->others9}}">
                                         </div>
 
                                         <div class="col-auto">
@@ -2370,7 +2369,7 @@
                                                 Others, specify
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="others10"
-                                                value="{{ $patients->others10}}" placeholder="N/A">
+                                                value="{{ $patients->others10}}">
                                         </div>
 
                                         <div class="col-auto">
@@ -2452,7 +2451,7 @@
                                                 Others, specify
                                             </label>
                                             <input type="text" class="inputlabelunderline2" name="others11"
-                                                value="{{$patients->others11}}" placeholder="N/A">
+                                                value="{{$patients->others11}}">
                                             <label class="form-check-label" for="Others11">
                                                 (e.g. suspected unter the influence of substance
                                                 used)
@@ -2551,11 +2550,11 @@
                                             id="others12Ch" value="Y"
                                             {{ ($chdata->others12Ch == 'Y'? ' checked' : '') }}>
                                         <label class="form-check-label" for="others12Ch" name="others12"
-                                            value="{{$patients->others12}}" placeholder="N/A">
+                                            value="{{$patients->others12}}">
                                             Others
                                         </label>
                                         <input type="text" class="inputlabelunderline" name="safety_others"
-                                            value="{{$patients->safety_others}}" id="safety_others" placeholder="N/A">
+                                            value="{{$patients->safety_others}}" id="safety_others">
                                     </div>
                                 </div>
                             </div>
@@ -2661,7 +2660,7 @@
 
                                     Others:
                                     <input type="text" class="inputlabelunderline"
-                                        value="{{$patients->ref_hosp_code_sp}}" placeholder="N/A"
+                                        value="{{$patients->ref_hosp_code_sp}}"
                                         name="ref_hosp_code_sp">
                                 </div>
                             </div>
@@ -2674,21 +2673,50 @@
                                         Name of Originating Physician:
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->hospPhys}}"
-                                        placeholder="N/A" name="hospPhys">
+                                     name="hospPhys">
                                 </div>
                             </div>
                         </div>
 
                         <div class="row-auto border border-secondary border-left-0 border-right-0">
                             <div class="row ">
-                                <div class="col-auto pt-2">
+                                <!-- <div class="col-auto pt-2">
                                     <label class="form-check-label" for="status">
                                         Status upon reaching Facility/Hospital:
                                     </label>
+                                </div> -->
+                                
+                                <div class="col-auto">
+                                    <label class="firstAid">Status upon reaching Facility/Hospital: </label>
                                 </div>
+                                <div class="col-auto">
+                                    <!-- <input type="hidden" name="rdoAid" value="N"> -->
+                                    <input class="form-check-input" required type="radio" name="statusRdo" id="statusY" value="01"
+                                        {{ ($chdata->statusRdo == '01'? ' checked' : '') }}>
+                                    <label class="form-check-label" for="statusY">
+                                    Dead on arrival</label>
+                                </div>
+                                <div class="col-auto">
+                                    </label>
+                                    <input class="form-check-input" required type="radio" name="statusRdo" id="statusN" value="02"
+                                        {{ ($chdata->statusRdo == '02'? ' checked' : '') }}>
+                                    <label class="form-check-label" for="statusN">
+                                    Alive: Conscious</label>
+                                    </label>
+                                </div>
+                                <div class="col-auto">
+                                    </label>
+                                    <input class="form-check-input" required type="radio" name="statusRdo" id="statusUnk" value="03"
+                                        {{ ($chdata->statusRdo == '03'? ' checked' : '') }}>
+                                    <label class="form-check-label" for="statusUnk">
+                                    Alive: Unconscious</label>
+                                    </label>
+                                </div>
+                            
                                 <div class="col">
                                     <div class="w-25">
-                                        <select id="status_code" name="status_code" class="form-select"
+                                        
+                                        <!-- <select id="status_code" name="status_code" class="form-select"
                                             aria-label=".form-select-sm example" required>
                                             <option value="{{$patients->status_code}}">{{$patients->status_name}}
                                             </option>
@@ -2696,10 +2724,8 @@
                                             @foreach($statusTB as $x)
                                             <option value="{{$x->status_code}}">{{$x->status_name}}</option>
                                             @endforeach
-                                            <!-- <option value="01">Dead on arrival</option>
-                                        <option value="02">Alive: Conscious</option>
-                                        <option value="03">Alive: Unconscious</option> -->
-                                        </select>
+                                        </select> -->
+
                                     </div>
                                 </div>
                                 <!-- <div class="col-auto">
@@ -2768,7 +2794,7 @@
                                         Others, specify
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->others13}}"
-                                        name="others13" placeholder="N/A">
+                                        name="others13">
                                 </div>
                             </div>
                         </div>
@@ -2779,7 +2805,7 @@
                                         Initial Impression:
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->impression}}"
-                                        name="impression" placeholder="N/A">
+                                        name="impression">
                                 </div>
                             </div>
                         </div>
@@ -2790,14 +2816,14 @@
                                         ICD-10 Code/s: Nature of Injury:
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->icdNature}}"
-                                        name="icdNature" placeholder="N/A">
+                                        name="icdNature">
                                 </div>
                                 <div class="col-auto">
                                     <label class="form-check-label">
                                         ICD-10 Code/s: External cause of Injury:
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->icdExternal}}"
-                                        name="icdExternal" placeholder="N/A">
+                                        name="icdExternal">
                                 </div>
                             </div>
                         </div>
@@ -2812,7 +2838,7 @@
                                     <label class="form-check-label">
                                     </label>
                                     <input type="text" class="inputlabelunderline" value="{{$patients->treatment}}"
-                                        name="treatment" placeholder="N/A">
+                                        name="treatment">
                                 </div>
                             </div>
                         </div>
@@ -2856,7 +2882,7 @@
                                                         Transferred to another facility/hospital, specify
                                                     </label>
                                                     <input type="text" class="inputlabelunderline" name="transferred"
-                                                        value="{{$patients->transferred}}" placeholder="N/A">
+                                                        value="{{$patients->transferred}}">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -2884,7 +2910,7 @@
                                                 <div class="col-auto">
                                                     <input type="text" class="inputlabelunderline" name="disp_er_sp_oth"
                                                         value="{{$patients->disp_er_sp_oth}}"
-                                                        placeholder="Name of Hospital: Others/specify">
+                                                        >
                                                 </div>
                                             </div>
                                         </div>
@@ -2942,7 +2968,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="text" class="inputlabelunderlinelong" name="inPatFinalDiag"
-                                        value="{{$patients->inPatFinalDiag}}" placeholder="Text here">
+                                        value="{{$patients->inPatFinalDiag}}" >
                                 </div>
                             </div>
                         </div>
@@ -2983,7 +3009,7 @@
                                         Others, specify:
                                     </label>
                                     <input type="text" class="inputlabelunderline" name="inPatOthers"
-                                        value="{{$patients->inPatOthers}}" placeholder="N/A">
+                                        value="{{$patients->inPatOthers}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -3016,7 +3042,7 @@
                                         <option value="Camp 8 Health Center">Camp 8 Health Center</option>
                                     </select>
                                     <input type="text" class="inputlabelunderline" name="inPatTransfer"
-                                        value="{{$patients->inPatTransfer}}" placeholder="Specify">
+                                        value="{{$patients->inPatTransfer}}" >
                                 </div>
                             </div>
                         </div>
@@ -3062,7 +3088,7 @@
                                     <h6 class="form-check-label" for="flexCheckDefault">
                                         ICD-10 Code/s: Nature of Injury:
                                         <input type="text" class="inputlabelunderline2" name="inPatNature"
-                                            value="{{$patients->inPatNature}}" placeholder="N/A">
+                                            value="{{$patients->inPatNature}}">
                                     </h6>
 
                                 </div>
@@ -3070,7 +3096,7 @@
                                     <h6 class="form-check-label" for="flexCheckDefault">
                                         ICD-10 Code/s: External cause of Injury:
                                         <input type="text" class="inputlabelunderline2" name="inPatExternal"
-                                            value="{{$patients->inPatExternal}}" placeholder="N/A">
+                                            value="{{$patients->inPatExternal}}">
                                     </h6>
                                 </div>
                             </div>
@@ -3085,7 +3111,7 @@
                                 </div>
                                 <div class="col">
                                     <input type="text" class="inputlabelunderlinelong" name="inPatComments"
-                                        value="{{$patients->inPatComments}}" placeholder="N/A">
+                                        value="{{$patients->inPatComments}}">
                                 </div>
                             </div>
                         </div>
@@ -3102,35 +3128,35 @@
                                                 name="consultant_in_charge_last_name"
                                                 id="consultant_in_charge_last_name"
                                                 value="{{$patients->consultant_in_charge_last_name}}"
-                                                placeholder="Last Name">
+                                                >
                                             <input type="text" class="inputlabelunderline2"
                                                 name="consultant_in_charge_first_name"
                                                 id="consultant_in_charge_first_name"
                                                 value="{{$patients->consultant_in_charge_first_name}}"
-                                                placeholder="First Name">
+                                                >
                                             <input type="text" class="inputlabelunderline2"
                                                 name="consultant_in_charge_middle_name"
                                                 id="consultant_in_charge_middle_name"
                                                 value="{{$patients->consultant_in_charge_middle_name}}"
-                                                placeholder="Middle Name">
+                                                >
                                             <input type="text" class="inputlabelunderline2"
                                                 name="consultant_in_charge_department"
                                                 id="consultant_in_charge_department"
                                                 value="{{$patients->consultant_in_charge_department}}"
-                                                placeholder="Department">
+                                                >
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col border border-secondary p-2 mt-2">
                                     <input type="text" class="inputlabelunderline2" name="consultant_landline"
                                         id="consultant_landline" value="{{$patients->consultant_landline}}"
-                                        placeholder="Landline#">
+                                        >
                                     <input type="text" class="inputlabelunderline2" name="consultant_mobile"
                                         id="consultant_mobile" value="{{$patients->consultant_mobile}}"
-                                        placeholder="Mobile#">
+                                        >
                                     <input type="text" class="inputlabelunderline" name="consultant_email"
                                         id="consultant_email" value="{{$patients->consultant_email}}"
-                                        placeholder="Email ">
+                                        >
                                 </div>
                             </div>
                         </div>
@@ -3146,22 +3172,22 @@
                                             <input type="text" class="inputlabelunderline2"
                                                 name="consultant_street_name" id="consultant_street_name"
                                                 value="{{$patients->consultant_street_name}}"
-                                                placeholder="# and Street Name">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="consultant_region"
                                                 id="consultant_region" value="{{$patients->consultant_region}}"
-                                                placeholder="Region">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="consultant_province"
                                                 id="consultant_province" value="{{$patients->consultant_province}}"
-                                                placeholder="Province">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="consultant_city"
                                                 id="consultant_city" value="{{$patients->consultant_city}}"
-                                                placeholder="City/Municipality">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="consultant_barangay"
                                                 id="consultant_barangay" value="{{$patients->consultant_barangay}}"
-                                                placeholder="Barangay">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="consultant_zipcode"
                                                 id="consultant_zipcode" value="{{$patients->consultant_zipcode}}"
-                                                placeholder="Zip Code">
+                                                >
                                         </div>
                                     </div>
                                 </div>
@@ -3193,19 +3219,19 @@
                                                     <input type="text" class="inputlabelunderline2"
                                                         name="completedBy_last_name" id="completedBy_last_name"
                                                         value="{{$patients->completedBy_last_name}}"
-                                                        placeholder="Last Name">
+                                                        >
                                                     <input type="text" class="inputlabelunderline2"
                                                         name="completedBy_first_name" id="completedBy_first_name"
                                                         value="{{$patients->completedBy_first_name}}"
-                                                        placeholder="First Name">
+                                                        >
                                                     <input type="text" class="inputlabelunderline2"
                                                         name="completedBy_middle_name" id="completedBy_middle_name"
                                                         value="{{$patients->completedBy_middle_name}}"
-                                                        placeholder="Middle Name">
+                                                        >
                                                     <input type="text" class="inputlabelunderline2"
                                                         name="completedBy_department" id="completedBy_department"
                                                         value="{{$patients->completedBy_department}}"
-                                                        placeholder="Department">
+                                                        >
                                                 </div>
                                             </div>
 
@@ -3217,13 +3243,13 @@
                                 <div class="col border border-secondary p-2 mt-2">
                                     <input type="text" class="inputlabelunderline2" name="completedBy_landline"
                                         id="completedBy_landline" value="{{$patients->completedBy_landline}}"
-                                        placeholder="Landline#">
+                                        >
                                     <input type="text" class="inputlabelunderline2" name="completedBy_mobile"
                                         id="completedBy_mobile" value="{{$patients->completedBy_mobile}}"
-                                        placeholder="Mobile#">
+                                        >
                                     <input type="text" class="inputlabelunderline" name="completedBy_email"
                                         id="completedBy_email" value="{{$patients->completedBy_email}}"
-                                        placeholder="Email ">
+                                        >
                                 </div>
                             </div>
                         </div>
@@ -3238,22 +3264,22 @@
                                             </h6>
                                             <input type="text" class="inputlabelunderline2" name="completedBy_street"
                                                 id="completedBy_street" value="{{$patients->completedBy_street}}"
-                                                placeholder="# and Street Name">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="completedBy_region"
                                                 id="completedBy_region" value="{{$patients->completedBy_region}}"
-                                                placeholder="Region">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="completedBy_province"
                                                 id="completedBy_province" value="{{$patients->completedBy_province}}"
-                                                placeholder="Province">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="completedBy_City"
                                                 id="completedBy_City" value="{{$patients->completedBy_City}}"
-                                                placeholder="City/Municipality">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="completedBy_barangay"
                                                 id="completedBy_barangay" value="{{$patients->completedBy_barangay}}"
-                                                placeholder="Barangay">
+                                                >
                                             <input type="text" class="inputlabelunderline2" name="completedBy_zip"
                                                 id="completedBy_zip" value="{{$patients->completedBy_zip}}"
-                                                placeholder="Zip Code">
+                                                >
                                         </div>
                                     </div>
                                 </div>
@@ -3267,8 +3293,8 @@
             </section>
         </div>
 </form>
-<div class="row" style="position: fixed; bottom: 0; right: 10px; top: 0px;">
-    <div class="col ">
+<div class="row " style="position: fixed; bottom: 0; right: 20px;">
+    <div class="col rounded bg-dark bg-gradient p-2 d-print-none">
         <div class="row">
             <div class="col d-flex justify-content-start d-print-none">
                 <a href="/search" class="btn btn-secondary btn-sm" title="Patient lists"
@@ -3285,6 +3311,7 @@
 
             <input type="hidden" id="account_name" name="account_name" value="{{$loginId}}">
             <input type="hidden" id="date_exported" name="date_exported" value="{{ date('F j, Y, g:i a') }}">
+            
             <div class="col d-flex justify-content-end">
                 <!-- <button type="button" data-toggle="popover" title="popover title" data-content="Some message">popover</button>  -->
                 <button id="saveinto" type="submit" class="btn btn-primary d-print-none"
